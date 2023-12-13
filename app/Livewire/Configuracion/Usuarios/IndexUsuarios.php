@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Livewire\Configuracion\Usuarios;
+
+use App\Models\User;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+class IndexUsuarios extends Component
+{
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public $search='';
+    public $numberRows = 5;
+
+    public function updatingSearch(){
+        $this->resetPage();
+    }
+    public function updatingnumberRows(){
+        $this->resetPage();
+    }
+    public function render()
+    {
+        $lista =  User::where('status','=','active')
+                        ->where('email','like','%'.$this->search.'%')
+                        ->orderBy('created_at','desc')
+                        ->paginate($this->numberRows);
+        $count = $lista->count();
+        return view('livewire.configuracion.usuarios.index-usuarios',[
+            'count' => $count,
+            'lista' => $lista,]);
+    }
+}

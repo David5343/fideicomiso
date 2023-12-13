@@ -1,0 +1,73 @@
+  <!-- Modal -->
+  <div wire:ignore.self class="modal fade" id="crearCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header text-bg-info">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Categoria</h1>
+          <button wire:click="cerrarModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            @if (session('msg_tipo'))
+            <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
+                {{ session('msg') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            <form>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
+                    <div class="col-sm-4">
+                      <input type="text" wire:model="nombre" minlength="5" maxlength="50" class="form-control form-control-lg @error('nombre') is-invalid @enderror" required>
+                      @error('nombre')<br><small style="color: red">{{ $message }}</small>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">Sueldo</label>
+                    <div class="col-sm-2">
+                      <input type="number" wire:model="sueldo" class="form-control form-control-lg @error('sueldo') is-invalid @enderror" min="0" max="9999999999.99" step="0.01" required>
+                      @error('sueldo')<br><small style="color: red">{{ $message }}</small>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">Compensación</label>
+                    <div class="col-sm-2">
+                      <input type="number" wire:model="compensacion" class="form-control form-control-lg @error('compensacion') is-invalid @enderror" min="0" max="9999999999.99" step="0.01" required>
+                      @error('compensacion')<br><small style="color: red">{{ $message }}</small>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">Complementaria</label>
+                    <div class="col-sm-2">
+                      <input type="number" wire:model="complementaria" class="form-control form-control-lg @error('complementaria') is-invalid @enderror" min="0" max="9999999999.99" step="0.01" required>
+                      @error('complementaria')<br><small style="color: red">{{ $message }}</small>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">ISR</label>
+                    <div class="col-sm-2">
+                      <input type="number" wire:model="isr" class="form-control form-control-lg @error('isr') is-invalid @enderror" min="0" max="9999999999.99" step="0.01" required>
+                      @error('isr')<br><small style="color: red">{{ $message }}</small>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">Plazas Autorizadas</label>
+                    <div class="col-sm-2">
+                      <input type="number" wire:model="plazas_autorizadas" class="form-control form-control-lg @error('plazas_autorizadas') is-invalid @enderror" min="1" max="51" step="0.01" required>
+                      @error('plazas_autorizadas')<br><small style="color: red">{{ $message }}</small>
+                      @enderror
+                    </div>
+                  </div>     
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button wire:click="cerrarModal" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button wire:click="guardar" type="button" class="btn btn-success">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

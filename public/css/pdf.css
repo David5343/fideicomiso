@@ -1,0 +1,94 @@
+@page{
+    margin:3cm 0.5cm 1.5cm 0.5cm;
+}
+#header{
+    /* background-color:#8B4513; */
+    position:fixed;
+    top: -3cm;
+    left: 0cm;
+    width: 100%;
+    line-height: 1px;
+    text-align: center;
+}
+.infoHeader{
+    margin-top: 1cm;
+}
+.imgHeaderleft{
+    float:left;
+    width:  75px;
+    height: 100px;
+    margin-top: 0.5cm;
+    margin-left: 0.5cm;
+}
+.imgHeaderright{
+    float:right;
+    width:  125px;
+    height: 100px;
+    margin-top: 0.5cm;
+    margin-left: 0.5cm;
+}
+.tituloTabla{
+    text-align: center;
+}
+#footer{
+    position: fixed;
+    bottom: -1.5cm;
+    left: 0cm;
+    width: 100%;
+    background-color: cadetblue;
+}
+.textFooter{
+    text-align: center;
+    width: 100%;
+}
+.hijo{
+    width: 2cm;
+    height: 0.5cm;
+    margin:0.2cm;
+    background-color: yellow;
+}
+  .tablaTabulador {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 2px;
+    font-size: 12px;
+    width: 100%;
+  }
+  .tablaTabulador th {
+    background-color: #8B4513; /* Marrón */
+    color: white;
+    /* text-align: center; */
+    font-size: 12px;
+    padding: 2px;
+  }
+  .tablaPersonal {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 2px;
+    font-size: 12px;
+    width: 100%;
+  }
+  .tablaPersonal th {
+    background-color: #8B4513; /* Marrón */
+    border: 1px solid black;
+    color: white;
+    /* text-align: center; */
+    font-size: 10px;
+    padding: 2px;
+  }
+  .tablaPersonal td {
+    border: 1px solid black;
+  }
+  .tablaFirmas{
+    margin-top: 100px;
+    text-align: center;
+    width: 100%;
+    padding: 8px;
+    line-height: 1px;
+  }
+  .tablaFirmas td{
+    text-align: center;
+    padding: 8px;
+  }
