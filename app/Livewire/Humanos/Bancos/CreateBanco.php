@@ -9,7 +9,7 @@ use Livewire\Attributes\Rule;
 
 class CreateBanco extends Component
 {
-    #[Rule('required','unique:banks,key','min:3','max:5')]
+    #[Rule('required|unique:banks,key|min:3|max:5')]
     public $clave;
     #[Rule('required','min:2','max:40')]
     public $nombre;
