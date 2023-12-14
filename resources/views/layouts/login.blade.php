@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Fonts -->
-        <link href="{{asset('css/fonts.css')}}" rel="stylesheet">
+        {{-- <link href="{{asset('css/fonts.css')}}" rel="stylesheet"> --}}
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
     <body>

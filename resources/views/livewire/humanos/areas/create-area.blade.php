@@ -13,20 +13,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form>
+            <form wire:submit="createArea">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-md-8">
-                      <input type="text" wire:model="nombre" class="form-control form-control-lg @error('nombre') is-invalid @enderror">
+                      <input type="text" wire:model="nombre" id="nombre" name="nombre" class="form-control form-control-lg">
                       @error('nombre')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
                   </div>     
-            </form>
+            
         </div>
         <div class="modal-footer">
           <button wire:click="cerrarModal" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-          <button wire:click="guardar" type="button" class="btn btn-success">Guardar</button>
+          <button  class="btn btn-success">Guardar</button>
+        </form>
         </div>
       </div>
     </div>

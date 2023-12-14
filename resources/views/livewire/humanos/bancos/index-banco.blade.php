@@ -19,7 +19,9 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Clave</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Razón Social</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
         </tr>
@@ -29,7 +31,9 @@
             @foreach ($lista as $item)
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
+                    <td>{{ $item->key }}</td>
                     <td>{{ $item->name }}</td>
+                    <td><div class="btn btn-warning btn-sm m-1" title="{{$item->legal_name}}"><i class="bi bi-bank"></i></div></td>
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}

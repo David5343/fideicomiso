@@ -9,14 +9,14 @@ use Livewire\Attributes\Rule;
 
 class CreateArea extends Component
 {
-    #[Rule('required', 'unique:areas,name', 'min:5', 'max:50')]
+    #[Rule('required|unique:areas,name|min:5|max:50')]
     public $nombre;
 
-    public function guardar(){
+    public function createArea(){
 
-        $validated = $this->validate();
+        $this->validate();
         $area = new Area();
-        $area->name = $validated['nombre'];
+        $area->name = $this->nombre;
         $area->status = 'active';
         $area->modified_by = Auth::user()->email;
         $area->save();
@@ -28,6 +28,7 @@ class CreateArea extends Component
     public function cerrarModal(){
 
         $this->reset(['nombre']);
+        $this->resetValidation();
 
     }
     public function render(){

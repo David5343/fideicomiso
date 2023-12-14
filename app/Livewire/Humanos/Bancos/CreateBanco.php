@@ -15,15 +15,12 @@ class CreateBanco extends Component
     public $nombre;
     #[Rule('required','min:5','max:120')]
     public $razon_social;
-    public function render(){
-        return view('livewire.humanos.bancos.create-banco');
-    }
     public function guardar(){
         $validated = $this->validate();
         $banco = new Bank();
-        $banco->key = $validated['clave'];
-        $banco->name = $validated['nombre'];
-        $banco->legal_name = $validated['razon_social'];
+        $banco->key = $this->clave;
+        $banco->name = $this->nombre;
+        $banco->legal_name = $this->razon_social;
         $banco->status = 'active';
         $banco->modified_by = Auth::user()->email;
         $banco->save();
@@ -34,5 +31,8 @@ class CreateBanco extends Component
     }
     public function cerrarModal(){
         $this->reset(['clave','nombre','razon_social']);
+    }
+    public function render(){
+        return view('livewire.humanos.bancos.create-banco');
     }
 }

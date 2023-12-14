@@ -17,7 +17,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Clave</label>
                     <div class="col-md-2">
-                      <input type="text" wire:model="clave" class="form-control form-control-lg @error('clave') is-invalid @enderror">
+                      <input type="text" wire:model="clave" class="form-control form-control-lg">
                       @error('clave')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -25,7 +25,7 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-md-3">
-                      <input type="text" wire:model="nombre" class="form-control form-control-lg @error('nombre') is-invalid @enderror">
+                      <input type="text" wire:model="nombre" class="form-control form-control-lg">
                       @error('nombre')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -33,8 +33,8 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Razon Social</label>
                     <div class="col-md-8">
-                      <textarea wire:model="razon_social" class="form-control form-control-lg @error('nombre') is-invalid @enderror" 
-                      minlength="5" maxlength="120" rows="2" required></textarea>
+                      <textarea wire:model="razon_social" class="form-control form-control-lg" 
+                       rows="2"></textarea>
                       @error('razon_social')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
