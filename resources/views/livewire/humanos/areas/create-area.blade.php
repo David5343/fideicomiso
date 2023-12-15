@@ -17,7 +17,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-md-8">
-                      <input type="text" wire:model="nombre" id="nombre" name="nombre" class="form-control form-control-lg">
+                      <input type="text" wire:model="nombre" id="nombre" name="nombre" class="form-control form-control-lg" required>
                       @error('nombre')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>

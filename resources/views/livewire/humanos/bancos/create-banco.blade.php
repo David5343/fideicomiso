@@ -13,11 +13,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form>
+            <form wire:submit="createBank">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Clave</label>
                     <div class="col-md-2">
-                      <input type="text" wire:model="clave" class="form-control form-control-lg">
+                      <input type="text" wire:model="clave" id="clave" name="clave" class="form-control form-control-lg" required>
                       @error('clave')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -25,7 +25,7 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-md-3">
-                      <input type="text" wire:model="nombre" class="form-control form-control-lg">
+                      <input type="text" wire:model="nombre" id="nombre" name="nombre" class="form-control form-control-lg" required>
                       @error('nombre')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -33,17 +33,18 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Razon Social</label>
                     <div class="col-md-8">
-                      <textarea wire:model="razon_social" class="form-control form-control-lg" 
+                      <textarea wire:model="razon_social" id="razon_social" name="razon_social" class="form-control form-control-lg" 
                        rows="2"></textarea>
                       @error('razon_social')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
                   </div>     
-            </form>
+            
         </div>
         <div class="modal-footer">
           <button wire:click="cerrarModal" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-          <button wire:click="guardar" type="button" class="btn btn-success">Guardar</button>
+          <button class="btn btn-success">Guardar</button>
+        </form>
         </div>
       </div>
     </div>
