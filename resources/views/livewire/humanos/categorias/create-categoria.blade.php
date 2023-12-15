@@ -13,11 +13,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form>
+            <form wire:submit="createCategory">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-sm-4">
-                      <input type="text" wire:model="nombre" minlength="5" maxlength="50" class="form-control form-control-lg @error('nombre') is-invalid @enderror" required>
+                      <input type="text" wire:model="nombre" class="form-control form-control-lg" required>
                       @error('nombre')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>

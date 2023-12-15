@@ -9,17 +9,17 @@ use Livewire\Attributes\Rule;
 
 class CreateCategoria extends Component
 {
-    #[Rule('required', 'min:5','max:50', 'unique:categories,name')]
+    #[Rule('required | min:5 | max:50 | unique:categories,name')]
     public $nombre;
-    #[Rule('required', 'regex:/^\d{1,10}(\.\d{1,2})?$/')]
+    #[Rule('required | regex:/^\d{1,10}(\.\d{1,2})?$/')]
     public $sueldo;
-    #[Rule('required', 'regex:/^\d{1,10}(\.\d{1,2})?$/')]
+    #[Rule('required | regex:/^\d{1,10}(\.\d{1,2})?$/')]
     public $compensacion;
-    #[Rule('required', 'regex:/^\d{1,10}(\.\d{1,2})?$/')]
+    #[Rule('required | regex:/^\d{1,10}(\.\d{1,2})?$/')]
     public $complementaria;
-    #[Rule('required', 'regex:/^\d{1,10}(\.\d{1,2})?$/')]
+    #[Rule('required | regex:/^\d{1,10}(\.\d{1,2})?$/')]
     public $isr;
-    #[Rule('required', 'numeric', 'min:1','max:51')]
+    #[Rule('required | numeric | min:1 | max: 3')]
     public $plazas_autorizadas;
 
     public function guardar(){
