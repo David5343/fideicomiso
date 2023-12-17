@@ -6,6 +6,7 @@ use App\Models\Humanos\Bank;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
+use Illuminate\Support\Str;
 
 class CreateBanco extends Component
 {
@@ -19,9 +20,10 @@ class CreateBanco extends Component
     public function createBank(){
 
         $this->validate();
+        $string = Str::upper($this->nombre);
         $banco = new Bank();
         $banco->key = $this->clave;
-        $banco->name = $this->nombre;
+        $banco->name = $string;
         $banco->legal_name = $this->razon_social;
         $banco->status = 'active';
         $banco->modified_by = Auth::user()->email;

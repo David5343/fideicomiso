@@ -13,11 +13,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form>
+            <form wire:submit="createPlace">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">No. de Plaza</label>
                     <div class="col-sm-2">
-                      <input type="text" wire:model="num_plaza" minlength="3" maxlength="5" class="form-control form-control-lg @error('num_plaza') is-invalid @enderror" id="num_plaza" name="num_plaza" required>
+                      <input type="text" wire:model="num_plaza" id="num_plaza" name="num_plaza"
+                       class="form-control form-control-lg"  required>
                       @error('num_plaza')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -25,7 +26,7 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Puesto</label>
                     <div class="col-md-5">
-                      <select wire:model="puesto" class="form-select form-select-lg @error('puesto') is-invalid @enderror" required>
+                      <select wire:model="puesto" id="puesto" name="puesto" class="form-select form-select-lg" required>
                       <option selected value="">Selecciona un Puesto</option>
                       <option value="Coordinador General">Coordinador General</option>
                       <option value="Administrador General">Administrador General</option>
@@ -46,7 +47,8 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Categoria</label>
                     <div class="col-md-5">
-                      <select wire:model="categoria_id" class="form-select form-select-lg @error('categoria_id') is-invalid @enderror" required>
+                      <select wire:model="categoria_id" id="categoria_id" name="categoria_id"
+                       class="form-select form-select-lg" required>
                       <option selected value="">Selecciona una Categoria</option>
                       @foreach ($select as $e)
                       <option value="{{ $e->id }}">{{ $e->name }}</option>
@@ -55,12 +57,12 @@
                       @error('categoria_id')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
-                  </div>     
-            </form>
+                  </div>
         </div>
         <div class="modal-footer ">
           <button wire:click="cerrarModal" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-          <button wire:click="guardar" type="button" class="btn btn-success">Guardar</button>
+          <button class="btn btn-success">Guardar</button>
+        </form>
         </div>
       </div>
     </div>

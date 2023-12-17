@@ -17,30 +17,40 @@
                     </div>
                 </div>
                 @endif 
-                <form wire:submit.prevent="cargarFoto">                     
+                <form wire:submit="cargarFoto">                     
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label col-form-label-lg text-end">Empleado</label>
                             <div class="col-md-6">
-                              <select wire:model="empleado_id" id="empleado_id" name="empleado_id" class="form-select form-select-lg @error('empleado_id') is-invalid @enderror" required>
+                              <select wire:model="empleado_id" id="empleado_id" name="empleado_id" 
+                              class="form-select form-select-lg" required>
                               <option selected value="">Selecciona un Empleado</option>
                               @foreach ($empleados as $e)
                               <option value="{{ $e->id }}">{{ $e->last_name_1.' '.$e->last_name_2.' '.$e->name }}</option>
                               @endforeach
                               </select>
+                              @error('empleado_id')<br><small style="color: red">{{ $message }}</small>
+                              @enderror                       
                             </div>
                           </div> 
                           <div class="row mb-3">
                             <label class="col-sm-2 col-form-label col-form-label-lg text-end">Foto</label>
                             <div class="col-md-6">
-                                <input wire:model='foto' type="file" class="form-control form-control-lg @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/png, image/jpeg">
+                                <input wire:model='foto' type="file" id="foto" name="foto"
+                                class="form-control form-control-lg" accept="image/png, image/jpeg" required>
+                                @error('foto')<br><small style="color: red">{{ $message }}</small>
+                                @enderror
+                                <div class="m-3 text-center">
+                                    <div wire:loading wire:target='foto' class="spinner-border" style="width:3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                      </div>
+                                      @if($foto)
+                                    <p class="text-center">
+                                      <img src="{{$foto->temporaryUrl()}}" width="300">
+                                    </p>
+                                    @endif
+                                </div>
                             </div>
-                            @if($foto)
-                            <p class="text-center">
-                              <img src="{{$foto->temporaryUrl()}}" width="300">
-                            </p>
-                            @endif
-                          </div>
-                    
+                          </div>             
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" wire:click="cerrarModal"

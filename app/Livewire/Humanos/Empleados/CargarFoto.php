@@ -53,6 +53,7 @@ class CargarFoto extends Component
     } 
     public function cerrarModal(){
         $this->reset(['empleado_id','foto']);
+        $this->resetValidation();
     }
     public function render()
     {

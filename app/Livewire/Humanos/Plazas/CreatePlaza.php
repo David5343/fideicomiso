@@ -10,24 +10,24 @@ use Livewire\Attributes\Rule;
 
 class CreatePlaza extends Component
 {
-    #[Rule('required','min:3','max:5','unique:places,place_number')]
+    #[Rule('required|min:3|max:5|unique:places,place_number')]
     public $num_plaza;
-    #[Rule('required','max:60')]
+    #[Rule('required|max:40')]
     public $puesto;
     #[Rule('required')]
     public $categoria_id;
 
-    public function guardar(){
-        $validated = $this->validate();
-        $categoria = Category::find($validated['categoria_id']);  
+    public function createPlace(){
+        $this->validate();
+        $categoria = Category::find($this->categoria_id);  
         $autorizadas = $categoria->authorized_places;
         $ocupadas = $categoria->covered_places;
         if($ocupadas < $autorizadas){
             //Creando la plaza
             $plaza = new Place();
-            $plaza->place_number = $validated['num_plaza'];
-            $plaza->job_position = $validated['puesto'];
-            $plaza->category_id = $validated['categoria_id'];
+            $plaza->place_number = $this->num_plaza;
+            $plaza->job_position = $this->puesto;
+            $plaza->category_id = $this->categoria_id;
             $plaza->status = 'active';
             $plaza->modified_by = Auth::user()->email;
             $plaza->save();
@@ -46,6 +46,7 @@ class CreatePlaza extends Component
     }
     public function cerrarModal(){
         $this->reset(['num_plaza','puesto','categoria_id']);
+        $this->resetValidation();
     }
     public function render()
     {

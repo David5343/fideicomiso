@@ -22,27 +22,27 @@ class CreateCategoria extends Component
     #[Rule('required | numeric | min:1 | max: 3')]
     public $plazas_autorizadas;
 
-    public function guardar(){
-        $validated = $this->validate();
+    public function createCategory(){
+        $this->validate();
         $categoria = new Category();
         //Haciendo calculos de sueldo bruto y sueldo neto
-        if($validated['sueldo'] !== 0||$validated['compensacion'] !== 0||$validated['complementaria'] !== 0)
+        if($this->sueldo !== 0||$this->compensacion !== 0||$this->complementaria !== 0)
         {
-            $sueldo_bruto = $validated['sueldo'] + $validated['compensacion'] + $validated['complementaria'] ;
+            $sueldo_bruto = $this->sueldo + $this->compensacion + $this->complementaria ;
             $categoria->gross_salary = $sueldo_bruto;
-            if($validated['isr']  !== 0)
+            if($this->isr !== 0)
             {
-                $sueldo_neto = $sueldo_bruto - $validated['isr'];
+                $sueldo_neto = $sueldo_bruto - $this->isr;
                 $categoria->net_salary = $sueldo_neto;
             }
         }
 
-        $categoria->name = $validated['nombre'];
-        $categoria->salary = $validated['sueldo'];
-        $categoria->compensation = $validated['compensacion'];
-        $categoria->complementary = $validated['complementaria'];         
-        $categoria->isr = $validated['isr']; 
-        $categoria->authorized_places = $validated['plazas_autorizadas'];
+        $categoria->name = $this->nombre;
+        $categoria->salary = $this->sueldo;
+        $categoria->compensation = $this->compensacion;
+        $categoria->complementary = $this->complementaria;        
+        $categoria->isr = $this->isr;
+        $categoria->authorized_places = $this->plazas_autorizadas;
         $categoria->covered_places = 0;
         $categoria->status = 'active';
         $categoria->modified_by = Auth::user()->email;
@@ -54,6 +54,7 @@ class CreateCategoria extends Component
     }
     public function cerrarModal(){
         $this->reset(['nombre','sueldo','compensacion','complementaria','isr','plazas_autorizadas']);
+        $this->resetValidation();
     }
     public function render(){
         return view('livewire.humanos.categorias.create-categoria');

@@ -47,16 +47,18 @@ class CargarFirma extends Component
             $e->save();
             session()->flash('msg_tipo_modal','success');
             session()->flash('msg_modal','Imagen cargada con éxito!'); 
-            $this->reset(['empleado_id','firma']);        
+            $this->reset(['empleado_id','firma']); 
+            $this->resetValidation();       
         }
 
     } 
     public function cerrarModal(){
         $this->reset(['empleado_id','firma']);
+        $this->resetValidation();
     }
     public function render()
     {
-        $lista =  Employee::where('status','=','active')->get();
+        $lista =  Employee::where('status','active')->get();
         return view('livewire.humanos.empleados.cargar-firma',['empleados'=>$lista]);
     }
 }

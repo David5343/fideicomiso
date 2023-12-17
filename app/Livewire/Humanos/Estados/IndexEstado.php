@@ -27,7 +27,7 @@ class IndexEstado extends Component
     }
     public function render()
     {
-        $lista =  State::where('status','=','active')
+        $lista =  State::where('status','active')
                         ->where('name','like','%'.$this->search.'%')
                         ->orderBy('name','asc')
                         ->paginate($this->numberRows);

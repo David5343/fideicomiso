@@ -6,18 +6,21 @@ use App\Models\Humanos\State;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
+use Illuminate\Support\Str;
 
 class CreateEstado extends Component
 {
-    #[Rule('required','unique:states,key','min:3','max:5')]
+    #[Rule('required|unique:states,key|min:3|max:5')]
     public $clave;
-    #[Rule('required','min:2','max:40')]
+    #[Rule('required|min:3|max:40')]
     public $nombre;
-    public function guardar(){
-        $validated = $this->validate();
+
+    public function createState(){
+        $this->validate();
+        $string = Str::upper($this->nombre);
         $estado = new State();
-        $estado->key = $validated['clave'];
-        $estado->name = $validated['nombre'];
+        $estado->key = $this->clave;
+        $estado->name = $string;
         $estado->status = 'active';
         $estado->modified_by = Auth::user()->email;
         $estado->save();
@@ -28,6 +31,7 @@ class CreateEstado extends Component
     }
     public function cerrarModal(){
         $this->reset(['clave','nombre']);
+        $this->resetValidation();
     }
     public function render()
     {
