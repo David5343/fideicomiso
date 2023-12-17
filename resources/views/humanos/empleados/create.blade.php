@@ -37,6 +37,48 @@
             <h3>Datos Generales.</h3>
         </div>
         <div class="col-md-3">
+          <label class="form-label">Area</label>
+          <select  class="form-select" name="area_id" value="{{old('area_id')}}" >
+            <option selected value="">Elije...</option>
+            @foreach($select1 as $a)
+            <option value="{{$a->id}}">{{$a->name}}</option>
+            @endforeach
+        </select>
+        @error('area_id')<br><small style="color: red">{{ $message }}</small>
+        @enderror
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Plaza</label>
+          <select  class="form-select" name="plaza_id">
+            <option selected value="">Elije...</option>
+            @foreach($select2 as $p)
+            <option value="{{$p->id}}">{{$p->place_number.'-'.$p->job_position}}</option>
+            @endforeach
+        </select>
+        @error('plaza_id')<br><small style="color: red">{{ $message }}</small>
+        @enderror
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Fecha de Ingreso</label>
+          <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}" >
+          @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Tipo de Contrato</label>
+          <select id="tipo_contrato" name="tipo_contrato" class="form-select" >
+            <option selected value="">Elije...</option>
+            <option>Nombramiento</option>
+            <option>Determinado</option>
+            <option>Eventual</option>
+          </select>
+          @error('sexo')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div> 
+        <div class="col-12">
+            <h3>Datos Personales.</h3>
+        </div>
+        <div class="col-md-3">
           <label  class="form-label">Apellido Paterno</label>
           <input type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
           @error('apaterno')<br><small style="color: red">{{ $message }}</small>
@@ -54,37 +96,6 @@
             @error('nombre')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-        <div class="col-md-4">
-          <label class="form-label">Area</label>
-          <select  class="form-select" name="area_id" value="{{old('area_id')}}" >
-            <option selected value="">Elije...</option>
-            @foreach($select1 as $a)
-            <option value="{{$a->id}}">{{$a->name}}</option>
-            @endforeach
-        </select>
-        @error('area_id')<br><small style="color: red">{{ $message }}</small>
-        @enderror
-        </div>
-        <div class="col-md-4">
-          <label class="form-label">Plaza</label>
-          <select  class="form-select" name="plaza_id">
-            <option selected value="">Elije...</option>
-            @foreach($select2 as $p)
-            <option value="{{$p->id}}">{{$p->place_number.'-'.$p->job_position}}</option>
-            @endforeach
-        </select>
-        @error('plaza_id')<br><small style="color: red">{{ $message }}</small>
-        @enderror
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Fecha de Ingreso</label>
-          <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}" >
-          @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
-          @enderror
-        </div>
-        <div class="col-12">
-            <h3>Datos Personales.</h3>
-        </div>
         <div class="col-md-3">
             <label class="form-label">Fecha de Nacimiento</label>
             <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{old('fecha_nacimiento')}}" >

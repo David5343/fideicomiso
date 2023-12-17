@@ -40,6 +40,12 @@ return new class extends Migration
             $table->string('signature',255)->nullable();
             $table->string('account_number',255)->nullable();
             $table->string('clabe',255)->nullable();
+            //tipo de contrato
+            $table->string('contract_type',255)->nullable();
+            //fecha de baja
+            $table->date('inactive_date')->nullable();
+            //motivo de baja
+            $table->string('inactive_motive',255)->nullable();
             $table->unsignedBigInteger('area_id')->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
             $table->unsignedBigInteger('place_id')->nullable()->unique();

@@ -67,6 +67,7 @@ class EmployeeController extends Controller
             'localidad' => ['required','min:5','max:85'],
             'num_cuenta' => ['required','digits:10'],
             'clabe' => ['required','digits:18'],
+            'tipo_contrato'=> ['required'],
             'banco_id' => ['required'],
             // 'foto' => ['required'],
             // 'firma' => ['required'],
@@ -110,6 +111,7 @@ class EmployeeController extends Controller
         $empleado->locality = $request->input('localidad');
         $empleado->account_number = $request->input('num_cuenta');
         $empleado->clabe = $request->input('clabe');
+        $empleado->contract_type = $request->input('tipo_contrato');
         $empleado->area_id = $request->input('area_id');
         $empleado->place_id = $request->input('plaza_id');
         $empleado->bank_id = $request->input('banco_id');
