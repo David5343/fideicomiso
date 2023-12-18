@@ -36,6 +36,27 @@
         <div class="col-12">
             <h3>Datos Generales.</h3>
         </div>
+        <div class="col-md-2">
+          <label class="form-label">Tipo de Contrato</label>
+          <select id="tipo_contrato" name="tipo_contrato" class="form-select" >
+            <option selected value="">Elije...</option>
+            <option>Nombramiento</option>
+            <option>Determinado</option>
+          </select>
+          @error('tipo_contrato')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Tipo de Empleo</label>
+          <select id="tipo_empleo" name="tipo_empleo" class="form-select" >
+            <option selected value="">Elije...</option>
+            <option>Estructura</option>
+            <option>Eventual</option>
+            <option>Permanente</option>
+          </select>
+          @error('tipo_empleo')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>   
         <div class="col-md-3">
           <label class="form-label">Area</label>
           <select  class="form-select" name="area_id" value="{{old('area_id')}}" >
@@ -64,33 +85,22 @@
           @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-md-2">
-          <label class="form-label">Tipo de Contrato</label>
-          <select id="tipo_contrato" name="tipo_contrato" class="form-select" >
-            <option selected value="">Elije...</option>
-            <option>Nombramiento</option>
-            <option>Determinado</option>
-            <option>Eventual</option>
-          </select>
-          @error('sexo')<br><small style="color: red">{{ $message }}</small>
-          @enderror
-        </div> 
         <div class="col-12">
             <h3>Datos Personales.</h3>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <label  class="form-label">Apellido Paterno</label>
           <input type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
           @error('apaterno')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <label  class="form-label">Apellido Materno</label>
           <input type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{old('amaterno')}}" >
           @error('amaterno')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-5">
+        <div class="col-3">
             <label  class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{old('nombre')}}" >
             @error('nombre')<br><small style="color: red">{{ $message }}</small>
@@ -117,7 +127,18 @@
             </select>
             @error('sexo')<br><small style="color: red">{{ $message }}</small>
             @enderror
-          </div> 
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Estado Civil</label>
+            <select id="estado_civil" name="estado_civil" class="form-select" >
+              <option selected value="">Elije...</option>
+              <option>Soltero/a</option>
+              <option>Casado/a</option>
+              <option>Divorciado/a</option>
+            </select>
+            @error('estado_civil')<br><small style="color: red">{{ $message }}</small>
+            @enderror
+          </div>   
           <div class="col-md-3">
             <label  class="form-label">RFC</label>
             <input type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}" >

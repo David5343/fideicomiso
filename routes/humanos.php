@@ -8,10 +8,8 @@ use App\Http\Controllers\Humanos\EmployeeController;
 use App\Http\Controllers\Humanos\EmployeeFamilyController;
 use App\Http\Controllers\Humanos\PlaceController;
 use App\Http\Controllers\Humanos\ReportsController;
-use App\Http\Controllers\Humanos\RoleController;
 use App\Http\Controllers\Humanos\SliderController;
 use App\Http\Controllers\Humanos\StateController;
-use App\Models\Humanos\Employee;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {

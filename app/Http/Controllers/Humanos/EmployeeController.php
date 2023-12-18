@@ -40,15 +40,18 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'apaterno' => ['required', 'min:2','max:20'],
-            'amaterno' => ['required', 'min:2','max:20'],
-            'nombre' => ['required','min:2','max:20'],
+            'tipo_contrato'=> ['required'],
+            'tipo_empleo'=> ['required'],
             'area_id' => ['required'],
             'plaza_id' => ['required', 'unique:employees,place_id'] ,
             'fecha_ingreso' => ['required','date'],
+            'apaterno' => ['required', 'min:2','max:20'],
+            'amaterno' => ['required', 'min:2','max:20'],
+            'nombre' => ['required','min:2','max:20'],            
             'fecha_nacimiento' => ['required','date'],
             'lugar_nacimiento' => ['required','min:5','max:85'],
             'sexo' => ['required'],
+            'estado_civil' => ['required'],
             'rfc' => ['required','regex:/^[a-zA-Z0-9]+$/','size:13','unique:employees,rfc'],
             'curp' => ['required','regex:/^[a-zA-Z0-9]+$/','size:18','unique:employees,curp'],
             'telefono' => ['required','numeric','digits:10'],
@@ -67,10 +70,9 @@ class EmployeeController extends Controller
             'localidad' => ['required','min:5','max:85'],
             'num_cuenta' => ['required','digits:10'],
             'clabe' => ['required','digits:18'],
-            'tipo_contrato'=> ['required'],
             'banco_id' => ['required'],
-            // 'foto' => ['required'],
-            // 'firma' => ['required'],
+            'fecha_baja' => ['required','date'],
+            'motivo_baja' => ['required','min:5','max:85']
         ]);
         $diccionario = ['á' => 'a',
         'é' => 'e',
@@ -82,17 +84,25 @@ class EmployeeController extends Controller
         'Í' => 'I',
         'Ó' => 'O',
         'Ú' => 'U'];
+        //Eliminando acentos        
         $slug_apaterno = Str::slug($request->input('apaterno'),' ','es',$diccionario);
         $slug_amaterno = Str::slug($request->input('amaterno'),' ','es',$diccionario);
         $slug_name = Str::slug($request->input('nombre'),' ','es',$diccionario);
+        //
         $empleado = new Employee();
+        $empleado->mov_type = "Nuevo Ingreso";
+        $empleado->contract_type = $request->input('tipo_contrato');
+        $empleado->job_type = $request->input('tipo_empleo');
+        $empleado->area_id = $request->input('area_id');
+        $empleado->place_id = $request->input('plaza_id');
+        $empleado->start_date = $request->input('fecha_ingreso');
         $empleado->last_name_1 = ucwords($slug_apaterno);
         $empleado->last_name_2 = ucwords($slug_amaterno);
         $empleado->name = ucwords($slug_name);
-        $empleado->start_date = $request->input('fecha_ingreso');
         $empleado->birthday = $request->input('fecha_nacimiento');
         $empleado->birthplace = $request->input('lugar_nacimiento');
         $empleado->sex = $request->input('sexo');
+        $empleado->marital_status = $request->input('estado_civil');
         $empleado->rfc = $request->input('rfc');
         $empleado->curp = $request->input('curp');
         $empleado->phone = $request->input('telefono');
@@ -111,9 +121,6 @@ class EmployeeController extends Controller
         $empleado->locality = $request->input('localidad');
         $empleado->account_number = $request->input('num_cuenta');
         $empleado->clabe = $request->input('clabe');
-        $empleado->contract_type = $request->input('tipo_contrato');
-        $empleado->area_id = $request->input('area_id');
-        $empleado->place_id = $request->input('plaza_id');
         $empleado->bank_id = $request->input('banco_id');
         $empleado->status = 'active';
         $empleado->modified_by = Auth::user()->email;
@@ -174,23 +181,25 @@ class EmployeeController extends Controller
     }   
     public function update(Request $request, string $id){
         $validated = $request->validate([
+            'tipo_contrato'=> ['required'],
+            'tipo_empleo'=> ['required'],
+            'area_id' => ['required'],
+            'plaza_id' => ['required', 'unique:employees,place_id,'.$id] ,
+            'fecha_ingreso' => ['required','date'],
             'apaterno' => ['required', 'min:2','max:20'],
             'amaterno' => ['required', 'min:2','max:20'],
-            'nombre' => ['required','min:2','max:20'],
-            'area_id' => ['required'],
-            //'hidden_plaza' =>['required'],
-            // 'plaza_id' => ['required', 'unique:employees,place_id'] ,
-            'fecha_ingreso' => ['required','date'],
+            'nombre' => ['required','min:2','max:20'],            
             'fecha_nacimiento' => ['required','date'],
             'lugar_nacimiento' => ['required','min:5','max:85'],
             'sexo' => ['required'],
+            'estado_civil' => ['required'],
             'rfc' => ['required','regex:/^[a-zA-Z0-9]+$/','size:13','unique:employees,rfc,'.$id],
             'curp' => ['required','regex:/^[a-zA-Z0-9]+$/','size:18','unique:employees,curp,'.$id],
             'telefono' => ['required','numeric','digits:10'],
             'email' => ['required','email','min:5','max:50','unique:employees,email,'.$id],
             'nombre_emergencia' => ['required','min:2','max:50'],
             'num_emergencia' => ['required','numeric','digits:10'],
-            'direccion_emergencia' => ['required','min:2','max:50'],            
+            'direccion_emergencia' => ['required','min:2','max:50'],
             'estado' => ['required','min:5','max:85'],
             'municipio' => ['required','min:5','max:85'],
             'colonia' => ['required','min:5','max:50'],
@@ -203,8 +212,8 @@ class EmployeeController extends Controller
             'num_cuenta' => ['required','digits:10'],
             'clabe' => ['required','digits:18'],
             'banco_id' => ['required'],
-            // 'foto' => ['required'],
-            // 'firma' => ['required'],
+            'fecha_baja' => ['required','date'],
+            'motivo_baja' => ['required','min:5','max:85']
         ]);
         $diccionario = ['á' => 'a',
                         'é' => 'e',
@@ -220,13 +229,19 @@ class EmployeeController extends Controller
         $slug_amaterno = Str::slug($request->input('amaterno'),' ','es',$diccionario);
         $slug_name = Str::slug($request->input('nombre'),' ','es',$diccionario);
         $row = Employee::find($id);
+        $row->mov_type = "Nuevo Ingreso";
+        $row->contract_type = $request->input('tipo_contrato');
+        $row->job_type = $request->input('tipo_empleo');
+        $row->area_id = $request->input('area_id');
+        $row->place_id = $request->input('plaza_id');
+        $row->start_date = $request->input('fecha_ingreso');
         $row->last_name_1 = ucwords($slug_apaterno);
         $row->last_name_2 = ucwords($slug_amaterno);
         $row->name = ucwords($slug_name);
-        $row->start_date = $request->input('fecha_ingreso');
         $row->birthday = $request->input('fecha_nacimiento');
         $row->birthplace = $request->input('lugar_nacimiento');
         $row->sex = $request->input('sexo');
+        $row->marital_status = $request->input('estado_civil');
         $row->rfc = $request->input('rfc');
         $row->curp = $request->input('curp');
         $row->phone = $request->input('telefono');
@@ -245,9 +260,8 @@ class EmployeeController extends Controller
         $row->locality = $request->input('localidad');
         $row->account_number = $request->input('num_cuenta');
         $row->clabe = $request->input('clabe');
-         $row->area_id = $request->input('area_id');
-        //$row->place_id = $request->input('plaza_id');
         $row->bank_id = $request->input('banco_id');
+        $row->status = 'active';
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('msg_tipo', 'success');
