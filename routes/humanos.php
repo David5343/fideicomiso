@@ -2,25 +2,15 @@
 
 use App\Http\Controllers\Humanos\AreaController;
 use App\Http\Controllers\Humanos\BankController;
-use App\Http\Controllers\Humanos\CarouselController;
 use App\Http\Controllers\Humanos\CategoryController;
 use App\Http\Controllers\Humanos\CountyController;
-use App\Http\Controllers\Humanos\EmployeeBankInformationController;
 use App\Http\Controllers\Humanos\EmployeeController;
 use App\Http\Controllers\Humanos\EmployeeFamilyController;
-use App\Http\Controllers\Humanos\EmployeeFamilyInformationController;
-use App\Http\Controllers\Humanos\EmployeeFileController;
-use App\Http\Controllers\Humanos\EmployeePersonalInformationController;
-use App\Http\Controllers\Humanos\FamilyFileController;
-use App\Http\Controllers\Humanos\PdfController;
-use App\Http\Controllers\Humanos\PermissionController;
-use App\Http\Controllers\Humanos\PersonalPdfController;
 use App\Http\Controllers\Humanos\PlaceController;
 use App\Http\Controllers\Humanos\ReportsController;
 use App\Http\Controllers\Humanos\RoleController;
+use App\Http\Controllers\Humanos\SliderController;
 use App\Http\Controllers\Humanos\StateController;
-use App\Http\Controllers\Humanos\TabulatorPdfController;
-use App\Http\Controllers\Humanos\VacationController;
 use App\Models\Humanos\Employee;
 use Illuminate\Support\Facades\Route;
 
@@ -106,10 +96,6 @@ Route::middleware('auth')->group(function () {
     // Route::get('humanos/archivos_familia/{id}/edit', [FamilyFileController::class,'edit'])->name('humanos.archivos_familia.edit');
     // Route::put('humanos/archivos_familia/{id}', [FamilyFileController::class,'update'])->name('humanos.archivos_familia.update');
     // Route::delete('humanos/archivos_familia/{id}', [FamilyFileController::class,'destroy'])->name('humanos.archivos_familia.destroy');
-    // //Rutas de Tabulador PDF
-    // Route::get('humanos/tabulador',[TabulatorPdfController::class, 'index'])->name('humanos.tabulador.index');
-    // //Rutas de Personal PDF
-    // Route::get('humanos/personal_pdf',[PersonalPdfController::class, 'index'])->name('humanos.personal_pdf.index');
      //Rutas de Generador de PDF
      Route::get('humanos/reportes',[ReportsController::class, 'index'])->name('humanos.reportes.index');
      Route::get('humanos/reportes/tabulador',[ReportsController::class, 'tabulador'])->name('humanos.reportes.tabulador');
@@ -132,5 +118,5 @@ Route::middleware('auth')->group(function () {
     // Route::put('humanos/vacaciones/{id}', [VacationController::class,'update'])->name('humanos.vacaciones.update');
     // Route::delete('humanos/vacaciones/{id}', [VacationController::class,'destroy'])->name('humanos.vacaciones.destroy');
     // //Rutas de carrusel
-    // Route::get('humanos/carrusel',[CarouselController::class, 'index'])->name('humanos.carrusel.index');
+     Route::get('humanos/slider/create',[SliderController::class, 'create'])->name('humanos.slider.create');
 });

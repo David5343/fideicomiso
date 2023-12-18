@@ -83,10 +83,10 @@
                         <hr class="dropdown-divider"></li>
                       {{--<li><h6 class="dropdown-header">Solicitudes</h6></li>
                       <li><a class="dropdown-item" href="{{route('humanos.permisos.index')}}">Permiso por hora</a></li>
-                      <li><a class="dropdown-item" href="{{route('humanos.vacaciones.index')}}">Vacaciones</a></li>
+                      <li><a class="dropdown-item" href="{{route('humanos.vacaciones.index')}}">Vacaciones</a></li>--}}
                       <hr class="dropdown-divider"></li>
                       <li><h6 class="dropdown-header">Ajustes</h6></li>
-                      <li><a class="dropdown-item" href="{{route('humanos.carrusel.index')}}">Carrusel</a></li> --}}
+                      <li><a class="dropdown-item" href="{{route('humanos.slider.create')}}">Slider</a></li> 
                       </ul>
                     </li>
                     <li class="nav-item dropdown">
