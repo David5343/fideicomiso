@@ -24,7 +24,6 @@
             <th scope="col">Plaza</th>
             <th scope="col">Ver</th>
             <th scope="col">Editar</th>
-            <th scope="col">Baja</th>
         </tr>
     </thead>
     <tbody>
@@ -46,14 +45,6 @@
                         <a href="{{ url('humanos/empleados/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                    </td>
-                    <td>
-                        <form action="{{ url('humanos/empleados/'.$item->id)}}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                    class="bi bi-trash"></i></button>
-                        </form>
                     </td>
                 </tr>
             @endforeach

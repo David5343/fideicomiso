@@ -2,6 +2,9 @@
 @section('content')
 <p class="text-end">
     <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bajaModal">
+        Baja
+    </button>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotoModal">
         Foto
     </button>
@@ -25,4 +28,5 @@
     </div>
     <livewire:humanos.empleados.cargar-foto />
     <livewire:humanos.empleados.cargar-firma />
+    <livewire:humanos.empleados.baja-empleado />
 @endsection
