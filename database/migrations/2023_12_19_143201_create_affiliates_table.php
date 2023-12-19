@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('file_number',255)->nullable();
             $table->unsignedBigInteger('dependency_id')->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('dependency_id')->references('id')->on('dependencies');
             $table->date('start_date')->nullable();
             $table->string('work_place',255)->nullable();
             $table->string('last_name_1',255)->nullable();
