@@ -25,7 +25,7 @@
     <form class="row g-3 m-3" action="{{ url('humanos/empleados/'.$empleado->id) }}" method="POST" >
       @method("PUT")
       @csrf
-      {{-- @if ($errors->any())
+      @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
               @foreach ($errors->all() as $error)
@@ -33,11 +33,11 @@
               @endforeach
           </ul>
       </div>
-  @endif --}}
+  @endif
         <div class="col-12">
             <h3>Datos Generales.</h3>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Tipo de Contrato</label>
           <select id="tipo_contrato" name="tipo_contrato" class="form-select" >
             <option selected value="{{$empleado->contract_type}}">{{$empleado->contract_type.' (Seleccionado)'}}</option>
@@ -47,7 +47,7 @@
           @error('tipo_contrato')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Tipo de Empleo</label>
           <select id="tipo_empleo" name="tipo_empleo" class="form-select" >
             <option selected value="{{$empleado->job_type}}">{{$empleado->job_type.' (Seleccionado)'}}</option>
@@ -71,7 +71,7 @@
         </div>
         <div class="col-md-4">
           <label class="form-label">Plaza</label>
-          {{-- <input type="hidden" value="{{$empleado->place_id}}" name="hidden_plaza"> --}}
+          <input type="hidden" value="{{$empleado->place_id}}" id="hidden_plaza"name="hidden_plaza">
           <select  class="form-select" name="plaza_id" disabled>
             <option selected value="{{$empleado->place_id}}">{{$empleado->place->place_number.'-'.$empleado->place->job_position.' (Seleccionado)'}}</option>
             @foreach($select2 as $p)
@@ -81,7 +81,7 @@
         @error('plaza_id')<br><small style="color: red">{{ $message }}</small>
         @enderror
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Fecha de Ingreso</label>
           <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{$empleado->start_date}}" >
           @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
@@ -130,10 +130,10 @@
             @error('sexo')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label class="form-label">Estado Civil</label>
             <select id="estado_civil" name="estado_civil" class="form-select" >
-              <option selected value="{{$empleado->marital_state}}">{{$empleado->marital_state.' (Seleccionado)'}}</option>
+              <option selected value="{{$empleado->marital_status}}">{{$empleado->marital_status.' (Seleccionado)'}}</option>
               <option>Soltero/a</option>
               <option>Casado/a</option>
               <option>Divorciado/a</option>

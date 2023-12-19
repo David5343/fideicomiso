@@ -36,7 +36,7 @@
         <div class="col-12">
             <h3>Datos Generales.</h3>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Tipo de Contrato</label>
           <select id="tipo_contrato" name="tipo_contrato" class="form-select" >
             <option selected value="">Elije...</option>
@@ -46,7 +46,7 @@
           @error('tipo_contrato')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Tipo de Empleo</label>
           <select id="tipo_empleo" name="tipo_empleo" class="form-select" >
             <option selected value="">Elije...</option>
@@ -57,9 +57,9 @@
           @error('tipo_empleo')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>   
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label class="form-label">Area</label>
-          <select  class="form-select" name="area_id" value="{{old('area_id')}}" >
+          <select  class="form-select" id="area_id" name="area_id" value="{{old('area_id')}}" >
             <option selected value="">Elije...</option>
             @foreach($select1 as $a)
             <option value="{{$a->id}}">{{$a->name}}</option>
@@ -68,9 +68,9 @@
         @error('area_id')<br><small style="color: red">{{ $message }}</small>
         @enderror
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <label class="form-label">Plaza</label>
-          <select  class="form-select" name="plaza_id">
+          <select  class="form-select" id="plaza_id" name="plaza_id">
             <option selected value="">Elije...</option>
             @foreach($select2 as $p)
             <option value="{{$p->id}}">{{$p->place_number.'-'.$p->job_position}}</option>
@@ -79,7 +79,7 @@
         @error('plaza_id')<br><small style="color: red">{{ $message }}</small>
         @enderror
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Fecha de Ingreso</label>
           <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}" >
           @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>

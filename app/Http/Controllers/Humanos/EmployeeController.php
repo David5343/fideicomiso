@@ -71,8 +71,8 @@ class EmployeeController extends Controller
             'num_cuenta' => ['required','digits:10'],
             'clabe' => ['required','digits:18'],
             'banco_id' => ['required'],
-            'fecha_baja' => ['required','date'],
-            'motivo_baja' => ['required','min:5','max:85']
+            //'fecha_baja' => ['required','date'],
+            //'motivo_baja' => ['required','min:5','max:85']
         ]);
         $diccionario = ['á' => 'a',
         'é' => 'e',
@@ -184,7 +184,7 @@ class EmployeeController extends Controller
             'tipo_contrato'=> ['required'],
             'tipo_empleo'=> ['required'],
             'area_id' => ['required'],
-            'plaza_id' => ['required', 'unique:employees,place_id,'.$id] ,
+            'hidden_plaza' => ['required', 'unique:employees,place_id,'.$id] ,
             'fecha_ingreso' => ['required','date'],
             'apaterno' => ['required', 'min:2','max:20'],
             'amaterno' => ['required', 'min:2','max:20'],
@@ -212,8 +212,8 @@ class EmployeeController extends Controller
             'num_cuenta' => ['required','digits:10'],
             'clabe' => ['required','digits:18'],
             'banco_id' => ['required'],
-            'fecha_baja' => ['required','date'],
-            'motivo_baja' => ['required','min:5','max:85']
+            //'fecha_baja' => ['required','date'],
+            //'motivo_baja' => ['required','min:5','max:85']
         ]);
         $diccionario = ['á' => 'a',
                         'é' => 'e',
@@ -233,7 +233,7 @@ class EmployeeController extends Controller
         $row->contract_type = $request->input('tipo_contrato');
         $row->job_type = $request->input('tipo_empleo');
         $row->area_id = $request->input('area_id');
-        $row->place_id = $request->input('plaza_id');
+        $row->place_id = $request->input('hidden_plaza');
         $row->start_date = $request->input('fecha_ingreso');
         $row->last_name_1 = ucwords($slug_apaterno);
         $row->last_name_2 = ucwords($slug_amaterno);
