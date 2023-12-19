@@ -55,11 +55,43 @@
                       <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
+                      {{-- <a class="nav-link" href="#">Link</a> --}}
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-people"></i> Recursos Humanos
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-primary">
+                        <li><h6 class="dropdown-header">Catalogos</h6></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.areas.index')}}">Áreas de Adscripción</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.bancos.index')}}">Bancos</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.estados.index')}}">Estados</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.municipios.index')}}">Municipios</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.categorias.index')}}">Categorias</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.plazas.index')}}">Plazas</a></li>
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
+                        <li><h6 class="dropdown-header">Empleados</h6></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.empleados.index')}}">Empleados</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.familiares.index')}}">Familiares</a></li>
+                         {{-- <li><a class="dropdown-item" href="{{route('humanos.archivos.index')}}">Docs Escaneados Empleados</a></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.archivos_familia.index')}}">Docs Escaneados Familiares</a></li> --}}
+                        <li><hr class="dropdown-divider"></li>
+                        <li><h6 class="dropdown-header">Reportes</h6></li>
+                        <li><a class="dropdown-item" href="{{route('humanos.reportes.index')}}">Generador de Reportes</a></li>
+                        <hr class="dropdown-divider"></li>
+                      {{--<li><h6 class="dropdown-header">Solicitudes</h6></li>
+                      <li><a class="dropdown-item" href="{{route('humanos.permisos.index')}}">Permiso por hora</a></li>
+                      <li><a class="dropdown-item" href="{{route('humanos.vacaciones.index')}}">Vacaciones</a></li>--}}
+                      <hr class="dropdown-divider"></li>
+                      <li><h6 class="dropdown-header">Ajustes</h6></li>
+                      <li><a class="dropdown-item" href="{{route('humanos.slider.create')}}">Slider</a></li> 
+                      </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people"></i> Prestaciones
                       </a>
                       <ul class="dropdown-menu dropdown-menu-primary">
                         <li><h6 class="dropdown-header">Catalogos</h6></li>
