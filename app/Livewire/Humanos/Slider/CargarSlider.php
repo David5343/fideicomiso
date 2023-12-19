@@ -17,7 +17,7 @@ class CargarSlider extends Component
     public $titulo_1;
     #[Rule('required')]
     public $texto_1;
-    #[Rule('required|image|max:512')]
+    #[Rule('required|image|max:512|dimensions:with=1600|height=700')]
     public $imagen_1;
     // #[Rule('required')]
     // public $titulo_2;

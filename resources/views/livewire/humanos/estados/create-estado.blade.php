@@ -13,7 +13,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form wire:submit="createState">
+            <form wire:submit.prevent="createState">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Clave</label>
                     <div class="col-md-2">

@@ -13,12 +13,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form wire:submit="createCategory">
+            <form wire:submit.prevent="createCategory">
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-sm-4">
-                      <input type="text" wire:model="nombre" id="nombre" name="nombre" class="form-control form-control-lg"
-                       required>
+                      <input type="text" wire:model="nombre" id="nombre" name="nombre" 
+                      class="form-control form-control-lg" required>
                       @error('nombre')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -26,8 +26,8 @@
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Sueldo</label>
                     <div class="col-sm-2">
-                      <input type="number" wire:model="sueldo" id="sueldo" name="sueldo" class="form-control form-control-lg"
-                       min="0" max="9999999999.99" step="0.01" required>
+                      <input type="number" wire:model="sueldo" id="sueldo" name="sueldo"
+                       class="form-control form-control-lg"required>
                       @error('sueldo')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -36,7 +36,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Compensación</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="compensacion" id="compensacion" name="compensacion" 
-                      class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
+                      class="form-control form-control-lg" required>
                       @error('compensacion')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -45,7 +45,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Complementaria</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="complementaria" id="complementaria" name="complementaria"
-                       class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
+                       class="form-control form-control-lg" required>
                       @error('complementaria')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -54,7 +54,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">ISR</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="isr" id="isr" name="isr" 
-                      class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
+                      class="form-control form-control-lg"  required>
                       @error('isr')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -63,7 +63,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Plazas Autorizadas</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="plazas_autorizadas" id="plazas_autoriadas" name="plazas_autorizadas"
-                       class="form-control form-control-lg" min="1" max="51" step="0.01" required>
+                       class="form-control form-control-lg" required>
                       @error('plazas_autorizadas')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
