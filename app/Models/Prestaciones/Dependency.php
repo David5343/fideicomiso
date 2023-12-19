@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Humanos;
+namespace App\Models\Prestaciones;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subdependency extends Model
+class Dependency extends Model
 {
     use HasFactory;
-    protected $table = 'subdependencies';
+    protected $table = 'dependencies';
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Humanos\Subdependency;
+use App\Models\Prestaciones\Subdependency;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
