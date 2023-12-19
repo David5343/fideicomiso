@@ -19,10 +19,12 @@ return new class extends Migration
             $table->date('request_date')->nullable();
             $table->date('start_vacation')->nullable();
             $table->date('end_vacation')->nullable();
-            $table->unsignedTinyInteger('first_period');
-            $table->unsignedTinyInteger('second_period');
+            $table->unsignedTinyInteger('first_period')->nullable();
+            $table->unsignedTinyInteger('second_period')->nullable();
             $table->string('note',255)->nullable();
-            $table->unsignedTinyInteger('vacation_bag');
+            $table->unsignedTinyInteger('vacation_bag')->nullable();
+            $table->enum('status', ['active', 'inactive','deleted']);
+            $table->string('modified_by',255)->nullable();
             $table->timestamps();
         });
     }

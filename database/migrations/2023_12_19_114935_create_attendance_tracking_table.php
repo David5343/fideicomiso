@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->date('date')->nullable();
+            $table->enum('status', ['active', 'inactive','deleted']);
+            $table->string('modified_by',255)->nullable();
             $table->timestamps();
         });
     }

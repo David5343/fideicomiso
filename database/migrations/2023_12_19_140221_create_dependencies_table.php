@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medical_disability', function (Blueprint $table) {
+        Schema::create('dependencies', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
+            $table->string('name',255)->unique();
             $table->enum('status', ['active', 'inactive','deleted']);
             $table->string('modified_by',255)->nullable();
             $table->timestamps();
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medical_disability');
+        Schema::dropIfExists('dependencies');
     }
 };

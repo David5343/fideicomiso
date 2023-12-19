@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('other',255)->nullable();
             $table->unsignedTinyInteger('required_time');
             $table->unsignedTinyInteger('monthly_bag');
+            $table->enum('status', ['active', 'inactive','deleted']);
+            $table->string('modified_by',255)->nullable();
             $table->timestamps();
         });
     }
