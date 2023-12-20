@@ -19,6 +19,7 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
@@ -29,6 +30,7 @@
             @foreach ($lista as $item)
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
+                    <td>{{ $item->email }}</td>
                     <td>{{ $item->name }}</td>
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">

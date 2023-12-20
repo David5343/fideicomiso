@@ -140,12 +140,46 @@ class EmployeeController extends Controller
         } else {
             //Registrando el usuario de sistema
             $user = new User();
+            //consultando el area al que se registrara
+            $rol = Area::find($empleado->area_id);
             $user->name = $name;
             $user->email = $usuario;
             $user->password = Hash::make($password);
             $user->status = 'active';
             $user->modified_by = Auth::user()->email;
             $user->save();
+            switch ($rol->id) {
+                case '1':
+                    $user->assignRole('Coordinacion');
+                    break;
+                case '2':
+                    $user->assignRole('Administracion');
+                    break;  
+                case '3':
+                    $user->assignRole('Juridica');
+                    break;
+                case '4':
+                    $user->assignRole('Medica');
+                    break;
+                case '5':
+                    $user->assignRole('Humanos');
+                    break;  
+                case '6':
+                    $user->assignRole('Financieros');
+                    break;
+                case '7':
+                    $user->assignRole('Materiales');
+                    break;
+                case '8':
+                    $user->assignRole('Prestaciones');
+                    break;  
+                case '9':
+                    $user->assignRole('Tecnologias');
+                    break;              
+                default:
+                $user->assignRole('Default');
+                    break;
+            }
             //Agregando el usuario creado a la tabla de empleados
             $empleado->user_id = $user->id;
             $empleado->save();

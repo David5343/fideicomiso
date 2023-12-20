@@ -25,6 +25,7 @@ class RoleSeeder extends Seeder
         $role9 = Role::create(['name' => 'Tecnologias']);
         $role10 = Role::create(['name' => 'Configuracion']);
         $role11 = Role::create(['name' => 'Admin']);
+        $role12 = Role::create(['name' => 'Default']);
         //Ejemplo de como asignar un permiso a muchos roles
         //Permission::create(['name'=>'humanos.area.index'])->syncRoles($role1,$role2);
 

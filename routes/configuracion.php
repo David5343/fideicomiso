@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Configuracion\AssignPermissionController;
 use App\Http\Controllers\Configuracion\PermissionController;
 use App\Http\Controllers\Configuracion\RoleController;
 use App\Http\Controllers\Configuracion\UserController;
