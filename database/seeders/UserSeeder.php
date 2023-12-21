@@ -18,15 +18,15 @@ class UserSeeder extends Seeder
             'email' => 'david@fideicomiso.com',
             'password' => bcrypt('david2023'),
             'status' => 'active'
-        //])->assignRole('Admin');
-        ]);
+        ])->assignRole('Admin');
+        //]);
         User::create([
             'name' => 'Luis Adelfo Roblez Vazquez',
             'email' => 'adelfo@fideicomiso.com',
             'password' => bcrypt('adelfo2023'),
             'status' => 'active'
-        //])->assignRole('Admin');
-        ]);
+        ])->assignRole('Admin');
+        //]);
 
     }
 }

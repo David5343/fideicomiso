@@ -14,15 +14,29 @@
             </div>
             @endif
             <form wire:submit.prevent="createPermission">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
-                    <div class="col-md-8">
-                      <input type="text" wire:model="nombre" id="nombre" name="nombre" class="form-control form-control-lg" required>
-                      @error('nombre')<br><small style="color: red">{{ $message }}</small>
-                      @enderror
-                    </div>
-                  </div>     
-            
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label col-form-label-lg text-end">Rol de Sistema</label>
+                <div class="col-md-5">
+                  <select wire:model="rol" id="rol" name="rol"
+                   class="form-select form-select-lg" required>
+                  <option selected value="">Selecciona un Rol</option>
+                  @foreach ($select as $e)
+                  <option value="{{ $e->name }}">{{ $e->name }}</option>
+                  @endforeach
+                  </select>
+                  @error('rol')<br><small style="color: red">{{ $message }}</small>
+                  @enderror
+                </div>
+              </div> 
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label col-form-label-lg text-end">Permiso</label>
+                <div class="col-md-5">
+                  <input type="text" wire:model="nombre" id="nombre" name="nombre" 
+                  class="form-control form-control-lg" required>
+                  @error('nombre')<br><small style="color: red">{{ $message }}</small>
+                  @enderror
+                </div>
+              </div>   
         </div>
         <div class="modal-footer">
           <button wire:click="cerrarModal" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>

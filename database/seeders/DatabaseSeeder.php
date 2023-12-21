@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BancosSeeder::class);
         $this->call(EstadosSeeder::class);
         $this->call(MunicipiosSeeder::class);
-        //$this->call(RoleSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(DependencySeeder::class);
         $this->call(SubdependencySeeder::class);

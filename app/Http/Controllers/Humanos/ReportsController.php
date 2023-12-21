@@ -10,6 +10,12 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportsController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware('can:humanos.reportes.index');
+        //$this->middleware('subscribed')->except('store');
+    }
     public function index(){
         return view('humanos.reportes.index');
     }

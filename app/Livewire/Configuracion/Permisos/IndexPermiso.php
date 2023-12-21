@@ -22,7 +22,7 @@ class IndexPermiso extends Component
     public function updatingnumberRows(){
         $this->resetPage();
     }
-    #[On('create_permiso')]
+    #[On('create_permission')]
     public function updateList($permiso = null){
 
     }

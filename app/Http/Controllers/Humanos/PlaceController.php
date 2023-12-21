@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PlaceController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware('can:humanos.plezas.index');
+        //$this->middleware('subscribed')->except('store');
+    }
     public function index()
     {   
         return view('humanos.plazas.index');

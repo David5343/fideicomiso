@@ -11,16 +11,18 @@ class CreatePermiso extends Component
 {
     #[Rule('required|unique:permissions,name|min:5|max:50')]
     public $nombre;
+    public $rol;
 
     public function createPermission(){
 
         $this->validate();
-        $role = Permission::create(['name' => $this->nombre]);
+        $permission = Permission::create(['name' => $this->nombre]);
+        $permission->assignRole($this->rol);
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        $this->reset(['nombre']);
-        $this->resetValidation();
-        $this->dispatch('create_role',$role);
+        //$this->reset(['nombre']);
+        //$this->resetValidation();
+        $this->dispatch('create_permission',$permission);
     }
     public function cerrarModal(){
 
@@ -30,6 +32,7 @@ class CreatePermiso extends Component
     }
     public function render()
     {
-        return view('livewire.configuracion.permisos.create-permiso');
+        $select = Role::all();
+        return view('livewire.configuracion.permisos.create-permiso',['select'=>$select]);
     }
 }

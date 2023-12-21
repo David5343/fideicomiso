@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware('can:humanos.categorias.index');
+        //$this->middleware('subscribed')->except('store');
+    }
     public function index()
     {
         return view('humanos.categorias.index');

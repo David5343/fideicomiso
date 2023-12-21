@@ -17,7 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::get('humanos/areas',[AreaController::class, 'index'])->name('humanos.areas.index');
     Route::get('humanos/areas/create',[AreaController::class, 'create'])->name('humanos.areas.create');
     Route::post('humanos/areas',[AreaController::class, 'store'])->name('humanos.areas.store');
-    Route::get('humanos/areas/{id}',[AreaController::class, 'show'])->name('humanos.areas.show');
     Route::get('humanos/areas/{id}/edit', [AreaController::class,'edit'])->name('humanos.areas.edit');
     Route::put('humanos/areas/{id}', [AreaController::class,'update'])->name('humanos.areas.update');
     Route::delete('humanos/areas/{id}', [AreaController::class,'destroy'])->name('humanos.areas.destroy');
