@@ -18,6 +18,6 @@
     @endif
         <livewire:configuracion.permisos.index-permiso />
     </div>
-    {{-- <livewire:humanos.areas.create-area /> --}}
+    <livewire:configuracion.permisos.create-permiso />
     {{-- <livewire:humanos.areas.edit-area /> --}}
 @endsection
