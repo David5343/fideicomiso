@@ -18,8 +18,6 @@ class CreateRole extends Component
         $role = Role::create(['name' => $this->nombre]);
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        $this->reset(['nombre']);
-        $this->resetValidation();
         $this->dispatch('create_role',$role);
     }
     public function cerrarModal(){

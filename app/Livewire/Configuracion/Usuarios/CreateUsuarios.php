@@ -28,11 +28,12 @@ class CreateUsuarios extends Component
         $usuario->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        $this->reset();
+        $this->dispatch('create_user',$usuario);
     }
     public function cerrarModal()
     {
-        $this->reset();
+        $this->reset(['nombre','email','password']);
+        $this->resetValidation();
     }
     public function render()
     {

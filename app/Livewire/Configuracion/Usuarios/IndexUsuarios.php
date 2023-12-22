@@ -3,6 +3,7 @@
 namespace App\Livewire\Configuracion\Usuarios;
 
 use App\Models\User;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,6 +20,10 @@ class IndexUsuarios extends Component
     }
     public function updatingnumberRows(){
         $this->resetPage();
+    }
+    #[On('create_user')]
+    public function updateList($user = null){
+
     }
     public function render()
     {
