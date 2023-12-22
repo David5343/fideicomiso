@@ -54,28 +54,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('humanos/empleados/{id}', [EmployeeController::class,'destroy'])->name('humanos.empleados.destroy');
     //Rutas de familiares
     Route::get('humanos/familiares',[EmployeeFamilyController::class, 'index'])->name('humanos.familiares.index');
-    Route::get('humanos/familiares/create',[EmployeeFamilyController::class, 'create'])->name('humanos.familiares.create');
-    Route::post('humanos/familiares',[EmployeeFamilyController::class, 'store'])->name('humanos.familiares.store');
     Route::get('humanos/familiares/{id}',[EmployeeFamilyController::class, 'show'])->name('humanos.familiares.show');
     Route::get('humanos/familiares/{id}/edit', [EmployeeFamilyController::class,'edit'])->name('humanos.familiares.edit');
     Route::put('humanos/familiares/{id}', [EmployeeFamilyController::class,'update'])->name('humanos.familiares.update');
     Route::delete('humanos/familiares/{id}', [EmployeeFamilyController::class,'destroy'])->name('humanos.familiares.destroy');
-    // //Rutas de archivos_escaneados
-    // Route::get('humanos/archivos',[EmployeeFileController::class, 'index'])->name('humanos.archivos.index');
-    // Route::get('humanos/archivos/create',[EmployeeFileController::class, 'create'])->name('humanos.archivos.create');
-    // Route::post('humanos/archivos',[EmployeeFileController::class, 'store'])->name('humanos.archivos.store');
-    // Route::get('humanos/archivos/{id}',[EmployeeFileController::class, 'show'])->name('humanos.archivos.show');
-    // Route::get('humanos/archivos/{id}/edit', [EmployeeFileController::class,'edit'])->name('humanos.archivos.edit');
-    // Route::put('humanos/archivos/{id}', [EmployeeFileController::class,'update'])->name('humanos.archivos.update');
-    // Route::delete('humanos/archivos/{id}', [EmployeeFileController::class,'destroy'])->name('humanos.archivos.destroy');
-    // //Rutas de archivos_escaneados_familiares
-    // Route::get('humanos/archivos_familia',[FamilyFileController::class, 'index'])->name('humanos.archivos_familia.index');
-    // Route::get('humanos/archivos_familia/create',[FamilyFileController::class, 'create'])->name('humanos.archivos_familia.create');
-    // Route::post('humanos/archivos_familia',[FamilyFileController::class, 'store'])->name('humanos.archivos_familia.store');
-    // Route::get('humanos/archivos_familia/{id}',[FamilyFileController::class, 'show'])->name('humanos.archivos_familia.show');
-    // Route::get('humanos/archivos_familia/{id}/edit', [FamilyFileController::class,'edit'])->name('humanos.archivos_familia.edit');
-    // Route::put('humanos/archivos_familia/{id}', [FamilyFileController::class,'update'])->name('humanos.archivos_familia.update');
-    // Route::delete('humanos/archivos_familia/{id}', [FamilyFileController::class,'destroy'])->name('humanos.archivos_familia.destroy');
      //Rutas de Generador de PDF
      Route::get('humanos/reportes',[ReportsController::class, 'index'])->name('humanos.reportes.index');
      Route::get('humanos/reportes/tabulador',[ReportsController::class, 'tabulador'])->name('humanos.reportes.tabulador');

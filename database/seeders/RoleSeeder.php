@@ -23,21 +23,16 @@ class RoleSeeder extends Seeder
         $role7 = Role::create(['name' => 'Materiales']);
         $role8 = Role::create(['name' => 'Prestaciones']);
         $role9 = Role::create(['name' => 'Tecnologias']);
-        $role10 = Role::create(['name' => 'Configuracion']);
-        $role11 = Role::create(['name' => 'Admin']);
-        $role12 = Role::create(['name' => 'Default']);
-        //Ejemplo de como asignar un permiso a muchos roles
-        //Permission::create(['name'=>'humanos.area.index'])->syncRoles($role1,$role2);
-
-        // //
-        // Permission::create(['name'=>'humanos.area.index'])->syncRoles($role1,$role2);
-        // Permission::create(['name'=>'humanos.area.create'])->syncRoles($role1,$role2);
-        // Permission::create(['name'=>'humanos.area.edit'])->syncRoles($role1,$role2);
-        // Permission::create(['name'=>'humanos.area.destroy'])->syncRoles($role1,$role2);
-        // //
-        // Permission::create(['name'=>'configuracion.usuarios.index'])->assignRole($role1);
-        // Permission::create(['name'=>'configuracion.usuarios.create'])->assignRole($role1);
-        // Permission::create(['name'=>'configuracion.usuarios.edit'])->assignRole($role1);
-        // Permission::create(['name'=>'configuracion.usuarios.destroy'])->assignRole($role1);
+        $role10 = Role::create(['name' => 'Jefe-Coordinacion']);
+        $role11 = Role::create(['name' => 'Jefe-Administracion']);
+        $role12 = Role::create(['name' => 'Jefe-Juridica']);
+        $role13 = Role::create(['name' => 'Jefe-Medica']);
+        $role14 = Role::create(['name' => 'Jefe-Humanos']);
+        $role15 = Role::create(['name' => 'Jefe-Financieros']);
+        $role16 = Role::create(['name' => 'Jefe-Materiales']);
+        $role17 = Role::create(['name' => 'Jefe-Prestaciones']);
+        $role18 = Role::create(['name' => 'Jefe-Tecnologias']);
+        $role19 = Role::create(['name' => 'Admin']);
+        $role20 = Role::create(['name' => 'Default']);
     }
 }

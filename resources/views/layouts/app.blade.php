@@ -104,10 +104,10 @@
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-gear"></i> Configuración
+                        <i class="bi bi-gear"></i> Tecnologías
                       </a>
                       <ul class="dropdown-menu dropdown-menu-primary">
-                        {{-- <li><h6 class="dropdown-header">Catalogos</h6></li> --}}
+                        <li><h6 class="dropdown-header">Configuracion</h6></li>
                         <li><a class="dropdown-item" href="{{route('configuracion.usuarios.index')}}"><i class="bi bi-person-gear"></i> Usuarios</a></li>
                         <li><a class="dropdown-item" href="{{route('configuracion.roles.index')}}"><i class="bi bi-ui-checks"></i> Roles</a></li>
                         <li><a class="dropdown-item" href="{{route('configuracion.permisos.index')}}"><i class="bi bi-key"></i> Permisos</a></li>
