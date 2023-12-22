@@ -39,7 +39,8 @@ class CargarFoto extends Component
             $e->save();
             session()->flash('msg_tipo_modal','success');
             session()->flash('msg_modal','Imagen cargada con éxito!');
-            $this->reset(['empleado_id','foto']);  
+            $this->reset(['empleado_id','foto']);
+            $this->dispatch('create_empleado',$e);  
         }else{
             Storage::delete('public/'.$e->photo);
             $e->photo = $customFoto;
@@ -47,7 +48,8 @@ class CargarFoto extends Component
             $e->save();
             session()->flash('msg_tipo_modal','success');
             session()->flash('msg_modal','Imagen cargada con éxito!'); 
-            $this->reset(['empleado_id','foto']);        
+            $this->reset(['empleado_id','foto']);
+            $this->dispatch('create_empleado',$e);        
         }
 
     } 

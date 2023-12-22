@@ -39,7 +39,8 @@ class CargarFirma extends Component
             $e->save();
             session()->flash('msg_tipo_modal','success');
             session()->flash('msg_modal','Imagen cargada con éxito!');
-            $this->reset(['empleado_id','firma']);  
+            $this->reset(['empleado_id','firma']); 
+            $this->dispatch('create_empleado',$e);  
         }else{
             Storage::delete('public/'.$e->signature);
             $e->signature = $customFirma;
@@ -48,7 +49,7 @@ class CargarFirma extends Component
             session()->flash('msg_tipo_modal','success');
             session()->flash('msg_modal','Imagen cargada con éxito!'); 
             $this->reset(['empleado_id','firma']); 
-            $this->resetValidation();       
+            $this->dispatch('create_empleado',$e);       
         }
 
     } 

@@ -14,7 +14,8 @@ class BajaEmpleado extends Component
     public $motivo_baja;
     
     public function bajaEmpleado(){
-
+        $this->reset(['empleado_id','motivo_baja']); 
+       // $this->dispatch('create_empleado',$e); 
     }
     public function cerrarModal(){
         $this->reset(['empleado_id','motivo_baja']);

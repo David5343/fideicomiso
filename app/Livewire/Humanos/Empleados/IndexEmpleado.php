@@ -3,6 +3,7 @@
 namespace App\Livewire\Humanos\Empleados;
 
 use App\Models\Humanos\Employee;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,6 +20,10 @@ class IndexEmpleado extends Component
     }
     public function updatingnumberRows(){
         $this->resetPage();
+    }
+    #[On('create_empleado')]
+    public function updateList($e = null){
+
     }
     public function render()
     {
