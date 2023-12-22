@@ -30,8 +30,6 @@ class CreateBanco extends Component
         $banco->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        $this->reset(['clave','nombre','razon_social']);
-        $this->resetValidation();
         $this->dispatch('create_banco',$banco);
     }
     public function cerrarModal(){
