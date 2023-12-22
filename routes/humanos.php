@@ -24,34 +24,22 @@ Route::middleware('auth')->group(function () {
     Route::put('humanos/bancos/{id}', [BankController::class,'update'])->name('humanos.bancos.update');
     Route::delete('humanos/bancos/{id}', [BankController::class,'destroy'])->name('humanos.bancos.destroy');
     //Rutas de estados
-    Route::get('humanos/estados',[StateController::class, 'index'])->name('humanos.estados.index');
-    Route::get('humanos/estados/create',[StateController::class, 'create'])->name('humanos.estados.create');
-    Route::post('humanos/estados',[StateController::class, 'store'])->name('humanos.estados.store');
-    Route::get('humanos/estados/{id}',[StateController::class, 'show'])->name('humanos.estados.show');
+    Route::get('humanos/estados',[StateController::class, 'index'])->name('humanos.estados.index');;
     Route::get('humanos/estados/{id}/edit', [StateController::class,'edit'])->name('humanos.estados.edit');
     Route::put('humanos/estados/{id}', [StateController::class,'update'])->name('humanos.estados.update');
     Route::delete('humanos/estados/{id}', [StateController::class,'destroy'])->name('humanos.estados.destroy');
     //Rutas de municipios
     Route::get('humanos/municipios',[CountyController::class, 'index'])->name('humanos.municipios.index');
-    Route::get('humanos/municipios/create',[CountyController::class, 'create'])->name('humanos.municipios.create');
-    Route::post('humanos/municipios',[CountyController::class, 'store'])->name('humanos.municipios.store');
-    Route::get('humanos/municipios/{id}',[CountyController::class, 'show'])->name('humanos.municipios.show');
     Route::get('humanos/municipios/{id}/edit', [CountyController::class,'edit'])->name('humanos.municipios.edit');
     Route::put('humanos/municipios/{id}', [CountyController::class,'update'])->name('humanos.municipios.update');
     Route::delete('humanos/municipios/{id}', [CountyController::class,'destroy'])->name('humanos.municipios.destroy');
     //Rutas de categorias
     Route::get('humanos/categorias',[CategoryController::class, 'index'])->name('humanos.categorias.index');
-    Route::get('humanos/categorias/create',[CategoryController::class, 'create'])->name('humanos.categorias.create');
-    Route::post('humanos/categorias',[CategoryController::class, 'store'])->name('humanos.categorias.store');
-    Route::get('humanos/categorias/{id}',[CategoryController::class, 'show'])->name('humanos.categorias.show');
     Route::get('humanos/categorias/{id}/edit', [CategoryController::class,'edit'])->name('humanos.categorias.edit');
     Route::put('humanos/categorias/{id}', [CategoryController::class,'update'])->name('humanos.categorias.update');
     Route::delete('humanos/categorias/{id}', [CategoryController::class,'destroy'])->name('humanos.categorias.destroy');
     //Rutas de plazas
     Route::get('humanos/plazas',[PlaceController::class, 'index'])->name('humanos.plazas.index');
-    Route::get('humanos/plazas/create',[PlaceController::class, 'create'])->name('humanos.plazas.create');
-    Route::post('humanos/plazas',[PlaceController::class, 'store'])->name('humanos.plazas.store');
-    Route::get('humanos/plazas/{id}',[PlaceController::class, 'show'])->name('humanos.plazas.show');
     Route::get('humanos/plazas/{id}/edit', [PlaceController::class,'edit'])->name('humanos.plazas.edit');
     Route::put('humanos/plazas/{id}', [PlaceController::class,'update'])->name('humanos.plazas.update');
     Route::delete('humanos/plazas/{id}', [PlaceController::class,'destroy'])->name('humanos.plazas.destroy');

@@ -13,7 +13,7 @@ class PlaceController extends Controller
     public function __construct()
     {
         //$this->middleware('auth');
-        $this->middleware('can:humanos.plezas.index');
+        $this->middleware('can:humanos.plazas.index');
         //$this->middleware('subscribed')->except('store');
     }
     public function index()
