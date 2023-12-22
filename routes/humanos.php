@@ -15,16 +15,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     //Rutas de areas de adscripcion
     Route::get('humanos/areas',[AreaController::class, 'index'])->name('humanos.areas.index');
-    Route::get('humanos/areas/create',[AreaController::class, 'create'])->name('humanos.areas.create');
-    Route::post('humanos/areas',[AreaController::class, 'store'])->name('humanos.areas.store');
     Route::get('humanos/areas/{id}/edit', [AreaController::class,'edit'])->name('humanos.areas.edit');
     Route::put('humanos/areas/{id}', [AreaController::class,'update'])->name('humanos.areas.update');
     Route::delete('humanos/areas/{id}', [AreaController::class,'destroy'])->name('humanos.areas.destroy');
     //Rutas de bancos
     Route::get('humanos/bancos',[BankController::class, 'index'])->name('humanos.bancos.index');
-    Route::get('humanos/bancos/create',[BankController::class, 'create'])->name('humanos.bancos.create');
-    Route::post('humanos/bancos',[BankController::class, 'store'])->name('humanos.bancos.store');
-    Route::get('humanos/bancos/{id}',[BankController::class, 'show'])->name('humanos.bancos.show');
     Route::get('humanos/bancos/{id}/edit', [BankController::class,'edit'])->name('humanos.bancos.edit');
     Route::put('humanos/bancos/{id}', [BankController::class,'update'])->name('humanos.bancos.update');
     Route::delete('humanos/bancos/{id}', [BankController::class,'destroy'])->name('humanos.bancos.destroy');

@@ -11,6 +11,7 @@ class CreatePermiso extends Component
 {
     #[Rule('required|unique:permissions,name|min:5|max:50')]
     public $nombre;
+    #[Rule('required')]
     public $rol;
 
     public function createPermission(){
@@ -20,13 +21,11 @@ class CreatePermiso extends Component
         $permission->assignRole($this->rol);
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        //$this->reset(['nombre']);
-        //$this->resetValidation();
         $this->dispatch('create_permission',$permission);
     }
     public function cerrarModal(){
 
-        $this->reset(['nombre']);
+        $this->reset(['nombre','rol']);
         $this->resetValidation();
 
     }

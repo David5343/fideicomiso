@@ -22,7 +22,6 @@ class CreateArea extends Component
         $area->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        $this->reset(['nombre']);
         $this->dispatch('create_area',$area);
     }
     public function cerrarModal(){
