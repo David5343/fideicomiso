@@ -49,7 +49,6 @@ class CreateCategoria extends Component
         $categoria->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro creado con éxito!'); 
-        $this->reset(['nombre','sueldo','compensacion','complementaria','isr','plazas_autorizadas']);
         $this->dispatch('create_categoria',$categoria);
     }
     public function cerrarModal(){
