@@ -18,6 +18,6 @@
     @endif
         <livewire:prestaciones.dependencias.index-dependencias />
     </div>
-    {{-- <livewire:humanos.areas.create-area /> --}}
+    <livewire:prestaciones.dependencias.create-dependencias />
     {{-- <livewire:humanos.areas.edit-area /> --}}
 @endsection
