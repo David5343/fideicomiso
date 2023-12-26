@@ -11,9 +11,9 @@ class AreaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:Admin','permission:humanos.areas.index|humanos.areas.edit|humanos.areas.update|humanos.areas.destroy']);
+        //$this->middleware(['role:Admin','permission:humanos.areas.index|humanos.areas.edit|humanos.areas.update|humanos.areas.destroy']);
         //$this->middleware('auth');
-        //$this->middleware('can:humanos.areas.index');
+        $this->middleware('can:humanos.areas.index');
         //$this->middleware('subscribed')->except('store');
     }
     public function index()
