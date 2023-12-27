@@ -100,6 +100,7 @@
                         <li>
                           <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item" href="{{route('prestaciones.afiliados.index')}}">Afiliados</a></li>
                       </ul>
                     </li>
                     <li class="nav-item dropdown">
