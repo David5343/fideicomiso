@@ -108,13 +108,16 @@
             @error('sexo')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label class="form-label">Estado Civil</label>
             <select id="estado_civil" name="estado_civil" class="form-select" >
               <option selected value="">Elije...</option>
               <option>Soltero/a</option>
               <option>Casado/a</option>
               <option>Divorciado/a</option>
+              <option>Separado/a en proceso Judicial</option>
+              <option>Viudo/a</option>
+              <option>Concubinato</option>
             </select>
             @error('estado_civil')<br><small style="color: red">{{ $message }}</small>
             @enderror
@@ -131,13 +134,13 @@
             @error('curp')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label  class="form-label">Telefono</label>
             <input type="phone" class="form-control" id="telefono" name="telefono" size="10" value="{{old('telefono')}}" >
             @error('telefono')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label  class="form-label">Correo Electrónico</label>
             <input type="email" class="form-control" id="email" name="email" maxlength="50" value="{{old('email')}}" >
             @error('email')<br><small style="color: red">{{ $message }}</small>
@@ -150,7 +153,7 @@
             <label class="form-label">Entidad Federativa</label>
             <input type="text" class="form-control" list="datalistEstados" id="estado" name="estado" minlength="3" maxlength="85" value="{{old('estado')}}">
             <datalist id="datalistEstados">
-              @foreach($select3 as $e)
+              @foreach($select2 as $e)
               <option value="{{$e->name}}">
               @endforeach   
             </datalist>
@@ -161,14 +164,14 @@
             <label class="form-label">Municipio o Delegación</label>
             <input type="text" class="form-control" list="datalistMunicipios"  id="municipio" name="municipio" minlength="3" maxlength="85" value="{{old('municipio')}}">
             <datalist id="datalistMunicipios">
-              @foreach($select4 as $m)
+              @foreach($select3 as $m)
               <option value="{{$m->name}}">
               @endforeach   
             </datalist>
             @error('municipio')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label  class="form-label">Colonia</label>
             <input type="text" class="form-control" id="colonia" name="colonia" minlength="3" maxlength="50"  value="{{old('colonia')}}" >
             @error('colonia')<br><small style="color: red">{{ $message }}</small>
@@ -196,7 +199,7 @@
             @error('num_interior')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             <label  class="form-label">CP</label>
             <input type="number" class="form-control" id="cp" name="cp" min="20000" max="99999"  value="{{old('cp')}}" >
             @error('cp')<br><small style="color: red">{{ $message }}</small>
@@ -227,9 +230,9 @@
             <label class="form-label">Institución Bancaria</label>
             <select  class="form-select" id="banco_id" name="banco_id" >
               <option selected value="">Elije...</option>
-              {{-- @foreach($select5 as $b)
+              @foreach($select4 as $b)
               <option value="{{$b->id}}">{{$b->name}}</option>
-              @endforeach --}}
+              @endforeach
           </select>
           @error('banco_id')<br><small style="color: red">{{ $message }}</small>
           @enderror
