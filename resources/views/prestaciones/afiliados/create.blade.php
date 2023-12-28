@@ -3,7 +3,7 @@
 <p class="text-end"><a href="{{ route('prestaciones.afiliados.index') }}" class="btn btn-primary" role="button">Lista de  Afiliados</a></p>
     <div class="card mt-1 border-primary">
         <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
-            Humanos/Crear Afiliado
+            Prestaciones/Crear Afiliado
         </div>
         @if (session('msg_tipo'))
         <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
@@ -22,7 +22,7 @@
             <button wire:click="rfcBuscar" type="button" class="btn btn-success">Buscar</button>
           </div>
       </div> --}}
-    <form class="row g-3 m-3" action="{{ route('humanos.empleados.store') }}" method="POST" >
+    <form class="row g-3 m-3" action="{{ route('prestaciones.afiliados.store') }}" method="POST" >
       @csrf
       {{-- @if ($errors->any())
       <div class="alert alert-danger">
@@ -38,8 +38,9 @@
         </div>
         <div class="col-md-3">
           <label  class="form-label">No de Expediente</label>
-          <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{old('no_expediente')}}" >
-          @error('no_expediente')<br><small style="color: red">{{ $message }}</small>
+          <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{old('no_expediente')}}" disabled>
+          <input type="hidden" id="expediente_hidden" name="expediente_hidden">
+          @error('expediente_hidden')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="col-md-7">
@@ -60,8 +61,13 @@
           @enderror
         </div>
         <div class="col-md-3">
-          <label  class="form-label">Lugar de Trabajo</label>
-          <input type="text" class="form-control" id="lugar_trabajo" name="lugar_trabajo" minlength="2" maxlength="20" value="{{old('lugar_trabajo')}}" >
+          <label class="form-label">Lugar de Trabajo</label>
+          <input type="text" class="form-control" list="datalistMunicipios"  id="lugar_trabajo" name="lugar_trabajo" minlength="3" maxlength="85" value="{{old('lugar_trabajo')}}">
+          <datalist id="datalistMunicipios">
+            @foreach($select3 as $m)
+            <option value="{{$m->name}}">
+            @endforeach   
+          </datalist>
           @error('lugar_trabajo')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
@@ -92,9 +98,14 @@
             @error('fecha_nacimiento')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
-          <div class="col-md-5">
-            <label  class="form-label">Lugar de Nacimiento</label>
-            <input type="text" class="form-control" id="lugar_nacimiento" name="lugar_nacimiento" minlength="5" maxlength="85" value="{{old('lugar_nacimiento')}}" >
+          <div class="col-md-3">
+            <label class="form-label">Lugar de Nacimiento</label>
+            <input type="text" class="form-control" list="datalistMunicipios"  id="lugar_nacimiento" name="lugar_nacimiento" minlength="3" maxlength="85" value="{{old('lugar_nacimiento')}}">
+            <datalist id="datalistMunicipios">
+              @foreach($select3 as $m)
+              <option value="{{$m->name}}">
+              @endforeach   
+            </datalist>
             @error('lugar_nacimiento')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>

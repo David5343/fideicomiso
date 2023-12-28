@@ -25,4 +25,5 @@ Route::middleware('auth')->group(function () {
     //Rutas de afiliacion
     Route::get('prestaciones/afiliados', [AffiliateController::class,'index'])->name('prestaciones.afiliados.index');
     Route::get('prestaciones/afiliados/create',[AffiliateController::class, 'create'])->name('prestaciones.afiliados.create');
+    Route::post('prestaciones/afiliados',[AffiliateController::class, 'store'])->name('prestaciones.afiliados.store');
 });

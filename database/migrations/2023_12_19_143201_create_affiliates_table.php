@@ -40,6 +40,8 @@ return new class extends Migration
             $table->string('locality',255)->nullable();
             $table->date('inactive_date')->nullable();
             $table->string('inactive_motive',255)->nullable();
+            $table->string('photo',255)->nullable();
+            $table->string('signature',255)->nullable();
             $table->enum('status', ['active', 'inactive','deleted']);
             $table->string('modified_by',255)->nullable();
             $table->timestamps();
