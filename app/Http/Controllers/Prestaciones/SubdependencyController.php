@@ -23,7 +23,7 @@ class SubdependencyController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nombre' => ['required', 'max:50', 'unique:subdependencies,name,' . $id],
+            'nombre' => ['required', 'max:60', 'unique:subdependencies,name,' . $id],
             'dependencia_id' =>['required']
         ]);
         $row = Subdependency::find($id);

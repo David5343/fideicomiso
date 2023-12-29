@@ -21,7 +21,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Nombre</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control form-control-lg" id="nombre" name="nombre"
-                            value="{{ $subdependencia->name }}" minlength="5" maxlength="50" required>
+                            value="{{ $subdependencia->name }}" minlength="5" maxlength="60" required>
                         @error('nombre')
                             <br><small style="color: red">{{ $message }}</small>
                         @enderror

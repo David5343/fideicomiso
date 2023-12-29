@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('affiliates', function (Blueprint $table) {
             $table->id();
             $table->string('file_number',255)->nullable();
-            $table->unsignedBigInteger('dependency_id')->nullable();
-            $table->foreign('dependency_id')->references('id')->on('dependencies');
+            $table->unsignedBigInteger('subdependency_id')->nullable();
+            $table->foreign('subdependency_id')->references('id')->on('subdependencies');
             $table->date('start_date')->nullable();
             $table->string('work_place',255)->nullable();
             $table->string('last_name_1',255)->nullable();
@@ -38,6 +38,10 @@ return new class extends Migration
             $table->string('interior_number',255)->nullable();
             $table->string('cp',255)->nullable();
             $table->string('locality',255)->nullable();
+            $table->string('account_number',255)->nullable();
+            $table->string('clabe',255)->nullable();
+            $table->unsignedBigInteger('bank_id')->nullable();
+            $table->foreign('bank_id')->references('id')->on('banks');
             $table->date('inactive_date')->nullable();
             $table->string('inactive_motive',255)->nullable();
             $table->string('photo',255)->nullable();

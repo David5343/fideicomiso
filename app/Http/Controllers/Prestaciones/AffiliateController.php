@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
+use App\Models\Prestaciones\Affiliate;
 use App\Models\Prestaciones\Subdependency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AffiliateController extends Controller
 {
@@ -38,28 +40,72 @@ class AffiliateController extends Controller
             'amaterno' => ['required', 'min:2','max:20'],
             'nombre' => ['required','min:2','max:20'],            
             'fecha_nacimiento' => ['required','date'],
-            'lugar_nacimiento' => ['required','min:5','max:85'],
-            'sexo' => ['required'],
-            'estado_civil' => ['required'],
-            'rfc' => ['required','regex:/^[a-zA-Z0-9]+$/','size:13','unique:employees,rfc'],
-            'curp' => ['required','regex:/^[a-zA-Z0-9]+$/','size:18','unique:employees,curp'],
-            'telefono' => ['required','numeric','digits:10'],
-            'email' => ['required','email','min:5','max:50','unique:employees,email'],
-            'estado' => ['required','min:5','max:85'],
-            'municipio' => ['required','min:5','max:85'],
-            'colonia' => ['required','min:5','max:50'],
-            'tipo_vialidad' => ['required','min:5','max:50'],
-            'calle' =>['required','min:5','max:50'],
-            'num_exterior' => ['required','numeric','max_digits:5'],
+            'lugar_nacimiento' => ['nullable','min:5','max:85'],
+            'sexo' => ['nullable'],
+            'estado_civil' => ['nullable'],
+            'rfc' => ['nullable','regex:/^[a-zA-Z0-9]+$/','size:13','unique:affiliates,rfc'],
+            'curp' => ['nullable','regex:/^[a-zA-Z0-9]+$/','size:18','unique:affiliates,curp'],
+            'telefono' => ['nullable','numeric','digits:10'],
+            'email' => ['nullable','email','min:5','max:50','unique:affiliates,email'],
+            'estado' => ['nullable','min:5','max:85'],
+            'municipio' => ['nullable','min:5','max:85'],
+            'colonia' => ['nullable','min:5','max:50'],
+            'tipo_vialidad' => ['nullable','min:5','max:50'],
+            'calle' =>['nullable','min:5','max:50'],
+            'num_exterior' => ['nullable','numeric','max_digits:5'],
             'num_interior' => ['nullable','numeric','max_digits:5'],
-            'cp' => ['required','numeric','digits:5'],
-            'localidad' => ['required','min:5','max:85'],
-            'num_cuenta' => ['required','digits:10'],
-            'clabe' => ['required','digits:18'],
-            'banco_id' => ['required'],
+            'cp' => ['nullable','numeric','digits:5'],
+            'localidad' => ['nullable','min:5','max:85'],
+            'num_cuenta' => ['nullable','digits:10'],
+            'clabe' => ['nullable','digits:18'],
+            'banco_id' => ['nullable'],
             //'fecha_baja' => ['required','date'],
             //'motivo_baja' => ['required','min:5','max:85']
-        ]);        
+        ]);
+        $diccionario = ['á' => 'a',
+        'é' => 'e',
+        'í' => 'i',
+        'ó' => 'o',
+        'ú' => 'u',
+        'Á' => 'A',
+        'É' => 'E',
+        'Í' => 'I',
+        'Ó' => 'O',
+        'Ú' => 'U'];
+        //Eliminando acentos        
+        $slug_apaterno = Str::slug($request->input('apaterno'),' ','es',$diccionario);
+        $slug_amaterno = Str::slug($request->input('amaterno'),' ','es',$diccionario);
+        $slug_name = Str::slug($request->input('nombre'),' ','es',$diccionario);
+        //
+        $afiliado = new Affiliate();
+        $afiliado->file_number = $request->input('expediente_hidden');
+        $afiliado->dependency_id = $request->input('subdepe_id');
+        $afiliado->start_date =$request->input('fecha_ingreso');
+        $afiliado->work_place = $request->input('lugar_trabajo');       
+        $afiliado->last_name_1 = ucwords($slug_apaterno);
+        $afiliado->last_name_2 = ucwords($slug_amaterno);
+        $afiliado->name = ucwords($slug_name);
+        $afiliado->birthday = $request->input('fecha_nacimiento');
+        $afiliado->birthplace = $request->input('lugar_nacimiento');
+        $afiliado->sex = $request->input('sexo');
+        $afiliado->marital_status = $request->input('estado_civil');
+        $afiliado->rfc = $request->input('rfc');
+        $afiliado->curp = $request->input('curp');
+        $afiliado->phone = $request->input('telefono');
+        $afiliado->email =$request->input('email');
+        $afiliado->state =$request->input('estado');
+        $afiliado->county =$request->input('municipio');
+        $afiliado->neighborhood =$request->input('colonia');
+        $afiliado->roadway_type =$request->input('tipo_vialidad');
+        $afiliado->street =$request->input('calle');
+        $afiliado->outdoor_number =$request->input('num_exterior');
+        $afiliado->interior_number =$request->input('num_interior');
+        $afiliado->cp =$request->input('cp');
+        $afiliado->locality =$request->input('localidad');
+        $afiliado->account_number =$request->input('num_cuenta');
+        $afiliado->clabe =$request->input('clabe');
+        $afiliado->bank_id =$request->input('banco_id');
+        $afiliado->save();
 
     }
 }
