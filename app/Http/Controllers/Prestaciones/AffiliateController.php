@@ -9,6 +9,7 @@ use App\Models\Humanos\State;
 use App\Models\Prestaciones\Affiliate;
 use App\Models\Prestaciones\Subdependency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class AffiliateController extends Controller
@@ -31,9 +32,9 @@ class AffiliateController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'no_expendiente'=> ['required'],
-            'expendiente_hidden'=> ['required'],
-            'subdepe'=> ['required'],
+            'no_expediente'=> ['required'],
+            //'expendiente_hidden'=> ['required'],
+            'subdepe_id'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
             'apaterno' => ['required', 'min:2','max:20'],
@@ -78,8 +79,8 @@ class AffiliateController extends Controller
         $slug_name = Str::slug($request->input('nombre'),' ','es',$diccionario);
         //
         $afiliado = new Affiliate();
-        $afiliado->file_number = $request->input('expediente_hidden');
-        $afiliado->dependency_id = $request->input('subdepe_id');
+        $afiliado->file_number = $request->input('no_expediente');
+        $afiliado->subdependency_id = $request->input('subdepe_id');
         $afiliado->start_date =$request->input('fecha_ingreso');
         $afiliado->work_place = $request->input('lugar_trabajo');       
         $afiliado->last_name_1 = ucwords($slug_apaterno);
@@ -105,7 +106,12 @@ class AffiliateController extends Controller
         $afiliado->account_number =$request->input('num_cuenta');
         $afiliado->clabe =$request->input('clabe');
         $afiliado->bank_id =$request->input('banco_id');
+        $afiliado->status = 'active';
+        $afiliado->modified_by = Auth::user()->email;
         $afiliado->save();
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'Registro creado con éxito!');
+        return to_route('prestaciones.afiliados.index');
 
     }
 }

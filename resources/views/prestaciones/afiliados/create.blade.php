@@ -24,7 +24,7 @@
       </div> --}}
     <form class="row g-3 m-3" action="{{ route('prestaciones.afiliados.store') }}" method="POST" >
       @csrf
-      {{-- @if ($errors->any())
+      @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
               @foreach ($errors->all() as $error)
@@ -32,15 +32,15 @@
               @endforeach
           </ul>
       </div>
-  @endif --}}
+  @endif
         <div class="col-12">
             <h3>Datos Generales.</h3>
         </div>
         <div class="col-md-3">
           <label  class="form-label">No de Expediente</label>
-          <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{old('no_expediente')}}" disabled>
+          <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{old('no_expediente')}}">
           <input type="hidden" id="expediente_hidden" name="expediente_hidden">
-          @error('expediente_hidden')<br><small style="color: red">{{ $message }}</small>
+          @error('no_expediente')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="col-md-7">
