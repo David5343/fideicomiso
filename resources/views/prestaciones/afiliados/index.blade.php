@@ -14,8 +14,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-        {{-- <livewire:prestaciones.dependencias.index-dependencias /> --}}
+        <livewire:prestaciones.afiliados.index-affiliates />
     </div>
-    {{-- <livewire:prestaciones.dependencias.create-dependencias /> --}}
-    {{-- <livewire:humanos.areas.edit-area /> --}}
 @endsection

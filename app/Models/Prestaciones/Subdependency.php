@@ -5,6 +5,7 @@ namespace App\Models\Prestaciones;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subdependency extends Model
 {
@@ -13,5 +14,9 @@ class Subdependency extends Model
     public function dependency():BelongsTo
     {
         return $this->belongsTo(Dependency::class);
+    }
+    public function affiliate():HasMany
+    {
+        return $this->hasMany(Affiliate::class);
     }
 }
