@@ -11,6 +11,7 @@ use App\Models\Prestaciones\Subdependency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class AffiliateController extends Controller
 {
@@ -24,16 +25,19 @@ class AffiliateController extends Controller
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
+        $id = IdGenerator::generate(['table' => 'affiliates','field' => 'file_number', 'length' => 10, 'prefix' =>'FSP']);
+        $no_expediente = $id;
         return  view('prestaciones.afiliados.create', ['select1' => $select1,
                                                   'select2' => $select2,
                                                   'select3' => $select3,
-                                                  'select4' => $select4]);
+                                                  'select4' => $select4,
+                                                    'no_expediente' =>$no_expediente]);
     }
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'no_expediente'=> ['required'],
-            //'expendiente_hidden'=> ['required'],
+            //'no_expediente'=> ['required'],
+            'expediente_hidden'=> ['required'],
             'subdepe_id'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
@@ -79,7 +83,7 @@ class AffiliateController extends Controller
         $slug_name = Str::slug($request->input('nombre'),' ','es',$diccionario);
         //
         $afiliado = new Affiliate();
-        $afiliado->file_number = $request->input('no_expediente');
+        $afiliado->file_number = $request->input('expediente_hidden');
         $afiliado->subdependency_id = $request->input('subdepe_id');
         $afiliado->start_date =$request->input('fecha_ingreso');
         $afiliado->work_place = $request->input('lugar_trabajo');       

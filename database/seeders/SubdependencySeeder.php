@@ -20,7 +20,7 @@ class SubdependencySeeder extends Seeder
             'modified_by'=>'david@fideicomiso.com',
         ]);
         Subdependency::create([
-            'name'=>'SUBSECRETARIA DE SEGURIDAD PUBLICA Y PROTECCION CIUDADANA',
+            'name'=>'SECRETARIA DE SEGURIDAD PUBLICA Y PROTECCION CIUDADANA',
             'dependency_id' => 1,
             'status'=>'active',
             'modified_by'=>'david@fideicomiso.com',
@@ -34,6 +34,12 @@ class SubdependencySeeder extends Seeder
         Subdependency::create([
             'name'=>'SUBSECRETARIA DE SERVICIOS ESTRATEGICOS DE SEGURIDAD',
             'dependency_id' => 1,
+            'status'=>'active',
+            'modified_by'=>'david@fideicomiso.com',
+        ]);
+        Subdependency::create([
+            'name'=>'FISCALIA GENERAL DEL ESTADO',
+            'dependency_id' => 2,
             'status'=>'active',
             'modified_by'=>'david@fideicomiso.com',
         ]);

@@ -38,8 +38,8 @@
         </div>
         <div class="col-md-3">
           <label  class="form-label">No de Expediente</label>
-          <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{old('no_expediente')}}">
-          <input type="hidden" id="expediente_hidden" name="expediente_hidden">
+          <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{$no_expediente}}" disabled>
+          <input type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$no_expediente}}">
           @error('no_expediente')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
