@@ -27,7 +27,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Sueldo</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="sueldo" id="sueldo" name="sueldo"
-                       class="form-control form-control-lg"required>
+                       class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
                       @error('sueldo')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -36,7 +36,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Compensación</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="compensacion" id="compensacion" name="compensacion" 
-                      class="form-control form-control-lg" required>
+                      class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
                       @error('compensacion')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -45,7 +45,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Complementaria</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="complementaria" id="complementaria" name="complementaria"
-                       class="form-control form-control-lg" required>
+                       class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
                       @error('complementaria')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
@@ -54,7 +54,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">ISR</label>
                     <div class="col-sm-2">
                       <input type="number" wire:model="isr" id="isr" name="isr" 
-                      class="form-control form-control-lg"  required>
+                      class="form-control form-control-lg" min="0" max="9999999999.99" step="0.01" required>
                       @error('isr')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
