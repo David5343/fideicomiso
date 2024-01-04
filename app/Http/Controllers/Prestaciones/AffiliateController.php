@@ -64,6 +64,11 @@ class AffiliateController extends Controller
             'num_cuenta' => ['nullable','digits:10'],
             'clabe' => ['nullable','digits:18'],
             'banco_id' => ['nullable'],
+            'nombre_representante' =>['nullable'],
+            'rfc_representante' =>['nullable'],
+            'curp_representante' =>['nullable'],
+            'parentesco_representante' =>['nullable'],
+
             //'fecha_baja' => ['required','date'],
             //'motivo_baja' => ['required','min:5','max:85']
         ]);
@@ -110,6 +115,10 @@ class AffiliateController extends Controller
         $afiliado->account_number =$request->input('num_cuenta');
         $afiliado->clabe =$request->input('clabe');
         $afiliado->bank_id =$request->input('banco_id');
+        $afiliado->representative_name =$request->input('nombre_representante');
+        $afiliado->representative_rfc =$request->input('rfc_representante');
+        $afiliado->representative_curp =$request->input('curp_representante');
+        $afiliado->representative_relationship =$request->input('parentesco_representante');        
         $afiliado->status = 'active';
         $afiliado->modified_by = Auth::user()->email;
         $afiliado->save();
@@ -162,6 +171,10 @@ class AffiliateController extends Controller
             'num_cuenta' => ['nullable','digits:10'],
             'clabe' => ['nullable','digits:18'],
             'banco_id' => ['nullable'],
+            'nombre_representante' =>['nullable'],
+            'rfc_representante' =>['nullable'],
+            'curp_representante' =>['nullable'],
+            'parentesco_representante' =>['nullable'],
             //'fecha_baja' => ['required','date'],
             //'motivo_baja' => ['required','min:5','max:85']
         ]);
@@ -208,6 +221,10 @@ class AffiliateController extends Controller
         $row->account_number =$request->input('num_cuenta');
         $row->clabe =$request->input('clabe');
         $row->bank_id =$request->input('banco_id');
+        $row->representative_name =$request->input('nombre_representante');
+        $row->representative_rfc =$request->input('rfc_representante');
+        $row->representative_curp =$request->input('curp_representante');
+        $row->representative_relationship =$request->input('parentesco_representante'); 
         $row->status = 'active';
         $row->modified_by = Auth::user()->email;
         $row->save();
