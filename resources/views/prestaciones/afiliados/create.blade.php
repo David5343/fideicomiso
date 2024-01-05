@@ -36,7 +36,7 @@
         <div class="col-12">
             <h3>Datos Generales.</h3>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <label  class="form-label">No de Expediente</label>
           <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{$no_expediente}}" disabled>
           <input type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$no_expediente}}">
@@ -71,6 +71,31 @@
           @error('lugar_trabajo')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
+        <div class="col-md-5">
+          <label  class="form-label">Motivo de alta</label>
+          <input type="text" class="form-control" id="motivo_alta" name="motivo_alta" 
+          placeholder="Se da de alta registro con oficio no. 45687963352123 (Si aplica)" minlength="2" maxlength="120" value="{{old('motivo_alta')}}" >
+          @error('motivo_alta')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Estatus</label>
+          <select id="estatus_afiliado" name="estatus_afiliado" class="form-select" >
+            <option selected value="">Elije...</option>
+            <option>Preafiliado</option>
+            <option>Activo</option>
+            <option>Baja</option>
+          </select>
+          @error('estatus_afiliado')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-12">
+          <label  class="form-label">Observaciones</label>
+          <textarea id="observaciones" name="observaciones" class="form-control form-control-lg" 
+          rows="2"></textarea>
+          @error('observaciones')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>        
         <div class="col-12">
             <h3>Datos Personales.</h3>
         </div>

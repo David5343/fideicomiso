@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreign('subdependency_id')->references('id')->on('subdependencies');
             $table->date('start_date')->nullable();
             $table->string('work_place',255)->nullable();
+            $table->string('register_motive',255)->nullable();
+            $table->string('observations',255)->nullable();
             $table->string('last_name_1',255)->nullable();
             $table->string('last_name_2',255)->nullable();
             $table->string('name',255)->nullable();

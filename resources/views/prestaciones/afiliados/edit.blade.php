@@ -37,7 +37,7 @@
         <div class="col-12">
             <h3>Datos Generales.</h3>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <label  class="form-label">No de Expediente</label>
           <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{$afiliado->file_number}}" disabled>
           <input type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$afiliado->file_number}}">
@@ -70,6 +70,30 @@
             @endforeach   
           </datalist>
           @error('lugar_trabajo')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-6">
+          <label  class="form-label">Motivo de alta</label>
+          <input type="text" class="form-control" id="motivo_alta" name="motivo_alta" minlength="2" maxlength="20" value="{{$afiliado->register_motive}}" >
+          @error('motivo_alta')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Estatus</label>
+          <select id="estatus_afiliado" name="estatus_afiliado" class="form-select" >
+            <option selected value="{{$afiliado->affiliate_status}}">{{$afiliado->affiliate_status.' (Seleccionado)'}}</option>
+            <option>Preafiliado</option>
+            <option>Activo</option>
+            <option>Baja</option>
+          </select>
+          @error('estatus_afiliado')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-12">
+          <label  class="form-label">Observaciones</label>
+          <textarea id="observaciones" name="observaciones" class="form-control form-control-lg" 
+          rows="2">{{$afiliado->observations}}</textarea>
+          @error('observaciones')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="col-12">

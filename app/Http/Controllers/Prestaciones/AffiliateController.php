@@ -25,7 +25,7 @@ class AffiliateController extends Controller
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
-        $id = IdGenerator::generate(['table' => 'affiliates','field' => 'file_number', 'length' => 10, 'prefix' =>'FSP']);
+        $id = IdGenerator::generate(['table' => 'affiliates','field' => 'file_number', 'length' => 8, 'prefix' =>'A']);
         $no_expediente = $id;
         return  view('prestaciones.afiliados.create', ['select1' => $select1,
                                                   'select2' => $select2,
@@ -41,6 +41,8 @@ class AffiliateController extends Controller
             'subdepe_id'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
+            'motivo_registro' =>['nullable'],
+            'observaciones' =>['nullable'],
             'apaterno' => ['required', 'min:2','max:20'],
             'amaterno' => ['required', 'min:2','max:20'],
             'nombre' => ['required','min:2','max:20'],            
@@ -91,7 +93,9 @@ class AffiliateController extends Controller
         $afiliado->file_number = $request->input('expediente_hidden');
         $afiliado->subdependency_id = $request->input('subdepe_id');
         $afiliado->start_date =$request->input('fecha_ingreso');
-        $afiliado->work_place = $request->input('lugar_trabajo');       
+        $afiliado->work_place = $request->input('lugar_trabajo');
+        $afiliado->register_motive = $request->input('motivo_registro');
+        $afiliado->observations = $request->input('observaciones');        
         $afiliado->last_name_1 = ucwords($slug_apaterno);
         $afiliado->last_name_2 = ucwords($slug_amaterno);
         $afiliado->name = ucwords($slug_name);
@@ -148,6 +152,8 @@ class AffiliateController extends Controller
             'subdepe_id'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
+            'motivo_registro' =>['nullable'],
+            'observaciones' =>['nullable'],
             'apaterno' => ['required', 'min:2','max:20'],
             'amaterno' => ['required', 'min:2','max:20'],
             'nombre' => ['required','min:2','max:20'],            
@@ -197,7 +203,9 @@ class AffiliateController extends Controller
         $row->file_number = $request->input('expediente_hidden');
         $row->subdependency_id = $request->input('subdepe_id');
         $row->start_date =$request->input('fecha_ingreso');
-        $row->work_place = $request->input('lugar_trabajo');       
+        $row->work_place = $request->input('lugar_trabajo');  
+        $row->register_motive = $request->input('motivo_registro');
+        $row->observations = $request->input('observaciones');       
         $row->last_name_1 = ucwords($slug_apaterno);
         $row->last_name_2 = ucwords($slug_amaterno);
         $row->name = ucwords($slug_name);

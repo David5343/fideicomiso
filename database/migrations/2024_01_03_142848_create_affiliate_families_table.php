@@ -21,12 +21,14 @@ return new class extends Migration
             $table->string('sex',255)->nullable();
             $table->string('rfc',255)->nullable();
             $table->string('curp',255)->nullable();
+            $table->enum('disabled_person', ['SI', 'NO']);
+            $table->string('relationship',255)->nullable();
             $table->string('address',255)->nullable();
+            $table->string('observations',255)->nullable();
             $table->string('account_number',255)->nullable();
             $table->string('clabe',255)->nullable();
             $table->unsignedBigInteger('bank_id')->nullable();
             $table->foreign('bank_id')->references('id')->on('banks');
-            $table->string('relationship',255)->nullable();
             $table->string('representative_name',255)->nullable();
             $table->string('representative_rfc',255)->nullable();
             $table->string('representative_curp',255)->nullable();
