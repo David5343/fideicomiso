@@ -131,6 +131,15 @@ class AffiliateController extends Controller
         return to_route('prestaciones.afiliados.index');
 
     }
+    public function show(string $id)
+    {
+        $row = Affiliate::find($id);
+        // $ae = EmployeeFile::where('employee_id',$id)->first();
+         //$fam = EmployeeFamily::where('employee_id',$id)->get();
+        return view('prestaciones.afiliados.show',['afiliado' => $row]);
+        
+    }
+
     public function edit(string $id)
     {
         $select1 = Subdependency::where('status', 'active')->get();
