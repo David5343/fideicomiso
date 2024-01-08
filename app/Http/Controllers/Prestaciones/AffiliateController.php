@@ -94,7 +94,7 @@ class AffiliateController extends Controller
         $afiliado->subdependency_id = $request->input('subdepe_id');
         $afiliado->start_date =$request->input('fecha_ingreso');
         $afiliado->work_place = $request->input('lugar_trabajo');
-        $afiliado->register_motive = $request->input('motivo_registro');
+        $afiliado->register_motive = $request->input('motivo_alta');
         $afiliado->observations = $request->input('observaciones');        
         $afiliado->last_name_1 = ucwords($slug_apaterno);
         $afiliado->last_name_2 = ucwords($slug_amaterno);
@@ -153,6 +153,7 @@ class AffiliateController extends Controller
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
             'motivo_registro' =>['nullable'],
+            'estatus_afiliado' => ['required'],
             'observaciones' =>['nullable'],
             'apaterno' => ['required', 'min:2','max:20'],
             'amaterno' => ['required', 'min:2','max:20'],
@@ -204,7 +205,7 @@ class AffiliateController extends Controller
         $row->subdependency_id = $request->input('subdepe_id');
         $row->start_date =$request->input('fecha_ingreso');
         $row->work_place = $request->input('lugar_trabajo');  
-        $row->register_motive = $request->input('motivo_registro');
+        $row->register_motive = $request->input('motivo_alta');
         $row->observations = $request->input('observaciones');       
         $row->last_name_1 = ucwords($slug_apaterno);
         $row->last_name_2 = ucwords($slug_amaterno);
@@ -233,6 +234,7 @@ class AffiliateController extends Controller
         $row->representative_rfc =$request->input('rfc_representante');
         $row->representative_curp =$request->input('curp_representante');
         $row->representative_relationship =$request->input('parentesco_representante'); 
+        $row->affiliate_status = $request->input('estatus_afiliado');
         $row->status = 'active';
         $row->modified_by = Auth::user()->email;
         $row->save();

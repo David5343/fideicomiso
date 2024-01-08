@@ -47,7 +47,7 @@
         <div class="col-md-7">
           <label class="form-label">Dependencia</label>
           <select  class="form-select" id="subdepe_id" name="subdepe_id">
-            <option selected value="{{$afiliado->subdependency->subdependency_id}}">{{$afiliado->subdependency->name.' (Selecionado)'}}</option>
+            <option selected value="{{$afiliado->subdependency->id}}">{{$afiliado->subdependency->name.' (Selecionado)'}}</option>
             @foreach($select1 as $sd)
             <option value="{{$sd->id}}">{{$sd->name}}</option>
             @endforeach
@@ -74,7 +74,7 @@
         </div>
         <div class="col-md-6">
           <label  class="form-label">Motivo de alta</label>
-          <input type="text" class="form-control" id="motivo_alta" name="motivo_alta" minlength="2" maxlength="20" value="{{$afiliado->register_motive}}" >
+          <input type="text" class="form-control" id="motivo_alta" name="motivo_alta" minlength="2" maxlength="120" value="{{$afiliado->register_motive}}" >
           @error('motivo_alta')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
@@ -272,7 +272,42 @@
           </select>
           @error('banco_id')<br><small style="color: red">{{ $message }}</small>
           @enderror
-          </div>          
+          </div>
+          <div class="col-12">
+            <h3>Datos Representante Legal.</h3>
+        </div> 
+        <div class="col-md-4">
+          <label  class="form-label">Nombre Completo</label>
+          <input type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="2" maxlength="20" value="{{$afiliado->representative_name}}" >
+          @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-3">
+          <label  class="form-label">RFC</label>
+          <input type="text" class="form-control" id="rfc_representante" name="rfc_representante" minlength="2" maxlength="20" value="{{$afiliado->representative_rfc}}" >
+          @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-3">
+          <label  class="form-label">CURP</label>
+          <input type="text" class="form-control" id="curp_representante" name="curp_representante" minlength="2" maxlength="20" value="{{$afiliado->representative_curp}}" >
+          @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Parentesco</label>
+          <select id="parentesco_representante" name="parentesco_representante" class="form-select" >
+            <option selected value="{{$afiliado->representative_relationship}}">{{$afiliado->representative_relationship.' (Seleccionado)'}}</option>
+            <option>Padre</option>
+            <option>Madre</option>
+            <option>Esposo/a</option>
+            <option>Hijo/a</option>
+            <option>Nieto/a</option>
+            <option>Hermano/a</option>
+          </select>
+          @error('parentesco_representante')<br><small style="color: red">{{ $message }}</small>
+          @enderror
+        </div>          
         <div class="col-12">
           <button type="submit" class="btn btn-primary">Guardar</button>
           <a href="{{ route('prestaciones.afiliados.index') }}" class="btn btn-danger" role="button">Cancelar</a>

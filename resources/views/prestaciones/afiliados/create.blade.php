@@ -81,7 +81,7 @@
         <div class="col-md-2">
           <label class="form-label">Estatus</label>
           <select id="estatus_afiliado" name="estatus_afiliado" class="form-select" >
-            <option selected value="">Elije...</option>
+            <option selected value="Preafiliado">Preafiliado</option>
             <option>Preafiliado</option>
             <option>Activo</option>
             <option>Baja</option>
