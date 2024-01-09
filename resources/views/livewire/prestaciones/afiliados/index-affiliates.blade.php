@@ -23,6 +23,7 @@
             <th scope="col">RFC</th>
             <th scope="col">Nombre</th>
             <th scope="col">Editar</th>
+            <th scope="col">Ver</th>
             <th scope="col">Estatus</th>
             <th scope="col">Eliminar</th>
         </tr>
@@ -40,6 +41,11 @@
                             <i class="bi bi-pencil-square"></i></button> --}}
                         <a href="{{ url('prestaciones/afiliados/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('prestaciones/afiliados/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
+                            <i class="bi bi-folder2-open"></i>
                         </a>
                     </td>
                     <td>{{ $item->status }}</td>

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <p class="text-end">
-    <a href="{{ route('humanos.empleados.create') }}" class="btn btn-primary" role="button">Crear Empleado</a>
-    <a href="{{ route('humanos.empleados.index') }}" class="btn btn-primary" role="button">Lista de Empleados</a>
+    <a href="{{ route('prestaciones.afiliados.create') }}" class="btn btn-primary" role="button">Crear Afiliado</a>
+    <a href="{{ route('prestaciones.afiliados.index') }}" class="btn btn-primary" role="button">Lista de Afiliados</a>
 </p>
     <div class="card mt-1 border-primary">
         <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Prestaciones/Expediente electrónico') }}</div>
@@ -37,14 +37,14 @@
                   <img src="{{asset('img/avatar.png')}}" alt="avatar"
                   class="rounded-circle img-fluid" style="width: 150px;">
                   @endif
-                  <h5 class="my-3">{{$empleado->user->email}}</h5>
-                  <p class="text-muted mb-1"><strong>{{$empleado->area->name}}</strong></p>
-                  <p class="text-muted mb-4"><strong>{{$empleado->place->job_position}}</strong></p>
+                  <h5 class="my-3"></h5>
+                  <p class="text-muted mb-1"><strong>ESTATUS</strong></p>
+                  <p class="text-muted mb-4"><strong>@if($afiliado->affiliate_status){{$afiliado->affiliate_status}}@endif</strong></p>
                   <div class="d-flex justify-content-center mb-2">
                     {{-- <button type="button" class="btn btn-primary">Follow</button>
                     <button type="button" class="btn btn-outline-primary ms-1">Message</button> --}}
-                    @if($empleado->signature))
-                    <img src="{{Storage::url($empleado->signature)}}"  class="rounded-circle img-fluid" style="width: 150px;">
+                    @if($afiliado->signature))
+                    <img src="{{Storage::url($afiliado->signature)}}"  class="rounded-circle img-fluid" style="width: 150px;">
                   @endif
                   </div>
                 </div>
@@ -57,15 +57,38 @@
                     </li>   
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>No de Cuenta</strong></p>
-                      <p class="mb-0">{{$empleado->account_number}}</p>
+                      <p class="mb-0">@if($afiliado->account_number){{$afiliado->account_number}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>CLABE</strong></p>
-                      <p class="mb-0">{{$empleado->clabe}}</p>
+                      <p class="mb-0">@if($afiliado->clabe){{$afiliado->clabe}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Banco</strong></p>
-                      <p class="mb-0">{{$empleado->bank->name}}</p>
+                      <p class="mb-0">@if($afiliado->bank->name){{$afiliado->bank->name}}@endif</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body p-0">
+                  <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <p class="mb-0 text-primary font-italic me-1">Representante Legal</p>
+                    </li>   
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <p class="mb-0"><strong>Nombre</strong></p>
+                      <p class="mb-0">@if($afiliado->representative_name){{$afiliado->representative_name}}@endif</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <p class="mb-0"><strong>RFC</strong></p>
+                      <p class="mb-0">@if($afiliado->representative_rfc){{$afiliado->representative_rfc}}@endif</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <p class="mb-0"><strong>CURP</strong></p>
+                      <p class="mb-0">@if($afiliado->representative_curp){{$afiliado->representative_curp}}@endif</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <p class="mb-0"><strong>Parentesco</strong></p>
+                      <p class="mb-0">@if($afiliado->representative_relationship){{$afiliado->representative_relationship}}@endif</p>
                     </li>
                   </ul>
                 </div>
@@ -76,10 +99,25 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Nombre</strong></p>
+                      <p class="mb-0"><strong></strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->name.' '.$empleado->last_name_1.' '.$empleado->last_name_2}}</p>
+                      <p class="mb-2"><strong>DATOS GENERALES</strong></p>
+                    </div>
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>No de Expediente</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->file_number){{$afiliado->file_number}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Dependencia</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->subdependency->name){{$afiliado->subdependency->name}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -88,170 +126,199 @@
                       <p class="mb-0"><strong>Fecha de Ingreso</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->start_date}}</p>
+                      <p class="text-muted mb-0">{{$afiliado->start_date}}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Plaza</strong></p>
+                      <p class="mb-0"><strong>Lugar de Trabajo</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->place->place_number}}</p>
+                      <p class="text-muted mb-0">{{$afiliado->work_place}}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Categoria</strong></p>
+                      <p class="mb-0"><strong>Motivo de Registro</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->place->category->name}}</p>
+                      <p class="text-muted mb-0">@if($afiliado->register_motive){{$afiliado->register_motive}}@endif</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Estatus</strong></p>
+                      <p class="mb-0"><strong>Observaciones</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->status}}</p>
+                      <p class="text-muted mb-0">@if($afiliado->observations){{$afiliado->observations}}@endif</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Modificado por</strong></p>
+                      <p class="mb-0"><strong></strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->modified_by}}</p>
+                      <p class="mb-0"><strong>DATOS PERSONALES</strong></p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Fecha de registro</strong></p>
+                      <p class="mb-0"><strong>Nombre</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->created_at}}</p>
+                      <p class="text-muted mb-0">@if($afiliado->last_name_1){{$afiliado->last_name_1.' '.$afiliado->last_name_2.' '.$afiliado->name}}@endif</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Ultima modificación</strong></p>
+                      <p class="mb-0"><strong>Fecha de Nacimiento</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$empleado->updated_at}}</p>
+                      <p class="text-muted mb-0">@if($afiliado->birthday){{$afiliado->birthday}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Lugar de Nacimiento</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->birthplace){{$afiliado->birthplace}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Sexo</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->sex){{$afiliado->sex}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Estado Civil</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->marital_status){{$afiliado->marital_status}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>RFC</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->rfc){{$afiliado->rfc}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>CURP</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->curp){{$afiliado->curp}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Teléfono</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->phone){{$afiliado->phone}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Correo electrónico</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->email){{$afiliado->email}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Estado</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->state){{$afiliado->state}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Municipio</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->county){{$afiliado->county}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Colonia</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->neighborhood){{$afiliado->neighborhood}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Tipo de Vialidad</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->roadway_type){{$afiliado->roadway_type}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Nombre de la Vialidad (Calle)</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->street){{$afiliado->street}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>No. de Exterior</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->outdoor_number){{$afiliado->outdoor_number}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>CP</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->cp){{$afiliado->cp}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Localidad</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($afiliado->locality){{$afiliado->locality}}@endif</p>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-4 mb-md-0">
-                      <div class="card-body">
-                        <p class="mb-4"><span class="text-primary font-italic me-1">Datos Personales</span>
-                        </p>                     
-                        <p class="mt-1 mb-1"><strong>Fecha de Nacimiento</strong></p>
-                        <p class="mt-2 mb-1">{{$empleado->birthday}}</p>
-                        <p class="mt-1 mb-1" ><strong>Lugar de Nacimiento</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->birthplace}}</p>
-                        <p class="mt-1 mb-1" ><strong>Sexo</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->sex}}</p>
-                        <p class="mt-1 mb-1" ><strong>RFC</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->rfc}}</p>
-                        <p class="mt-1 mb-1" ><strong>CURP</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->curp}}</p>
-                        <p class="mt-1 mb-1" ><strong>Teléfono</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->phone}}</p>
-                        <p class="mt-1 mb-1" ><strong>Número de Emergencia</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->emergency_number}}</p>
-                        <p class="mt-1 mb-1" ><strong>Correo Electrónico</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->email}}</p>
-                        <p class="mt-1 mb-1" ><strong>Entidad Federativa</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->state}}</p>
-                        <p class="mt-1 mb-1" ><strong>Municipio o Delegación</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->county}}</p>
-                        <p class="mt-1 mb-1" ><strong>Colonia</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->neighborhood}}</p>
-                        <p class="mt-1 mb-1" ><strong>Tipo de Vialidad</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->roadway_type}}</p>
-                        <p class="mt-1 mb-1" ><strong>Nombre de la Vialidad(Calle)</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->street}}</p>
-                        <p class="mt-1 mb-1" ><strong>No de Exterior</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->outdoor_number}}</p>
-                        <p class="mt-1 mb-1" ><strong>No de Interior</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->interior_number}}</p>
-                        <p class="mt-1 mb-1" ><strong>CP</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->cp}}</p>
-                        <p class="mt-1 mb-1" ><strong>Localidad</strong></p>
-                        <p class="mt-2 mb-1" >{{$empleado->locality}}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="card mb-4 mb-md-0">
-                      <div class="card-body">
-                        <p class="mb-4"><span class="text-primary font-italic me-1">Archivos Escaneados</span>
-                        </p>
-                        {{-- @if($ae)                       
-                        <p class="mt-1 mb-1">Solicitud de Empleo</p>
-                        <p class="mt-2 mb-1">{{$ae->job_application}}</p>
-                        <p class="mt-1 mb-1" >Curriculum Vitae</p>
-                        <p class="mt-2 mb-1" >{{$ae->cv_resume}}</p>
-                        <p class="mt-1 mb-1" >Acta de Nacimiento</p>
-                        <p class="mt-2 mb-1" >{{$ae->birth_certificate}}</p>
-                        <p class="mt-1 mb-1" >INE</p>
-                        <p class="mt-2 mb-1" >{{$ae->ine}}</p>
-                        <p class="mt-1 mb-1" >RFC</p>
-                        <p class="mt-2 mb-1" >{{$ae->rfc}}</p>
-                        <p class="mt-1 mb-1">Cartilla Militar</p>
-                        <p class="mt-2 mb-1">{{$ae->military_card}}</p>
-                        <p class="mt-1 mb-1" >Comprobante de Domicilio</p>
-                        <p class="mt-2 mb-1" >{{$ae->proof_residency}}</p>
-                        <p class="mt-1 mb-1" >Croquis de Domicilio</p>
-                        <p class="mt-2 mb-1" >{{$ae->sketch_home}}</p>
-                        <p class="mt-1 mb-1" >Carta No Inhabilitacion</p>
-                        <p class="mt-2 mb-1" >{{$ae->no_disqualification}}</p>
-                        <p class="mt-1 mb-1" >Antecedentes Penales</p>
-                        <p class="mt-2 mb-1" >{{$ae->criminal_record}}</p>
-                        <p class="mt-1 mb-1">Nivel de Estudioos</p>
-                        <p class="mt-2 mb-1">{{$ae->educational_level}}</p>
-                        <p class="mt-1 mb-1" >Cédula Profesional</p>
-                        <p class="mt-2 mb-1" >{{$ae->profesional_ID}}</p>
-                        <p class="mt-1 mb-1" >Carta de Recomendación 1</p>
-                        <p class="mt-2 mb-1" >{{$ae->recommendation_letter_1}}</p>
-                        <p class="mt-1 mb-1" >Carta de Recomendación 2</p>
-                        <p class="mt-2 mb-1" >{{$ae->recommendation_letter_2}}</p>
-                        <p class="mt-1 mb-1" >Examen Médico</p>
-                        <p class="mt-2 mb-1" >{{$ae->checkup_medical}}</p>
-                        @endif --}}
-                      </div>
-                    </div>
-                  </div>
-                @if($fam !==0)
-                    @foreach($fam as $f)
-                    <div class="col-md-6 mt-2">
-                        <div class="card mb-4 mb-md-0">
-                          <div class="card-body">
-                            <p class="mb-4"><span class="text-primary font-italic me-1"><strong>Familiares</strong></span> {{$f->parentesco}}
-                            </p>
-                            <p class="mt-1 mb-1"><strong>Nombre</strong></p>
-                            <p class="mt-2 mb-1">{{$f->name.' '.$f->last_name_1.' '.$f->last_name_2}}</p>
-                             <p class="mt-1 mb-1"><strong>Fecha de Ingreso</strong></p>
-                            <p class="mt-2 mb-1">{{$f->start_date}}</p>
-                          <p class="mt-1 mb-1" ><strong>CURP</strong></p>
-                            <p class="mt-2 mb-1" >{{$f->curp}}</p>
-                            <p class="mt-1 mb-1" ><strong>Parentesco</strong></p>
-                            <p class="mt-2 mb-1" >{{$f->relationship}}</p>
-                            <p class="mt-1 mb-1" ><strong>Estatus</strong></p>
-                            <p class="mt-2 mb-1" >{{$f->status}}</p>
-                          </div>
-                        </div>
-                      </div>
-                       @endforeach
-                @endif
               </div>
             </div>
           </div>

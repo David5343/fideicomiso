@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('prestaciones/afiliados', [AffiliateController::class,'index'])->name('prestaciones.afiliados.index');
     Route::get('prestaciones/afiliados/create',[AffiliateController::class, 'create'])->name('prestaciones.afiliados.create');
     Route::post('prestaciones/afiliados',[AffiliateController::class, 'store'])->name('prestaciones.afiliados.store');
+    Route::get('prestaciones/afiliados/{id}',[AffiliateController::class, 'show'])->name('prestaciones.afiliados.show');
     Route::get('prestaciones/afiliados/{id}/edit', [AffiliateController::class,'edit'])->name('prestaciones.afiliados.edit');
     Route::put('prestaciones/afiliados/{id}', [AffiliateController::class,'update'])->name('prestaciones.afiliados.update');
 });
