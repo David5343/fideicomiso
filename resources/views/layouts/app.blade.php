@@ -101,6 +101,9 @@
                           <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="{{route('prestaciones.afiliados.index')}}">Afiliados</a></li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="{{route('prestaciones.familiares.index')}}">Familiares</a></li>
                       </ul>
                     </li>
                     <li class="nav-item dropdown">

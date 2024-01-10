@@ -7,5 +7,12 @@ use Illuminate\Http\Request;
 
 class AffiliateFamilyController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('prestaciones.familiares.index');
+    }
+    public function create()
+    {
+        return view('prestaciones.familiares.create');
+    }
 }

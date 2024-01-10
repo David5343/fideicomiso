@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Prestaciones\AffiliateController;
+use App\Http\Controllers\Prestaciones\AffiliateFamilyController;
 use App\Http\Controllers\Prestaciones\DependencyController;
 use App\Http\Controllers\Prestaciones\SubdependencyController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::get('prestaciones/afiliados/{id}',[AffiliateController::class, 'show'])->name('prestaciones.afiliados.show');
     Route::get('prestaciones/afiliados/{id}/edit', [AffiliateController::class,'edit'])->name('prestaciones.afiliados.edit');
     Route::put('prestaciones/afiliados/{id}', [AffiliateController::class,'update'])->name('prestaciones.afiliados.update');
+    //Rutas de familiares
+    Route::get('prestaciones/familiares',[AffiliateFamilyController::class, 'index'])->name('prestaciones.familiares.index');
+    Route::get('prestaciones/familiares/create',[AffiliateFamilyController::class, 'create'])->name('prestaciones.familiares.create');
+    Route::post('prestaciones/familiares',[AffiliateFamilyController::class, 'store'])->name('prestaciones.familiares.store');
+    Route::get('prestaciones/familiares/{id}',[AffiliateFamilyController::class, 'show'])->name('prestaciones.familiares.show');
+    Route::get('prestaciones/familiares/{id}/edit', [AffiliateFamilyController::class,'edit'])->name('prestaciones.familiares.edit');
+    Route::put('prestaciones/familiares/{id}', [AffiliateFamilyController::class,'update'])->name('prestaciones.familiares.update');
+    Route::delete('prestaciones/familiares/{id}', [AffiliateFamilyController::class,'destroy'])->name('prestaciones.familiares.destroy');
 });
