@@ -99,9 +99,9 @@
                         <li><a class="dropdown-item" href="{{route('prestaciones.subdependencias.index')}}">Subdependencias</a></li>
                         <li>
                           <hr class="dropdown-divider">
+                          <li><h6 class="dropdown-header">Afiliados</h6></li>
                         </li>
-                        <li><a class="dropdown-item" href="{{route('prestaciones.afiliados.index')}}">Afiliados</a></li>
-                        <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="{{route('prestaciones.afiliados.index')}}">Titulares</a></li>
                       </li>
                       <li><a class="dropdown-item" href="{{route('prestaciones.familiares.index')}}">Familiares</a></li>
                       </ul>
