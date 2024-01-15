@@ -28,7 +28,7 @@ class CreateFamily extends Component
     public $fecha_nacimiento="";
     #[Rule('required')] 
     public $sexo="";
-    #[Rule('required')] 
+    #[Rule('nullable')] 
     public $rfc="";
     #[Rule('required')] 
     public $curp="";
@@ -38,18 +38,28 @@ class CreateFamily extends Component
     public $parentesco="";
     #[Rule('required')] 
     public $direccion ="";
+    #[Rule('nullable')] 
     public $observaciones="";
+    #[Rule('nullable')] 
     public $num_cuenta="";
+    #[Rule('nullable')] 
     public $clabe="";
-    public $banco_id= null;
+    #[Rule('nullable')] 
+    public $banco_id;
+    #[Rule('nullable')] 
     public $nombre_representante="";
+    #[Rule('nullable')] 
     public $rfc_representante="";
+    #[Rule('nullable')] 
     public $curp_representante="";
+    #[Rule('nullable')] 
     public $parentesco_representante="";
+    #[Rule('required')] 
     public $num_expediente="";
     #[Rule('required')]
     public $expediente_hidden="";
-
+    #[Rule('required')]
+    public $fecha_ingreso="";
 
 
 
@@ -76,7 +86,8 @@ class CreateFamily extends Component
         //exit();
         $this->validate();
         $familiar = new AffiliateFamily();
-        $familiar->file_number = $this->expediente_hidden;  
+        $familiar->file_number = $this->expediente_hidden;
+        $familiar->start_date = $this->fecha_ingreso;  
         $familiar->last_name_1 = $this->apaterno;
         $familiar->last_name_2 = $this->amaterno;
         $familiar->name = $this->nombre;

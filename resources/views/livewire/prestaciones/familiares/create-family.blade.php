@@ -69,6 +69,12 @@
   @enderror
 </div>
 <div class="col-md-2">
+  <label  class="form-label">Fecha de Ingreso</label>
+  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso">
+  @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
+  @enderror
+</div>
+<div class="col-md-2">
   <label  class="form-label">Apellido Paterno</label>
   <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
   @error('apaterno')<br><small style="color: red">{{ $message }}</small>

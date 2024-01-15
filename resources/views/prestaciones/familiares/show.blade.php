@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <p class="text-end">
-    <a href="{{ route('prestaciones.afiliados.create') }}" class="btn btn-primary" role="button">Crear Afiliado</a>
-    <a href="{{ route('prestaciones.afiliados.index') }}" class="btn btn-primary" role="button">Lista de Afiliados</a>
+    <a href="{{ route('prestaciones.familiares.create') }}" class="btn btn-primary" role="button">Crear Familiar</a>
+    <a href="{{ route('prestaciones.familiares.index') }}" class="btn btn-primary" role="button">Lista de Familiar</a>
 </p>
     <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Prestaciones/Expediente electrónico') }}</div>
+        <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Prestaciones/Expediente electrónico del Familiar') }}</div>
         @if (session('msg_tipo'))
         <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
             {{ session('msg') }}
@@ -30,8 +30,8 @@
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
-                  @if(($afiliado->photo))
-                  <img src="{{Storage::url($afiliado->photo)}}" alt="avatar"
+                  @if(($familiar->photo))
+                  <img src="{{Storage::url($familiar->photo)}}" alt="avatar"
                   class="rounded-circle img-fluid" style="width: 150px;">
                   @else
                   <img src="{{asset('img/avatar.png')}}" alt="avatar"
@@ -39,13 +39,10 @@
                   @endif
                   <h5 class="my-3"></h5>
                   <p class="text-muted mb-1"><strong>ESTATUS</strong></p>
-                  <p class="text-muted mb-4"><strong>@if($afiliado->affiliate_status){{$afiliado->affiliate_status}}@endif</strong></p>
+                  <p class="text-muted mb-4"><strong>@if($familiar->family_status){{$familiar->family_status}}@endif</strong></p>
                   <div class="d-flex justify-content-center mb-2">
                     {{-- <button type="button" class="btn btn-primary">Follow</button>
                     <button type="button" class="btn btn-outline-primary ms-1">Message</button> --}}
-                    @if($afiliado->signature))
-                    <img src="{{Storage::url($afiliado->signature)}}"  class="rounded-circle img-fluid" style="width: 150px;">
-                  @endif
                   </div>
                 </div>
               </div>
@@ -57,15 +54,15 @@
                     </li>   
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>No de Cuenta</strong></p>
-                      <p class="mb-0">@if($afiliado->account_number){{$afiliado->account_number}}@endif</p>
+                      <p class="mb-0">@if($familiar->account_number){{$familiar->account_number}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>CLABE</strong></p>
-                      <p class="mb-0">@if($afiliado->clabe){{$afiliado->clabe}}@endif</p>
+                      <p class="mb-0">@if($familiar->clabe){{$familiar->clabe}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Banco</strong></p>
-                      <p class="mb-0">@if($afiliado->bank){{$afiliado->bank->name}}@endif</p>
+                      <p class="mb-0">@if($familiar->bank){{$familiar->bank->name}}@endif</p>
                     </li>
                   </ul>
                 </div>
@@ -78,58 +75,52 @@
                     </li>   
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Nombre</strong></p>
-                      <p class="mb-0">@if($afiliado->representative_name){{$afiliado->representative_name}}@endif</p>
+                      <p class="mb-0">@if($familiar->representative_name){{$familiar->representative_name}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>RFC</strong></p>
-                      <p class="mb-0">@if($afiliado->representative_rfc){{$afiliado->representative_rfc}}@endif</p>
+                      <p class="mb-0">@if($familiar->representative_rfc){{$familiar->representative_rfc}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>CURP</strong></p>
-                      <p class="mb-0">@if($afiliado->representative_curp){{$afiliado->representative_curp}}@endif</p>
+                      <p class="mb-0">@if($familiar->representative_curp){{$familiar->representative_curp}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Parentesco</strong></p>
-                      <p class="mb-0">@if($afiliado->representative_relationship){{$afiliado->representative_relationship}}@endif</p>
+                      <p class="mb-0">@if($familiar->representative_relationship){{$familiar->representative_relationship}}@endif</p>
                     </li>
                   </ul>
                 </div>
               </div>
-              @if($afiliado->families)
+              @if($familiar->affiliate)
               <div class="card mb-4 mb-lg-0 mt-2">
-                @foreach ($afiliado->families as $item)
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <p class="mb-0 text-primary font-italic me-1">Familiar</p>
+                      <p class="mb-0 text-primary font-italic me-1">Familiar de:</p>
                     </li>   
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>No. de Expediente</strong></p>
-                      <p class="mb-0">@if($item->file_number){{$item->file_number}}@endif</p>
+                      <p class="mb-0">@if($familiar->affiliate->file_number){{$familiar->affiliate->file_number}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Nombre</strong></p>
-                      <p class="mb-0">@if($item->last_name_1){{$item->last_name_1.' '.$item->last_name_2.' '.$item->name}}@endif</p>
+                      <p class="mb-0">@if($familiar->affiliate->last_name_1){{$familiar->affiliate->last_name_1.' '.$familiar->affiliate->last_name_2.' '.$familiar->affiliate->name}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Fecha de Nacimiento</strong></p>
-                      <p class="mb-0">@if($item->birthday){{$item->birthday}}@endif</p>
+                      <p class="mb-0">@if($familiar->affiliate->birthday){{$familiar->affiliate->birthday}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>RFC</strong></p>
-                      <p class="mb-0">@if($item->rfc){{$item->rfc}}@endif</p>
+                      <p class="mb-0">@if($familiar->affiliate->rfc){{$familiar->affiliate->rfc}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>CURP</strong></p>
-                      <p class="mb-0">@if($item->curp){{$item->curp}}@endif</p>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <p class="mb-0"><strong>Parentesco</strong></p>
-                      <p class="mb-0">@if($item->relationship){{$item->relationship}}@endif</p>
+                      <p class="mb-0">@if($familiar->affiliate->curp){{$familiar->affiliate->curp}}@endif</p>
                     </li>
                   </ul>
                 </div>
-                @endforeach
               </div> 
               @endif                           
             </div>
@@ -147,16 +138,7 @@
                       <p class="mb-0"><strong>No de Expediente</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->file_number){{$afiliado->file_number}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Dependencia</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->subdependency->name){{$afiliado->subdependency->name}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->file_number){{$familiar->file_number}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -165,34 +147,7 @@
                       <p class="mb-0"><strong>Fecha de Ingreso</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$afiliado->start_date}}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Lugar de Trabajo</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$afiliado->work_place}}</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Motivo de Registro</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->register_motive){{$afiliado->register_motive}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Observaciones</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->observations){{$afiliado->observations}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->start_date){{$familiar->start_date}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -210,7 +165,7 @@
                       <p class="mb-0"><strong>Nombre</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->last_name_1){{$afiliado->last_name_1.' '.$afiliado->last_name_2.' '.$afiliado->name}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->last_name_1){{$familiar->last_name_1.' '.$familiar->last_name_2.' '.$familiar->name}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -219,16 +174,7 @@
                       <p class="mb-0"><strong>Fecha de Nacimiento</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->birthday){{$afiliado->birthday}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Lugar de Nacimiento</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->birthplace){{$afiliado->birthplace}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->birthday){{$familiar->birthday}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -237,16 +183,7 @@
                       <p class="mb-0"><strong>Sexo</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->sex){{$afiliado->sex}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Estado Civil</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->marital_status){{$afiliado->marital_status}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->sex){{$familiar->sex}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -255,7 +192,7 @@
                       <p class="mb-0"><strong>RFC</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->rfc){{$afiliado->rfc}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->rfc){{$familiar->rfc}}@endif</p>
                     </div>
                   </div>
                   <hr>
@@ -264,99 +201,37 @@
                       <p class="mb-0"><strong>CURP</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->curp){{$afiliado->curp}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->curp){{$familiar->curp}}@endif</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Teléfono</strong></p>
+                      <p class="mb-0"><strong>¿DIVERSAS CAPACIDADES?</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->phone){{$afiliado->phone}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->disabled_person){{$familiar->disabled_person}}@endif</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Correo electrónico</strong></p>
+                      <p class="mb-0"><strong>DIRECCION</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->email){{$afiliado->email}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->address){{$familiar->address}}@endif</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Estado</strong></p>
+                      <p class="mb-0"><strong>OBSERVACIONES</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->state){{$afiliado->state}}@endif</p>
+                      <p class="text-muted mb-0">@if($familiar->observations){{$familiar->observations}}@endif</p>
                     </div>
                   </div>
                   <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Municipio</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->county){{$afiliado->county}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Colonia</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->neighborhood){{$afiliado->neighborhood}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Tipo de Vialidad</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->roadway_type){{$afiliado->roadway_type}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Nombre de la Vialidad (Calle)</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->street){{$afiliado->street}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>No. de Exterior</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->outdoor_number){{$afiliado->outdoor_number}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>CP</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->cp){{$afiliado->cp}}@endif</p>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0"><strong>Localidad</strong></p>
-                    </div>
-                    <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($afiliado->locality){{$afiliado->locality}}@endif</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

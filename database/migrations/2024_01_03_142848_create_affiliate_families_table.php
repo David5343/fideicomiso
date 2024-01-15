@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('affiliate_families', function (Blueprint $table) {
             $table->id();
             $table->string('file_number',255)->nullable();
+            $table->date('start_date')->nullable();
             $table->string('last_name_1',255)->nullable();
             $table->string('last_name_2',255)->nullable();
             $table->string('name',255)->nullable();
