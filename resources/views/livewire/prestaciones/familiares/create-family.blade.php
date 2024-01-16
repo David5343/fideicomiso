@@ -60,97 +60,99 @@
 </div>
 <div class="col-12">
     <h3>Datos del Familiar.</h3>
+    <h6>(*) Campos Obligatorios</h6>
 </div>
 <div class="col-md-2">
-  <label  class="form-label">No de Expediente</label>
-  <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{$num_expediente}}" disabled>
+  <label  class="form-label">* No de Expediente</label>
+  <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="8" value="{{$num_expediente}}" disabled>
   <input wire:modal="expediente_hidden" type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$num_expediente}}">
   @error('expediente_hidden')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-2">
-  <label  class="form-label">Fecha de Ingreso</label>
-  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso">
+  <label  class="form-label">* Fecha de Ingreso</label>
+  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}" required>
   @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-2">
-  <label  class="form-label">Apellido Paterno</label>
-  <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
+  <label  class="form-label">* Apellido Paterno</label>
+  <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" required>
   @error('apaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-2">
-  <label  class="form-label">Apellido Materno</label>
-  <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{old('amaterno')}}" >
+  <label  class="form-label">* Apellido Materno</label>
+  <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{old('amaterno')}}" required>
   @error('amaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-3">
-    <label  class="form-label">Nombre</label>
-    <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{old('nombre')}}" >
+    <label  class="form-label">* Nombre</label>
+    <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{old('nombre')}}" required>
     @error('nombre')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-3">
-    <label  class="form-label">Fecha de Nacimiento</label>
-    <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" minlength="2" maxlength="20" value="{{old('fecha_nacimiento')}}" >
+    <label  class="form-label">* Fecha de Nacimiento</label>
+    <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{old('fecha_nacimiento')}}" required>
     @error('fecha_nacimiento')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-2">
-    <label class="form-label">Sexo</label>
+    <label class="form-label">* Sexo</label>
     <select wire:model="sexo" id="sexo" name="sexo" class="form-select" >
-      <option selected value="">Elije...</option>
-      <option>Hombre</option>
-      <option>Mujer</option>
+      <option selected>Elije...</option>
+      <option value="Hombre"{{old('sexo' == "Hombre" ? 'selected' : '')}}>Hombre</option>
+      <option value="Mujer"{{old('sexo' == "Mujer" ? 'selected' : '')}}>Mujer</option>
     </select>
     @error('sexo')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
-    <label  class="form-label">RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}" >
+    <label  class="form-label">* RFC</label>
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}" required>
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
-    <label  class="form-label">CURP</label>
-    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" size="18" value="{{old('curp')}}" >
+    <label  class="form-label">* CURP</label>
+    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" size="18" value="{{old('curp')}}" required>
     @error('curp')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-2">
-    <label class="form-label">¿Con Diversas Capacidades?</label>
-    <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select" >
-      <option selected value="">Elije...</option>
+    <label class="form-label">* ¿Con Diversas Capacidades?</label>
+    <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select" value="{{old('persona_discapacitada')}}" required>
+      {{-- <option selected value="">Elije...</option> --}}
+      <option selected value="NO">NO</option>
       <option>SI</option>
-      <option>NO</option>
     </select>
     @error('persona_discapacitada')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
-    <label class="form-label">Parentesco</label>
-    <select wire:model="parentesco" id="parentesco" name="parentesco" class="form-select" >
+    <label class="form-label">* Parentesco</label>
+    <select wire:model="parentesco" id="parentesco" name="parentesco" class="form-select" required>
       <option selected value="">Elije...</option>
-      <option>Padre</option>
-      <option>Madre</option>
-      <option>Esposa</option>
-      <option>Hijo/a</option>
+      <option value="Padre"{{old('parentesco' == "Padre" ? 'selected' : '')}}>Padre</option>
+      <option value="Madre"{{old('parentesco' == "Madre" ? 'selected' : '')}}>Madre</option>
+      <option value="Esposa"{{old('parentesco' == "Esposa" ? 'selected' : '')}}>Esposa</option>
+      <option value="Hijo/a"{{old('parentesco' == "Hijo/a" ? 'selected' : '')}}>Hijo/a</option>
+      <option value="Concubina"{{old('parentesco' == "Concubina" ? 'selected' : '')}}>Concubina</option>
     </select>
     @error('parentesco')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>   
   <div class="col-md-10">
     <label  class="form-label">Dirección</label>
-    <input wire:model="direccion" type="text" class="form-control" id="direccion" name="direccion" size="18" value="{{old('direccion')}}" >
+    <input wire:model="direccion" type="text" class="form-control" id="direccion" name="direccion" maxlength="100" value="{{old('direccion')}}" required>
     @error('direccion')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>   
   <div class="col-md-12">
     <label  class="form-label">Observaciones</label>
-    <textarea wire:model="observaciones" id="observaciones" name="observaciones" class="form-control form-control-lg" 
+    <textarea wire:model="observaciones" id="observaciones" name="observaciones" class="form-control form-control-lg" maxlength="150"
     rows="2"></textarea>
     @error('observaciones')<br><small style="color: red">{{ $message }}</small>
     @enderror
@@ -160,13 +162,13 @@
 </div>
 <div class="col-md-4">
     <label  class="form-label">Numero de Cuenta</label>
-    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta" size="10" >
+    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta" size="10" value="{{old('num_cuenta')}}">
     @error('num_cuenta')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
   <div class="col-md-4">
     <label  class="form-label">CLABE</label>
-    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe" size="18">
+    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe" size="18" value="{{old('num_cuenta')}}">
     @error('clabe')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
@@ -186,32 +188,32 @@
 </div> 
 <div class="col-md-4">
   <label  class="form-label">Nombre Completo</label>
-  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="5" maxlength="40">
+  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="5" maxlength="40" value="{{old('nombre_representante')}}">
   @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">RFC</label>
-  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" size="13" >
+  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" size="13" value="{{old('rfc_representante')}}">
   @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">CURP</label>
-  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" size="18">
+  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" size="18" value="{{old('curp_representante')}}">
   @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label class="form-label">Parentesco</label>
   <select wire:model="parentesco_representante" id="parentesco_representante" name="parentesco_representante" class="form-select" >
-    <option selected value="">Elije...</option>
-    <option>Padre</option>
-    <option>Madre</option>
-    <option>Esposo/a</option>
-    <option>Hijo/a</option>
-    <option>Nieto/a</option>
-    <option>Hermano/a</option>
+    <option selected>Elije...</option>
+    <option value="Padre" {{old('parentesco_representante') == "Padre" ? 'selected' : ''}}>Padre</option>
+    <option value="Madre" {{old('parentesco_representante') == "Madre" ? 'selected' : ''}}>Madre</option>
+    <option value="Esposo/a" {{old('parentesco_representante') == "Esposo/a" ? 'selected' : ''}}>Esposo/a</option>
+    <option value="Hijo/a" {{old('parentesco_representante') == "Hijo/a" ? 'selected' : ''}}>Hijo/a</option>
+    <option value="Nieto/a" {{old('parentesco_representante') == "Nieto/a" ? 'selected' : ''}}>Nieto/a</option>
+    <option value="Hermano/a" {{old('parentesco_representante') == "Hermano/a" ? 'selected' : ''}}>Hermano/a</option>
   </select>
   @error('parentesco_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
