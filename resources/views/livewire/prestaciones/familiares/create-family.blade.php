@@ -160,13 +160,13 @@
 </div>
 <div class="col-md-4">
     <label  class="form-label">Numero de Cuenta</label>
-    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta" maxlength="10"  value="{{old('num_cuenta')}}" >
+    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta" size="10" >
     @error('num_cuenta')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
   <div class="col-md-4">
     <label  class="form-label">CLABE</label>
-    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe" maxlength="18" value="{{old('clabe')}}" >
+    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe" size="18">
     @error('clabe')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
@@ -186,19 +186,19 @@
 </div> 
 <div class="col-md-4">
   <label  class="form-label">Nombre Completo</label>
-  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="2" maxlength="20" value="{{old('nombre_representante')}}" >
+  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="5" maxlength="40">
   @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">RFC</label>
-  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" minlength="2" maxlength="20" value="{{old('rfc_representante')}}" >
+  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" size="13" >
   @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">CURP</label>
-  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
+  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" size="18">
   @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
