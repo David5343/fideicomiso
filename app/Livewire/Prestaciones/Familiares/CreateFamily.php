@@ -18,48 +18,49 @@ class CreateFamily extends Component
     public $nombre_afiliado="";
     public $rfc_afiliado="";
     public $no_expediente="";
-    #[Rule('required')]  
+    #[Rule('required')] 
+    public $num_expediente="";
+    #[Rule('required | max: 8')]
+    public $expediente_hidden="";
+    #[Rule('required | date')]
+    public $fecha_ingreso="";
+    #[Rule('required | max:20')]  
     public $apaterno="";
-    #[Rule('required')] 
+    #[Rule('required | max:20')] 
     public $amaterno="";
-    #[Rule('required')] 
+    #[Rule('required | max:20')] 
     public $nombre="";
-    #[Rule('required')] 
+    #[Rule('required | date')] 
     public $fecha_nacimiento="";
     #[Rule('required')] 
     public $sexo="";
-    #[Rule('nullable')] 
+    #[Rule('nullable | size:13| alpha_num:ascii')] 
     public $rfc="";
-    #[Rule('required')] 
+    #[Rule('required | size:18 | alpha_num:ascii')] 
     public $curp="";
     #[Rule('required')] 
     public $persona_discapacitada="";
     #[Rule('required')] 
     public $parentesco="";
-    #[Rule('required')] 
+    #[Rule('required | max:100')] 
     public $direccion ="";
-    #[Rule('nullable')] 
+    #[Rule('nullable | max:150')] 
     public $observaciones="";
-    #[Rule('nullable')] 
+    #[Rule('nullable | max:10 | numeric')] 
     public $num_cuenta="";
-    #[Rule('nullable')] 
+    #[Rule('nullable | max:18 | numeric')] 
     public $clabe="";
     #[Rule('nullable')] 
     public $banco_id;
-    #[Rule('nullable')] 
+    #[Rule('nullable | max:40')] 
     public $nombre_representante="";
-    #[Rule('nullable')] 
+    #[Rule('nullable | max:13 | alpha_num:ascii')] 
     public $rfc_representante="";
-    #[Rule('nullable')] 
+    #[Rule('nullable | max:18 | alpha_num:ascii')] 
     public $curp_representante="";
     #[Rule('nullable')] 
     public $parentesco_representante="";
-    #[Rule('required')] 
-    public $num_expediente="";
-    #[Rule('required')]
-    public $expediente_hidden="";
-    #[Rule('required')]
-    public $fecha_ingreso="";
+
 
 
 

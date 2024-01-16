@@ -37,13 +37,13 @@
                     <td>{{ $item->file_number }}</td>
                     <td>{{ $item->rfc }}</td>
                     <td>{{ $item->last_name_1.' '.$item->last_name_2.' '.$item->name }}</td>
-                    <td>{{ $item->affiliate->name }}</td>
+                    <td>{{ $item->affiliate->last_name_1.' '.$item->last_name_2.' '.$item->affiliate->name }}</td>
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
                         <a href="{{ url('prestaciones/familiares/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i>
-                        </a>
+                        </a> 
                     </td>
                     <td>
                         <a href="{{ url('prestaciones/familiares/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
