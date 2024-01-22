@@ -40,7 +40,8 @@ class AffiliateController extends Controller
             'subdepe_id'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
-            'motivo_registro' =>['nullable'],
+            'motivo_alta' =>['nullable'],
+            'estatus_afiliado' =>['required'],
             'observaciones' =>['nullable'],
             'apaterno' => ['required', 'min:2','max:20'],
             'amaterno' => ['required', 'min:2','max:20'],
@@ -94,6 +95,7 @@ class AffiliateController extends Controller
         $afiliado->start_date =$request->input('fecha_ingreso');
         $afiliado->work_place = $request->input('lugar_trabajo');
         $afiliado->register_motive = $request->input('motivo_alta');
+        $afiliado->affiliate_status = $request->input('estatus_afiliado');
         $afiliado->observations = $request->input('observaciones');        
         $afiliado->last_name_1 = ucwords($slug_apaterno);
         $afiliado->last_name_2 = ucwords($slug_amaterno);
@@ -121,7 +123,8 @@ class AffiliateController extends Controller
         $afiliado->representative_name =$request->input('nombre_representante');
         $afiliado->representative_rfc =$request->input('rfc_representante');
         $afiliado->representative_curp =$request->input('curp_representante');
-        $afiliado->representative_relationship =$request->input('parentesco_representante');        
+        $afiliado->representative_relationship =$request->input('parentesco_representante');
+        $afiliado->affiliate_status = 'active';        
         $afiliado->status = 'active';
         $afiliado->modified_by = Auth::user()->email;
         $afiliado->save();
@@ -160,7 +163,7 @@ class AffiliateController extends Controller
             'subdepe_id'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'lugar_trabajo' => ['required'],
-            'motivo_registro' =>['nullable'],
+            'motivo_alta' =>['nullable'],
             'estatus_afiliado' => ['required'],
             'observaciones' =>['nullable'],
             'apaterno' => ['required', 'min:2','max:20'],
@@ -214,6 +217,7 @@ class AffiliateController extends Controller
         $row->start_date =$request->input('fecha_ingreso');
         $row->work_place = $request->input('lugar_trabajo');  
         $row->register_motive = $request->input('motivo_alta');
+        $row->affiliate_status = $request->input('estatus_afiliado');
         $row->observations = $request->input('observaciones');       
         $row->last_name_1 = ucwords($slug_apaterno);
         $row->last_name_2 = ucwords($slug_amaterno);
@@ -242,8 +246,6 @@ class AffiliateController extends Controller
         $row->representative_rfc =$request->input('rfc_representante');
         $row->representative_curp =$request->input('curp_representante');
         $row->representative_relationship =$request->input('parentesco_representante'); 
-        $row->affiliate_status = $request->input('estatus_afiliado');
-        $row->status = 'active';
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('msg_tipo', 'success');

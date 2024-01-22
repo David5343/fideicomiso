@@ -57,12 +57,28 @@ class AffiliateFamilyController extends Controller
         ]);
         $row = AffiliateFamily::find($id);
         $row->start_date = $request->input('fecha_ingreso');
-        $row->
-        $row->status = 'active';
+        $row->last_name_1 = $request->input('apaterno');
+        $row->last_name_2 = $request->input('amaterno');
+        $row->name = $request->input('nombre');
+        $row->birthday = $request->input('fecha_nacimiento');
+        $row->sex = $request->input('sexo');
+        $row->rfc = $request->input('rfc');
+        $row->curp = $request->input('curp');
+        $row->disabled_person = $request->input('persona_discapacitada');
+        $row->relationship = $request->input('parentesco');
+        $row->address = $request->input('direccion');
+        $row->observations = $request->input('observaciones');
+        $row->account_number = $request->input('name');
+        $row->clabe = $request->input('clabe');
+        $row->bank_id = $request->input('banco_id');
+        $row->representative_name = $request->input('nombre_representante');
+        $row->representative_rfc = $request->input('rfc_representante');
+        $row->representative_curp = $request->input('curp_representante');
+        $row->representative_relationship = $request->input('parentesco_representante');
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('msg_tipo', 'success');
-        session()->flash('msg', 'Registro creado con éxito!');
-        return to_route('prestaciones.afiliados.index');
+        session()->flash('msg', 'Registro actualizado con éxito!');
+        return to_route('prestaciones.familiares.index');
     }
 }

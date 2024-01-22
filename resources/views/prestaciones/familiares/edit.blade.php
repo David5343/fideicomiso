@@ -14,7 +14,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-<form class="row g-3 m-3">
+<form class="row g-3 m-3" action="{{ url('prestaciones/familiares/'.$familiar->id) }}" method="POST">
     @method('PUT')
     @csrf
 <div class="col-12">

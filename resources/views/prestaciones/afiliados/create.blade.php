@@ -99,14 +99,14 @@
         <div class="col-12">
             <h3>Datos Personales.</h3>
         </div>
-        <div class="col-md-2">
-          <label  class="form-label">Apellido Paterno</label>
+        <div class="col-md-3">
+          <label  class="form-label">Apellido Paterno (Primer Apellido)</label>
           <input type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
           @error('apaterno')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-2">
-          <label  class="form-label">Apellido Materno</label>
+        <div class="col-3">
+          <label  class="form-label">Apellido Materno (Segundo Apellido)</label>
           <input type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{old('amaterno')}}" >
           @error('amaterno')<br><small style="color: red">{{ $message }}</small>
           @enderror

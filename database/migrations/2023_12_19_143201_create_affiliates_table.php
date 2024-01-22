@@ -46,6 +46,7 @@ return new class extends Migration
             $table->foreign('bank_id')->references('id')->on('banks');
             $table->date('inactive_date')->nullable();
             $table->string('inactive_motive',255)->nullable();
+            $table->date('reentry_date')->nullable();
             $table->string('photo',255)->nullable();
             $table->string('signature',255)->nullable();
             $table->string('representative_name',255)->nullable();

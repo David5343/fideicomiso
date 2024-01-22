@@ -12,6 +12,11 @@
                 <option value="50">50</option>
             </select>
         </div>
+        <p class="text-end">
+            <i class="bi bi-stoplights-fill btn btn-warning btn-sm m-1"></i>Preafiliado
+            <i class="bi bi-stoplights-fill btn btn-success btn-sm m-1"></i>Activo
+            <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>Baja
+        </p>
     </div>
     <table class="table">
     @if ($lista->count())
@@ -39,16 +44,27 @@
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('prestaciones/afiliados/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
+                        <a href="{{ url('prestaciones/afiliados/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('prestaciones/afiliados/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
-                            <i class="bi bi-folder2-open"></i>
+                        <a href="{{ url('prestaciones/afiliados/' . $item->id) }}" class="btn btn-info btn-sm m-1">
+                            <i class="bi bi-binoculars"></i>
                         </a>
                     </td>
-                    <td>{{ $item->status }}</td>
+                    <td>
+                        @switch($item->affiliate_status)
+                        @case("Preafiliado")
+                        <i class="bi bi-stoplights-fill btn btn-warning btn-sm m-1"></i>
+                            @break                     
+                        @case("Activo")
+                        <i class="bi bi-stoplights-fill btn btn-success btn-sm m-1"></i>
+                            @break               
+                        @default
+                        <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>
+                    @endswitch
+                    </td>
                     <td>
                         <form action="{{ url('prestaciones/afiliados/'.$item->id)}}" method="post">
                             @method('DELETE')

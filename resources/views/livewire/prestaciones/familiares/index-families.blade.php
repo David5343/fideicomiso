@@ -50,7 +50,7 @@
                             <i class="bi bi-folder2-open"></i>
                         </a>
                     </td>
-                    <td>{{ $item->status }}</td>
+                    <td>{{ $item->family_status }}</td>
                     <td>
                         <form action="{{ url('prestaciones/familiares/'.$item->id)}}" method="post">
                             @method('DELETE')

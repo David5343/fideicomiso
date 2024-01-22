@@ -5,7 +5,7 @@
     <a href="{{ route('prestaciones.familiares.index') }}" class="btn btn-primary" role="button">Lista de Familiar</a>
 </p>
     <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Prestaciones/Expediente electrónico del Familiar') }}</div>
+        <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Prestaciones/Expediente electrónico del Familiar') }} </div> 
         @if (session('msg_tipo'))
         <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
             {{ session('msg') }}
@@ -30,6 +30,11 @@
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
+                  <p class="text-end m-2">
+                    <a href="{{ url('prestaciones/familiares/'.$familiar->id .'/edit')}}" class="btn btn-warning btn-sm" title="Editar registro">
+                      <i class="bi bi-pencil-square"></i>
+                  </a> 
+                </p>
                   @if(($familiar->photo))
                   <img src="{{Storage::url($familiar->photo)}}" alt="avatar"
                   class="rounded-circle img-fluid" style="width: 150px;">
