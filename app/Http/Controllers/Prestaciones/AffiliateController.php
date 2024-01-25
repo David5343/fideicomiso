@@ -25,7 +25,7 @@ class AffiliateController extends Controller
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
-        $no_expediente = IdGenerator::generate(['table' => 'affiliates','field' => 'file_number', 'length' => 8, 'prefix' =>'A']);
+        $no_expediente = IdGenerator::generate(['table' => 'affiliates','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
         return  view('prestaciones.afiliados.create', ['select1' => $select1,
                                                   'select2' => $select2,
                                                   'select3' => $select3,

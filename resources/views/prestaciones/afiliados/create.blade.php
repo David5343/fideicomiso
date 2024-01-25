@@ -3,7 +3,7 @@
 <p class="text-end"><a href="{{ route('prestaciones.afiliados.index') }}" class="btn btn-primary" role="button">Lista de  Afiliados</a></p>
     <div class="card mt-1 border-primary">
         <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
-            Prestaciones/Crear Afiliado
+            Prestaciones/Crear Derechohabiente
         </div>
         @if (session('msg_tipo'))
         <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">

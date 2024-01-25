@@ -3,6 +3,7 @@
 use App\Http\Controllers\Prestaciones\AffiliateController;
 use App\Http\Controllers\Prestaciones\AffiliateFamilyController;
 use App\Http\Controllers\Prestaciones\DependencyController;
+use App\Http\Controllers\Prestaciones\ServiceUserController;
 use App\Http\Controllers\Prestaciones\SubdependencyController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('prestaciones/afiliados/{id}',[AffiliateController::class, 'show'])->name('prestaciones.afiliados.show');
     Route::get('prestaciones/afiliados/{id}/edit', [AffiliateController::class,'edit'])->name('prestaciones.afiliados.edit');
     Route::put('prestaciones/afiliados/{id}', [AffiliateController::class,'update'])->name('prestaciones.afiliados.update');
+    //Rutas de titulares
+    Route::get('prestaciones/titulares', [ServiceUserController::class,'index'])->name('prestaciones.titulares.index');
+    Route::get('prestaciones/titulares/create',[ServiceUserController::class, 'create'])->name('prestaciones.titulares.create');
+    Route::post('prestaciones/titulares',[ServiceUserController::class, 'store'])->name('prestaciones.titulares.store');
+    Route::get('prestaciones/titulares/{id}',[ServiceUserController::class, 'show'])->name('prestaciones.titulares.show');
+    Route::get('prestaciones/titulares/{id}/edit', [ServiceUserController::class,'edit'])->name('prestaciones.titulares.edit');
+    Route::put('prestaciones/titulares/{id}', [ServiceUserController::class,'update'])->name('prestaciones.titulares.update');
     //Rutas de familiares
     Route::get('prestaciones/familiares',[AffiliateFamilyController::class, 'index'])->name('prestaciones.familiares.index');
     Route::get('prestaciones/familiares/create',[AffiliateFamilyController::class, 'create'])->name('prestaciones.familiares.create');
