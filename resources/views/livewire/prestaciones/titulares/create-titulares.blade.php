@@ -9,13 +9,20 @@
             </ul>
         </div>
     @endif
+    <div class="col-12">
+      @if (session('msg_tipo'))
+      <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
+          {{ session('msg') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
+      </div>
           <div class="col-12">
               <h3>Datos Generales.</h3>
           </div>
           <div class="col-md-2">
             <label  class="form-label">No de Expediente</label>
             <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="20" value="{{$no_expediente}}" disabled>
-            <input wire:model.live="expediente_hidden" type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$no_expediente}}">
             @error('no_expediente')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
@@ -57,7 +64,7 @@
           <div class="col-md-2">
             <label class="form-label">Estatus</label>
             <select wire:model="estatus_afiliado" id="estatus_afiliado" name="estatus_afiliado" class="form-select" >
-              <option selected value="Preafiliado">Preafiliado</option>
+              <option selected value="">Elije..</option>
               <option>Preafiliado</option>
               <option>Activo</option>
               <option>Baja</option>
