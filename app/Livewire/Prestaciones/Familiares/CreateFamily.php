@@ -3,8 +3,8 @@
 namespace App\Livewire\Prestaciones\Familiares;
 
 use App\Models\Humanos\Bank;
-use App\Models\Prestaciones\Affiliate;
-use App\Models\Prestaciones\AffiliateFamily;
+use App\Models\Prestaciones\ServiceUser;
+use App\Models\Prestaciones\UserFamily;
 use Livewire\Component;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -66,14 +66,14 @@ class CreateFamily extends Component
 
     public function buscar()
     {
-        $row = Affiliate::where('file_number',$this->busqueda)->first();
+        $row = ServiceUser::where('file_number',$this->busqueda)->first();
         //dd($busqueda);
         if($row !== null)
         {
             $this->hidden_id = $row->id;
             $this->nombre_afiliado = $row->last_name_1.' '.$row->last_name_2.' '.$row->name;
             $this->rfc_afiliado = $row->rfc;
-            $this->num_expediente = IdGenerator::generate(['table' => 'affiliate_families','field' => 'file_number', 'length' => 8, 'prefix' =>'F']);
+            $this->num_expediente = IdGenerator::generate(['table' => 'user_families','field' => 'file_number', 'length' => 8, 'prefix' =>'F']);
             $this->expediente_hidden = $this->num_expediente;
         }else{
             session()->flash('msg_tipo_busqueda','info');
@@ -86,7 +86,7 @@ class CreateFamily extends Component
         //dd($this->expediente_hidden);
         //exit();
         $this->validate();
-        $familiar = new AffiliateFamily();
+        $familiar = new UserFamily();
         $familiar->file_number = $this->expediente_hidden;
         $familiar->start_date = $this->fecha_ingreso;  
         $familiar->last_name_1 = $this->apaterno;

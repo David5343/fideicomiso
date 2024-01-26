@@ -97,7 +97,7 @@
                   </ul>
                 </div>
               </div>
-              @if($familiar->affiliate)
+              @if($familiar->serviceUser)
               <div class="card mb-4 mb-lg-0 mt-2">
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
@@ -106,23 +106,23 @@
                     </li>   
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>No. de Expediente</strong></p>
-                      <p class="mb-0">@if($familiar->affiliate->file_number){{$familiar->affiliate->file_number}}@endif</p>
+                      <p class="mb-0">@if($familiar->serviceUser->file_number){{$familiar->serviceUser->file_number}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Nombre</strong></p>
-                      <p class="mb-0">@if($familiar->affiliate->last_name_1){{$familiar->affiliate->last_name_1.' '.$familiar->affiliate->last_name_2.' '.$familiar->affiliate->name}}@endif</p>
+                      <p class="mb-0">@if($familiar->serviceUser->last_name_1){{$familiar->serviceUser->last_name_1.' '.$familiar->serviceUser->last_name_2.' '.$familiar->serviceUser->name}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>Fecha de Nacimiento</strong></p>
-                      <p class="mb-0">@if($familiar->affiliate->birthday){{$familiar->affiliate->birthday}}@endif</p>
+                      <p class="mb-0">@if($familiar->serviceUser->birthday){{$familiar->serviceUser->birthday}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>RFC</strong></p>
-                      <p class="mb-0">@if($familiar->affiliate->rfc){{$familiar->affiliate->rfc}}@endif</p>
+                      <p class="mb-0">@if($familiar->serviceUser->rfc){{$familiar->serviceUser->rfc}}@endif</p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <p class="mb-0"><strong>CURP</strong></p>
-                      <p class="mb-0">@if($familiar->affiliate->curp){{$familiar->affiliate->curp}}@endif</p>
+                      <p class="mb-0">@if($familiar->serviceUser->curp){{$familiar->serviceUser->curp}}@endif</p>
                     </li>
                   </ul>
                 </div>

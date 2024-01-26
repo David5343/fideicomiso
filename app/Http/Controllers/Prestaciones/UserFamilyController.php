@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Prestaciones;
 
 use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
-use App\Models\Prestaciones\AffiliateFamily;
+use App\Models\Prestaciones\UserFamily;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AffiliateFamilyController extends Controller
+class UserFamilyController extends Controller
 {
     public function index()
     {
@@ -20,13 +20,13 @@ class AffiliateFamilyController extends Controller
     }
     public function show(string $id)
     {
-        $row = AffiliateFamily::find($id);
+        $row = UserFamily::find($id);
         return view('prestaciones.familiares.show',['familiar' => $row]);
         
     }
     public function edit(string $id)
     {
-        $row = AffiliateFamily::find($id);
+        $row = UserFamily::find($id);
         $select4 = Bank::where('status', 'active')->get();
         return view('prestaciones.familiares.edit',['familiar' => $row,
                                                     'select4'=>$select4]);
@@ -55,7 +55,7 @@ class AffiliateFamilyController extends Controller
             'curp_representante' =>['nullable','size:18','alpha_num:ascii'],
             'parentesco_representante' =>['nullable'],
         ]);
-        $row = AffiliateFamily::find($id);
+        $row = UserFamily::find($id);
         $row->start_date = $request->input('fecha_ingreso');
         $row->last_name_1 = $request->input('apaterno');
         $row->last_name_2 = $request->input('amaterno');

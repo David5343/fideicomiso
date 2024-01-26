@@ -30,6 +30,11 @@
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
+                  <p class="text-end m-2">
+                    <a href="{{ url('prestaciones/titulares/'.$titular->id .'/edit')}}" class="btn btn-warning btn-sm" title="Editar registro">
+                      <i class="bi bi-pencil-square"></i>
+                  </a> 
+                </p>
                   @if(($titular->photo))
                   <img src="{{Storage::url($titular->photo)}}" alt="avatar"
                   class="rounded-circle img-fluid" style="width: 150px;">

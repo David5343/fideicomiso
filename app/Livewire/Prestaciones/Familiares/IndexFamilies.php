@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Prestaciones\Familiares;
 
-use App\Models\Prestaciones\AffiliateFamily;
+use App\Models\Prestaciones\UserFamily;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -22,7 +22,7 @@ class IndexFamilies extends Component
     }    
     public function render()
     {
-        $lista =  AffiliateFamily::where('status','=','active')
+        $lista =  UserFamily::where('status','=','active')
                         ->where('rfc','like','%'.$this->search.'%')
                         ->orderBy('name','asc')
                         ->paginate($this->numberRows);

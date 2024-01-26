@@ -110,8 +110,8 @@
     @enderror
   </div>
   <div class="col-md-3">
-    <label  class="form-label">* RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}" required>
+    <label  class="form-label">RFC</label>
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}">
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
