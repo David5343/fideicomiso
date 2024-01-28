@@ -19,6 +19,7 @@
       </div>
           <div class="col-12">
               <h3>Datos Generales.</h3>
+              <h6>(*) Campos Obligatorios</h6>
           </div>
           <div class="col-md-2">
             <label  class="form-label">No de Expediente</label>
@@ -27,7 +28,7 @@
             @enderror
           </div>
           <div class="col-md-7">
-            <label class="form-label">Dependencia</label>
+            <label class="form-label">* Dependencia</label>
             <select wire:model="subdepe_id" class="form-select" id="subdepe_id" name="subdepe_id" value="{{old('subdepe_id')}}" >
               <option selected value="">Elije...</option>
               @foreach($select1 as $sd)
@@ -38,13 +39,13 @@
           @enderror
           </div>
           <div class="col-md-3">
-            <label class="form-label">Fecha de Ingreso</label>
+            <label class="form-label">* Fecha de Ingreso</label>
             <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}" >
             @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
           <div class="col-md-3">
-            <label class="form-label">Lugar de Trabajo</label>
+            <label class="form-label">* Lugar de Trabajo</label>
             <input wire:model="lugar_trabajo" type="text" class="form-control" list="datalistMunicipios"  id="lugar_trabajo" name="lugar_trabajo" minlength="3" maxlength="85" value="{{old('lugar_trabajo')}}">
             <datalist id="datalistMunicipios">
               @foreach($select3 as $m)
@@ -62,7 +63,7 @@
             @enderror
           </div>
           <div class="col-md-2">
-            <label class="form-label">Estatus</label>
+            <label class="form-label">* Estatus</label>
             <select wire:model="estatus_afiliado" id="estatus_afiliado" name="estatus_afiliado" class="form-select" >
               <option selected value="">Elije..</option>
               <option>Preafiliado</option>
@@ -83,25 +84,25 @@
               <h3>Datos Personales.</h3>
           </div>
           <div class="col-md-3">
-            <label  class="form-label">Apellido Paterno (Primer Apellido)</label>
+            <label  class="form-label">* Apellido Paterno (Primer Apellido)</label>
             <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
             @error('apaterno')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
           <div class="col-3">
-            <label  class="form-label">Apellido Materno (Segundo Apellido)</label>
+            <label  class="form-label">* Apellido Materno (Segundo Apellido)</label>
             <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{old('amaterno')}}" >
             @error('amaterno')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
           <div class="col-3">
-              <label  class="form-label">Nombre</label>
+              <label  class="form-label">* Nombre</label>
               <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{old('nombre')}}" >
               @error('nombre')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
           <div class="col-md-3">
-              <label class="form-label">Fecha de Nacimiento</label>
+              <label class="form-label">* Fecha de Nacimiento</label>
               <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{old('fecha_nacimiento')}}" >
               @error('fecha_nacimiento')<br><small style="color: red">{{ $message }}</small>
               @enderror

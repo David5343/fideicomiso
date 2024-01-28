@@ -7,6 +7,7 @@ use App\Models\Humanos\Bank;
 use App\Models\Prestaciones\UserFamily;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class UserFamilyController extends Controller
 {
@@ -57,11 +58,12 @@ class UserFamilyController extends Controller
         ]);
         $row = UserFamily::find($id);
         $row->start_date = $request->input('fecha_ingreso');
-        $row->last_name_1 = $request->input('apaterno');
-        $row->last_name_2 = $request->input('amaterno');
-        $row->name = $request->input('nombre');
+        $row->last_name_1 = Str::of($request->input('apaterno'))->trim();
+        $row->last_name_2 = Str::of($request->input('amaterno'))->trim();
+        $row->name = Str::of($request->input('nombre'))->trim();
         $row->birthday = $request->input('fecha_nacimiento');
         $row->sex = $request->input('sexo');
+        
         $row->rfc = $request->input('rfc');
         $row->curp = $request->input('curp');
         $row->disabled_person = $request->input('persona_discapacitada');
