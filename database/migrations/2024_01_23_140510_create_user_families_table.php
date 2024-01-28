@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('photo',255)->nullable();
             $table->string('family_status',255)->nullable();
             $table->unsignedBigInteger('affiliate_id')->nullable();
-            $table->foreign('affiliate_id')->references('id')->on('affiliates');
+            $table->foreign('affiliate_id')->references('id')->on('service_users');
             $table->enum('status', ['active', 'inactive','deleted']);
             $table->string('modified_by',255)->nullable();
             $table->timestamps();
