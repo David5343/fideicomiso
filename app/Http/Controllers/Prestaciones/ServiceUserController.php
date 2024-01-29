@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class ServiceUserController extends Controller
 {
     public function index()
-    {
+    {   
         return view('prestaciones.titulares.index');
     }
     public function create()

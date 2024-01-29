@@ -23,8 +23,8 @@ class IndexFamilies extends Component
     public function render()
     {
         $lista =  UserFamily::where('status','=','active')
-                        ->where('rfc','like','%'.$this->search.'%')
-                        ->orderBy('name','asc')
+                        ->where('file_number','like','%'.$this->search.'%')
+                        ->orderBy('file_number','asc')
                         ->paginate($this->numberRows);
         $count = $lista->count();        
         return view('livewire.prestaciones.familiares.index-families',[

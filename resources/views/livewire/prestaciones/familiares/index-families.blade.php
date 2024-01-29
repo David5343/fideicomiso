@@ -2,7 +2,7 @@
     <div class="row mb-2">
         <div class="col-sm-4">
             <input wire:model.live='search' type="text" class="form-control form-control-lg"
-                placeholder="Escribe el rfc...">
+                placeholder="Escribe el No de Expediente...">
         </div>
         <div class="col-md-2">
             <select wire:model.live='numberRows' class="form-select form-select-lg">
@@ -26,7 +26,7 @@
             <th scope="col">Editar</th>
             <th scope="col">Ver</th>
             <th scope="col">Estatus</th>
-            <th scope="col">Eliminar</th>
+            {{-- <th scope="col">Eliminar</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -51,14 +51,14 @@
                         </a>
                     </td>
                     <td>{{ $item->family_status }}</td>
-                    <td>
+                    {{-- <td>
                         <form action="{{ url('prestaciones/familiares/'.$item->id)}}" method="post">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm"><i
                                     class="bi bi-trash"></i></button>
                         </form>
-                    </td>
+                    </td> --}}
                 </tr>
             @endforeach
         @endif
