@@ -43,9 +43,9 @@ class CreateTitulares extends Component
     public $sexo;
     #[Rule('nullable')]
     public $estado_civil;
-    #[Rule('nullable | size:13| alpha_num:ascii')]
+    #[Rule('nullable | max:13| alpha_num:ascii')]
     public $rfc;
-    #[Rule('nullable | size:18| alpha_num:ascii')]
+    #[Rule('nullable | max:18| alpha_num:ascii')]
     public $curp;
     #[Rule('nullable|numeric|digits:10')]
     public $telefono;
@@ -77,9 +77,9 @@ class CreateTitulares extends Component
     public $banco_id;
     #[Rule('nullable | max:40')]
     public $nombre_representante;
-    #[Rule('nullable | size:13| alpha_num:ascii')]
+    #[Rule('nullable | max:13| alpha_num:ascii')]
     public $rfc_representante;
-    #[Rule('nullable | size:18| alpha_num:ascii')]
+    #[Rule('nullable | max:18| alpha_num:ascii')]
     public $curp_representante;
     #[Rule('nullable')]
     public $parentesco_representante;

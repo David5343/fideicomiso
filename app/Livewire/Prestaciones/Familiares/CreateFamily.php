@@ -34,9 +34,9 @@ class CreateFamily extends Component
     public $fecha_nacimiento="";
     #[Rule('required')] 
     public $sexo="";
-    #[Rule('nullable | size:13| alpha_num:ascii')] 
+    #[Rule('nullable | max:13| alpha_num:ascii')] 
     public $rfc="";
-    #[Rule('required | size:18 | alpha_num:ascii')] 
+    #[Rule('required | max:18 | alpha_num:ascii')] 
     public $curp="";
     #[Rule('required')] 
     public $persona_discapacitada="";
