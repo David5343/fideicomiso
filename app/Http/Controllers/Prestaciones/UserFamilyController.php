@@ -52,8 +52,8 @@ class UserFamilyController extends Controller
             'clabe' => ['nullable','numeric','max:18'],
             'banco_id' => ['nullable'],
             'nombre_representante' =>['nullable','max:40'],
-            'rfc_representante' =>['nullable','size:13','alpha_num:ascii'],
-            'curp_representante' =>['nullable','size:18','alpha_num:ascii'],
+            'rfc_representante' =>['nullable','max:13','alpha_num:ascii'],
+            'curp_representante' =>['nullable','max:18','alpha_num:ascii'],
             'parentesco_representante' =>['nullable'],
         ]);
         $row = UserFamily::find($id);

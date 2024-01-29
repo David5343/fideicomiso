@@ -262,7 +262,7 @@
           </div> 
           <div class="col-md-4">
             <label  class="form-label">Nombre Completo</label>
-            <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="2" maxlength="20" value="{{old('nombre_representante')}}" >
+            <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="2" maxlength="40" value="{{old('nombre_representante')}}" >
             @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
