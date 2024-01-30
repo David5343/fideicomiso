@@ -104,7 +104,7 @@
         </div>
         <div class="col-5">
             <label  class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{$empleado->name}}" >
+            <input type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="30" value="{{$empleado->name}}" >
             @error('nombre')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
@@ -182,7 +182,7 @@
         </div>
         <div class="col-6">
           <label  class="form-label">Dirección</label>
-          <input type="text" class="form-control" id="direccion_emergencia" name="direccion_emergencia" minlength="2" maxlength="30" value="{{$empleado->emergency_address}}" >
+          <input type="text" class="form-control" id="direccion_emergencia" name="direccion_emergencia" minlength="2" maxlength="40" value="{{$empleado->emergency_address}}" >
           @error('direccion_emergencia')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
