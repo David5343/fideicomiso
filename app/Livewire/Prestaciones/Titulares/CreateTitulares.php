@@ -43,7 +43,7 @@ class CreateTitulares extends Component
     public $sexo;
     #[Rule('nullable')]
     public $estado_civil;
-    #[Rule('nullable | max:13| alpha_num:ascii')]
+    #[Rule('required | max:13| alpha_num:ascii')]
     public $rfc;
     #[Rule('nullable | max:18| alpha_num:ascii')]
     public $curp;
