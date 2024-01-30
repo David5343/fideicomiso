@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('prestaciones.titulares.create') }}" class="btn btn-primary" role="button">
-            Crear Titular</a>
+        <a href="{{ route('prestaciones.titulares.create') }}" class="btn btn-primary btn-lg" role="button">
+            <i class="bi bi-person-up"></i> Crear Titular</a>         
     </p>
     <div class="card mt-1 border-primary">
         <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">

@@ -121,4 +121,27 @@ class ServiceUserController extends Controller
         session()->flash('msg', 'Registro creado con éxito!');
         return to_route('prestaciones.titulares.index');        
     }
+    public function disabled(string $id)
+    {
+        $row = ServiceUser::find($id);
+        return view('prestaciones.titulares.disabled',['titular'=>$row]);
+    }
+    public function baja(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'fecha_baja' => ['required','date'],
+            'motivo_baja' => ['required'],
+
+        ]);
+        $row = ServiceUser::find($id);
+        $row->inactive_date = $request->input('fecha_baja');
+        $row->inactive_motive = $request->input('motivo_baja');
+        $row->affiliate_status = "Baja";
+        $row->modified_by = Auth::user()->email;
+        $row->save();
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'El Registro fue dado de baja con éxito!');
+        return to_route('prestaciones.titulares.index'); 
+
+    }
 }

@@ -28,9 +28,9 @@
             <th scope="col">RFC</th>
             <th scope="col">Nombre</th>
             <th scope="col">Editar</th>
-            <th scope="col">Ver</th>
+            <th scope="col">Ficha Técnica</th>
             <th scope="col">Estatus</th>
-            <th scope="col">Eliminar</th>
+            <th scope="col">Baja</th>
         </tr>
     </thead>
     <tbody>
@@ -44,34 +44,38 @@
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
+                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-lg">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('prestaciones/titulares/' . $item->id) }}" class="btn btn-info btn-sm m-1">
-                            <i class="bi bi-binoculars"></i>
+                        <a href="{{ url('prestaciones/titulares/' . $item->id) }}" class="btn btn-info btn-lg m-1">
+                            <i class="bi bi-file-person"></i>
                         </a>
                     </td>
                     <td>
                         @switch($item->affiliate_status)
                         @case("Preafiliado")
-                        <i class="bi bi-stoplights-fill btn btn-warning btn-sm m-1"></i>
+                        <i class="bi bi-stoplights-fill btn btn-warning btn-lg"></i>
                             @break                     
                         @case("Activo")
-                        <i class="bi bi-stoplights-fill btn btn-success btn-sm m-1"></i>
+                        <i class="bi bi-stoplights-fill btn btn-success btn-lg"></i>
                             @break               
                         @default
-                        <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>
+                        <i class="bi bi-stoplights-fill btn btn-danger btn-lg"></i>
                     @endswitch
                     </td>
                     <td>
-                        <form action="{{ url('prestaciones/titulares/'.$item->id)}}" method="post">
+                        {{-- <form action="{{ url('prestaciones/titulares/'.$item->id)}}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                    class="bi bi-trash"></i></button>
-                        </form>
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="bi bi-person-down"></i></button>
+                        </form> --}}
+                        
+                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/disabled')}}" class="btn btn-danger btn-lg">
+                            <i class="bi bi-person-down"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

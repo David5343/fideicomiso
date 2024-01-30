@@ -72,13 +72,13 @@
           @error('lugar_trabajo')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
           <label  class="form-label">Motivo de alta</label>
           <input type="text" class="form-control" id="motivo_alta" name="motivo_alta" minlength="2" maxlength="120" value="{{$titular->register_motive}}" >
           @error('motivo_alta')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="form-label">Estatus</label>
           <select id="estatus_afiliado" name="estatus_afiliado" class="form-select" >
             <option selected value="{{$titular->affiliate_status}}">{{$titular->affiliate_status.' (Seleccionado)'}}</option>

@@ -24,7 +24,7 @@
             <th scope="col">Familiar</th>
             <th scope="col">Titular</th>
             <th scope="col">Editar</th>
-            <th scope="col">Ver</th>
+            <th scope="col">Ficha Técnica</th>
             <th scope="col">Estatus</th>
             {{-- <th scope="col">Eliminar</th> --}}
         </tr>
@@ -47,7 +47,7 @@
                     </td>
                     <td>
                         <a href="{{ url('prestaciones/familiares/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
-                            <i class="bi bi-folder2-open"></i>
+                            <i class="bi bi-file-person"></i>
                         </a>
                     </td>
                     <td>{{ $item->family_status }}</td>

@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('prestaciones/titulares/{id}',[ServiceUserController::class, 'show'])->name('prestaciones.titulares.show');
     Route::get('prestaciones/titulares/{id}/edit', [ServiceUserController::class,'edit'])->name('prestaciones.titulares.edit');
     Route::put('prestaciones/titulares/{id}', [ServiceUserController::class,'update'])->name('prestaciones.titulares.update');
+    Route::get('prestaciones/titulares/{id}/disabled', [ServiceUserController::class,'disabled'])->name('prestaciones.titulares.disabled');
+    Route::put('prestaciones/titulares/baja/{id}', [ServiceUserController::class,'baja'])->name('prestaciones.titulares.baja');
     //Rutas de familiares
     Route::get('prestaciones/familiares',[UserFamilyController::class, 'index'])->name('prestaciones.familiares.index');
     Route::get('prestaciones/familiares/create',[UserFamilyController::class, 'create'])->name('prestaciones.familiares.create');
