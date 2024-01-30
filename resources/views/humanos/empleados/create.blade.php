@@ -102,7 +102,7 @@
         </div>
         <div class="col-3">
             <label  class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{old('nombre')}}" >
+            <input type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="30" value="{{old('nombre')}}" >
             @error('nombre')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
@@ -180,7 +180,7 @@
         </div>
         <div class="col-6">
           <label  class="form-label">Dirección</label>
-          <input type="text" class="form-control" id="direccion_emergencia" name="direccion_emergencia" minlength="2" maxlength="30" value="{{old('direccion_emergencia')}}" >
+          <input type="text" class="form-control" id="direccion_emergencia" name="direccion_emergencia" minlength="2" maxlength="40" value="{{old('direccion_emergencia')}}" >
           @error('direccion_emergencia')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
@@ -267,7 +267,7 @@
           <div class="col-md-4">
             <label class="form-label">Institución Bancaria</label>
             <select  class="form-select" id="banco_id" name="banco_id" >
-              <option selected value="">Elije...</option>
+              <option selected value="NULL">Elije...</option>
               @foreach($select5 as $b)
               <option value="{{$b->id}}">{{$b->name}}</option>
               @endforeach
