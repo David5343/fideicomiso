@@ -22,7 +22,7 @@
             <th scope="col">No de Expediente</th>
             <th scope="col">RFC</th>
             <th scope="col">Familiar</th>
-            <th scope="col">Titular</th>
+            {{-- <th scope="col">Titular</th> --}}
             <th scope="col">Editar</th>
             <th scope="col">Ficha Técnica</th>
             <th scope="col">Estatus</th>
@@ -37,7 +37,7 @@
                     <td>{{ $item->file_number }}</td>
                     <td>{{ $item->rfc }}</td>
                     <td>{{ $item->last_name_1.' '.$item->last_name_2.' '.$item->name }}</td>
-                    <td>{{ $item->serviceUser->last_name_1.' '.$item->serviceUser->last_name_2.' '.$item->serviceUser->name }}</td>
+                    {{-- <td>{{ $item->serviceUser->last_name_1.' '.$item->serviceUser->last_name_2.' '.$item->serviceUser->name }}</td> --}}
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
