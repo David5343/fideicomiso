@@ -137,6 +137,7 @@
                 <option>Divorciado/a</option>
                 <option>Separado/a en proceso Judicial</option>
                 <option>Viudo/a</option>
+                <option>Union Libre</option>
                 <option>Concubinato</option>
               </select>
               @error('estado_civil')<br><small style="color: red">{{ $message }}</small>
