@@ -100,9 +100,9 @@
                   </ul>
                 </div>
               </div> 
-              @if($titular->families)
-              <div class="card mb-4 mb-lg-0 mt-2">
+              @if($titular->families)              
                 @foreach ($titular->families as $item)
+                <div class="card mb-4 mb-lg-0 mt-2">
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
@@ -134,8 +134,8 @@
                     </li>
                   </ul>
                 </div>
-                @endforeach
               </div> 
+                @endforeach
               @endif                           
             </div>
             <div class="col-lg-8">

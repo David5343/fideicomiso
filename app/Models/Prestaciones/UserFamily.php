@@ -14,7 +14,7 @@ class UserFamily extends Model
 
     public function serviceUser(): BelongsTo
     {
-        return $this->belongsTo(ServiceUser::class,'id');
+        return $this->belongsTo(ServiceUser::class);
     }
     public function bank(): BelongsTo
     {

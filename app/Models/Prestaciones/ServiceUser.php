@@ -23,6 +23,7 @@ class ServiceUser extends Model
     }
     public function families(): HasMany
     {
-        return $this->hasMany(UserFamily::class,'id');
+        return $this->hasMany(UserFamily::class,'affiliate_id');
     }
+
 }
