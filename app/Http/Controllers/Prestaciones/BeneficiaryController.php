@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Prestaciones;
 
 use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
-use App\Models\Prestaciones\UserFamily;
+use App\Models\Prestaciones\Beneficiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class UserFamilyController extends Controller
+class BeneficiaryController extends Controller
 {
     public function index()
     {
@@ -21,13 +21,13 @@ class UserFamilyController extends Controller
     }
     public function show(string $id)
     {
-        $row = UserFamily::find($id);
+        $row = Beneficiary::find($id);
         return view('prestaciones.familiares.show',['familiar' => $row]);
         
     }
     public function edit(string $id)
     {
-        $row = UserFamily::find($id);
+        $row = Beneficiary::find($id);
         $select4 = Bank::where('status', 'active')->get();
         return view('prestaciones.familiares.edit',['familiar' => $row,
                                                     'select4'=>$select4]);
@@ -42,8 +42,8 @@ class UserFamilyController extends Controller
             'nombre' => ['required','max:20'], 
             'fecha_nacimiento' => ['required','date'],
             'sexo' => ['required'],
-            'rfc' => ['nullable','max:13','alpha_num:ascii','unique:user_families,rfc,'. $id],
-            'curp' => ['required','max:18','alpha_num:ascii','unique:user_families,curp,'. $id],
+            'rfc' => ['nullable','max:13','alpha_num:ascii','unique:beneficiaries,rfc,'. $id],
+            'curp' => ['required','max:18','alpha_num:ascii','unique:beneficiaries,curp,'. $id],
             'persona_discapacitada' => ['required'],
             'parentesco' =>['required'],
             'direccion' =>['required','max:100'],
@@ -56,27 +56,28 @@ class UserFamilyController extends Controller
             'curp_representante' =>['nullable','max:18','alpha_num:ascii'],
             'parentesco_representante' =>['nullable'],
         ]);
-        $row = UserFamily::find($id);
+        $row = Beneficiary::find($id);
         $row->start_date = $request->input('fecha_ingreso');
         $row->last_name_1 = Str::of($request->input('apaterno'))->trim();
         $row->last_name_2 = Str::of($request->input('amaterno'))->trim();
         $row->name = Str::of($request->input('nombre'))->trim();
         $row->birthday = $request->input('fecha_nacimiento');
         $row->sex = $request->input('sexo');
-        
-        $row->rfc = $request->input('rfc');
-        $row->curp = $request->input('curp');
+        $rfc = Str::of($request->input('rfc'))->trim();
+        $row->rfc = Str::upper($rfc);
+        $curp = Str::of($request->input('curp'))->trim();
+        $row->curp = Str::upper($curp);
         $row->disabled_person = $request->input('persona_discapacitada');
         $row->relationship = $request->input('parentesco');
-        $row->address = $request->input('direccion');
-        $row->observations = $request->input('observaciones');
-        $row->account_number = $request->input('name');
-        $row->clabe = $request->input('clabe');
+        $row->address = Str::of($request->input('direccion'))->trim();
+        $row->observations = Str::of($request->input('observaciones'))->trim();
+        $row->account_number = Str::of($request->input('name'))->trim();
+        $row->clabe = Str::of($request->input('clabe'))->trim();
         $row->bank_id = $request->input('banco_id');
-        $row->representative_name = $request->input('nombre_representante');
-        $row->representative_rfc = $request->input('rfc_representante');
-        $row->representative_curp = $request->input('curp_representante');
-        $row->representative_relationship = $request->input('parentesco_representante');
+        $row->representative_name = Str::of($request->input('nombre_representante'))->trim();
+        $row->representative_rfc = Str::of($request->input('rfc_representante'))->trim();
+        $row->representative_curp = Str::of($request->input('curp_representante'))->trim();
+        $row->representative_relationship = Str::of($request->input('parentesco_representante'))->trim();
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('msg_tipo', 'success');

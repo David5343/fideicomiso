@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\Prestaciones\AffiliateController;
-use App\Http\Controllers\Prestaciones\AffiliateFamilyController;
+use App\Http\Controllers\Prestaciones\BeneficiaryController;
 use App\Http\Controllers\Prestaciones\DependencyController;
-use App\Http\Controllers\Prestaciones\ServiceUserController;
+use App\Http\Controllers\Prestaciones\InsuredController;
 use App\Http\Controllers\Prestaciones\SubdependencyController;
-use App\Http\Controllers\Prestaciones\UserFamilyController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -26,20 +24,20 @@ Route::middleware('auth')->group(function () {
     Route::put('prestaciones/subdependencias/{id}', [SubdependencyController::class,'update'])->name('prestaciones.subdependencias.update');
     Route::delete('prestaciones/subdependencias/{id}', [SubdependencyController::class,'destroy'])->name('prestaciones.subdependencias.destroy');
     //Rutas de titulares
-    Route::get('prestaciones/titulares', [ServiceUserController::class,'index'])->name('prestaciones.titulares.index');
-    Route::get('prestaciones/titulares/create',[ServiceUserController::class, 'create'])->name('prestaciones.titulares.create');
-    Route::post('prestaciones/titulares',[ServiceUserController::class, 'store'])->name('prestaciones.titulares.store');
-    Route::get('prestaciones/titulares/{id}',[ServiceUserController::class, 'show'])->name('prestaciones.titulares.show');
-    Route::get('prestaciones/titulares/{id}/edit', [ServiceUserController::class,'edit'])->name('prestaciones.titulares.edit');
-    Route::put('prestaciones/titulares/{id}', [ServiceUserController::class,'update'])->name('prestaciones.titulares.update');
-    Route::get('prestaciones/titulares/{id}/disabled', [ServiceUserController::class,'disabled'])->name('prestaciones.titulares.disabled');
-    Route::put('prestaciones/titulares/baja/{id}', [ServiceUserController::class,'baja'])->name('prestaciones.titulares.baja');
+    Route::get('prestaciones/titulares', [InsuredController::class,'index'])->name('prestaciones.titulares.index');
+    Route::get('prestaciones/titulares/create',[InsuredController::class, 'create'])->name('prestaciones.titulares.create');
+    Route::post('prestaciones/titulares',[InsuredController::class, 'store'])->name('prestaciones.titulares.store');
+    Route::get('prestaciones/titulares/{id}',[InsuredController::class, 'show'])->name('prestaciones.titulares.show');
+    Route::get('prestaciones/titulares/{id}/edit', [InsuredController::class,'edit'])->name('prestaciones.titulares.edit');
+    Route::put('prestaciones/titulares/{id}', [InsuredController::class,'update'])->name('prestaciones.titulares.update');
+    Route::get('prestaciones/titulares/{id}/disabled', [InsuredController::class,'disabled'])->name('prestaciones.titulares.disabled');
+    Route::put('prestaciones/titulares/baja/{id}', [InsuredController::class,'baja'])->name('prestaciones.titulares.baja');
     //Rutas de familiares
-    Route::get('prestaciones/familiares',[UserFamilyController::class, 'index'])->name('prestaciones.familiares.index');
-    Route::get('prestaciones/familiares/create',[UserFamilyController::class, 'create'])->name('prestaciones.familiares.create');
-    Route::post('prestaciones/familiares',[UserFamilyController::class, 'store'])->name('prestaciones.familiares.store');
-    Route::get('prestaciones/familiares/{id}',[UserFamilyController::class, 'show'])->name('prestaciones.familiares.show');
-    Route::get('prestaciones/familiares/{id}/edit', [UserFamilyController::class,'edit'])->name('prestaciones.familiares.edit');
-    Route::put('prestaciones/familiares/{id}', [UserFamilyController::class,'update'])->name('prestaciones.familiares.update');
-    Route::delete('prestaciones/familiares/{id}', [UserFamilyController::class,'destroy'])->name('prestaciones.familiares.destroy');
+    Route::get('prestaciones/familiares',[BeneficiaryController::class, 'index'])->name('prestaciones.familiares.index');
+    Route::get('prestaciones/familiares/create',[BeneficiaryController::class, 'create'])->name('prestaciones.familiares.create');
+    Route::post('prestaciones/familiares',[BeneficiaryController::class, 'store'])->name('prestaciones.familiares.store');
+    Route::get('prestaciones/familiares/{id}',[BeneficiaryController::class, 'show'])->name('prestaciones.familiares.show');
+    Route::get('prestaciones/familiares/{id}/edit', [BeneficiaryController::class,'edit'])->name('prestaciones.familiares.edit');
+    Route::put('prestaciones/familiares/{id}', [BeneficiaryController::class,'update'])->name('prestaciones.familiares.update');
+    Route::delete('prestaciones/familiares/{id}', [BeneficiaryController::class,'destroy'])->name('prestaciones.familiares.destroy');
 });

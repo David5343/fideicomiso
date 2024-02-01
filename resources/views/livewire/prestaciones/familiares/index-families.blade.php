@@ -50,7 +50,7 @@
                             <i class="bi bi-file-person"></i>
                         </a>
                     </td>
-                    <td>{{ $item->family_status }}</td>
+                    <td>{{ $item->affiliate_status }}</td>
                     {{-- <td>
                         <form action="{{ url('prestaciones/familiares/'.$item->id)}}" method="post">
                             @method('DELETE')

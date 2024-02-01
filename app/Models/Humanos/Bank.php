@@ -2,8 +2,8 @@
 
 namespace App\Models\Humanos;
 
-use App\Models\Prestaciones\Affiliate;
-use App\Models\Prestaciones\AffiliateFamily;
+use App\Models\Prestaciones\Beneficiary;
+use App\Models\Prestaciones\Insured;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,12 +16,12 @@ class Bank extends Model
     {
         return $this->hasMany(Employee::class);
     }
-    public function affiliate():HasMany
+    public function insured():HasMany
     {
-        return $this->hasMany(Affiliate::class);
+        return $this->hasMany(Insured::class);
     }
-    public function families():HasMany
+    public function beneficiary():HasMany
     {
-        return $this->hasMany(AffiliateFamily::class);
+        return $this->hasMany(Beneficiary::class);
     }
 }

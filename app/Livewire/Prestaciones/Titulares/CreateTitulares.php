@@ -5,7 +5,7 @@ namespace App\Livewire\Prestaciones\Titulares;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
-use App\Models\Prestaciones\ServiceUser;
+use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Subdependency;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class CreateTitulares extends Component
 {
-    #[Rule('required | unique:service_users,file_number')] 
+    #[Rule('required | unique:insureds,file_number')] 
     public $no_expediente;
     #[Rule('required')]
     public $subdepe_id;
@@ -43,13 +43,13 @@ class CreateTitulares extends Component
     public $sexo;
     #[Rule('nullable')]
     public $estado_civil;
-    #[Rule('required | max:13| alpha_num:ascii')]
+    #[Rule('required | max:13| alpha_num:ascii | unique:insureds,rfc')]
     public $rfc;
-    #[Rule('nullable | max:18| alpha_num:ascii')]
+    #[Rule('nullable | max:18| alpha_num:ascii | unique:insureds,curp')]
     public $curp;
     #[Rule('nullable|numeric|digits:10')]
     public $telefono;
-    #[Rule('nullable|email|min:5|max:50|unique:service_users,email')]
+    #[Rule('nullable|email|min:5|max:50|unique:insureds,email')]
     public $email;
     #[Rule('nullable|min:5|max:85')]
     public $estado;
@@ -87,7 +87,7 @@ class CreateTitulares extends Component
     public function guardar()
     {
         $this->validate();
-        $titular = new ServiceUser();
+        $titular = new Insured();
         $titular->file_number = Str::of($this->no_expediente)->trim();
         $titular->subdependency_id = $this->subdepe_id;
         $titular->start_date =$this->fecha_ingreso;
@@ -141,7 +141,7 @@ class CreateTitulares extends Component
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
-        $this->no_expediente = IdGenerator::generate(['table' => 'service_users','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
+        $this->no_expediente = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
         return view('livewire.prestaciones.titulares.create-titulares',['select1' => $select1,
                                                                         'select2' => $select2,
                                                                         'select3' => $select3,

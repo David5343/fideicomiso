@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
-use App\Models\Prestaciones\ServiceUser;
+use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Subdependency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class ServiceUserController extends Controller
+class InsuredController extends Controller
 {
     public function index()
     {   
@@ -24,7 +24,7 @@ class ServiceUserController extends Controller
     }
     public function show(string $id)
     {
-        $row = ServiceUser::find($id);
+        $row = Insured::find($id);
         return view('prestaciones.titulares.show',['titular' => $row]);
         
     }
@@ -34,7 +34,7 @@ class ServiceUserController extends Controller
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
-        $row = ServiceUser::find($id);
+        $row = Insured::find($id);
         return view('prestaciones/titulares/edit', ['select1' => $select1,
                                                     'select2' => $select2,
                                                     'select3' => $select3,
@@ -57,10 +57,10 @@ class ServiceUserController extends Controller
             'lugar_nacimiento' => ['nullable','min:5','max:85'],
             'sexo' => ['nullable'],
             'estado_civil' => ['nullable'],
-            'rfc' => ['nullable ',' max:13 ',' alpha_num:ascii'],
-            'curp' => ['nullable' ,' max:18 ', 'alpha_num:ascii'],
+            'rfc' => ['nullable ',' max:13 ',' alpha_num:ascii','unique:insureds,rfc,'.$id],
+            'curp' => ['nullable' ,' max:18 ', 'alpha_num:ascii','unique:insureds,curp,'.$id],
             'telefono' => ['nullable','numeric','digits:10'],
-            'email' => ['nullable','email','min:5','max:50','unique:service_users,email,'. $id],
+            'email' => ['nullable','email','min:5','max:50','unique:insureds,email,'. $id],
             'estado' => ['nullable','min:5','max:85'],
             'municipio' => ['nullable','min:5','max:85'],
             'colonia' => ['nullable','min:5','max:50'],
@@ -70,15 +70,15 @@ class ServiceUserController extends Controller
             'num_interior' => ['nullable','max:7'],
             'cp' => ['nullable','numeric','digits:5'],
             'localidad' => ['nullable','min:5','max:85'],
-            'num_cuenta' => ['nullable','digits:10'],
-            'clabe' => ['nullable','digits:18'],
+            'num_cuenta' => ['nullable','digits:10','unique:insureds,account_number,'.$id],
+            'clabe' => ['nullable','digits:18','unique:insureds,clabe,'.$id],
             'banco_id' => ['nullable'],
             'nombre_representante' =>['nullable','max:40'],
-            'rfc_representante' =>['nullable ',' size:13 ',' alpha_num:ascii'],
-            'curp_representante' =>['nullable ',' size:18 ',' alpha_num:ascii'],
+            'rfc_representante' =>['nullable ',' max:13 ',' alpha_num:ascii'],
+            'curp_representante' =>['nullable ',' max:18 ',' alpha_num:ascii'],
             'parentesco_representante' =>['nullable'],
         ]);
-        $row = ServiceUser::find($id);
+        $row = Insured::find($id);
         $row->subdependency_id = $request->input('subdepe_id');
         $row->start_date =$request->input('fecha_ingreso');
         $row->work_place = Str::of($request->input('lugar_trabajo'))->trim();  
@@ -123,7 +123,7 @@ class ServiceUserController extends Controller
     }
     public function disabled(string $id)
     {
-        $row = ServiceUser::find($id);
+        $row = Insured::find($id);
         return view('prestaciones.titulares.disabled',['titular'=>$row]);
     }
     public function baja(Request $request, string $id)
@@ -133,7 +133,7 @@ class ServiceUserController extends Controller
             'motivo_baja' => ['required'],
 
         ]);
-        $row = ServiceUser::find($id);
+        $row = Insured::find($id);
         $row->inactive_date = $request->input('fecha_baja');
         $row->inactive_motive = $request->input('motivo_baja');
         $row->affiliate_status = "Baja";

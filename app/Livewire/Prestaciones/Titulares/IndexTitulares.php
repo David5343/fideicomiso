@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Prestaciones\Titulares;
 
-use App\Models\Prestaciones\ServiceUser;
+use App\Models\Prestaciones\Insured;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -22,7 +22,7 @@ class IndexTitulares extends Component
     }
     public function render()
     {
-        $lista =  ServiceUser::where('status','=','active')
+        $lista =  Insured::where('status','=','active')
         ->where('rfc','like','%'.$this->search.'%')
         ->orderBy('name','asc')
         ->paginate($this->numberRows);

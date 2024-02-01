@@ -100,8 +100,8 @@
                   </ul>
                 </div>
               </div> 
-              @if($titular->families)              
-                @foreach ($titular->families as $item)
+              @if($titular->beneficiaries)              
+                @foreach ($titular->beneficiaries as $item)
                 <div class="card mb-4 mb-lg-0 mt-2">
                 <div class="card-body p-0">
                   <ul class="list-group list-group-flush rounded-3">

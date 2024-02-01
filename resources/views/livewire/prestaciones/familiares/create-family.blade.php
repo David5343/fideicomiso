@@ -163,13 +163,13 @@
 </div>
 <div class="col-md-4">
     <label  class="form-label">Numero de Cuenta</label>
-    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta" size="10" value="{{old('num_cuenta')}}">
+    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta"  value="{{old('num_cuenta')}}">
     @error('num_cuenta')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
   <div class="col-md-4">
     <label  class="form-label">CLABE</label>
-    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe" size="18" value="{{old('num_cuenta')}}">
+    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe"  value="{{old('clabe')}}">
     @error('clabe')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
