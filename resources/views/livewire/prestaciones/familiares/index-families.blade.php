@@ -1,17 +1,21 @@
 <div class="card-body p-3">
     <div class="row mb-2">
         <div class="col-sm-4">
-            <input wire:model.live='search' type="text" class="form-control form-control-lg"
+            <input wire:model.live='search' type="text" class="form-control"
                 placeholder="Escribe el No de Expediente...">
         </div>
-        <div class="col-md-2">
-            <select wire:model.live='numberRows' class="form-select form-select-lg">
+        <div class="col-md-1">
+            <select wire:model.live='numberRows' class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
             </select>
         </div>
+        <p class="text-end">
+            <i class="bi bi-stoplights-fill btn btn-success btn-sm m-1"></i>Activo
+            <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>Baja
+        </p>
     </div>
     <table class="table">
     @if ($lista->count())
@@ -22,7 +26,7 @@
             <th scope="col">No de Expediente</th>
             <th scope="col">RFC</th>
             <th scope="col">Familiar</th>
-            {{-- <th scope="col">Titular</th> --}}
+            <th scope="col">Titular</th>
             <th scope="col">Editar</th>
             <th scope="col">Ficha Técnica</th>
             <th scope="col">Estatus</th>
@@ -37,7 +41,7 @@
                     <td>{{ $item->file_number }}</td>
                     <td>{{ $item->rfc }}</td>
                     <td>{{ $item->last_name_1.' '.$item->last_name_2.' '.$item->name }}</td>
-                    {{-- <td>{{ $item->serviceUser->last_name_1.' '.$item->serviceUser->last_name_2.' '.$item->serviceUser->name }}</td> --}}
+                    <td>{{ $item->insured->last_name_1.' '.$item->insured->last_name_2.' '.$item->insured->name }}</td>
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
@@ -50,7 +54,15 @@
                             <i class="bi bi-file-person"></i>
                         </a>
                     </td>
-                    <td>{{ $item->affiliate_status }}</td>
+                    <td>
+                        @switch($item->affiliate_status)                    
+                        @case("active")
+                        <i class="bi bi-stoplights-fill btn btn-success btn-sm"></i>
+                            @break               
+                        @default
+                        <i class="bi bi-stoplights-fill btn btn-danger btn-sm"></i>
+                    @endswitch
+                    </td>
                     {{-- <td>
                         <form action="{{ url('prestaciones/familiares/'.$item->id)}}" method="post">
                             @method('DELETE')
