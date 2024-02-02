@@ -18,9 +18,9 @@ class CreateFamily extends Component
     public $nombre_afiliado="";
     public $rfc_afiliado="";
     public $no_expediente="";
-    #[Rule('required')] 
+    #[Rule('required | unique:beneficiaries,file_number')] 
     public $num_expediente="";
-    #[Rule('required | max: 8')]
+    #[Rule('required | max: 8 | unique:beneficiaries,file_number')]
     public $expediente_hidden="";
     #[Rule('required | date')]
     public $fecha_ingreso="";
