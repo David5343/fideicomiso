@@ -31,7 +31,7 @@
 </div>
 <div class="mb-3 row">
   <label for="inputPassword" class="col-sm-2 col-form-label">Nombre Completo</label>
-  <div class="col-sm-6">
+  <div class="col-sm-5">
     <input wire:model="nombre_afiliado" type="text" class="form-control" id="nombre_afiliado" name="nombre_afiliado" disabled>
     <input wire:model="hidden_id" type="hidden" id="hidden_id" name="hidden_id" value="{{$hidden_id}}">
   </div>
@@ -111,20 +111,20 @@
   </div>
   <div class="col-md-3">
     <label  class="form-label">RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}">
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{old('rfc')}}">
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label  class="form-label">* CURP</label>
-    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" size="18" value="{{old('curp')}}" required>
+    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{old('curp')}}" required>
     @error('curp')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label class="form-label">* ¿Con Diversas Capacidades?</label>
     <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select" value="{{old('persona_discapacitada')}}" required>
-      <option selected value="">Elije...</option>
+      <option selected value="NO">NO</option>
       <option>SI</option>
       <option>NO</option>
       
@@ -195,13 +195,13 @@
 </div>
 <div class="col-md-3">
   <label  class="form-label">RFC</label>
-  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" size="13" value="{{old('rfc_representante')}}">
+  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" maxlength="13" value="{{old('rfc_representante')}}">
   @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">CURP</label>
-  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" size="18" value="{{old('curp_representante')}}">
+  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" maxlength="18" value="{{old('curp_representante')}}">
   @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
