@@ -1,11 +1,11 @@
 <div class="card-body p-3">
     <div class="row mb-2">
         <div class="col-sm-4">
-            <input wire:model.live='search' type="text" class="form-control form-control-lg"
+            <input wire:model.live='search' type="text" class="form-control"
                 placeholder="Escribe el rfc...">
         </div>
         <div class="col-md-2">
-            <select wire:model.live='numberRows' class="form-select form-select-lg">
+            <select wire:model.live='numberRows' class="form-select">
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -44,25 +44,25 @@
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-lg">
+                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('prestaciones/titulares/' . $item->id) }}" class="btn btn-info btn-lg m-1">
+                        <a href="{{ url('prestaciones/titulares/' . $item->id) }}" class="btn btn-info btn-sm">
                             <i class="bi bi-file-person"></i>
                         </a>
                     </td>
                     <td>
                         @switch($item->affiliate_status)
                         @case("Preafiliado")
-                        <i class="bi bi-stoplights-fill btn btn-warning btn-lg"></i>
+                        <i class="bi bi-stoplights-fill btn btn-warning btn-sm"></i>
                             @break                     
                         @case("Activo")
-                        <i class="bi bi-stoplights-fill btn btn-success btn-lg"></i>
+                        <i class="bi bi-stoplights-fill btn btn-success btn-sm"></i>
                             @break               
                         @default
-                        <i class="bi bi-stoplights-fill btn btn-danger btn-lg"></i>
+                        <i class="bi bi-stoplights-fill btn btn-danger btn-sm"></i>
                     @endswitch
                     </td>
                     <td>
@@ -73,7 +73,7 @@
                                 <i class="bi bi-person-down"></i></button>
                         </form> --}}
                         
-                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/disabled')}}" class="btn btn-danger btn-lg">
+                        <a href="{{ url('prestaciones/titulares/'.$item->id .'/disabled')}}" class="btn btn-danger btn-sm">
                             <i class="bi bi-person-down"></i>
                         </a>
                     </td>

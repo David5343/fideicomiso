@@ -91,7 +91,7 @@
         </div>
         <div class="col-md-12">
           <label  class="form-label">Observaciones</label>
-          <textarea id="observaciones" name="observaciones" class="form-control form-control-lg" 
+          <textarea id="observaciones" name="observaciones" class="form-control" 
           rows="2">{{$titular->observations}}</textarea>
           @error('observaciones')<br><small style="color: red">{{ $message }}</small>
           @enderror
@@ -160,13 +160,13 @@
           </div>   
           <div class="col-md-3">
             <label  class="form-label">RFC</label>
-            <input type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{$titular->rfc}}" >
+            <input type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{$titular->rfc}}" >
             @error('rfc')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
           <div class="col-md-3">
             <label  class="form-label">CURP</label>
-            <input type="text" class="form-control" id="curp" name="curp" size="18" value="{{$titular->curp}}" >
+            <input type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{$titular->curp}}" >
             @error('curp')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
@@ -237,7 +237,7 @@
           </div>
           <div class="col-md-2">
             <label  class="form-label">CP</label>
-            <input type="number" class="form-control" id="cp" name="cp" value="{{$titular->cp}}" >
+            <input type="number" class="form-control" id="cp" name="cp"  maxlength="6" value="{{$titular->cp}}" >
             @error('cp')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div> 
@@ -309,7 +309,7 @@
           @enderror
         </div>          
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
           <a href="{{ route('prestaciones.titulares.index') }}" class="btn btn-danger" role="button">Cancelar</a>
         </div>
       </form>

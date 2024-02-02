@@ -45,12 +45,12 @@
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('prestaciones/familiares/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
+                        <a href="{{ url('prestaciones/familiares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a> 
                     </td>
                     <td>
-                        <a href="{{ url('prestaciones/familiares/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
+                        <a href="{{ url('prestaciones/familiares/' . $item->id) }}" class="btn btn-warning btn-sm">
                             <i class="bi bi-file-person"></i>
                         </a>
                     </td>

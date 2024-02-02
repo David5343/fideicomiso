@@ -64,7 +64,7 @@
         </div>
     </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
           <a href="{{ route('prestaciones.titulares.index') }}" class="btn btn-danger" role="button">Cancelar</a>
         </div>
       </form>
