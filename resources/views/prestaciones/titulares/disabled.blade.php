@@ -54,9 +54,10 @@
           <label class="form-label">Motivo de Baja</label>
           <select id="motivo_baja" name="motivo_baja" class="form-select" required >
             <option selected value="">Elige...</option>
+            <option>Acta Administrativa</option>
             <option>Defunsión</option>
-            <option>Renuncia</option>
             <option>Jubilación</option>
+            <option>Renuncia</option>
           </select>
           @error('motivo_baja')<br><small style="color: red">{{ $message }}</small>
           @enderror
