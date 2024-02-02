@@ -24,7 +24,7 @@ class IndexTitulares extends Component
     {
         $lista =  Insured::where('status','=','active')
         ->where('rfc','like','%'.$this->search.'%')
-        ->orderBy('name','asc')
+        ->orderBy('rfc','asc')
         ->paginate($this->numberRows);
 $count = $lista->count();
         return view('livewire.prestaciones.titulares.index-titulares',[
