@@ -145,13 +145,13 @@
             </div>   
             <div class="col-md-3">
               <label  class="form-label">* RFC</label>
-              <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{old('rfc')}}" required>
+              <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{old('rfc')}}" required>
               @error('rfc')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
             <div class="col-md-3">
               <label  class="form-label">CURP</label>
-              <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" size="18" value="{{old('curp')}}" >
+              <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{old('curp')}}" >
               @error('curp')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
@@ -269,13 +269,13 @@
           </div>
           <div class="col-md-3">
             <label  class="form-label">RFC</label>
-            <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" minlength="2" maxlength="20" value="{{old('rfc_representante')}}" >
+            <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" minlength="2" maxlength="13" value="{{old('rfc_representante')}}" >
             @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
           <div class="col-md-3">
             <label  class="form-label">CURP</label>
-            <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" minlength="2" maxlength="20" value="{{old('apaterno')}}" >
+            <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" minlength="2" maxlength="18" value="{{old('apaterno')}}" >
             @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
             @enderror
           </div>
