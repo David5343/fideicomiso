@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware(['role:Admin','permission:humanos.areas.index|humanos.areas.edit|humanos.areas.update|humanos.areas.destroy']);
+        //$this->middleware(['role_or_permission:Admin|humanos.areas.index']);
+        //$this->middleware('auth');
+        $this->middleware('can:configuracion.usuarios.index');
+        //$this->middleware('subscribed')->except('store');
+    }
     public function index()
     {
         return view('configuracion.usuarios.index');
