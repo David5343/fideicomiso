@@ -14,7 +14,7 @@ class UserController extends Controller
         //$this->middleware(['role:Admin','permission:humanos.areas.index|humanos.areas.edit|humanos.areas.update|humanos.areas.destroy']);
         //$this->middleware(['role_or_permission:Admin|humanos.areas.index']);
         //$this->middleware('auth');
-        $this->middleware('can:configuracion.usuarios.index');
+        //$this->middleware('can:configuracion.usuarios.index');
         //$this->middleware('subscribed')->except('store');
     }
     public function index()
