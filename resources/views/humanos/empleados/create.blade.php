@@ -135,6 +135,7 @@
               <option>Soltero/a</option>
               <option>Casado/a</option>
               <option>Divorciado/a</option>
+              <option>Unión Libre</option>
             </select>
             @error('estado_civil')<br><small style="color: red">{{ $message }}</small>
             @enderror
@@ -168,7 +169,7 @@
         </div>
         <div class="col-4">
           <label  class="form-label">Nombre Completo</label>
-          <input type="text" class="form-control" id="nombre_emergencia" name="nombre_emergencia" minlength="2" maxlength="30" value="{{old('nombre_emergencia')}}" >
+          <input type="text" class="form-control" id="nombre_emergencia" name="nombre_emergencia" minlength="2" maxlength="50" value="{{old('nombre_emergencia')}}" >
           @error('nombre_emergencia')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
@@ -180,7 +181,7 @@
         </div>
         <div class="col-6">
           <label  class="form-label">Dirección</label>
-          <input type="text" class="form-control" id="direccion_emergencia" name="direccion_emergencia" minlength="2" maxlength="40" value="{{old('direccion_emergencia')}}" >
+          <input type="text" class="form-control" id="direccion_emergencia" name="direccion_emergencia" minlength="2" maxlength="50" value="{{old('direccion_emergencia')}}" >
           @error('direccion_emergencia')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
