@@ -56,7 +56,7 @@
             <option selected value="">Elige...</option>
             <option>Acta Administrativa</option>
             <option>Defunsión</option>
-            <option>Jubilación</option>
+            <option>Pensión</option>
             <option>Renuncia</option>
           </select>
           @error('motivo_baja')<br><small style="color: red">{{ $message }}</small>
