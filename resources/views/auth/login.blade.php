@@ -39,9 +39,9 @@ height: 100%;
   
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror"
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
               name="email" value="{{ old('email') }}" placeholder="Ingrese un correo válido" required autocomplete="email" autofocus />
-              <label class="form-label" for="form3Example3">Correo electrónico</label>
+              <label class="form-label" for="form3Example3">Nombre de usuario</label>
               @error('email')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@ height: 100%;
   
             <!-- Password input -->
             <div class="form-outline mb-3">
-              <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror"
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                 name ="password" placeholder="Ingrese la contraseña" required/>
               <label class="form-label" for="form3Example4">Contraseña</label>
               @error('password')
@@ -73,7 +73,7 @@ height: 100%;
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button type="submit" class="btn btn-primary btn-lg"
+              <button type="submit" class="btn btn-primary"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sessión</button>
               {{-- <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                   class="link-danger">Register</a></p> --}}
