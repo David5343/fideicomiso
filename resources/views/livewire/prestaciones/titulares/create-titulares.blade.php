@@ -68,7 +68,6 @@
               <option selected value="">Elije..</option>
               <option>Preafiliado</option>
               <option>Activo</option>
-              <option>Baja</option>
             </select>
             @error('estatus_afiliado')<br><small style="color: red">{{ $message }}</small>
             @enderror

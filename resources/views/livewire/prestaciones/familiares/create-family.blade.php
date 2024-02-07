@@ -123,11 +123,9 @@
   </div>
   <div class="col-md-3">
     <label class="form-label">* ¿Con Diversas Capacidades?</label>
-    <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select" value="{{old('persona_discapacitada')}}" required>
-      <option selected value="NO">NO</option>
-      <option>SI</option>
-      <option>NO</option>
-      
+    <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select" required>
+      <option value="NO" selected>NO</option> 
+      <option>SI</option>     
     </select>
     @error('persona_discapacitada')<br><small style="color: red">{{ $message }}</small>
     @enderror
