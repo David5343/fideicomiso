@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Livewire\Configuracion\Roles;
+namespace App\Livewire\Tecnologias\Permisos;
 
+use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
-class IndexRoles extends Component
+class IndexPermiso extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -21,17 +22,17 @@ class IndexRoles extends Component
     public function updatingnumberRows(){
         $this->resetPage();
     }
-    #[On('create_role')]
-    public function updateList($role = null){
+    #[On('create_permission')]
+    public function updateList($permiso = null){
 
     }
     public function render()
     {
-        $lista =  Role::where('name','like','%'.$this->search.'%')
+        $lista =  Permission::where('name','like','%'.$this->search.'%')
                         ->orderBy('name','asc')
                         ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.configuracion.roles.index-roles',[
+        return view('livewire.tecnologias.permisos.index-permiso',[
             'count' => $count,
             'lista' => $lista,]);
     }

@@ -112,9 +112,9 @@
                       </a>
                       <ul class="dropdown-menu dropdown-menu-primary">
                         <li><h6 class="dropdown-header">Configuracion</h6></li>
-                        <li><a class="dropdown-item" href="{{route('configuracion.usuarios.index')}}"><i class="bi bi-person-gear"></i> Usuarios</a></li>
-                        <li><a class="dropdown-item" href="{{route('configuracion.roles.index')}}"><i class="bi bi-ui-checks"></i> Roles</a></li>
-                        <li><a class="dropdown-item" href="{{route('configuracion.permisos.index')}}"><i class="bi bi-key"></i> Permisos</a></li>
+                        <li><a class="dropdown-item" href="{{route('tecnologias.usuarios.index')}}"><i class="bi bi-person-gear"></i> Usuarios</a></li>
+                        <li><a class="dropdown-item" href="{{route('tecnologias.roles.index')}}"><i class="bi bi-ui-checks"></i> Roles</a></li>
+                        <li><a class="dropdown-item" href="{{route('tecnologias.permisos.index')}}"><i class="bi bi-key"></i> Permisos</a></li>
                         <li>
                           <hr class="dropdown-divider">
                         </li>

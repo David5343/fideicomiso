@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('humanos.areas.index') }}" class="btn btn-primary" role="button">Lista de Usuarios</a>
+        <a href="{{ route('tecnologias.usuarios.index') }}" class="btn btn-primary" role="button">Lista de Usuarios</a>
     </p>
     <div class="card mt-1 border-primary">
         <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
-            Humanos/Editar Usuario
+            Tecnologias/Editar Usuario
         </div>
         <div class="card-body p-3">
             @if (session('msg_tipo'))
@@ -14,7 +14,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-            <form action="{{ url('configuracion/usuarios/' . $usuario->id) }}" method="POST">
+            <form action="{{ url('tecnologias/usuarios/' . $usuario->id) }}" method="POST">
                       @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
@@ -61,7 +61,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg"></label>
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{{ route('configuracion.usuarios.index') }}" class="btn btn-danger" role="button">Cancelar</a>
+                        <a href="{{ route('tecnologias.usuarios.index') }}" class="btn btn-danger" role="button">Cancelar</a>
                     </div>
                 </div>
             </form>

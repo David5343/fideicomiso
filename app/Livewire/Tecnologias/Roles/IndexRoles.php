@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Configuracion\Usuarios;
+namespace App\Livewire\Tecnologias\Roles;
 
-use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Role;
 
-class IndexUsuarios extends Component
+class IndexRoles extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -21,18 +21,17 @@ class IndexUsuarios extends Component
     public function updatingnumberRows(){
         $this->resetPage();
     }
-    #[On('create_user')]
-    public function updateList($user = null){
+    #[On('create_role')]
+    public function updateList($role = null){
 
     }
     public function render()
     {
-        $lista =  User::where('status','=','active')
-                        ->where('email','like','%'.$this->search.'%')
-                        ->orderBy('created_at','desc')
+        $lista =  Role::where('name','like','%'.$this->search.'%')
+                        ->orderBy('name','asc')
                         ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.configuracion.usuarios.index-usuarios',[
+        return view('livewire.tecnologias.roles.index-roles',[
             'count' => $count,
             'lista' => $lista,]);
     }

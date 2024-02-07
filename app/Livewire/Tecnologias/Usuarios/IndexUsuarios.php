@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Livewire\Configuracion\Permisos;
+namespace App\Livewire\Tecnologias\Usuarios;
 
 use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Permission;
 
-class IndexPermiso extends Component
+class IndexUsuarios extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -22,17 +21,18 @@ class IndexPermiso extends Component
     public function updatingnumberRows(){
         $this->resetPage();
     }
-    #[On('create_permission')]
-    public function updateList($permiso = null){
+    #[On('create_user')]
+    public function updateList($user = null){
 
     }
     public function render()
     {
-        $lista =  Permission::where('name','like','%'.$this->search.'%')
-                        ->orderBy('name','asc')
+        $lista =  User::where('status','=','active')
+                        ->where('email','like','%'.$this->search.'%')
+                        ->orderBy('created_at','desc')
                         ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.configuracion.permisos.index-permiso',[
+        return view('livewire.tecnologias.usuarios.index-usuarios',[
             'count' => $count,
             'lista' => $lista,]);
     }
