@@ -21,19 +21,19 @@ class CreateTitulares extends Component
     public $subdepe_id;
     #[Rule('required | date')]
     public $fecha_ingreso;
-    #[Rule('required')]
+    #[Rule('required|min:3|max:85')]
     public $lugar_trabajo;
-    #[Rule('nullable')]
+    #[Rule('nullable|min:2|max:120')]
     public $motivo_alta;
     #[Rule('required')]
     public $estatus_afiliado;
-    #[Rule('nullable')]
+    #[Rule('nullable|min:5|max:180')]
     public $observaciones;
     #[Rule('required | min:2| max:20')]
     public $apaterno;
     #[Rule('required | min:2| max:20')]
     public $amaterno;
-    #[Rule('required | min:2| max:20')]
+    #[Rule('required | min:2| max:30')]
     public $nombre;         
     #[Rule('required | date')]
     public $fecha_nacimiento;
@@ -127,6 +127,7 @@ class CreateTitulares extends Component
         $titular->representative_relationship = Str::of($this->parentesco_representante)->trim();
         $titular->status = 'active';
         $titular->modified_by = Auth::user()->email;
+        sleep(3);
         $titular->save();
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro creado con éxito!');
