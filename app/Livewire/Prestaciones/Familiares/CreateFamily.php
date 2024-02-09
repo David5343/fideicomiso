@@ -123,6 +123,7 @@ class CreateFamily extends Component
             session()->flash('msg_tipo', 'danger');
             session()->flash('msg', $e->getMessage()); 
         }
+        DB::commit();
         // $this->validate();
         // $familiar = new Beneficiary();
         // $familiar->file_number = $this->expediente_hidden;
