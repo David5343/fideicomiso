@@ -64,38 +64,38 @@
 </div>
 <div class="col-md-2">
   <label  class="form-label">* No de Expediente</label>
-  <input type="text" class="form-control" id="no_expediente" name="no_expediente" minlength="2" maxlength="8" value="{{$num_expediente}}" disabled>
+  <input type="text" class="form-control" id="no_expediente" name="no_expediente" value="{{$num_expediente}}">
   <input wire:modal="expediente_hidden" type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$num_expediente}}">
   @error('expediente_hidden')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-2">
   <label  class="form-label">* Fecha de Ingreso</label>
-  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}" required>
+  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}">
   @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-2">
   <label  class="form-label">* Apellido Paterno</label>
-  <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{old('apaterno')}}" required>
+  <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" value="{{old('apaterno')}}">
   @error('apaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-2">
   <label  class="form-label">* Apellido Materno</label>
-  <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{old('amaterno')}}" required>
+  <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" value="{{old('amaterno')}}">
   @error('amaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-3">
     <label  class="form-label">* Nombre</label>
-    <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{old('nombre')}}" required>
+    <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}">
     @error('nombre')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-3">
     <label  class="form-label">* Fecha de Nacimiento</label>
-    <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{old('fecha_nacimiento')}}" required>
+    <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{old('fecha_nacimiento')}}">
     @error('fecha_nacimiento')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
@@ -111,19 +111,19 @@
   </div>
   <div class="col-md-3">
     <label  class="form-label">RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{old('rfc')}}">
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" value="{{old('rfc')}}">
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label  class="form-label">* CURP</label>
-    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{old('curp')}}" required>
+    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" value="{{old('curp')}}">
     @error('curp')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label class="form-label">* ¿Con Diversas Capacidades?</label>
-    <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select" required>
+    <select wire:model="persona_discapacitada" id="persona_discapacitada" name="persona_discapacitada" class="form-select">
       <option value="" selected>Elije...</option> 
       <option>SI</option>
       <option>NO</option>       
@@ -133,7 +133,7 @@
   </div>
   <div class="col-md-3">
     <label class="form-label">* Parentesco</label>
-    <select wire:model="parentesco" id="parentesco" name="parentesco" class="form-select" required>
+    <select wire:model="parentesco" id="parentesco" name="parentesco" class="form-select">
       <option selected value="">Elije...</option>
       <option value="Padre"{{old('parentesco' == "Padre" ? 'selected' : '')}}>Padre</option>
       <option value="Madre"{{old('parentesco' == "Madre" ? 'selected' : '')}}>Madre</option>
@@ -146,13 +146,13 @@
   </div>   
   <div class="col-md-10">
     <label  class="form-label">Dirección</label>
-    <input wire:model="direccion" type="text" class="form-control" id="direccion" name="direccion" maxlength="100" value="{{old('direccion')}}" required>
+    <input wire:model="direccion" type="text" class="form-control" id="direccion" name="direccion"  value="{{old('direccion')}}">
     @error('direccion')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>   
   <div class="col-md-12">
     <label  class="form-label">Observaciones</label>
-    <textarea wire:model="observaciones" id="observaciones" name="observaciones" class="form-control form-control-lg" maxlength="150"
+    <textarea wire:model="observaciones" id="observaciones" name="observaciones" class="form-control form-control-lg" 
     rows="2"></textarea>
     @error('observaciones')<br><small style="color: red">{{ $message }}</small>
     @enderror
@@ -188,19 +188,19 @@
 </div> 
 <div class="col-md-4">
   <label  class="form-label">Nombre Completo</label>
-  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="5" maxlength="40" value="{{old('nombre_representante')}}">
+  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" value="{{old('nombre_representante')}}">
   @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">RFC</label>
-  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" maxlength="13" value="{{old('rfc_representante')}}">
+  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" value="{{old('rfc_representante')}}">
   @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">CURP</label>
-  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" maxlength="18" value="{{old('curp_representante')}}">
+  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" value="{{old('curp_representante')}}">
   @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
@@ -217,10 +217,23 @@
   </select>
   @error('parentesco_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
-</div>   
+</div>
+<div class="col-12">
+  @if (session('msg_tipo'))
+  <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
+      {{ session('msg') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
+  </div>      
 <div class="col-12">
   <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
   <a href="{{ route('prestaciones.familiares.index') }}" class="btn btn-danger" role="button">Cancelar</a>
+  <div class="d-flex justify-content-center">
+    <div wire:loading wire:target='guardar' class="spinner-border text-success" style="width:3rem; height: 3rem;"  role="status">
+      <span class="visually-hidden">Guardando...</span>
+    </div>
+  </div>
 </div>
 </form>
 </div>

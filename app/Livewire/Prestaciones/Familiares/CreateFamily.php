@@ -9,6 +9,7 @@ use Livewire\Component;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 
 class CreateFamily extends Component
 {
@@ -18,47 +19,47 @@ class CreateFamily extends Component
     public $nombre_afiliado="";
     public $rfc_afiliado="";
     public $no_expediente="";
-    #[Rule('required | unique:beneficiaries,file_number')] 
+    #[Validate('required | unique:beneficiaries,file_number')] 
     public $num_expediente="";
-    #[Rule('required | max: 8 | unique:beneficiaries,file_number')]
+    #[Validate('required | max: 8 | unique:beneficiaries,file_number')]
     public $expediente_hidden="";
-    #[Rule('required | date')]
+    #[Validate('required | date')]
     public $fecha_ingreso="";
-    #[Rule('required | max:20')]  
+    #[Validate('required | max:20')]  
     public $apaterno="";
-    #[Rule('required | max:20')] 
+    #[Validate('required | max:20')] 
     public $amaterno="";
-    #[Rule('required | max:20')] 
+    #[Validate('required | max:30')] 
     public $nombre="";
-    #[Rule('required | date')] 
+    #[Validate('required | date')] 
     public $fecha_nacimiento="";
-    #[Rule('required')] 
+    #[Validate('required')] 
     public $sexo="";
-    #[Rule('nullable | max:13| alpha_num:ascii')] 
+    #[Validate('nullable | max:13| alpha_num:ascii')] 
     public $rfc="";
-    #[Rule('required | max:18 | alpha_num:ascii')] 
+    #[Validate('required | max:18 | alpha_num:ascii')] 
     public $curp="";
-    #[Rule('required')] 
+    #[Validate('required')] 
     public $persona_discapacitada="";
-    #[Rule('required')] 
+    #[Validate('required')] 
     public $parentesco="";
-    #[Rule('required | max:100')] 
+    #[Validate('required | max:100')] 
     public $direccion ="";
-    #[Rule('nullable | max:150')] 
+    #[Validate('nullable | max:150')] 
     public $observaciones="";
-    #[Rule('nullable | numeric | max_digits:10')] 
+    #[Validate('nullable | numeric | max_digits:10')] 
     public $num_cuenta="";
-    #[Rule('nullable | numeric | max_digits:18')] 
+    #[Validate('nullable | numeric | max_digits:18')] 
     public $clabe="";
-    #[Rule('nullable')] 
+    #[Validate('nullable')] 
     public $banco_id;
-    #[Rule('nullable | max:40')] 
+    #[Validate('nullable | max:50')] 
     public $nombre_representante="";
-    #[Rule('nullable | max:13 | alpha_num:ascii')] 
+    #[Validate('nullable | max:13 | alpha_num:ascii')] 
     public $rfc_representante="";
-    #[Rule('nullable | max:18 | alpha_num:ascii')] 
+    #[Validate('nullable | max:18 | alpha_num:ascii')] 
     public $curp_representante="";
-    #[Rule('nullable')] 
+    #[Validate('nullable')] 
     public $parentesco_representante="";
 
 
@@ -111,10 +112,12 @@ class CreateFamily extends Component
         $familiar->affiliate_status = 'active'; 
         $familiar->status = 'active';
         $familiar->modified_by = Auth::user()->email;
+        sleep(1);
         $familiar->save();
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro creado con éxito!');
-        return to_route('prestaciones.familiares.create');
+        //$this->js("alert('Registro creado con éxito!')"); 
+        //return to_route('prestaciones.familiares.create');
 
     }
 

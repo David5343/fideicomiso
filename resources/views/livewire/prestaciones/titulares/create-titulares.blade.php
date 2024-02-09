@@ -291,12 +291,25 @@
             </select>
             @error('parentesco_representante')<br><small style="color: red">{{ $message }}</small>
             @enderror
-          </div>          
+          </div>
+          <div class="col-12">
+            @if (session('msg_tipo'))
+            <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
+                {{ session('msg') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            </div>          
           <div class="col-12">
             <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
             <a href="{{ route('prestaciones.titulares.index') }}" class="btn btn-danger" role="button">Cancelar</a>
-            <div wire:loading wire:target='guardar' class="m-2">
-              Enviando...
+            {{-- <div wire:loading wire:target='guardar' class="spinner-border spinner-border-sm text-success" style="width:3rem; height: 3rem;" role="status">
+              <span class="visually-hidden">Guardando...</span>
+            </div> --}}
+            <div class="d-flex justify-content-center">
+              <div wire:loading wire:target='guardar' class="spinner-border text-success" style="width:3rem; height: 3rem;"  role="status">
+                <span class="visually-hidden">Guardando...</span>
+              </div>
             </div>
           </div>
         </form>

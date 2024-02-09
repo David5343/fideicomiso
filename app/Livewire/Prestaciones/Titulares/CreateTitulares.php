@@ -18,71 +18,71 @@ class CreateTitulares extends Component
 {
     #[Validate('required|unique:insureds,file_number')] 
     public $no_expediente;
-    #[Rule('required')]
+    #[Validate('required')]
     public $subdepe_id;
-    #[Rule('required | date')]
+    #[Validate('required | date')]
     public $fecha_ingreso;
-    #[Rule('required|min:3|max:85')]
+    #[Validate('required|min:3|max:85')]
     public $lugar_trabajo;
-    #[Rule('nullable|min:2|max:120')]
+    #[Validate('nullable|min:2|max:120')]
     public $motivo_alta;
-    #[Rule('required')]
+    #[Validate('required')]
     public $estatus_afiliado;
-    #[Rule('nullable|min:5|max:180')]
+    #[Validate('nullable|min:5|max:180')]
     public $observaciones;
-    #[Rule('required | min:2| max:20')]
+    #[Validate('required | min:2| max:20')]
     public $apaterno;
-    #[Rule('required | min:2| max:20')]
+    #[Validate('required | min:2| max:20')]
     public $amaterno;
-    #[Rule('required | min:2| max:30')]
+    #[Validate('required | min:2| max:30')]
     public $nombre;         
-    #[Rule('required | date')]
+    #[Validate('required | date')]
     public $fecha_nacimiento;
-    #[Rule('nullable | min:5| max:85')]
+    #[Validate('nullable | min:5| max:85')]
     public $lugar_nacimiento;
-    #[Rule('nullable')]
+    #[Validate('nullable')]
     public $sexo;
-    #[Rule('nullable')]
+    #[Validate('nullable')]
     public $estado_civil;
-    #[Rule('required | max:13| alpha_num:ascii | unique:insureds,rfc')]
+    #[Validate('required | max:13| alpha_num:ascii | unique:insureds,rfc')]
     public $rfc;
-    #[Rule('nullable | max:18| alpha_num:ascii | unique:insureds,curp')]
+    #[Validate('nullable | max:18| alpha_num:ascii | unique:insureds,curp')]
     public $curp;
-    #[Rule('nullable|numeric|digits:10')]
+    #[Validate('nullable|numeric|digits:10')]
     public $telefono;
-    #[Rule('nullable|email|min:5|max:50|unique:insureds,email')]
+    #[Validate('nullable|email|min:5|max:50|unique:insureds,email')]
     public $email;
-    #[Rule('nullable|min:5|max:85')]
+    #[Validate('nullable|min:5|max:85')]
     public $estado;
-    #[Rule('nullable|min:5|max:85')]
+    #[Validate('nullable|min:5|max:85')]
     public $municipio;
-    #[Rule('nullable|min:5|max:50')]
+    #[Validate('nullable|min:5|max:50')]
     public $colonia;
-    #[Rule('nullable|min:5|max:50')]
+    #[Validate('nullable|min:5|max:50')]
     public $tipo_vialidad;
-    #[Rule('nullable|min:5|max:50')]
+    #[Validate('nullable|min:5|max:50')]
     public $calle;
-    #[Rule('nullable | max:7')]
+    #[Validate('nullable | max:7')]
     public $num_exterior;
-    #[Rule('nullable | max:7')]
+    #[Validate('nullable | max:7')]
     public $num_interior;
-    #[Rule('nullable|numeric|digits:5')]
+    #[Validate('nullable|numeric|digits:5')]
     public $cp;
-    #[Rule('nullable|min:5|max:85')]
+    #[Validate('nullable|min:5|max:85')]
     public $localidad;
-    #[Rule('nullable | digits:10')]
+    #[Validate('nullable | digits:10')]
     public $num_cuenta;
-    #[Rule('nullable | digits:18')]
+    #[Validate('nullable | digits:18')]
     public $clabe;
-    #[Rule('nullable')]
+    #[Validate('nullable')]
     public $banco_id;
-    #[Rule('nullable | max:40')]
+    #[Validate('nullable | max:40')]
     public $nombre_representante;
-    #[Rule('nullable | max:13| alpha_num:ascii')]
+    #[Validate('nullable | max:13| alpha_num:ascii')]
     public $rfc_representante;
-    #[Rule('nullable | max:18| alpha_num:ascii')]
+    #[Validate('nullable | max:18| alpha_num:ascii')]
     public $curp_representante;
-    #[Rule('nullable')]
+    #[Validate('nullable')]
     public $parentesco_representante;
 
     public function guardar()
@@ -128,11 +128,12 @@ class CreateTitulares extends Component
         $titular->representative_relationship = Str::of($this->parentesco_representante)->trim();
         $titular->status = 'active';
         $titular->modified_by = Auth::user()->email;
-        sleep(3);
+        sleep(1);
         $titular->save();
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro creado con éxito!');
-        return to_route('prestaciones.titulares.create');
+        //$this->js("alert('Registro creado con éxito!')"); 
+        //return to_route('prestaciones.titulares.create');
 
   
     }
