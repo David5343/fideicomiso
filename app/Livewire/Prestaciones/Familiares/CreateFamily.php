@@ -24,7 +24,7 @@ class CreateFamily extends Component
     public $num_expediente="";
     #[Validate('required | max: 8 | unique:beneficiaries,file_number')]
     public $expediente_hidden="";
-    #[Validate('required|date|max:8')]
+    #[Validate('required|date|max:10')]
     public $fecha_ingreso="";
     #[Validate('required | max:20')]  
     public $apaterno="";
@@ -32,7 +32,7 @@ class CreateFamily extends Component
     public $amaterno="";
     #[Validate('required | max:30')] 
     public $nombre="";
-    #[Validate('required|date|max:8')] 
+    #[Validate('required|date|max:10')] 
     public $fecha_nacimiento="";
     #[Validate('required')] 
     public $sexo="";
