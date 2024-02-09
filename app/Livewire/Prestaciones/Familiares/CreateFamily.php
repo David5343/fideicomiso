@@ -5,10 +5,11 @@ namespace App\Livewire\Prestaciones\Familiares;
 use App\Models\Humanos\Bank;
 use App\Models\Prestaciones\Beneficiary;
 use App\Models\Prestaciones\Insured;
+use Exception;
 use Livewire\Component;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Rule;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 
 class CreateFamily extends Component
@@ -74,8 +75,8 @@ class CreateFamily extends Component
             $this->hidden_id = $row->id;
             $this->nombre_afiliado = $row->last_name_1.' '.$row->last_name_2.' '.$row->name;
             $this->rfc_afiliado = $row->rfc;
-            $this->num_expediente = IdGenerator::generate(['table' => 'beneficiaries','field' => 'file_number', 'length' => 8, 'prefix' =>'F']);
-            $this->expediente_hidden = $this->num_expediente;
+            // $this->num_expediente = IdGenerator::generate(['table' => 'beneficiaries','field' => 'file_number', 'length' => 8, 'prefix' =>'F']);
+            // $this->expediente_hidden = $this->num_expediente;
         }else{
             session()->flash('msg_tipo_busqueda','info');
             session()->flash('msg_busqueda','Ups!, No se encontro ningun registro.'); 
@@ -84,38 +85,74 @@ class CreateFamily extends Component
     }
     public function guardar()
     {
-        //dd($this->expediente_hidden);
-        //exit();
-        $this->validate();
-        $familiar = new Beneficiary();
-        $familiar->file_number = $this->expediente_hidden;
-        $familiar->start_date = $this->fecha_ingreso;  
-        $familiar->last_name_1 = $this->apaterno;
-        $familiar->last_name_2 = $this->amaterno;
-        $familiar->name = $this->nombre;
-        $familiar->birthday = $this->fecha_nacimiento;
-        $familiar->sex = $this->sexo;
-        $familiar->rfc = $this->rfc;
-        $familiar->curp = $this->curp;
-        $familiar->disabled_person = $this->persona_discapacitada;
-        $familiar->relationship = $this->parentesco;
-        $familiar->address = $this->direccion;
-        $familiar->observations = $this->observaciones;
-        $familiar->account_number = $this->num_cuenta;
-        $familiar->clabe = $this->clabe;
-        $familiar->bank_id = $this->banco_id;
-        $familiar->representative_name = $this->nombre_representante;
-        $familiar->representative_rfc = $this->rfc_representante;
-        $familiar->representative_curp = $this->curp_representante;
-        $familiar->representative_relationship = $this->parentesco_representante;
-        $familiar->insured_id = $this->hidden_id;
-        $familiar->affiliate_status = 'active'; 
-        $familiar->status = 'active';
-        $familiar->modified_by = Auth::user()->email;
-        sleep(1);
-        $familiar->save();
-        session()->flash('msg_tipo', 'success');
-        session()->flash('msg', 'Registro creado con éxito!');
+        DB::beginTransaction();
+        try
+        {
+            $this->validate();
+            $familiar = new Beneficiary();
+            $familiar->file_number = $this->expediente_hidden;
+            $familiar->start_date = $this->fecha_ingreso;  
+            $familiar->last_name_1 = $this->apaterno;
+            $familiar->last_name_2 = $this->amaterno;
+            $familiar->name = $this->nombre;
+            $familiar->birthday = $this->fecha_nacimiento;
+            $familiar->sex = $this->sexo;
+            $familiar->rfc = $this->rfc;
+            $familiar->curp = $this->curp;
+            $familiar->disabled_person = $this->persona_discapacitada;
+            $familiar->relationship = $this->parentesco;
+            $familiar->address = $this->direccion;
+            $familiar->observations = $this->observaciones;
+            $familiar->account_number = $this->num_cuenta;
+            $familiar->clabe = $this->clabe;
+            $familiar->bank_id = $this->banco_id;
+            $familiar->representative_name = $this->nombre_representante;
+            $familiar->representative_rfc = $this->rfc_representante;
+            $familiar->representative_curp = $this->curp_representante;
+            $familiar->representative_relationship = $this->parentesco_representante;
+            $familiar->insured_id = $this->hidden_id;
+            $familiar->affiliate_status = 'active'; 
+            $familiar->status = 'active';
+            $familiar->modified_by = Auth::user()->email;
+            sleep(1);
+            $familiar->save();
+            session()->flash('msg_tipo', 'success');
+            session()->flash('msg', 'Registro creado con éxito!');           
+        }catch (Exception $e){
+            DB::rollBack();
+            session()->flash('msg_tipo', 'danger');
+            session()->flash('msg', $e->getMessage()); 
+        }
+        // $this->validate();
+        // $familiar = new Beneficiary();
+        // $familiar->file_number = $this->expediente_hidden;
+        // $familiar->start_date = $this->fecha_ingreso;  
+        // $familiar->last_name_1 = $this->apaterno;
+        // $familiar->last_name_2 = $this->amaterno;
+        // $familiar->name = $this->nombre;
+        // $familiar->birthday = $this->fecha_nacimiento;
+        // $familiar->sex = $this->sexo;
+        // $familiar->rfc = $this->rfc;
+        // $familiar->curp = $this->curp;
+        // $familiar->disabled_person = $this->persona_discapacitada;
+        // $familiar->relationship = $this->parentesco;
+        // $familiar->address = $this->direccion;
+        // $familiar->observations = $this->observaciones;
+        // $familiar->account_number = $this->num_cuenta;
+        // $familiar->clabe = $this->clabe;
+        // $familiar->bank_id = $this->banco_id;
+        // $familiar->representative_name = $this->nombre_representante;
+        // $familiar->representative_rfc = $this->rfc_representante;
+        // $familiar->representative_curp = $this->curp_representante;
+        // $familiar->representative_relationship = $this->parentesco_representante;
+        // $familiar->insured_id = $this->hidden_id;
+        // $familiar->affiliate_status = 'active'; 
+        // $familiar->status = 'active';
+        // $familiar->modified_by = Auth::user()->email;
+        // sleep(1);
+        // $familiar->save();
+        // session()->flash('msg_tipo', 'success');
+        // session()->flash('msg', 'Registro creado con éxito!');
         //$this->js("alert('Registro creado con éxito!')"); 
         //return to_route('prestaciones.familiares.create');
 
