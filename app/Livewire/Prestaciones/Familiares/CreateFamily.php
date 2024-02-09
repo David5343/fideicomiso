@@ -125,6 +125,9 @@ class CreateFamily extends Component
     {
         
         $select4 = Bank::where('status', 'active')->get();
-        return view('livewire.prestaciones.familiares.create-family',['select4'=>$select4]);
+        $this->num_expediente = IdGenerator::generate(['table' => 'beneficiaries','field' => 'file_number', 'length' => 8, 'prefix' =>'F']);
+        $this->expediente_hidden = $this->num_expediente;
+        return view('livewire.prestaciones.familiares.create-family',['select4'=>$select4,
+                                                                        'num_expediente'=>$this->num_expediente]);
     }
 }
