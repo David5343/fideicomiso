@@ -64,7 +64,7 @@
 </div>
 <div class="col-md-2">
   <label  class="form-label">* No de Expediente</label>
-  <input type="text" class="form-control" id="no_expediente" name="no_expediente" value="{{$num_expediente}}">
+  <input type="text" class="form-control" id="no_expediente" name="no_expediente" value="{{$num_expediente}}" disabled>
   <input wire:modal="expediente_hidden" type="hidden" id="expediente_hidden" name="expediente_hidden" value="{{$num_expediente}}">
   @error('expediente_hidden')<br><small style="color: red">{{ $message }}</small>
   @enderror
