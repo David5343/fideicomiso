@@ -12,10 +12,11 @@ use Livewire\Attributes\Rule;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Validate;
 
 class CreateTitulares extends Component
 {
-    #[Rule('required | unique:insureds,file_number')] 
+    #[Validate('required|unique:insureds,file_number')] 
     public $no_expediente;
     #[Rule('required')]
     public $subdepe_id;
