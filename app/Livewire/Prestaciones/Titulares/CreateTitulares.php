@@ -8,7 +8,6 @@ use App\Models\Humanos\State;
 use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Subdependency;
 use Livewire\Component;
-use Livewire\Attributes\Rule;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -131,8 +130,8 @@ class CreateTitulares extends Component
         sleep(1);
         $titular->save();
         session()->flash('msg_tipo', 'success');
-        session()->flash('msg', 'Registro creado con éxito!');
-        //$this->js("alert('Registro creado con éxito!')"); 
+        session()->flash('msg', 'Registro con No. de Expediente: '.$titular->file_number.' creado con éxito!');
+        $this->js("alert('Registro con No. de Expediente:".$titular->file_number." creado con éxito!')"); 
         //return to_route('prestaciones.titulares.create');
 
   

@@ -43,13 +43,14 @@
   </div>
 </div>
 <div class="col-12">
-@if (session('msg_tipo'))
-<div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
-    {{ session('msg') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
-</div>
+  @if (session('msg_tipo'))
+  <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
+    <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
+    <p><strong>{{ session('msg')}}</strong></p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
+  </div> 
 <div class="col-12">
   @if (session('msg_tipo_busqueda'))
   <div class="alert alert-{{ session('msg_tipo_busqueda') }} alert-dismissible fade show m-1 p-3" role="alert">
@@ -220,8 +221,9 @@
 </div>
 <div class="col-12">
   @if (session('msg_tipo'))
-  <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
-      {{ session('msg') }}
+  <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
+    <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
+    <p><strong>{{ session('msg')}}</strong></p>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   @endif

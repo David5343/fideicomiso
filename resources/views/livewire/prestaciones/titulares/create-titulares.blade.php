@@ -11,12 +11,13 @@
     @endif
     <div class="col-12">
       @if (session('msg_tipo'))
-      <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
-          {{ session('msg') }}
+      <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
+        <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
+        <p><strong>{{ session('msg')}}</strong></p>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       @endif
-      </div>
+      </div> 
           <div class="col-12">
               <h3>Datos Generales.</h3>
               <h6>(*) Campos Obligatorios</h6>
@@ -144,19 +145,19 @@
             </div>   
             <div class="col-md-3">
               <label  class="form-label">* RFC</label>
-              <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" value="{{old('rfc')}}">
+              <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{old('rfc')}}">
               @error('rfc')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
             <div class="col-md-3">
               <label  class="form-label">CURP</label>
-              <input wire:model="curp" type="text" class="form-control" id="curp" name="curp"  value="{{old('curp')}}" >
+              <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{old('curp')}}" >
               @error('curp')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
             <div class="col-md-2">
               <label  class="form-label">Telefono</label>
-              <input wire:model="telefono" type="phone" class="form-control" id="telefono" name="telefono"  value="{{old('telefono')}}" >
+              <input wire:model="telefono" type="phone" class="form-control" id="telefono" name="telefono" maxlength="10" value="{{old('telefono')}}" >
               @error('telefono')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
@@ -294,23 +295,24 @@
           </div>
           <div class="col-12">
             @if (session('msg_tipo'))
-            <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
-                {{ session('msg') }}
+            <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
+              <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
+              <p><strong>{{ session('msg')}}</strong></p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            </div>          
+            </div>         
           <div class="col-12">
             <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
             <a href="{{ route('prestaciones.titulares.index') }}" class="btn btn-danger" role="button">Cancelar</a>
             {{-- <div wire:loading wire:target='guardar' class="spinner-border spinner-border-sm text-success" style="width:3rem; height: 3rem;" role="status">
               <span class="visually-hidden">Guardando...</span>
             </div> --}}
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
               <div wire:loading wire:target='guardar' class="spinner-border text-success" style="width:3rem; height: 3rem;"  role="status">
                 <span class="visually-hidden">Guardando...</span>
               </div>
-            </div>
+            </div> --}}
           </div>
         </form>
 </div>
