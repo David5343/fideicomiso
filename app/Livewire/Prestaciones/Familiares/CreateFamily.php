@@ -8,7 +8,6 @@ use App\Models\Prestaciones\Insured;
 use Livewire\Component;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 
 class CreateFamily extends Component
