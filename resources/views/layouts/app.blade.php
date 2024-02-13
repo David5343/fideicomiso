@@ -19,7 +19,7 @@
           <nav class="navbar sticky-top rounded" style="background-color:#b09a5b; border-color:#333333">
             <div class="container">        
               <a class="navbar-brand" href="#"></a>
-              <span class="navbar-text fs-3 fst-italic">
+              <span class="navbar-text fs-4 fst-italic">
                 "Año de Felipe Carrillo Puerto, Benemérito del Proletariado, Revolucionario y Defensor del Mayab".
               </span>
               <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
