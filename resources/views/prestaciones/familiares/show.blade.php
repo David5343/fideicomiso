@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <p class="text-end">
-    <a href="{{ route('prestaciones.familiares.create') }}" class="btn btn-primary" role="button">Crear Familiar</a>
-    <a href="{{ route('prestaciones.familiares.index') }}" class="btn btn-primary" role="button">Lista de Familiar</a>
+    <a href="{{ route('prestaciones.familiares.create') }}" class="btn btn-secondary" role="button">Crear Familiar</a>
+    <a href="{{ route('prestaciones.familiares.index') }}" class="btn btn-secondary" role="button">Lista de Familiar</a>
 </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Prestaciones/Expediente electrónico del Familiar') }} </div> 
+<div class="card mt-1" style="border-color:#333333">
+  <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
+          {{ __('Prestaciones/Expediente electrónico del Familiar') }} </div> 
         @if (session('msg_tipo'))
         <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
             {{ session('msg') }}

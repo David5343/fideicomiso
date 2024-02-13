@@ -3,8 +3,8 @@
     <p class="text-end">
 
     </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
+    <div class="card mt-1" style="border-color:#333333">
+        <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Humanos/Sliders
         </div>
         @if (session('msg_tipo'))

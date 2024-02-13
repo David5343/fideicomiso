@@ -2,12 +2,12 @@
 @section('content')
     <p class="text-end">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearEstado">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#crearEstado">
             Crear Estado
         </button>
     </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
+    <div class="card mt-1" style="border-color:#333333">
+        <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Humanos/Lista de Estados
         </div>
         @if (session('msg_tipo'))

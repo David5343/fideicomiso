@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('humanos.bancos.index') }}" class="btn btn-primary" role="button">Lista de Municipios</a>
+        <a href="{{ route('humanos.municipios.index') }}" class="btn btn-secondary" role="button">Lista de Municipios</a>
     </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
+    <div class="card mt-1" style="border-color:#333333">
+        <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Humanos/Editar Municipio
         </div>
         <div class="card-body p-3">
@@ -42,7 +42,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg"></label>
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{{ route('humanos.estados.index') }}" class="btn btn-danger" role="button">Cancelar</a>
+                        <a href="{{ route('humanos.municipios.index') }}" class="btn btn-danger" role="button">Cancelar</a>
                     </div>
                 </div>
             </form>

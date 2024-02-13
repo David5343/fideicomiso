@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <p class="text-end">
-    <a href="{{ route('humanos.empleados.create') }}" class="btn btn-primary" role="button">Crear Empleado</a>
-    <a href="{{ route('humanos.empleados.index') }}" class="btn btn-primary" role="button">Lista de Empleados</a>
+    <a href="{{ route('humanos.empleados.create') }}" class="btn btn-secondary" role="button">Crear Empleado</a>
+    <a href="{{ route('humanos.empleados.index') }}" class="btn btn-secondary" role="button">Lista de Empleados</a>
 </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5">{{ __('Humanos/Expediente electrónico') }}</div>
+<div class="card mt-1" style="border-color:#333333">
+  <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
+          {{ __('Humanos/Expediente electrónico') }}</div>
         @if (session('msg_tipo'))
         <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
             {{ session('msg') }}

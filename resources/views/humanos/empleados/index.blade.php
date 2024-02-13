@@ -5,17 +5,17 @@
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bajaModal">
         Baja
     </button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotoModal">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#fotoModal">
         Foto
     </button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#firmaModal">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#firmaModal">
         Firma
     </button>
-    <a href="{{ route('humanos.empleados.create') }}" class="btn btn-primary" role="button">
+    <a href="{{ route('humanos.empleados.create') }}" class="btn btn-secondary" role="button">
     crear Empleado</a>
 </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
+<div class="card mt-1" style="border-color:#333333">
+    <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Humanos/Lista de Empleados
         </div>
         @if (session('msg_tipo'))

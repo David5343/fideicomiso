@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('humanos.bancos.index') }}" class="btn btn-primary" role="button">Lista de Categorias</a>
+        <a href="{{ route('humanos.bancos.index') }}" class="btn btn-secondarry" role="button">Lista de Categorias</a>
     </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
+    <div class="card mt-1" style="border-color:#333333">
+        <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Humanos/Editar Categoria
         </div>
         <div class="card-body p-3">

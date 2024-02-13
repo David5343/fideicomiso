@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('prestaciones.titulares.create') }}" class="btn btn-primary" role="button">
+        <a href="{{ route('prestaciones.titulares.create') }}" class="btn btn-secondary" role="button">
             <i class="bi bi-person-up"></i> Crear Titular</a>         
     </p>
-    <div class="card mt-1 border-primary">
-        <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded">
+    <div class="card mt-1" style="border-color:#333333">
+        <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Prestaciones/Lista de Titulares
         </div>
         @if (session('msg_tipo'))

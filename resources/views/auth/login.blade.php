@@ -73,7 +73,7 @@ height: 100%;
             </div>
 
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button type="submit" class="btn btn-primary"
+              <button type="submit" class="btn btn-secondary"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sessión</button>
               {{-- <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                   class="link-danger">Register</a></p> --}}
@@ -83,9 +83,9 @@ height: 100%;
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5" style="background-color:#333333;">
       <!-- Copyright -->
-      <div class="text-white mb-3 mb-md-0">
+      <div class="mb-3 mb-md-0" style="color:#b09a5b">
         {{-- Copyright © 2020. All rights reserved. --}}
         Tecnologías de la Información.
     </div>

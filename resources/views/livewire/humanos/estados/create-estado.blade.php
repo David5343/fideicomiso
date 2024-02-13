@@ -2,7 +2,7 @@
   <div wire:ignore.self class="modal fade" id="crearEstado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <div class="modal-header text-bg-info">
+        <div class="modal-header" style="background-color:#333333; color:#b09a5b">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Estado</h1>
           <button wire:click="cerrarModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
