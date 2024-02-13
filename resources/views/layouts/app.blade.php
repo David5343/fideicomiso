@@ -15,7 +15,7 @@
 </head>
 <body>
     <div id="app" class="container">
-      <img src="{{asset('img/Banner.jpg')}}" class="rounded img-fluid" width="1296px">
+      <img src="{{asset('img/Banner-2.jpg')}}" class="rounded img-fluid" width="1296px">
           <nav class="navbar sticky-top rounded" style="background-color:#b09a5b; border-color:#333333">
             <div class="container">        
               <a class="navbar-brand" href="#"></a>
