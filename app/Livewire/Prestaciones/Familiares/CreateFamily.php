@@ -11,6 +11,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class CreateFamily extends Component
 {
@@ -83,36 +84,71 @@ class CreateFamily extends Component
         try
         {
             $this->validate();
-            $familiar = new Beneficiary();
-            $familiar->file_number = $this->expediente_hidden;
-            $familiar->start_date = $this->fecha_ingreso;  
-            $familiar->last_name_1 = $this->apaterno;
-            $familiar->last_name_2 = $this->amaterno;
-            $familiar->name = $this->nombre;
-            $familiar->birthday = $this->fecha_nacimiento;
-            $familiar->sex = $this->sexo;
-            $familiar->rfc = $this->rfc;
-            $familiar->curp = $this->curp;
-            $familiar->disabled_person = $this->persona_discapacitada;
-            $familiar->relationship = $this->parentesco;
-            $familiar->address = $this->direccion;
-            $familiar->observations = $this->observaciones;
-            $familiar->account_number = $this->num_cuenta;
-            $familiar->clabe = $this->clabe;
-            $familiar->bank_id = $this->banco_id;
-            $familiar->representative_name = $this->nombre_representante;
-            $familiar->representative_rfc = $this->rfc_representante;
-            $familiar->representative_curp = $this->curp_representante;
-            $familiar->representative_relationship = $this->parentesco_representante;
-            $familiar->insured_id = $this->hidden_id;
-            $familiar->affiliate_status = 'active'; 
-            $familiar->status = 'active';
-            $familiar->modified_by = Auth::user()->email;
-            sleep(1);
-            $familiar->save();
-            session()->flash('msg_tipo', 'success');
-            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
-            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')");           
+            //El trabajador solo tiene derecho a registrar una esposa, una concubina
+            //una Madre y un Padre
+            //El trabajador puede registrar N cantidad de hijos
+            // $esposa = Beneficiary::where('status','active')
+            //                         ->where('insured_id',$this->hidden_id)
+            //                         ->where('relationship','Esposa')->get();
+            // $concubina = Beneficiary::where('status','active')
+            //                         ->where('insured_id',$this->hidden_id)
+            //                         ->where('relationship','Concubina')->get();
+            // $mama = Beneficiary::where('status','active')
+            //                         ->where('insured_id',$this->hidden_id)
+            //                         ->where('relationship','Madre')->get();
+            // $papa = Beneficiary::where('status','active')
+            //                         ->where('insured_id',$this->hidden_id)
+            //                         ->where('relationship','Padre')->get();
+            // if ($esposa->count() == 1 | $this->parentesco == 'Esposa'| $this->parentesco == 'Concubina')
+            // {
+            //     session()->flash('msg_tipo', 'info');
+            //     session()->flash('msg', 'Ya existe una Esposa registrada para este Trabajador');
+            //     $this->js("alert('Ya existe una Esposa registrada para este Trabajador')"); 
+
+            // }elseif($concubina->count() == 1| $this->parentesco == 'Esposa'| $this->parentesco == 'Concubina'){
+            //     session()->flash('msg_tipo', 'info');
+            //     session()->flash('msg', 'Ya existe una Concubina registrada para este Trabajador');
+            //     $this->js("alert('Ya existe una Concubina registrada para este Trabajador')"); 
+            // } elseif($mama->count() == 1| $this->parentesco == 'Madre'){
+            //     session()->flash('msg_tipo', 'info');
+            //     session()->flash('msg', 'Ya existe una Madre registrada para este Trabajador');
+            //     $this->js("alert('Ya existe una Madre registrada para este Trabajador')"); 
+            // } elseif($papa->count() == 1| $this->parentesco == 'Padre'){
+            //     session()->flash('msg_tipo', 'info');
+            //     session()->flash('msg', 'Ya existe un Padre registrada para este Trabajador');
+            //     $this->js("alert('Ya existe un Padre registrada para este Trabajador')"); 
+            // } else {
+                $familiar = new Beneficiary();
+                $familiar->file_number = $this->expediente_hidden;
+                $familiar->start_date = $this->fecha_ingreso;  
+                $familiar->last_name_1 = $this->apaterno;
+                $familiar->last_name_2 = $this->amaterno;
+                $familiar->name = $this->nombre;
+                $familiar->birthday = $this->fecha_nacimiento;
+                $familiar->sex = $this->sexo;
+                $familiar->rfc = $this->rfc;
+                $familiar->curp = $this->curp;
+                $familiar->disabled_person = $this->persona_discapacitada;
+                $familiar->relationship = $this->parentesco;
+                $familiar->address = $this->direccion;
+                $familiar->observations = $this->observaciones;
+                $familiar->account_number = $this->num_cuenta;
+                $familiar->clabe = $this->clabe;
+                $familiar->bank_id = $this->banco_id;
+                $familiar->representative_name = $this->nombre_representante;
+                $familiar->representative_rfc = $this->rfc_representante;
+                $familiar->representative_curp = $this->curp_representante;
+                $familiar->representative_relationship = $this->parentesco_representante;
+                $familiar->insured_id = $this->hidden_id;
+                $familiar->affiliate_status = 'active'; 
+                $familiar->status = 'active';
+                $familiar->modified_by = Auth::user()->email;
+                sleep(1);
+                $familiar->save();
+                session()->flash('msg_tipo', 'success');
+                session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')");  
+            //}         
         }catch (Exception $e){
             DB::rollBack();
             session()->flash('msg_tipo', 'danger');
