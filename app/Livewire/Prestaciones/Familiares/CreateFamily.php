@@ -87,37 +87,19 @@ class CreateFamily extends Component
             //El trabajador solo tiene derecho a registrar una esposa, una concubina
             //una Madre y un Padre
             //El trabajador puede registrar N cantidad de hijos
-            // $esposa = Beneficiary::where('status','active')
-            //                         ->where('insured_id',$this->hidden_id)
-            //                         ->where('relationship','Esposa')->get();
-            // $concubina = Beneficiary::where('status','active')
-            //                         ->where('insured_id',$this->hidden_id)
-            //                         ->where('relationship','Concubina')->get();
-            // $mama = Beneficiary::where('status','active')
-            //                         ->where('insured_id',$this->hidden_id)
-            //                         ->where('relationship','Madre')->get();
-            // $papa = Beneficiary::where('status','active')
-            //                         ->where('insured_id',$this->hidden_id)
-            //                         ->where('relationship','Padre')->get();
-            // if ($esposa->count() == 1 | $this->parentesco == 'Esposa'| $this->parentesco == 'Concubina')
-            // {
-            //     session()->flash('msg_tipo', 'info');
-            //     session()->flash('msg', 'Ya existe una Esposa registrada para este Trabajador');
-            //     $this->js("alert('Ya existe una Esposa registrada para este Trabajador')"); 
+            $esposa = Beneficiary::where('status','active')
+                                    ->where('insured_id',$this->hidden_id)
+                                    ->where('relationship','Esposa')->get();
+            $concubina = Beneficiary::where('status','active')
+                                    ->where('insured_id',$this->hidden_id)
+                                    ->where('relationship','Concubina')->get();
+            $mama = Beneficiary::where('status','active')
+                                    ->where('insured_id',$this->hidden_id)
+                                    ->where('relationship','Madre')->get();
+            $papa = Beneficiary::where('status','active')
+                                    ->where('insured_id',$this->hidden_id)
+                                    ->where('relationship','Padre')->get();
 
-            // }elseif($concubina->count() == 1| $this->parentesco == 'Esposa'| $this->parentesco == 'Concubina'){
-            //     session()->flash('msg_tipo', 'info');
-            //     session()->flash('msg', 'Ya existe una Concubina registrada para este Trabajador');
-            //     $this->js("alert('Ya existe una Concubina registrada para este Trabajador')"); 
-            // } elseif($mama->count() == 1| $this->parentesco == 'Madre'){
-            //     session()->flash('msg_tipo', 'info');
-            //     session()->flash('msg', 'Ya existe una Madre registrada para este Trabajador');
-            //     $this->js("alert('Ya existe una Madre registrada para este Trabajador')"); 
-            // } elseif($papa->count() == 1| $this->parentesco == 'Padre'){
-            //     session()->flash('msg_tipo', 'info');
-            //     session()->flash('msg', 'Ya existe un Padre registrada para este Trabajador');
-            //     $this->js("alert('Ya existe un Padre registrada para este Trabajador')"); 
-            // } else {
                 $familiar = new Beneficiary();
                 $familiar->file_number = $this->expediente_hidden;
                 $familiar->start_date = $this->fecha_ingreso;  
@@ -143,12 +125,68 @@ class CreateFamily extends Component
                 $familiar->affiliate_status = 'active'; 
                 $familiar->status = 'active';
                 $familiar->modified_by = Auth::user()->email;
-                sleep(1);
-                $familiar->save();
-                session()->flash('msg_tipo', 'success');
-                session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
-                $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')");  
-            //}         
+                switch ($this->parentesco) {
+                    case 'Padre':
+                        if($papa->count()==0){
+                            sleep(1);
+                            $familiar->save();
+                            session()->flash('msg_tipo', 'success');
+                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
+                        }else{
+                            session()->flash('msg_tipo','warning');
+                            session()->flash('msg', 'Ya existe un registro con el parentesco:Padre para este Trabajador');
+                            $this->js("alert('Ya existe un registro con el parentesco:Padre para este Trabajador')");                             
+                        }
+                        break;
+                    case 'Madre':
+                        if($mama->count()==0){
+                            sleep(1);
+                            $familiar->save();
+                            session()->flash('msg_tipo', 'success');
+                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
+                        }else{
+                            session()->flash('msg_tipo','warning');
+                            session()->flash('msg', 'Ya existe un registro con el parentesco:Madre para este Trabajador');
+                            $this->js("alert('Ya existe un registro con el parentesco:Madre para este Trabajador')");                             
+                        }
+                        break;
+                    case 'Esposa':
+                        if($esposa->count()==0 && $concubina->count()==0){
+                            sleep(1);
+                            $familiar->save();
+                            session()->flash('msg_tipo', 'success');
+                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
+                        }else{
+                            session()->flash('msg_tipo','warning');
+                            session()->flash('msg', 'Ya existe un registro con el parentesco:Esposa o Concubina para este Trabajador');
+                            $this->js("alert('Ya existe un registro con el parentesco:Esposa o Concubina para este Trabajador')");                             
+                        }
+                        break;
+                    case 'Concubina':
+                        if($concubina->count()==0 && $esposa->count()==0){
+                            sleep(1);
+                            $familiar->save();
+                            session()->flash('msg_tipo', 'success');
+                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
+                        }else{
+                            session()->flash('msg_tipo','warning');
+                            session()->flash('msg', 'Ya existe un registro con el parentesco:Concubina o Esposa para este Trabajador');
+                            $this->js("alert('Ya existe un registro con el parentesco:Concubina o Esposa para este Trabajador')");                             
+                        }
+                        break;                   
+                    default:
+                    sleep(1);
+                    $familiar->save();
+                    session()->flash('msg_tipo', 'success');
+                    session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                    $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')");
+                        break;
+                } 
+        
         }catch (Exception $e){
             DB::rollBack();
             session()->flash('msg_tipo', 'danger');
