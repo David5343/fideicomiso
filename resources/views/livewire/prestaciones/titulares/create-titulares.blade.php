@@ -305,14 +305,11 @@
           <div class="col-12">
             <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Guardar</button>
             <a href="{{ route('prestaciones.titulares.index') }}" class="btn btn-danger" role="button">Cancelar</a>
-            {{-- <div wire:loading wire:target='guardar' class="spinner-border spinner-border-sm text-success" style="width:3rem; height: 3rem;" role="status">
-              <span class="visually-hidden">Guardando...</span>
-            </div> --}}
-            {{-- <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
               <div wire:loading wire:target='guardar' class="spinner-border text-success" style="width:3rem; height: 3rem;"  role="status">
                 <span class="visually-hidden">Guardando...</span>
               </div>
-            </div> --}}
+            </div>
           </div>
         </form>
 </div>

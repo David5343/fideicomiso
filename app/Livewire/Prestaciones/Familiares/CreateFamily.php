@@ -111,7 +111,8 @@ class CreateFamily extends Component
             sleep(1);
             $familiar->save();
             session()->flash('msg_tipo', 'success');
-            session()->flash('msg', 'Registro creado con éxito!');           
+            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')");           
         }catch (Exception $e){
             DB::rollBack();
             session()->flash('msg_tipo', 'danger');
