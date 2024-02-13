@@ -2,7 +2,7 @@
     <div class="row mb-2">
         <div class="col-sm-4">
             <input wire:model.live='search' type="text" class="form-control"
-                placeholder="Escribe el No. de Expediente...">
+                placeholder="Escribe el RFC...">
         </div>
         <div class="col-md-2">
             <select wire:model.live='numberRows' class="form-select">

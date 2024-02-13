@@ -23,7 +23,7 @@ class IndexTitulares extends Component
     public function render()
     {
         $lista =  Insured::where('status','=','active')
-        ->where('file_number','like','%'.$this->search.'%')
+        ->where('rfc','like','%'.$this->search.'%')
         ->orderBy('rfc','asc')
         ->paginate($this->numberRows);
 $count = $lista->count();
