@@ -175,7 +175,7 @@
         </div>
         <div class="col-md-2">
           <label  class="form-label">Numero de Emergencia</label>
-          <input type="phone" class="form-control" id="num_emergencia" name="num_emergencia" size="10" value="{{old('num_emergencia')}}" >
+          <input type="phone" class="form-control" id="num_emergencia" name="num_emergencia" maxlength="10" value="{{old('num_emergencia')}}" >
           @error('num_emergencia')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>

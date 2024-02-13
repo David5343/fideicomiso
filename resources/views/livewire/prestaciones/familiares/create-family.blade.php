@@ -112,13 +112,13 @@
   </div>
   <div class="col-md-3">
     <label  class="form-label">RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" value="{{old('rfc')}}">
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{old('rfc')}}">
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label  class="form-label">* CURP</label>
-    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" value="{{old('curp')}}">
+    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{old('curp')}}">
     @error('curp')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>

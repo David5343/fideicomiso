@@ -7,7 +7,6 @@
                 Lista de Titulares</a>
     </p>
     <div class="card mt-1" style="border-color:#333333">
-        {{-- <div class="card-header bg-primary text-bg-primary p-3 fs-5 rounded"> --}}
         <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Prestaciones/Crear Registro de Titular
         </div>

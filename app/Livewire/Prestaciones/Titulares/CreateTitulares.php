@@ -17,27 +17,27 @@ use Livewire\Attributes\Validate;
 
 class CreateTitulares extends Component
 {
-    #[Validate('required|unique:insureds,file_number')] 
+    #[Validate('required|max:8|unique:insureds,file_number')] 
     public $no_expediente;
     #[Validate('required')]
     public $subdepe_id;
-    #[Validate('required | date')]
+    #[Validate('required|max:10|date')]
     public $fecha_ingreso;
-    #[Validate('required|min:3|max:85')]
+    #[Validate('nullable|min:3|max:85')]
     public $lugar_trabajo;
-    #[Validate('nullable|min:2|max:120')]
+    #[Validate('nullable|min:3|max:120')]
     public $motivo_alta;
     #[Validate('required')]
     public $estatus_afiliado;
     #[Validate('nullable|min:5|max:180')]
     public $observaciones;
-    #[Validate('required | min:2| max:20')]
+    #[Validate('required|min:2|max:20')]
     public $apaterno;
-    #[Validate('required | min:2| max:20')]
+    #[Validate('required|min:2|max:20')]
     public $amaterno;
-    #[Validate('required | min:2| max:30')]
+    #[Validate('required|min:2|max:30')]
     public $nombre;         
-    #[Validate('required | date')]
+    #[Validate('nullable|max:10|date')]
     public $fecha_nacimiento;
     #[Validate('nullable | min:5| max:85')]
     public $lugar_nacimiento;
@@ -45,9 +45,9 @@ class CreateTitulares extends Component
     public $sexo;
     #[Validate('nullable')]
     public $estado_civil;
-    #[Validate('required | max:13| alpha_num:ascii | unique:insureds,rfc')]
+    #[Validate('required|max:13|alpha_num:ascii|unique:insureds,rfc')]
     public $rfc;
-    #[Validate('nullable | max:18| alpha_num:ascii | unique:insureds,curp')]
+    #[Validate('nullable|max:18|alpha_num:ascii|unique:insureds,curp')]
     public $curp;
     #[Validate('nullable|numeric|digits:10')]
     public $telefono;
@@ -63,25 +63,25 @@ class CreateTitulares extends Component
     public $tipo_vialidad;
     #[Validate('nullable|min:5|max:50')]
     public $calle;
-    #[Validate('nullable | max:7')]
+    #[Validate('nullable|max:7')]
     public $num_exterior;
-    #[Validate('nullable | max:7')]
+    #[Validate('nullable|max:7')]
     public $num_interior;
     #[Validate('nullable|numeric|digits:5')]
     public $cp;
     #[Validate('nullable|min:5|max:85')]
     public $localidad;
-    #[Validate('nullable | digits:10')]
+    #[Validate('nullable|digits:10')]
     public $num_cuenta;
-    #[Validate('nullable | digits:18')]
+    #[Validate('nullable|digits:18')]
     public $clabe;
     #[Validate('nullable')]
     public $banco_id;
-    #[Validate('nullable | max:40')]
+    #[Validate('nullable| max:40')]
     public $nombre_representante;
-    #[Validate('nullable | max:13| alpha_num:ascii')]
+    #[Validate('nullable|max:13|alpha_num:ascii')]
     public $rfc_representante;
-    #[Validate('nullable | max:18| alpha_num:ascii')]
+    #[Validate('nullable| max:18|alpha_num:ascii')]
     public $curp_representante;
     #[Validate('nullable')]
     public $parentesco_representante;
