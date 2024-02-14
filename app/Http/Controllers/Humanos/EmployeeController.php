@@ -47,9 +47,9 @@ class EmployeeController extends Controller
     }
     public function store(Request $request)
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        try{
+        // try{
             $validated = $request->validate([
                 'tipo_contrato'=> ['required'],
                 'tipo_empleo'=> ['required'],
@@ -190,13 +190,13 @@ class EmployeeController extends Controller
                 session()->flash('msg', 'Registro creado con éxito!');
                 return to_route('humanos.empleados.create');
             }
-        }catch(Exception $e){
-            DB::rollBack();
-            session()->flash('msg_tipo', 'danger');
-            session()->flash('msg', $e->getMessage()); 
+        // }catch(Exception $e){
+        //     DB::rollBack();
+        //     session()->flash('msg_tipo', 'danger');
+        //     session()->flash('msg', $e->getMessage()); 
 
-        }
-        DB::commit();
+        // }
+        // DB::commit();
 
     }
     public function show(string $id)
