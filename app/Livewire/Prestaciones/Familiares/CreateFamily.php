@@ -190,32 +190,36 @@ class CreateFamily extends Component
                         //         $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
                         //     }else{
                         //         if($hijos->count()==1){
-                        //             if($hijos->secondary_insured_id == NULL){
-                        //                 sleep(1);
-                        //                 $hijos->secondary_insured_id = $this->hidden_id;
-                        //                 $hijos->modified_by = Auth::user()->email;
-                        //                 $hijos->save();
-                        //                 session()->flash('msg_tipo', 'success');
-                        //                 session()->flash('msg', 'Registro con CURP: '.$hijos->curp.' ya existe vinculado con '.
-                        //                 'No. de Expediente: '.$hijos->insured->file_number.'. Se vinculo con éxito! al No. de Expediente secundario: '.$this->hidden_id);
-                        //                 $this->js("alert('Registro con CURP: '.$hijos->curp.' ya existe vinculado con '.
-                        //                 'No. de Expediente: '.$hijos->insured->file_number.'. Se vinculo con éxito! al No. de Expediente secundario: '.$this->hidden_id)"); 
-                        //             }else{
-                        //                 session()->flash('msg_tipo','warning');
-                        //                 session()->flash('msg', 'Ya existe registro con CURP:'.$hijos->curp.'vinculado con '.
-                        //                 'No. de Expediente: '.$hijos->insured->file_number.' y No. de Expediente secundario: '.$hijos->secondary_insured_id);
-                        //                 $this->js("alert('Ya existe registro con CURP:'.$hijos->curp.'vinculado con '.
-                        //                 'No. de Expediente: '.$hijos->insured->file_number.' y No. de Expediente secundario: '.$hijos->secondary_insured_id)"); 
+                        //             foreach($hijos as $hijo){
+                        //                 if($hijo->secondary_insured_id == null){
+                        //                     if($hijo->file_number === $this->hidden_id){
+                        //                         session()->flash('msg_tipo','warning');
+                        //                         session()->flash('msg', 'Ya existe registro con CURP:'.$hijo->curp.'vinculado con '.
+                        //                         'No. de Expediente: '.$hijo->insured->file_number);
+                        //                         //$this->js("alert('Ya existe registro con CURP:'.$hijo->curp.'vinculado con No. de Expediente: '.$hijo->insured)"); 
+                        //                     }
+                        //                     $row = Beneficiary::find($hijo->id);
+                        //                     $row->secondary_insured_id = $this->hidden_id;
+                        //                     $row->modified_by = Auth::user()->email;
+                        //                     sleep(1);
+                        //                     $row->save();
+                        //                     session()->flash('msg_tipo', 'success');
+                        //                     session()->flash('msg', 'Registro con CURP: '.$hijos->curp.' ya existe vinculado con '.
+                        //                     'No. de Expediente: '.$hijos->insured->file_number.'. Se vinculo con éxito! al No. de Expediente secundario: '.$this->hidden_id);
+                        //                     $this->js("alert('Registro con CURP: '.$hijos->curp.' ya existe vinculado con '.
+                        //                     'No. de Expediente: '.$hijos->insured->file_number.'. Se vinculo con éxito! al No. de Expediente secundario: '.$this->hidden_id)"); 
+                        //                 }else{
+                        //                     session()->flash('msg_tipo','warning');
+                        //                     session()->flash('msg', 'Ya existe registro con CURP:'.$hijos->curp.'vinculado con '.
+                        //                     'No. de Expediente: '.$hijos->insured->file_number.' y No. de Expediente secundario: '.$hijos->secondary_insured_id);
+                        //                     $this->js("alert('Ya existe registro con CURP:'.$hijos->curp.'vinculado con '.
+                        //                     'No. de Expediente: '.$hijos->insured->file_number.' y No. de Expediente secundario: '.$hijos->secondary_insured_id)"); 
+                        //                 }
                         //             } 
                         //         }                     
                         // }
                         //     break;                    
                             default:
-                            sleep(1);
-                            $familiar->save();
-                            session()->flash('msg_tipo', 'success');
-                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
-                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
                             break;
                 } 
         
