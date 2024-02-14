@@ -188,7 +188,7 @@ class EmployeeController extends Controller
                 $empleado->save();
                 session()->flash('msg_tipo', 'success');
                 session()->flash('msg', 'Registro creado con éxito!');
-                return to_route('humanos.empleados.index');
+                return to_route('humanos.empleados.create');
             }
         }catch(Exception $e){
             DB::rollBack();
