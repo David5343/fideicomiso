@@ -147,7 +147,8 @@
   </div>   
   <div class="col-md-10">
     <label  class="form-label">Dirección</label>
-    <input wire:model="direccion" type="text" class="form-control" id="direccion" name="direccion"  value="{{old('direccion')}}">
+    <input wire:model="direccion" type="text" class="form-control" id="direccion" name="direccion"
+    maxlength="150"  value="{{old('direccion')}}">
     @error('direccion')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>   

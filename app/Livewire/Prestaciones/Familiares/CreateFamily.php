@@ -45,7 +45,7 @@ class CreateFamily extends Component
     public $persona_discapacitada="";
     #[Validate('required')] 
     public $parentesco="";
-    #[Validate('required | max:100')] 
+    #[Validate('required | max:150')] 
     public $direccion ="";
     #[Validate('nullable | max:150')] 
     public $observaciones="";
@@ -99,6 +99,9 @@ class CreateFamily extends Component
             $papa = Beneficiary::where('status','active')
                                     ->where('insured_id',$this->hidden_id)
                                     ->where('relationship','Padre')->get();
+            $hijos = Beneficiary::where('status','active')
+                                    ->where('relationship','Hijo/a')
+                                    ->where('curp',$this->curp)->get();
 
                 $familiar = new Beneficiary();
                 $familiar->file_number = $this->expediente_hidden;
@@ -177,14 +180,43 @@ class CreateFamily extends Component
                             session()->flash('msg', 'Ya existe un registro con el parentesco:Concubina o Esposa para este Trabajador');
                             $this->js("alert('Ya existe un registro con el parentesco:Concubina o Esposa para este Trabajador')");                             
                         }
-                        break;                   
-                    default:
-                    sleep(1);
-                    $familiar->save();
-                    session()->flash('msg_tipo', 'success');
-                    session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
-                    $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')");
                         break;
+                        // case 'Hijo/a':
+                        //     if($hijos->count()==0){
+                        //         sleep(1);
+                        //         $familiar->save();
+                        //         session()->flash('msg_tipo', 'success');
+                        //         session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                        //         $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
+                        //     }else{
+                        //         if($hijos->count()==1){
+                        //             if($hijos->secondary_insured_id == NULL){
+                        //                 sleep(1);
+                        //                 $hijos->secondary_insured_id = $this->hidden_id;
+                        //                 $hijos->modified_by = Auth::user()->email;
+                        //                 $hijos->save();
+                        //                 session()->flash('msg_tipo', 'success');
+                        //                 session()->flash('msg', 'Registro con CURP: '.$hijos->curp.' ya existe vinculado con '.
+                        //                 'No. de Expediente: '.$hijos->insured->file_number.'. Se vinculo con éxito! al No. de Expediente secundario: '.$this->hidden_id);
+                        //                 $this->js("alert('Registro con CURP: '.$hijos->curp.' ya existe vinculado con '.
+                        //                 'No. de Expediente: '.$hijos->insured->file_number.'. Se vinculo con éxito! al No. de Expediente secundario: '.$this->hidden_id)"); 
+                        //             }else{
+                        //                 session()->flash('msg_tipo','warning');
+                        //                 session()->flash('msg', 'Ya existe registro con CURP:'.$hijos->curp.'vinculado con '.
+                        //                 'No. de Expediente: '.$hijos->insured->file_number.' y No. de Expediente secundario: '.$hijos->secondary_insured_id);
+                        //                 $this->js("alert('Ya existe registro con CURP:'.$hijos->curp.'vinculado con '.
+                        //                 'No. de Expediente: '.$hijos->insured->file_number.' y No. de Expediente secundario: '.$hijos->secondary_insured_id)"); 
+                        //             } 
+                        //         }                     
+                        // }
+                        //     break;                    
+                            default:
+                            sleep(1);
+                            $familiar->save();
+                            session()->flash('msg_tipo', 'success');
+                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
+                            break;
                 } 
         
         }catch (Exception $e){
