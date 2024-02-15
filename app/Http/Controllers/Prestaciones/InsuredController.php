@@ -45,8 +45,8 @@ class InsuredController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        DB::beginTransaction();
-        try{
+        // DB::beginTransaction();
+        // try{
             $validated = $request->validate([
                 'subdepe_id'=> ['required'],
                 'fecha_ingreso' => ['required','max:10','date'],
@@ -124,12 +124,12 @@ class InsuredController extends Controller
             session()->flash('msg_tipo', 'success');
             session()->flash('msg', 'Registro creado con éxito!');
             return to_route('prestaciones.titulares.index'); 
-        }catch(Exception $e){
-            DB::rollBack();
-            session()->flash('msg_tipo', 'danger');
-            session()->flash('msg', $e->getMessage()); 
-        }
-        DB::commit();
+        // }catch(Exception $e){
+        //     DB::rollBack();
+        //     session()->flash('msg_tipo', 'danger');
+        //     session()->flash('msg', $e->getMessage()); 
+        // }
+        // DB::commit();
        
     }
     public function disabled(string $id)
