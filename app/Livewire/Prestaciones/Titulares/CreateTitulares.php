@@ -41,7 +41,7 @@ class CreateTitulares extends Component
     public $fecha_nacimiento;
     #[Validate('nullable | min:5| max:85')]
     public $lugar_nacimiento;
-    #[Validate('nullable')]
+    #[Validate('required')]
     public $sexo;
     #[Validate('nullable')]
     public $estado_civil;

@@ -132,7 +132,7 @@
               @enderror
             </div>
             <div class="col-md-2">
-              <label class="form-label">Sexo</label>
+              <label class="form-label">* Sexo</label>
               <select wire:model="sexo" id="sexo" name="sexo" class="form-select" >
                 <option selected value="">Elije...</option>
                 <option>Hombre</option>

@@ -13,12 +13,25 @@ class IndexTitulares extends Component
 
     public $search='';
     public $numberRows = 5;
+    public $dato;
 
     public function updatingSearch(){
         $this->resetPage();
     }
     public function updatingnumberRows(){
         $this->resetPage();
+    }
+    public function buscar()
+    {
+        $row = Insured::where('file_number',$this->busqueda)->first();
+        if($row !== null)
+        {
+            $this->dato = $row;
+        }else{
+            session()->flash('msg_tipo_busqueda','info');
+            session()->flash('msg_busqueda','Ups!, No se encontro ningun registro.'); 
+        }
+
     }
     public function render()
     {
