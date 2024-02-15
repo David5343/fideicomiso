@@ -10,7 +10,7 @@
     <button wire:click="rfcBuscar" type="button" class="btn btn-success">Buscar</button>
   </div>
 </div> --}}
-<form wire:submit="guardar" class="row g-3 m-3">
+<form wire:submit="guardar" class="row g-3 m-2">
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>
@@ -21,17 +21,17 @@
 </div>
 @endif
 <div class="col-12">
-    <h3>Busqueda del Titular</h3>
+    <h4>Busqueda del Titular</h4>
 </div>
 <div class="col-3">
   <div class="input-group mb-3">
-    <input wire:model="busqueda" type="text" class="form-control" placeholder="Ingrese número de Expediente">
+    <input wire:model="busqueda" type="text" class="form-control" placeholder="Ingrese Número de Expediente">
     <button wire:click="buscar" class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
   </div>
 </div>
 <div class="mb-3 row">
   <label for="inputPassword" class="col-sm-2 col-form-label">Nombre Completo</label>
-  <div class="col-sm-5">
+  <div class="col-sm-4">
     <input wire:model="nombre_afiliado" type="text" class="form-control" id="nombre_afiliado" name="nombre_afiliado" disabled>
     <input wire:model="hidden_id" type="hidden" id="hidden_id" name="hidden_id" value="{{$hidden_id}}">
   </div>
@@ -60,7 +60,7 @@
   @endif
 </div>
 <div class="col-12">
-    <h3>Datos del Familiar.</h3>
+    <h4>Datos del Familiar.</h4>
     <h6>(*) Campos Obligatorios</h6>
 </div>
 <div class="col-md-2">
@@ -72,31 +72,36 @@
 </div>
 <div class="col-md-2">
   <label  class="form-label">* Fecha de Ingreso</label>
-  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{old('fecha_ingreso')}}">
+  <input wire:model="fecha_ingreso" type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso"
+  maxlength="10" value="{{old('fecha_ingreso')}}">
   @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-2">
   <label  class="form-label">* Apellido Paterno</label>
-  <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno" value="{{old('apaterno')}}">
+  <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno"
+  maxlength="20" value="{{old('apaterno')}}">
   @error('apaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-2">
   <label  class="form-label">* Apellido Materno</label>
-  <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" value="{{old('amaterno')}}">
+  <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno"
+  maxlength="20" value="{{old('amaterno')}}">
   @error('amaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-3">
     <label  class="form-label">* Nombre</label>
-    <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}">
+    <input wire:model="nombre" type="text" class="form-control" id="nombre" name="nombre"
+    maxlength="30" value="{{old('nombre')}}">
     @error('nombre')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-3">
     <label  class="form-label">* Fecha de Nacimiento</label>
-    <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{old('fecha_nacimiento')}}">
+    <input wire:model="fecha_nacimiento" type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+    maxlength="10" value="{{old('fecha_nacimiento')}}">
     @error('fecha_nacimiento')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
@@ -112,13 +117,15 @@
   </div>
   <div class="col-md-3">
     <label  class="form-label">RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13" value="{{old('rfc')}}">
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13"
+     value="{{old('rfc')}}">
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label  class="form-label">* CURP</label>
-    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18" value="{{old('curp')}}">
+    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18"
+     value="{{old('curp')}}">
     @error('curp')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
@@ -160,17 +167,19 @@
     @enderror
   </div>   
   <div class="col-12">
-    <h3>Datos Bancarios</h3>
+    <h4>Datos Bancarios</h4>
 </div>
 <div class="col-md-4">
     <label  class="form-label">Numero de Cuenta</label>
-    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta"  value="{{old('num_cuenta')}}">
+    <input wire:model="num_cuenta" type="number" class="form-control" id="num_cuenta" name="num_cuenta"
+    maxlength="10"  value="{{old('num_cuenta')}}">
     @error('num_cuenta')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
   <div class="col-md-4">
     <label  class="form-label">CLABE</label>
-    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe"  value="{{old('clabe')}}">
+    <input wire:model="clabe" type="number" class="form-control" id="clabe" name="clabe"
+    maxlength="18" value="{{old('clabe')}}">
     @error('clabe')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
@@ -186,23 +195,26 @@
   @enderror
   </div>
   <div class="col-12">
-    <h3>Datos Representante Legal.</h3>
+    <h4>Datos Representante Legal.</h4>
 </div> 
 <div class="col-md-4">
   <label  class="form-label">Nombre Completo</label>
-  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante" value="{{old('nombre_representante')}}">
+  <input wire:model="nombre_representante" type="text" class="form-control" id="nombre_representante" name="nombre_representante"
+  maxlength="50" value="{{old('nombre_representante')}}">
   @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">RFC</label>
-  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante" value="{{old('rfc_representante')}}">
+  <input wire:model="rfc_representante" type="text" class="form-control" id="rfc_representante" name="rfc_representante"
+  maxlength="13" value="{{old('rfc_representante')}}">
   @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">CURP</label>
-  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante" value="{{old('curp_representante')}}">
+  <input wire:model="curp_representante" type="text" class="form-control" id="curp_representante" name="curp_representante"
+  maxlength="18" value="{{old('curp_representante')}}">
   @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>

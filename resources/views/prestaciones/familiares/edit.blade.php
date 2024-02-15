@@ -7,18 +7,18 @@
       <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
             Prestaciones/Editar Familiar
         </div>
-        <div class="card-body p-3">
+        <div class="card-body p-2">
             @if (session('msg_tipo'))
             <div class="alert alert-{{ session('msg_tipo') }} alert-dismissible fade show m-4 p-4" role="alert">
                 {{ session('msg') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-<form class="row g-3 m-3" action="{{ url('prestaciones/familiares/'.$familiar->id) }}" method="POST">
+<form class="row g-3 m-2" action="{{ url('prestaciones/familiares/'.$familiar->id) }}" method="POST">
     @method('PUT')
     @csrf
 <div class="col-12">
-    <h3>Datos del Familiar.</h3>
+    <h4>Datos del Familiar.</h4>
     <h6>(*) Campos Obligatorios</h6>
 </div>
 <div class="col-md-2">
@@ -30,31 +30,36 @@
 </div>
 <div class="col-md-2">
   <label  class="form-label">* Fecha de Ingreso</label>
-  <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" value="{{$familiar->start_date}}" required>
+  <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso"
+  maxlength="10" value="{{$familiar->start_date}}" required>
   @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-2">
   <label  class="form-label">* Apellido Paterno</label>
-  <input  type="text" class="form-control" id="apaterno" name="apaterno" minlength="2" maxlength="20" value="{{$familiar->last_name_1}}" required>
+  <input  type="text" class="form-control" id="apaterno" name="apaterno" maxlength="20"
+   value="{{$familiar->last_name_1}}" required>
   @error('apaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-2">
   <label  class="form-label">* Apellido Materno</label>
-  <input type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20" value="{{$familiar->last_name_2}}" required>
+  <input type="text" class="form-control" id="amaterno" name="amaterno" maxlength="20"
+   value="{{$familiar->last_name_2}}" required>
   @error('amaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-3">
     <label  class="form-label">* Nombre</label>
-    <input  type="text" class="form-control" id="nombre" name="nombre" minlength="2" maxlength="20" value="{{$familiar->name}}" required>
+    <input  type="text" class="form-control" id="nombre" name="nombre" maxlength="30"
+     value="{{$familiar->name}}" required>
     @error('nombre')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-3">
     <label  class="form-label">* Fecha de Nacimiento</label>
-    <input  type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{$familiar->birthday}}" required>
+    <input  type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+    maxlength="10" value="{{$familiar->birthday}}" required>
     @error('fecha_nacimiento')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
@@ -70,13 +75,15 @@
   </div>
   <div class="col-md-3">
     <label  class="form-label">RFC</label>
-    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" size="13" value="{{$familiar->rfc}}">
+    <input wire:model="rfc" type="text" class="form-control" id="rfc" name="rfc" maxlength="13"
+     value="{{$familiar->rfc}}">
     @error('rfc')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
   <div class="col-md-3">
     <label  class="form-label">* CURP</label>
-    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" size="18" value="{{$familiar->curp}}" required>
+    <input wire:model="curp" type="text" class="form-control" id="curp" name="curp" maxlength="18"
+     value="{{$familiar->curp}}" required>
     @error('curp')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>
@@ -106,7 +113,7 @@
   </div>   
   <div class="col-md-10">
     <label  class="form-label">Dirección</label>
-    <input type="text" class="form-control" id="direccion" name="direccion" maxlength="100" value="{{$familiar->address}}" required>
+    <input type="text" class="form-control" id="direccion" name="direccion" maxlength="150" value="{{$familiar->address}}" required>
     @error('direccion')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div>   
@@ -118,17 +125,17 @@
     @enderror
   </div>   
   <div class="col-12">
-    <h3>Datos Bancarios</h3>
+    <h4>Datos Bancarios</h4>
 </div>
 <div class="col-md-4">
     <label  class="form-label">Numero de Cuenta</label>
-    <input type="number" class="form-control" id="num_cuenta" name="num_cuenta" size="10" value="{{$familiar->account_number}}">
+    <input type="number" class="form-control" id="num_cuenta" name="num_cuenta" maxlength="10" value="{{$familiar->account_number}}">
     @error('num_cuenta')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
   <div class="col-md-4">
     <label  class="form-label">CLABE</label>
-    <input  type="number" class="form-control" id="clabe" name="clabe" size="18" value="{{$familiar->clabe}}">
+    <input  type="number" class="form-control" id="clabe" name="clabe" maxlength="18" value="{{$familiar->clabe}}">
     @error('clabe')<br><small style="color: red">{{ $message }}</small>
     @enderror
   </div> 
@@ -144,23 +151,26 @@
   @enderror
   </div>
   <div class="col-12">
-    <h3>Datos Representante Legal.</h3>
+    <h4>Datos Representante Legal.</h4>
 </div> 
 <div class="col-md-4">
   <label  class="form-label">Nombre Completo</label>
-  <input  type="text" class="form-control" id="nombre_representante" name="nombre_representante" minlength="5" maxlength="40" value="{{$familiar->representative_name}}">
+  <input  type="text" class="form-control" id="nombre_representante" name="nombre_representante" maxlength="40"
+   value="{{$familiar->representative_name}}">
   @error('nombre_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">RFC</label>
-  <input  type="text" class="form-control" id="rfc_representante" name="rfc_representante" size="13" value="{{$familiar->representative_rfc}}">
+  <input  type="text" class="form-control" id="rfc_representante" name="rfc_representante" maxlength="13"
+   value="{{$familiar->representative_rfc}}">
   @error('rfc_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
 <div class="col-md-3">
   <label  class="form-label">CURP</label>
-  <input  type="text" class="form-control" id="curp_representante" name="curp_representante" size="18" value="{{$familiar->representative_curp}}">
+  <input  type="text" class="form-control" id="curp_representante" name="curp_representante" maxlength="18"
+   value="{{$familiar->representative_curp}}">
   @error('curp_representante')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>

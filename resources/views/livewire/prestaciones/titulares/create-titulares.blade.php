@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit="guardar" class="row g-3 mb-3 mx-2">
+    <form wire:submit="guardar" class="row g-3 m-2">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
