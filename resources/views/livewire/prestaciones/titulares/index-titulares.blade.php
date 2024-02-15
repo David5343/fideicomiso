@@ -17,10 +17,32 @@
             <i class="bi bi-stoplights-fill btn btn-success btn-sm m-1"></i>Activo
             <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>Baja
         </p>
+    <div class="row">
+        <div class="col">        
+            <p class="text-start">
+                <caption>{{$count}} Registros de Titulares.</caption>
+            </p>
+        </div>
+        <div class="col">
+            <p class="text-start">
+                    <caption><i class="bi bi-gender-male"></i> {{$masculinos}} Masculinos</caption>
+            </p>
+        </div>
+        <div class="col">        
+            <p class="text-start">
+                <caption><i class="bi bi-gender-female"></i> {{$femeninos}} Femeninos</caption>
+            </p>
+        </div>
+        <div class="col">        
+            <p class="text-start">
+                <caption><i class="bi bi-gender-female"></i> {{$indefinidos}} Indefinidos.</caption>
+            </p>
+        </div>
+    </div>   
     </div>
     <table class="table">
     @if ($lista->count())
-        <caption> ({{ $lista->count() }}) Registros</caption>
+        <caption> ({{ $lista->count() }}) Registros encontrados</caption>
     <thead>
         <tr>
             <th scope="col">#</th>

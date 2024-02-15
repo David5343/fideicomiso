@@ -22,13 +22,26 @@ class IndexTitulares extends Component
     }
     public function render()
     {
+        $count = Insured::where('status','active')
+                ->get();
+        $masculinos = Insured::where('status','active')
+                ->where('sex','Hombre')
+                ->get();
+        $femeninos = Insured::where('status','active')
+                ->where('sex','Mujer')
+                ->get();
+        $indefinidos = Insured::where('status','active')
+                ->where('sex',null)
+                ->get();
         $lista =  Insured::where('status','=','active')
         ->where('rfc','like','%'.$this->search.'%')
         ->orderBy('rfc','asc')
         ->paginate($this->numberRows);
-$count = $lista->count();
         return view('livewire.prestaciones.titulares.index-titulares',[
-            'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista,
+            'count' => $count->count(),
+            'masculinos'=> $masculinos->count(),
+            'femeninos'=> $femeninos->count(),
+            'indefinidos'=> $indefinidos->count()]);
     }
 }
