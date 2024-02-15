@@ -35,7 +35,7 @@
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption><i class="bi bi-gender-female"></i> {{$indefinidos}} Indefinidos.</caption>
+                <caption> {{$indefinidos}} Indefinidos.</caption>
             </p>
         </div>
     </div>   
