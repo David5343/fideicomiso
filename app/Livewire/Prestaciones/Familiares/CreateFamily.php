@@ -181,7 +181,12 @@ class CreateFamily extends Component
                             $this->js("alert('Ya existe un registro con el parentesco:Concubina o Esposa para este Trabajador')");                             
                         }
                         break;
-                        // case 'Hijo/a':
+                         case 'Hijo/a':
+                            sleep(1);
+                            $familiar->save();
+                            session()->flash('msg_tipo', 'success');
+                            session()->flash('msg', 'Registro con No. de Expediente: '.$familiar->file_number.' creado con éxito!');
+                            $this->js("alert('Registro con No. de Expediente:".$familiar->file_number." creado con éxito!')"); 
                         //     if($hijos->count()==0){
                         //         sleep(1);
                         //         $familiar->save();
@@ -218,7 +223,7 @@ class CreateFamily extends Component
                         //             } 
                         //         }                     
                         // }
-                        //     break;                    
+                             break;                    
                             default:
                             break;
                 } 
