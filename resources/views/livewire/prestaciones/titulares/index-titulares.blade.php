@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col">        
             <p class="text-start">
-                <caption>{{$count}} Registros de Titulares.</caption>
+                <caption><i class="bi bi-database"></i> {{$count}} Registros de Titulares.</caption>
             </p>
         </div>
         <div class="col">
