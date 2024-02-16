@@ -12,8 +12,8 @@ class IndexTitulares extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search='';
-    public $numberRows = 5;
-    public $dato;
+    public $busqueda_por;
+    public $dato='';
 
     public function updatingSearch(){
         $this->resetPage();
@@ -23,13 +23,22 @@ class IndexTitulares extends Component
     }
     public function buscar()
     {
-        $row = Insured::where('file_number',$this->busqueda)->first();
-        if($row !== null)
-        {
-            $this->dato = $row;
+        if($this->search !== ''){
+            if($this->busqueda_por !== null){
+                $row = Insured::where($this->busqueda_por,$this->search)->first();
+                if($row !== null){
+                    $this->dato = $row;
+                }else{
+                    session()->flash('msg_tipo_busqueda','info');
+                    session()->flash('msg_busqueda','Ups!, No se encontro ningun registro.'); 
+                }
+            }else{
+                session()->flash('msg_tipo_busqueda','warning');
+                session()->flash('msg_busqueda','Elija un Parámetro de Búsqueda.');
+            }
         }else{
-            session()->flash('msg_tipo_busqueda','info');
-            session()->flash('msg_busqueda','Ups!, No se encontro ningun registro.'); 
+            session()->flash('msg_tipo_busqueda','warning');
+            session()->flash('msg_busqueda','Ingrese un Parámetro Válido.'); 
         }
 
     }
@@ -46,15 +55,16 @@ class IndexTitulares extends Component
         $indefinidos = Insured::where('status','active')
                 ->where('sex',null)
                 ->get();
-        $lista =  Insured::where('status','=','active')
-        ->where('rfc','like','%'.$this->search.'%')
-        ->orderBy('rfc','asc')
-        ->paginate($this->numberRows);
+        $lista =  Insured::where('status','active')
+                        ->latest()
+                        ->limit(25)
+                        ->get();
         return view('livewire.prestaciones.titulares.index-titulares',[
             'lista' => $lista,
+            'dato' => $this->dato,
             'count' => $count->count(),
             'masculinos'=> $masculinos->count(),
             'femeninos'=> $femeninos->count(),
-            'indefinidos'=> $indefinidos->count()]);
+            'indefinidos'=> $indefinidos->count(),]);
     }
 }
