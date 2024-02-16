@@ -1,12 +1,15 @@
 <div class="card-body p-3">
     <div class="row mb-2">
+    <div class="col-12">
+        <h4>Busqueda de Titulares.</h4>
+    </div>
         <p class="text-end">
             <i class="bi bi-stoplights-fill btn btn-warning btn-sm m-1"></i>Preafiliado
             <i class="bi bi-stoplights-fill btn btn-success btn-sm m-1"></i>Activo
             <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>Baja
         </p>
         <div class="col-sm-4">
-            <input wire:model.live='search' type="text" class="form-control"
+            <input wire:model='search' type="text" class="form-control"
                 placeholder="Selecciona El Parámetro de Busqueda...">
         </div>
         <div class="col-md-2">
@@ -18,7 +21,8 @@
             </select>
         </div>
         <div class="col-sm-4">
-            <button wire:click="buscar" class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+            <button wire:click="buscar" class="btn btn-outline-primary" type="button" id="btn_buscar">Buscar</button>
+            <button wire:click="limpiar" class="btn btn-outline-secondary" type="button" id="btn_limpiar">Limpiar</button>
         </div>
         @if($dato)
         <div class="col-12">
@@ -92,6 +96,12 @@
             @endif
             </div> 
         @endif
+    <div class="m-3">
+        <hr>
+    </div>
+    <div class="col-12">
+            <h4 class="text-center">Lista de Titulares.</h4>
+    </div>          
     <div class="row m-2">
         <div class="col">        
             <p class="text-start">

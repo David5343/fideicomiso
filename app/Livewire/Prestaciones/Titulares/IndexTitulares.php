@@ -21,6 +21,10 @@ class IndexTitulares extends Component
     public function updatingnumberRows(){
         $this->resetPage();
     }
+    public function limpiar()
+    {
+        $this->dato ='';
+    }
     public function buscar()
     {
         if($this->search !== ''){
