@@ -8,6 +8,7 @@ use App\Models\Prestaciones\Beneficiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class BeneficiaryController extends Controller
 {
@@ -22,6 +23,10 @@ class BeneficiaryController extends Controller
     public function show(string $id)
     {
         $row = Beneficiary::find($id);
+        $fecha_ingreso =Carbon::parse($row->start_date);
+        $fecha_nacimiento =Carbon::parse($row->birthday);
+        $row->start_date = $fecha_ingreso->format('d-m-Y');
+        $row->birthday = $fecha_nacimiento->format('d-m-Y');
         return view('prestaciones.familiares.show',['familiar' => $row]);
         
     }

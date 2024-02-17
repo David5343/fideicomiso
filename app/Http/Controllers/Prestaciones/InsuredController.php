@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class InsuredController extends Controller
 {
@@ -27,6 +28,10 @@ class InsuredController extends Controller
     public function show(string $id)
     {
         $row = Insured::find($id);
+        $fecha_ingreso =Carbon::parse($row->start_date);
+        $fecha_nacimiento =Carbon::parse($row->birthday);
+        $row->start_date = $fecha_ingreso->format('d-m-Y');
+        $row->birthday = $fecha_nacimiento->format('d-m-Y');
         return view('prestaciones.titulares.show',['titular' => $row]);
         
     }
