@@ -4,31 +4,70 @@ namespace App\Livewire\Prestaciones\Familiares;
 
 use App\Models\Prestaciones\Beneficiary;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class IndexFamilies extends Component
 {
-    use WithPagination;
-    protected $paginationTheme = 'bootstrap';
 
     public $search='';
-    public $numberRows = 5;
+    public $busqueda_por;
+    public $dato='';
 
-    public function updatingSearch(){
-        $this->resetPage();
+    public function limpiar()
+    {
+        $this->dato ='';
     }
-    public function updatingnumberRows(){
-        $this->resetPage();
-    }    
+    public function buscar()
+    {
+        if($this->search !== ''){
+            if($this->busqueda_por !== null){
+                $row = Beneficiary::where($this->busqueda_por,$this->search)->first();
+                if($row !== null){
+                    $this->dato = $row;
+                }else{
+                    session()->flash('msg_tipo_busqueda','info');
+                    session()->flash('msg_busqueda','Ups!, No se encontro ningun registro.'); 
+                }
+            }else{
+                session()->flash('msg_tipo_busqueda','warning');
+                session()->flash('msg_busqueda','Elija un Parámetro de Búsqueda.');
+            }
+        }else{
+            session()->flash('msg_tipo_busqueda','warning');
+            session()->flash('msg_busqueda','Ingrese un Parámetro Válido.'); 
+        }
+
+    }   
     public function render()
     {
-        $lista =  Beneficiary::where('status','=','active')
-                        ->where('file_number','like','%'.$this->search.'%')
-                        ->orderBy('file_number','asc')
-                        ->paginate($this->numberRows);
-        $count = $lista->count();        
+        $count = Beneficiary::where('status','active')
+                ->get();
+        $padres = Beneficiary::where('status','active')
+                ->where('realtionship','Padre')
+                ->get();
+        $madres = Beneficiary::where('status','active')
+                ->where('realtionship','Madre')
+                ->get();
+        $esposas = Beneficiary::where('status','active')
+                ->where('realtionship','Esposa')
+                ->get();
+        $hijos = Beneficiary::where('status','active')
+                ->where('realtionship','Hijo/a')
+                ->get();
+        $concubinas = Beneficiary::where('status','active')
+                ->where('realtionship','Concubina')
+                ->get();
+        $lista =  Beneficiary::where('status','active')
+                        ->latest()
+                        ->limit(25)
+                        ->get();      
         return view('livewire.prestaciones.familiares.index-families',[
-            'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista,
+            'dato' => $this->dato,
+            'count' => $count->count(),
+            'padres'=> $padres->count(),
+            'madres'=> $madres->count(),
+            'esposas'=> $esposas->count(),
+            'hijos'=> $hijos->count(),
+            'concubinas'=> $concubinas->count(),]);
     }
 }
