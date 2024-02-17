@@ -96,9 +96,15 @@
             @endif
             </div> 
         @endif
-    <div class="m-3">
-        <hr>
-    </div>
+        <div class="row">
+            <div class="col-1">
+            </div>
+            <div class="col-10">
+                <hr>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
     <div class="col-12">
             <h4 class="text-center">Lista de Titulares.</h4>
     </div>          

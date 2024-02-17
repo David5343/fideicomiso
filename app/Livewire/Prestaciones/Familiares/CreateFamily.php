@@ -11,7 +11,6 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
-use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class CreateFamily extends Component
 {

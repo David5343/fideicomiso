@@ -42,24 +42,24 @@ class IndexFamilies extends Component
         $count = Beneficiary::where('status','active')
                 ->get();
         $padres = Beneficiary::where('status','active')
-                ->where('realtionship','Padre')
+                ->where('relationship','Padre')
                 ->get();
         $madres = Beneficiary::where('status','active')
-                ->where('realtionship','Madre')
+                ->where('relationship','Madre')
                 ->get();
         $esposas = Beneficiary::where('status','active')
-                ->where('realtionship','Esposa')
+                ->where('relationship','Esposa')
                 ->get();
         $hijos = Beneficiary::where('status','active')
-                ->where('realtionship','Hijo/a')
+                ->where('relationship','Hijo/a')
                 ->get();
         $concubinas = Beneficiary::where('status','active')
-                ->where('realtionship','Concubina')
+                ->where('relationship','Concubina')
                 ->get();
         $lista =  Beneficiary::where('status','active')
                         ->latest()
                         ->limit(25)
-                        ->get();      
+                        ->get();     
         return view('livewire.prestaciones.familiares.index-families',[
             'lista' => $lista,
             'dato' => $this->dato,
