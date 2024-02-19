@@ -13,6 +13,26 @@
             </select>
         </div>
     </div>
+    <div class="col-12">
+        <h4 class="text-center">Lista de Empleados.</h4>
+</div>          
+<div class="row m-2">
+    <div class="col">        
+        <p class="text-start">
+            <caption><i class="bi bi-database"></i> {{$count}} Registros de Empleados.</caption>
+        </p>
+    </div>
+    <div class="col">
+        <p class="text-start">
+                <caption><i class="bi bi-person-standing"></i> {{$masculinos}} Masculinos</caption>
+        </p>
+    </div>
+    <div class="col">        
+        <p class="text-start">
+            <caption><i class="bi bi-person-standing-dress"></i> {{$femeninos}} Femeninos</caption>
+        </p>
+    </div>
+</div> 
     <table class="table">
     @if ($lista->count())
         <caption> ({{ $lista->count() }}) Registros</caption>
@@ -28,9 +48,9 @@
     </thead>
     <tbody>
         @if ($lista->count())
-            @foreach ($lista as $item)
+            @foreach ($lista as $key => $item)
                 <tr>
-                    <th scope="row">{{ $item->id }}</th>
+                    <th scope="row">{{ $key+1 }}</th>
                     <td>{{ $item->last_name_1 . ' ' . $item->last_name_2 . ' ' . $item->name }}</td>
                     <td>{{ $item->area->name }}</td>
                     <td>{{ $item->place->place_number }}</td>

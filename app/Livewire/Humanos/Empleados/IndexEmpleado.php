@@ -31,11 +31,20 @@ class IndexEmpleado extends Component
                             ->where('name','like','%'.$this->search.'%')
                             ->orwhere('last_name_1','like','%'.$this->search.'%')
                             ->orwhere('last_name_2','like','%'.$this->search.'%')
-                            ->orderBy('created_at','desc')
+                            ->orderBy('created_at','asc')
                             ->paginate($this->numberRows);
-        $count = $lista->count();
+        $count = Employee::where('status','active')
+                            ->get();
+                    $masculinos = Employee::where('status','active')
+                            ->where('sex','Hombre')
+                            ->get();
+                    $femeninos = Employee::where('status','active')
+                            ->where('sex','Mujer')
+                            ->get();
         return view('livewire.humanos.empleados.index-empleado',[
-            'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista,
+            'count' => $count->count(),
+            'masculinos' => $masculinos->count(),
+            'femeninos' => $femeninos->count(),]);
     }
 }
