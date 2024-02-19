@@ -13,9 +13,34 @@
             </select>
         </div>
     </div>
+    <div class="col-12">
+        <h4 class="text-center">Lista de Plazas.</h4>
+</div>          
+<div class="row m-2">
+    <div class="col">        
+        <p class="text-start">
+            <caption><i class="bi bi-database"></i> {{$count}} Registros de Plazas.</caption>
+        </p>
+    </div>
+    <div class="col">
+        <p class="text-start">
+                <caption>{{$pa}}  Plazas Autorizadas</caption>
+        </p>
+    </div>
+    <div class="col">        
+        <p class="text-start">
+            <caption>{{$po}}  Plazas Ocupadas</caption>
+        </p>
+    </div>
+    <div class="col">        
+        <p class="text-start">
+            <caption>{{$pd}}  Plazas Disponibles.</caption>
+        </p>
+    </div>
+</div> 
     <table class="table">
     @if ($lista->count())
-        <caption> ({{ $lista->count() }}) Registros</caption>
+        <caption> ({{ $lista->count() }}) Registros encontrados</caption>
     <thead>
         <tr>
             <th scope="col">#</th>

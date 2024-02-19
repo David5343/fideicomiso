@@ -104,27 +104,27 @@
         </div>
         <div class="col">
             <p class="text-start">
-                    <caption><i class="bi bi-gender-male"></i> {{$padres}} Padres</caption>
+                    <caption><i class="bi bi-person-standing"></i> {{$padres}} Padres</caption>
             </p>
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption><i class="bi bi-gender-female"></i> {{$madres}} Madres</caption>
+                <caption><i class="bi bi-person-standing-dress"></i> {{$madres}} Madres</caption>
             </p>
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption><i class="bi bi-gender-female"></i> {{$esposas}} Esposas.</caption>
+                <caption><i class="bi bi-person-standing-dress"></i> {{$esposas}} Esposas.</caption>
             </p>
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption> {{$hijos}} Hijos.</caption>
+                <caption><i class="bi bi-person-standing"></i><i class="bi bi-person-standing-dress"></i> {{$hijos}} Hijos.</caption>
             </p>
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption><i class="bi bi-gender-female"></i> {{$concubinas}} Concubinas.</caption>
+                <caption><i class="bi bi-person-standing-dress"></i> {{$concubinas}} Concubinas.</caption>
             </p>
         </div>
     </div>   

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Humanos\Plazas;
 
+use App\Models\Humanos\Category;
 use App\Models\Humanos\Place;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -27,13 +28,21 @@ class IndexPlaza extends Component
     }
     public function render()
     {
-        $lista =  Place::where('status','=','active')
+        $lista =  Place::where('status','active')
                         ->where('place_number','like','%'.$this->search.'%')
                         ->orderBy('place_number','asc')
                         ->paginate($this->numberRows);
-        $count = $lista->count();
+        $count = Place::where('status','active')
+                        ->get();
+        $tabulador = Category::where('status','active')->get();
+        $pa = $tabulador->sum('authorized_places');
+        $po = $tabulador->sum('covered_places');
+        $pd = $pa-$po;
         return view('livewire.humanos.plazas.index-plaza',[
-            'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista,
+            'count' => $count->count(),
+            'pa' => $pa,
+            'po' => $po,
+            'pd' => $pd]);
     }
 }

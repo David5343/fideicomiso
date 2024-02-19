@@ -116,12 +116,12 @@
         </div>
         <div class="col">
             <p class="text-start">
-                    <caption><i class="bi bi-gender-male"></i> {{$masculinos}} Masculinos</caption>
+                    <caption><i class="bi bi-person-standing"></i> {{$masculinos}} Masculinos</caption>
             </p>
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption><i class="bi bi-gender-female"></i> {{$femeninos}} Femeninos</caption>
+                <caption><i class="bi bi-person-standing-dress"></i> {{$femeninos}} Femeninos</caption>
             </p>
         </div>
         <div class="col">        
