@@ -84,7 +84,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg"></label>
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{{ route('humanos.estados.index') }}" class="btn btn-danger" role="button">Cancelar</a>
+                        <a href="{{ route('humanos.categorias.index') }}" class="btn btn-danger" role="button">Cancelar</a>
                     </div>
                 </div>
             </form>

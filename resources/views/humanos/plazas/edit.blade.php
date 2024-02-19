@@ -21,7 +21,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">No. de Plaza</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-lg" id="num_plaza" name="num_plaza"
-                            value="{{ $plaza->place_number }}" minlength="3" maxlength="50" required>
+                            value="{{ $plaza->place_number }}" maxlength="4" required>
                         @error('num_plaza')
                             <br><small style="color: red">{{ $message }}</small>
                         @enderror
@@ -31,7 +31,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">Puesto</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-lg" id="puesto" name="puesto"
-                            value="{{ $plaza->job_position }}" minlength="3" maxlength="50" required>
+                            value="{{ $plaza->job_position }}" required>
                         @error('puesto')
                             <br><small style="color: red">{{ $message }}</small>
                         @enderror

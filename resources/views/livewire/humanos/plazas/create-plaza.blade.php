@@ -18,7 +18,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg text-end">No. de Plaza</label>
                     <div class="col-sm-2">
                       <input type="text" wire:model="num_plaza" id="num_plaza" name="num_plaza"
-                       class="form-control form-control-lg" required>
+                      maxlength="4" class="form-control form-control-lg" required>
                       @error('num_plaza')<br><small style="color: red">{{ $message }}</small>
                       @enderror
                     </div>
