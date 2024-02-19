@@ -27,12 +27,12 @@ class IndexEmpleado extends Component
     }
     public function render()
     {
-        $lista =  Employee::where('status','=','active')
-        ->where('name','like','%'.$this->search.'%')
-         ->where('last_name_1','like','%'.$this->search.'%')
-         ->where('last_name_2','like','%'.$this->search.'%')
-         ->orderBy('created_at','desc')
-                        ->paginate($this->numberRows);
+        $lista =  Employee::where('status','active')
+                            ->where('name','like','%'.$this->search.'%')
+                            ->orwhere('last_name_1','like','%'.$this->search.'%')
+                            ->orwhere('last_name_2','like','%'.$this->search.'%')
+                            ->orderBy('created_at','desc')
+                            ->paginate($this->numberRows);
         $count = $lista->count();
         return view('livewire.humanos.empleados.index-empleado',[
             'count' => $count,
