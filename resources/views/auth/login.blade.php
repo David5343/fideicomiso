@@ -33,7 +33,7 @@ height: 100%;
             </div> 
             <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0">
-                <img src="{{asset('img/LogoFide.png')}}" width="320">
+                <img src="{{asset('img/LogoFide.png')}}" width="280">
               </p>
             </div>
   
