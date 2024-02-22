@@ -23,18 +23,24 @@ class CargarSlider extends Component
     public function cargarSlider()
     {
         $this->validate();
-        $uuid =Str::uuid();
-        $path = $this->imagen->storeAs('sliders',$uuid.'.'.$this->imagen->extension(),'public');
-        $slider = new Slider();           
-        $slider->title = $this->titulo;
-        $slider->text = $this->texto;
-        $slider->img= $path;
-        $slider->modified_by = Auth::user()->email;
-        $slider->save();
-        session()->flash('msg_tipo','success');
-        session()->flash('msg','Imagen cargada con éxito!');
-        $this->js("alert('Imagen Cargada con exito')");
-
+        $slider = new Slider();
+        $count = $slider->count(); 
+        if($count >= 3){
+            session()->flash('msg_tipo','warning');
+            session()->flash('msg','El numero maximo de images para el slider es 3!');
+            $this->js("alert('El numero maximo de images para el slider es 3!')"); 
+        }else {
+            $uuid =Str::uuid();
+            $path = $this->imagen->storeAs('sliders',$uuid.'.'.$this->imagen->extension(),'public');                      
+            $slider->title = $this->titulo;
+            $slider->text = $this->texto;
+            $slider->img= $path;
+            $slider->modified_by = Auth::user()->email;
+            $slider->save();
+            session()->flash('msg_tipo','success');
+            session()->flash('msg','Imagen cargada con éxito!');
+            $this->js("alert('Imagen Cargada con exito')");           
+        }
     } 
   
     public function render()

@@ -8,29 +8,51 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{asset('/img/slider1.jpeg')}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              @foreach($sliders as $slider)
-              @if($slider->id == 1)
-              <h5>{{$slider->title}}</h5>
-              <p>{{$slider->text}}</p>
+            @isset($slider1)
+            @if($slider1)
+            <img src="{{asset(Storage::disk('public')->url($slider1->img))}}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">                            
+              <h5>{{$slider1->title}}</h5>
+              <p>{{$slider1->text}}</p>
+              @else
+              <img src="..." class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>              
               @endif
-              @endforeach
-
+              @endisset
             </div>
           </div>
           <div class="carousel-item">
-            <img src="{{asset('/img/slider2.jpeg')}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+            @isset($slider2)
+            @if($slider2)
+            <img src="{{asset(Storage::disk('public')->url($slider2->img))}}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">                            
+              <h5>{{$slider2->title}}</h5>
+              <p>{{$slider2->text}}</p>
+              @else
+              <img src="..." class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>           
+              @endif
+              @endisset
             </div>
           </div>
           <div class="carousel-item">
-            <img src="{{asset('/img/slider3.jpeg')}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p>
+            @isset($slider3)
+            @if($slider3)
+            <img src="{{asset(Storage::disk('public')->url($slider3->img))}}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">                            
+              <h5>{{$slider3->title}}</h5>
+              <p>{{$slider3->text}}</p>
+              @else
+              <img src="..." class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>          
+              @endif
+              @endisset
             </div>
           </div>
         </div>
