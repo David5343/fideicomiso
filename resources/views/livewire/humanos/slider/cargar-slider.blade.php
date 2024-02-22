@@ -1,116 +1,68 @@
 <div class="row m-3">
-    <form wire:submit.prevent="cargarSlider">
+    <form wire:submit="cargarSlider">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
         <div class="col-12">
-            <h3>Imagen 1</h3>
+            <h3>Subir Datos del Slider</h3>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Titulo</label>
+            <label class="col-sm-2 col-form-label text-end">Titulo</label>
             <div class="col-sm-6">
-              <input type="text" wire:model="titulo_1" id="titulo_1" name="titulo_1" class="form-control form-control-lg"
+              <input type="text" wire:model="titulo" id="titulo" name="titulo" class="form-control"
                required>
-              @error('titulo_1')<br><small style="color: red">{{ $message }}</small>
+              @error('titulo')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Texto</label>
+            <label class="col-sm-2 col-form-label text-end">Texto</label>
             <div class="col-sm-6">
-                <textarea wire:model="texto_1" id="texto_1" name="texto_1" class="form-control form-control-lg" 
+                <textarea wire:model="texto" id="texto" name="texto" class="form-control" 
                 rows="2" required></textarea>
-               @error('texto_1')<br><small style="color: red">{{ $message }}</small>
+               @error('texto')<br><small style="color: red">{{ $message }}</small>
                @enderror
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Imagen</label>
+            <label class="col-sm-2 col-form-label text-end">Imagen</label>
             <div class="col-sm-6">
-                <input wire:model="imagen_1" type="file" id="imagen_1" name="imagen_1"
-                class="form-control form-control-lg" accept="image/png, image/jpeg" required>
-                @error('imagen_1')<br><small style="color: red">{{ $message }}</small>
+                <input wire:model="imagen" type="file" id="imagen" name="imagen"
+                class="form-control" accept="image/png, image/jpeg" required>
+                @error('imagen')<br><small style="color: red">{{ $message }}</small>
                 @enderror
                 <div class="m-3 text-center">
-                    <div wire:loading wire:target='imagen_1' class="spinner-border" style="width:3rem; height: 3rem;" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                </div>
-            </div>
-          </div>
-          {{-- <div class="col-12">
-            <h3>Imagen 2</h3>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Titulo</label>
-            <div class="col-sm-6">
-              <input type="text" wire:model="titulo_2" id="titulo_2" name="titulo_2" class="form-control form-control-lg"
-               >
-              @error('titulo_2')<br><small style="color: red">{{ $message }}</small>
-              @enderror
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Texto</label>
-            <div class="col-sm-6">
-                <textarea wire:model="texto_2" id="texto_2" name="texto_2" class="form-control form-control-lg" 
-                rows="2"></textarea>
-               @error('texto_2')<br><small style="color: red">{{ $message }}</small>
-               @enderror
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Imagen</label>
-            <div class="col-sm-6">
-                <input wire:model="imagen_2" type="file" id="imagen_2" name="imagen_2"
-                class="form-control form-control-lg" accept="image/png, image/jpeg">
-                @error('imagen_2')<br><small style="color: red">{{ $message }}</small>
-                @enderror
-                <div class="m-3 text-center">
-                    <div wire:loading wire:target='imagen_2' class="spinner-border" style="width:3rem; height: 3rem;" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                </div>
+                  <div wire:loading wire:target='imagen' class="spinner-border" style="width:3rem; height: 3rem;" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    @isset($imagen)
+                    <p class="text-center">
+                      <img src="{{$imagen->temporaryUrl()}}" width="180">
+                    </p>                         
+                    @endisset                       
+              </div>
             </div>
           </div>
           <div class="col-12">
-            <h3>Imagen 3</h3>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Titulo</label>
-            <div class="col-sm-6">
-              <input type="text" wire:model="titulo_3" id="titulo_3" name="titulo_3" class="form-control form-control-lg"
-               >
-              @error('titulo_3')<br><small style="color: red">{{ $message }}</small>
-              @enderror
+            @if (session('msg_tipo'))
+            <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
+              <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
+              <p><strong>{{ session('msg')}}</strong></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Texto</label>
-            <div class="col-sm-6">
-                <textarea wire:model="texto_3" id="texto_3" name="texto_3" class="form-control form-control-lg" 
-                rows="2"></textarea>
-               @error('texto_3')<br><small style="color: red">{{ $message }}</small>
-               @enderror
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label col-form-label-lg text-end">Imagen</label>
-            <div class="col-sm-6">
-                <input wire:model='imagen_3' type="file" id="imagen_3" name="imagen_3"
-                class="form-control form-control-lg" accept="image/png, image/jpeg">
-                @error('imagen_3')<br><small style="color: red">{{ $message }}</small>
-                @enderror
-                <div class="m-3 text-center">
-                    <div wire:loading wire:target='imagen_3' class="spinner-border" style="width:3rem; height: 3rem;" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                </div>
-            </div>
-          </div> --}}
+            @endif
+            </div> 
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label col-form-label-lg text-end"></label>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-danger" wire:click="cerrarModal"
-                data-bs-dismiss="modal">Cerrar</button>
-            <button wire:loading.attr='disabled'class="btn btn-success">Guardar</button>
+              <button wire:loading.attr='disabled' type="submit" class="btn btn-success">Guardar</button>
+              <a href="{{ route('humanos.slider.create') }}" class="btn btn-danger" role="button">Cancelar</a>          
             <div wire:loading wire:target='cargarSlider' class="m-2">
                 Enviando...
               </div>

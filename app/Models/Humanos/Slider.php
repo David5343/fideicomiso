@@ -9,5 +9,5 @@ class Slider extends Model
 {
     use HasFactory;
 
-    protected $table = 'slider';
+    //protected $table = 'slider';
 }

@@ -10,8 +10,13 @@
           <div class="carousel-item active">
             <img src="{{asset('/img/slider1.jpeg')}}" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+              @foreach($sliders as $slider)
+              @if($slider->id == 1)
+              <h5>{{$slider->title}}</h5>
+              <p>{{$slider->text}}</p>
+              @endif
+              @endforeach
+
             </div>
           </div>
           <div class="carousel-item">
