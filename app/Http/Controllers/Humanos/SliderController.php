@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facedes\Storage;
 
 class SliderController extends Controller
 {
@@ -31,8 +32,13 @@ class SliderController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nombre' => ['required', 'max:50', 'unique:areas,name,' . $id],
+            'posicion' => ['required'],
+            'titulo' => ['required','max:50'],
+            'texto' => ['required','max:150'],
+            'imagen' => ['required','image','max:512','dimensions:min_width=1600,min_height=700'],
         ]);
+        dump($validated);
+        exit();
         $row = Slider::find($id);
         $row->name = $request->input('nombre');
         $row->modified_by = Auth::user()->email;

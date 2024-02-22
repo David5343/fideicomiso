@@ -6,20 +6,19 @@ use App\Models\Humanos\Slider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Livewire\Attributes\Rule;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Validate;
 
 class CargarSlider extends Component
 {
     use WithFileUploads;
-    #[Rule('required')]
+    #[Validate('required')]
     public $posicion;
-    #[Rule('required|max:50')]
+    #[Validate('required|max:50')]
     public $titulo;
-    #[Rule('required|max:150')]
+    #[Validate('required|max:150')]
     public $texto;
-    #[Rule('required|image|max:512|dimensions:min_width=1600,min_height=700')]
+    #[Validate('required|image|max:512|dimensions:min_width=1600,min_height=700')]
     public $imagen;
 
     public function cargarSlider()

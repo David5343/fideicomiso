@@ -8,12 +8,12 @@
             <i class="bi bi-stoplights-fill btn btn-danger btn-sm m-1"></i>Baja
         </p>
         <div class="col-sm-4">
-            <input wire:model='search' type="text" class="form-control"
+            <input wire:model.live='search' type="text" class="form-control"
                 placeholder="Selecciona El Parámetro de Busqueda...">
         </div>
         <div class="col-md-2">
-            <select  wire:model="busqueda_por" class="form-select">
-                <option value="">Busqueda por</option>
+            <select  wire:model.live="busqueda_por" class="form-select">
+                <option value="default">Busqueda por</option>
                 <option value="file_number">No. de Expediente</option>
                 <option value="curp">CURP</option>
             </select>
@@ -119,7 +119,12 @@
         </div>
         <div class="col">        
             <p class="text-start">
-                <caption><i class="bi bi-person-standing"></i><i class="bi bi-person-standing-dress"></i> {{$hijos}} Hijos.</caption>
+                <caption><i class="bi bi-person-standing"></i> {{$hijos}} Hijos.(H)</caption>
+            </p>
+        </div>
+        <div class="col">        
+            <p class="text-start">
+                <caption><i class="bi bi-person-standing-dress"></i> {{$hijas}} Hijos.(M)</caption>
             </p>
         </div>
         <div class="col">        

@@ -19,7 +19,7 @@ class IndexFamilies extends Component
     public function buscar()
     {
         if($this->search !== ''){
-            if($this->busqueda_por !== null){
+            if($this->busqueda_por !== "default"){
                 $row = Beneficiary::where($this->busqueda_por,$this->search)->first();
                 if($row !== null){
                     $this->dato = $row;
@@ -52,6 +52,11 @@ class IndexFamilies extends Component
                 ->get();
         $hijos = Beneficiary::where('status','active')
                 ->where('relationship','Hijo/a')
+                ->where('sex','Hombre')
+                ->get();
+        $hijas = Beneficiary::where('status','active')
+                ->where('relationship','Hijo/a')
+                ->where('sex','Mujer')
                 ->get();
         $concubinas = Beneficiary::where('status','active')
                 ->where('relationship','Concubina')
@@ -68,6 +73,7 @@ class IndexFamilies extends Component
             'madres'=> $madres->count(),
             'esposas'=> $esposas->count(),
             'hijos'=> $hijos->count(),
+            'hijas'=> $hijas->count(),
             'concubinas'=> $concubinas->count(),]);
     }
 }

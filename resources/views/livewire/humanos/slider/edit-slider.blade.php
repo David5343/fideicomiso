@@ -10,13 +10,13 @@
       </div>
   @endif
         <div class="col-12">
-            <h3>Subir Datos del Slider</h3>
+            <h3>Editar Datos del Slider</h3>
         </div>
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label text-end">Posición en el Slider</label>
           <div class="col-md-5">
             <select wire:model="posicion" id="posicion" name="posicion" class="form-select" required>
-            <option selected value="">Selecciona una Posicíon</option>
+            <option selected value=""></option>
             <option value="Primero">Primero</option>
             <option value="Segundo">Segundo</option>
             <option value="Tercero">Tercero</option>
@@ -29,7 +29,7 @@
             <label class="col-sm-2 col-form-label text-end">Título</label>
             <div class="col-sm-6">
               <input type="text" wire:model="titulo" id="titulo" name="titulo" class="form-control"
-               required>
+                required>
               @error('titulo')<br><small style="color: red">{{ $message }}</small>
               @enderror
             </div>

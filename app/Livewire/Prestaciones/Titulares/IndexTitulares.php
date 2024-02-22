@@ -12,7 +12,7 @@ class IndexTitulares extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search='';
-    public $busqueda_por;
+    public $busqueda_por = null;
     public $dato='';
 
     public function updatingSearch(){
@@ -28,7 +28,7 @@ class IndexTitulares extends Component
     public function buscar()
     {
         if($this->search !== ''){
-            if($this->busqueda_por !== null){
+            if($this->busqueda_por !== "default"){
                 $row = Insured::where($this->busqueda_por,$this->search)->first();
                 if($row !== null){
                     $this->dato = $row;
