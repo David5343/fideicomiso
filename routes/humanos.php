@@ -80,5 +80,8 @@ Route::middleware('auth')->group(function () {
     // Route::put('humanos/vacaciones/{id}', [VacationController::class,'update'])->name('humanos.vacaciones.update');
     // Route::delete('humanos/vacaciones/{id}', [VacationController::class,'destroy'])->name('humanos.vacaciones.destroy');
     // //Rutas de carrusel
-     Route::get('humanos/slider/create',[SliderController::class, 'create'])->name('humanos.slider.create');
+    Route::get('humanos/slider',[SliderController::class, 'index'])->name('humanos.slider.index'); 
+    Route::get('humanos/slider/create',[SliderController::class, 'create'])->name('humanos.slider.create');
+    Route::get('humanos/slider/{id}/edit', [SliderController::class,'edit'])->name('humanos.slider.edit');
+    Route::put('humanos/slider/{id}', [SliderController::class,'update'])->name('humanos.slider.update');
 });

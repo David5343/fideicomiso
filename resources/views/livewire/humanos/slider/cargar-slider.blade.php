@@ -13,7 +13,20 @@
             <h3>Subir Datos del Slider</h3>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label text-end">Titulo</label>
+          <label class="col-sm-2 col-form-label text-end">Posición en el Slider</label>
+          <div class="col-md-5">
+            <select wire:model="posicion" id="posicion" name="posicion" class="form-select" required>
+            <option selected value="">Selecciona una Posicíon</option>
+            <option value="Primero">Primero</option>
+            <option value="Segundo">Segundo</option>
+            <option value="Tercero">Tercero</option>
+            </select>
+            @error('posicion')<br><small style="color: red">{{ $message }}</small>
+            @enderror
+          </div>
+        </div> 
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label text-end">Título</label>
             <div class="col-sm-6">
               <input type="text" wire:model="titulo" id="titulo" name="titulo" class="form-control"
                required>
@@ -49,15 +62,6 @@
               </div>
             </div>
           </div>
-          <div class="col-12">
-            @if (session('msg_tipo'))
-            <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
-              <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
-              <p><strong>{{ session('msg')}}</strong></p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-            </div> 
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label col-form-label-lg text-end"></label>
             <div class="col-sm-6">
@@ -69,4 +73,13 @@
             </div>
           </div>           
           </form>
+          <div class="col-12">
+            @if (session('msg_tipo'))
+            <div class="alert alert-{{session('msg_tipo')}} alert-dismissible fade show m-4 p-4" role="alert">
+              <h4 class="alert-heading">Pigd <i class="bi bi-check-circle"></i></h4>
+              <p><strong>{{ session('msg')}}</strong></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            </div> 
 </div>

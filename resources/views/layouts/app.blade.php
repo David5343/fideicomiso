@@ -89,7 +89,7 @@
                       <li><a class="dropdown-item" href="{{route('humanos.vacaciones.index')}}">Vacaciones</a></li>--}}
                       <hr class="dropdown-divider"></li>
                       <li><h6 class="dropdown-header">Ajustes</h6></li>
-                      <li><a class="dropdown-item" href="{{route('humanos.slider.create')}}">Slider</a></li> 
+                      <li><a class="dropdown-item" href="{{route('humanos.slider.index')}}">Slider</a></li> 
                       </ul>
                     </li>
                     <li class="nav-item dropdown">

@@ -24,9 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slider1 = Slider::find(1);
-        $slider2 = Slider::find(2);
-        $slider3 = Slider::find(3);
+        $slider1 = Slider::where('position','Primero')->first();
+        $slider2 = Slider::where('position','Segundo')->first();
+        $slider3 = Slider::where('position','Tercero')->first();
         return view('home',['slider1'=>$slider1,
                             'slider2'=>$slider2,
                             'slider3'=>$slider3]);

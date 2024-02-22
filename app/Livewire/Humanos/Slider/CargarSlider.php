@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 class CargarSlider extends Component
 {
     use WithFileUploads;
+    #[Rule('required')]
+    public $posicion;
     #[Rule('required|max:50')]
     public $titulo;
     #[Rule('required|max:150')]
@@ -32,6 +34,7 @@ class CargarSlider extends Component
         }else {
             $uuid =Str::uuid();
             $path = $this->imagen->storeAs('sliders',$uuid.'.'.$this->imagen->extension(),'public');                      
+            $slider->position = $this->posicion;
             $slider->title = $this->titulo;
             $slider->text = $this->texto;
             $slider->img= $path;

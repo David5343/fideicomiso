@@ -51,7 +51,7 @@ class BeneficiaryController extends Controller
             'curp' => ['required','max:18','alpha_num:ascii','unique:beneficiaries,curp,'. $id],
             'persona_discapacitada' => ['required'],
             'parentesco' =>['required'],
-            'direccion' =>['required','max:100'],
+            'direccion' =>['required','max:150'],
             'observaciones' =>['nullable','max:150'], 
             'num_cuenta' => ['nullable','numeric','max:10'],
             'clabe' => ['nullable','numeric','max:18'],
