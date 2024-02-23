@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Humanos;
 
 use App\Http\Controllers\Controller;
 use App\Models\Humanos\Slider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facedes\Storage;
 
 class SliderController extends Controller
 {
@@ -28,9 +25,5 @@ class SliderController extends Controller
     {
         $row = Slider::find($id);
         return view('humanos.slider.edit', ['slider' => $row]);
-    }
-    public function update(Request $request, string $id)
-    {
-
     }
 }

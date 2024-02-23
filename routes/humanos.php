@@ -6,6 +6,7 @@ use App\Http\Controllers\Humanos\CategoryController;
 use App\Http\Controllers\Humanos\CountyController;
 use App\Http\Controllers\Humanos\EmployeeController;
 use App\Http\Controllers\Humanos\EmployeeFamilyController;
+use App\Http\Controllers\Humanos\NavbarController;
 use App\Http\Controllers\Humanos\PlaceController;
 use App\Http\Controllers\Humanos\ReportsController;
 use App\Http\Controllers\Humanos\SliderController;
@@ -79,9 +80,17 @@ Route::middleware('auth')->group(function () {
     // Route::get('humanos/vacaciones/{id}/edit', [VacationController::class,'edit'])->name('humanos.vacaciones.edit');
     // Route::put('humanos/vacaciones/{id}', [VacationController::class,'update'])->name('humanos.vacaciones.update');
     // Route::delete('humanos/vacaciones/{id}', [VacationController::class,'destroy'])->name('humanos.vacaciones.destroy');
-    // //Rutas de carrusel
+    //Rutas de carrusel
     Route::get('humanos/slider',[SliderController::class, 'index'])->name('humanos.slider.index'); 
     Route::get('humanos/slider/create',[SliderController::class, 'create'])->name('humanos.slider.create');
     Route::get('humanos/slider/{id}/edit', [SliderController::class,'edit'])->name('humanos.slider.edit');
     Route::put('humanos/slider/{id}', [SliderController::class,'update'])->name('humanos.slider.update');
+    //Rutas de Navbar
+    Route::get('humanos/navbar',[NavbarController::class, 'index'])->name('humanos.navbar.index');
+    Route::get('humanos/navbar/create',[NavbarController::class, 'create'])->name('humanos.navbar.create');
+    Route::post('humanos/navbar',[NavbarController::class, 'store'])->name('humanos.navbar.store');
+    Route::get('humanos/navbar/{id}',[NavbarController::class,'show'])->name('humanos.navbar.show');
+    Route::get('humanos/navbar/{id}/edit', [NavbarController::class,'edit'])->name('humanos.navbar.edit');
+    Route::put('humanos/navbar/{id}', [NavbarController::class,'update'])->name('humanos.navbar.update');
+    Route::delete('humanos/navbar/{id}', [NavbarController::class,'destroy'])->name('humanos.navbar.destroy');    
 });
