@@ -20,7 +20,8 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Titulo</th>
+                <th scope="col">Texto</th>
+                <th scope="col">Tamaño</th>
                 <th scope="col">Editar</th>
             </tr>
         </thead>
@@ -29,7 +30,8 @@
                 @foreach ($lista as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
-                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->text }}</td>
+                        <td>{{ $item->size }}</td>
                         <td>
                             <a href="{{ url('humanos/navbar/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                                 <i class="bi bi-pencil-square"></i>

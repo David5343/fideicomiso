@@ -19,8 +19,13 @@
           <nav class="navbar sticky-top rounded" style="background-color:#b09a5b; border-color:#333333">
             <div class="container">        
               <a class="navbar-brand" href="#"></a>
-              <span class="navbar-text fs-4 fst-italic">
-                "Año de Felipe Carrillo Puerto, Benemérito del Proletariado, Revolucionario y Defensor del Mayab".
+              @php
+              $rows = App\Models\Humanos\Navbar::all();
+              @endphp
+              @foreach($rows as $row)
+              <span class="navbar-text {{$row->size}} fst-italic">
+              {{ $row->text }}
+              @endforeach 
               </span>
               <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                 <span class="navbar-toggler-icon"></span>
