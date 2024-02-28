@@ -22,6 +22,7 @@
             <th scope="col">NOMBRE</th>
             <th scope="col">INGRESO</th>
             <th scope="col">CURP</th>
+            <th scope="col">EMPLEADO</th>
             {{-- <th scope="col">Ver</th> --}}
             <th scope="col">Editar</th>
             {{-- <th scope="col">Baja</th> --}}
@@ -35,6 +36,7 @@
                     <td>{{ $item->last_name_1 . ' ' . $item->last_name_2 . ' ' . $item->name }}</td>
                     <td>{{ $item->start_date }}</td>
                     <td>{{ $item->curp }}</td>
+                    <td>{{ $item->employee->last_name_1 . ' ' . $item->employee->last_name_2 . ' ' . $item->employee->name }}</td>
                     {{-- <td>
                         <a href="{{ url('humanos/familiares/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
                             <i class="bi bi-folder2-open"></i>

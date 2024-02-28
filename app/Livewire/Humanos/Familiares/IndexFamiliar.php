@@ -27,7 +27,7 @@ class IndexFamiliar extends Component
     }
     public function render()
     {
-        $lista =  EmployeeFamily::where('status','=','active')
+        $lista =  EmployeeFamily::where('status','active')
                                     ->where('name','like','%'.$this->search.'%')
                                     ->orwhere('last_name_1','like','%'.$this->search.'%')
                                     ->orwhere('last_name_2','like','%'.$this->search.'%')
@@ -35,7 +35,7 @@ class IndexFamiliar extends Component
                                     ->paginate($this->numberRows);
         $count = $lista->count();
         return view('livewire.humanos.familiares.index-familiar',[
-            'count' => $count,
-            'lista' => $lista,]);
+                                                                'count' => $count,
+                                                                'lista' => $lista,]);
     }
 }

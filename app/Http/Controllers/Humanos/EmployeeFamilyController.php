@@ -21,6 +21,14 @@ class EmployeeFamilyController extends Controller
     {
         return view('humanos.familiares.index');
     }
+    public function show(string $id)
+    {
+        $row = EmployeeFamily::find($id);
+        dump($row);
+        exit();
+
+        
+    }
     public function edit(string $id)
     {
         
