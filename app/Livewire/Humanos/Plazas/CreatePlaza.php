@@ -10,7 +10,7 @@ use Livewire\Attributes\Rule;
 
 class CreatePlaza extends Component
 {
-    #[Rule('required|min:3|max:4|unique:places,place_number')]
+    #[Rule('required|min:4|max:4|unique:places,place_number')]
     public $num_plaza;
     #[Rule('required|max:40')]
     public $puesto;

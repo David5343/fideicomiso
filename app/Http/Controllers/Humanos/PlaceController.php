@@ -29,7 +29,7 @@ class PlaceController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'num_plaza' => ['required','min:3','max:5','unique:places,place_number,'.$id],
+            'num_plaza' => ['required','min:4','max:4','unique:places,place_number,'.$id],
             'puesto' => ['required','max:60'],
             'categoria_id' => ['required']
         ]);
