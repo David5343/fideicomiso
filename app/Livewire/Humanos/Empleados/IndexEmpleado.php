@@ -35,12 +35,8 @@ class IndexEmpleado extends Component
                             ->paginate($this->numberRows);
         $count = Employee::where('status','active')
                             ->get();
-                    $masculinos = Employee::where('status','active')
-                            ->where('sex','Hombre')
-                            ->get();
-                    $femeninos = Employee::where('status','active')
-                            ->where('sex','Mujer')
-                            ->get();
+        $masculinos = $count->where('sex','Hombre');
+        $femeninos =$count->where('sex','Mujer');
         return view('livewire.humanos.empleados.index-empleado',[
             'lista' => $lista,
             'count' => $count->count(),

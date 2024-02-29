@@ -55,14 +55,14 @@
                     <td>{{ $item->area->name }}</td>
                     <td>{{ $item->place->place_number }}</td>
                     <td>
-                        <a href="{{ url('humanos/empleados/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
-                            <i class="bi bi-folder2-open"></i>
+                        <a href="{{ url('humanos/empleados/' . $item->id) }}" class="btn btn-info btn-sm m-1">
+                            <i class="bi bi-person-lines-fill"></i>
                         </a>
                     </td>
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('humanos/empleados/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
+                        <a href="{{ url('humanos/empleados/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>

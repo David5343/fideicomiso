@@ -203,7 +203,6 @@ class EmployeeController extends Controller
     public function show(string $id)
     {
         $row = Employee::find($id);
-        $fam = $row->families;
         $fecha_ingreso =Carbon::parse($row->start_date);
         $fecha_nacimiento =Carbon::parse($row->birthday);
         $fecha_registro =Carbon::parse($row->created_at);
@@ -211,11 +210,9 @@ class EmployeeController extends Controller
         $row->start_date = $fecha_ingreso->format('d-m-Y');
         $row->birthday = $fecha_nacimiento->format('d-m-Y');
         $row->created_at = $fecha_registro->format('d-m-Y h:i:s A');
-        $row->updated_at = $fecha_umodificacion->format('d-m-Y h:i:s A');
+        $row->updated_at = $fecha_umodificacion->format('d-m-Y h:i:s A');        
         // $ae = EmployeeFile::where('employee_id',$id)->first();
-         //$fam = EmployeeFamily::where('employee_id',$id)->get();
-        return view('humanos.empleados.show',['empleado' => $row,
-                                                'fam'=>$fam]);
+        return view('humanos.empleados.show',['empleado' => $row]);
         
     }
     public function edit(string $id)

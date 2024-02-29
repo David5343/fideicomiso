@@ -19,10 +19,10 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">NOMBRE</th>
-            <th scope="col">INGRESO</th>
+            <th scope="col">Familiar</th>
+            <th scope="col">Fecha de Ingreso</th>
             <th scope="col">CURP</th>
-            <th scope="col">EMPLEADO</th>
+            <th scope="col">Empleado</th>
             {{-- <th scope="col">Ver</th> --}}
             <th scope="col">Editar</th>
             {{-- <th scope="col">Baja</th> --}}
