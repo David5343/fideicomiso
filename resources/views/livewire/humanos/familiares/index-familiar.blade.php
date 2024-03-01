@@ -23,7 +23,7 @@
             <th scope="col">Fecha de Ingreso</th>
             <th scope="col">CURP</th>
             <th scope="col">Empleado</th>
-            {{-- <th scope="col">Ver</th> --}}
+            <th scope="col">Ver</th>
             <th scope="col">Editar</th>
             {{-- <th scope="col">Baja</th> --}}
         </tr>
@@ -37,15 +37,15 @@
                     <td>{{ $item->start_date }}</td>
                     <td>{{ $item->curp }}</td>
                     <td>{{ $item->employee->last_name_1 . ' ' . $item->employee->last_name_2 . ' ' . $item->employee->name }}</td>
-                    {{-- <td>
-                        <a href="{{ url('humanos/familiares/' . $item->id) }}" class="btn btn-warning btn-sm m-1">
-                            <i class="bi bi-folder2-open"></i>
+                    <td>
+                        <a href="{{ url('humanos/familiares/' . $item->id) }}" class="btn btn-info btn-sm m-1">
+                            <i class="bi bi-person-lines-fill"></i>
                         </a>
-                    </td> --}}
+                    </td>
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('humanos/familiares/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
+                        <a href="{{ url('humanos/familiares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>

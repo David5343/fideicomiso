@@ -24,10 +24,9 @@ class EmployeeFamilyController extends Controller
     public function show(string $id)
     {
         $row = EmployeeFamily::find($id);
-        dump($row);
-        exit();
-
-        
+        $fecha_ingreso =Carbon::parse($row->start_date);
+        $row->start_date = $fecha_ingreso->format('d-m-Y');
+        return view('humanos.familiares.show',['fam'=>$row]);   
     }
     public function edit(string $id)
     {

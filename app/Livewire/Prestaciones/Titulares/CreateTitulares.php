@@ -39,7 +39,7 @@ class CreateTitulares extends Component
     public $nombre;         
     #[Validate('nullable|max:10|date')]
     public $fecha_nacimiento;
-    #[Validate('nullable | min:5| max:85')]
+    #[Validate('nullable | min:3| max:85')]
     public $lugar_nacimiento;
     #[Validate('required')]
     public $sexo;
@@ -55,7 +55,7 @@ class CreateTitulares extends Component
     public $email;
     #[Validate('nullable|min:5|max:85')]
     public $estado;
-    #[Validate('nullable|min:5|max:85')]
+    #[Validate('nullable|min:3|max:85')]
     public $municipio;
     #[Validate('nullable|min:5|max:50')]
     public $colonia;

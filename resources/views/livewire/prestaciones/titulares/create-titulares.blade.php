@@ -122,7 +122,7 @@
             <div class="col-md-3">
               <label class="form-label">Lugar de Nacimiento</label>
               <input wire:model="lugar_nacimiento" type="text" class="form-control" list="datalistMunicipios"
-               id="lugar_nacimiento" name="lugar_nacimiento" minlength="5" maxlength="85" value="{{old('lugar_nacimiento')}}">
+               id="lugar_nacimiento" name="lugar_nacimiento" minlength="3" maxlength="85" value="{{old('lugar_nacimiento')}}">
               <datalist id="datalistMunicipios">
                 @foreach($select3 as $m)
                 <option value="{{$m->name}}">
@@ -200,7 +200,7 @@
             <div class="col-md-3">
               <label class="form-label">Municipio o Delegación</label>
               <input wire:model="municipio" type="text" class="form-control" list="datalistMunicipios"  id="municipio" 
-              minlength="5" maxlength="85" value="{{old('municipio')}}">
+              minlength="3" maxlength="85" value="{{old('municipio')}}">
               <datalist id="datalistMunicipios">
                 @foreach($select3 as $m)
                 <option value="{{$m->name}}">

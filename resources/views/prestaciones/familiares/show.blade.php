@@ -45,7 +45,7 @@
                   @endif
                   <h5 class="my-3"></h5>
                   <p class="text-muted mb-1"><strong>ESTATUS</strong></p>
-                  <p class="text-muted mb-4"><strong>@if($familiar->family_status){{$familiar->family_status}}@endif</strong></p>
+                  <p class="text-muted mb-4"><strong>@if($familiar->affiliate_status){{$familiar->affiliate_status}}@endif</strong></p>
                   <div class="d-flex justify-content-center mb-2">
                     {{-- <button type="button" class="btn btn-primary">Follow</button>
                     <button type="button" class="btn btn-outline-primary ms-1">Message</button> --}}
