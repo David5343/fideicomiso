@@ -65,5 +65,15 @@ class EmployeeFamilyController extends Controller
         session()->flash('msg','Registro editado con éxito!');  
         return to_route('humanos.familiares.index');
 
-    }    
+    } 
+    public function destroy(string $id)
+    {
+        $row = EmployeeFamily::find($id);
+        $row->status = 'inactive';
+        $row->modified_by = Auth::user()->email;
+        $row->save();
+        session()->flash('msg_tipo','success');
+        session()->flash('msg','Registro deshabilidado con éxito!');     
+        return to_route('humanos.familiares.index');
+    }   
 }

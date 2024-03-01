@@ -25,7 +25,8 @@
             <th scope="col">Empleado</th>
             <th scope="col">Ver</th>
             <th scope="col">Editar</th>
-            {{-- <th scope="col">Baja</th> --}}
+            <th scope="col">Baja</th>
+            <th scope="col">Estatus</th>
         </tr>
     </thead>
     <tbody>
@@ -49,14 +50,15 @@
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
-                    {{-- <td>
+                    <td>
                         <form action="{{ url('humanos/familiares/'.$item->id)}}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                    class="bi bi-trash"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-person-down"></i></button>
                         </form>
-                    </td> --}}
+                    </td>
+                    <td>{{ $item->status}}</td>
                 </tr>
             @endforeach
         @endif
