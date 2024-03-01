@@ -3,15 +3,15 @@
 namespace App\Livewire\Tecnologias\Permisos;
 
 use Livewire\Component;
-use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class CreatePermiso extends Component
 {
-    #[Rule('required|unique:permissions,name|min:5|max:50')]
+    #[Validate('required|unique:permissions,name|min:5|max:50')]
     public $nombre;
-    #[Rule('required')]
+    #[Validate('required')]
     public $rol;
 
     public function createPermission(){

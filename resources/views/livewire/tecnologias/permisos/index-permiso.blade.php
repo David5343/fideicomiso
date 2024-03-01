@@ -33,12 +33,12 @@
                     <td>
                         {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
                             <i class="bi bi-pencil-square"></i></button> --}}
-                        <a href="{{ url('configuracion/permisos/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
+                        <a href="{{ url('tecnologias/permisos/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
                     <td>
-                        <form action="{{ url('configuracion/permisos/'.$item->id)}}" method="post">
+                        <form action="{{ url('tecnologias/permisos/'.$item->id)}}" method="post">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm"><i
