@@ -133,7 +133,7 @@
           <div class="col-md-3">
             <label class="form-label">Lugar de Nacimiento</label>
             <input type="text" class="form-control" list="datalistMunicipios"  id="lugar_nacimiento" name="lugar_nacimiento"
-             minlength="5" maxlength="85" value="{{$titular->birthplace}}">
+             minlength="3" maxlength="85" value="{{$titular->birthplace}}">
             <datalist id="datalistMunicipios">
               @foreach($select3 as $m)
               <option value="{{$m->name}}">
@@ -209,7 +209,7 @@
           <div class="col-md-3">
             <label class="form-label">Municipio o Delegación</label>
             <input type="text" class="form-control" list="datalistMunicipios"  id="municipio" name="municipio" 
-            minlength="5" maxlength="85" value="{{$titular->county}}">
+            minlength="3" maxlength="85" value="{{$titular->county}}">
             <datalist id="datalistMunicipios">
               @foreach($select3 as $m)
               <option value="{{$m->name}}">
