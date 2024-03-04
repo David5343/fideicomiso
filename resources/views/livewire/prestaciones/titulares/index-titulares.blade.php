@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-2">
             <select  wire:model.live="busqueda_por" class="form-select">
-                <option value="default">Busqueda por</option>
+                <option value="">Busqueda por</option>
                 <option value="rfc">RFC</option>
                 <option value="file_number">No. de Expediente</option>
                 <option value="curp">CURP</option>

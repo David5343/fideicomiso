@@ -11,9 +11,9 @@ class IndexTitulares extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $search='';
-    public $busqueda_por = null;
-    public $dato='';
+    public $search;
+    public $busqueda_por;
+    public $dato;
 
     public function updatingSearch(){
         $this->resetPage();
@@ -27,8 +27,16 @@ class IndexTitulares extends Component
     }
     public function buscar()
     {
-        if($this->search !== ''){
-            if($this->busqueda_por !== "default"){
+        if(empty($this->search)){
+            session()->flash('msg_tipo_busqueda','warning');
+            session()->flash('msg_busqueda','Ingrese un Parámetro Válido.'); 
+
+        }else{
+            if(empty($this->busqueda_por)){
+                session()->flash('msg_tipo_busqueda','warning');
+                session()->flash('msg_busqueda','Elija un Parámetro de Búsqueda.');
+                //dump($this->busqueda_por);
+            }else{
                 $row = Insured::where($this->busqueda_por,$this->search)->first();
                 if($row !== null){
                     $this->dato = $row;
@@ -36,13 +44,7 @@ class IndexTitulares extends Component
                     session()->flash('msg_tipo_busqueda','info');
                     session()->flash('msg_busqueda','Ups!, No se encontro ningun registro.'); 
                 }
-            }else{
-                session()->flash('msg_tipo_busqueda','warning');
-                session()->flash('msg_busqueda','Elija un Parámetro de Búsqueda.');
             }
-        }else{
-            session()->flash('msg_tipo_busqueda','warning');
-            session()->flash('msg_busqueda','Ingrese un Parámetro Válido.'); 
         }
 
     }
