@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Insured;
 use Illuminate\Http\Request;
 
-class InsuredController extends Controller
+class InsuredApiController extends Controller
 {
     public function index()
     {   
