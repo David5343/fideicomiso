@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,10 +19,14 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::get('prestaciones/titulares', [InsuredApiController::class,'index']);
+//ruta para el login
+Route::post('/login',[ApiController::class,'login']);
+
 Route::middleware('auth:sanctum')->group(function () {
+    
+    Route::get('/users', [ApiController::class,'index']);
     //Rutas de titulares
-    // Route::get('api/prestaciones/titulares', [InsuredController::class,'index']);
+    Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
     // Route::get('api/prestaciones/titulares/create',[InsuredController::class, 'create']);
     // Route::post('api/prestaciones/titulares',[InsuredController::class, 'store']);
     // Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
