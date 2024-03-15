@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 // });
 //ruta para el login
 Route::post('/login',[ApiController::class,'login']);
+Route::get('/users', [ApiController::class,'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     
