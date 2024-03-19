@@ -27,7 +27,7 @@ class ApiController extends Controller
             $user = User::where('email',$data->email)->first();
             if($user){
                 if(Hash::check($data->password,$user->password)){
-                    $token = $user->createToken($data->email);
+                    //$token = $user->createToken($data->email);
                     $response["status"] = 1;
                     //$response["token"] = $token->plainTextToken;
                     $response["msg"] = "Inicio de Session exitoso.";
