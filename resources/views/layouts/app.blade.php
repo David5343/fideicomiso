@@ -117,17 +117,22 @@
                     </li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-gear"></i> Tecnologías
+                        <i class="bi bi-gear"></i> Administración
                       </a>
                       <ul class="dropdown-menu dropdown-menu-primary">
-                        <li><h6 class="dropdown-header">Configuracion</h6></li>
-                        <li><a class="dropdown-item" href="{{route('tecnologias.usuarios.index')}}"><i class="bi bi-person-gear"></i> Usuarios</a></li>
-                        <li><a class="dropdown-item" href="{{route('tecnologias.roles.index')}}"><i class="bi bi-ui-checks"></i> Roles</a></li>
-                        <li><a class="dropdown-item" href="{{route('tecnologias.permisos.index')}}"><i class="bi bi-key"></i> Permisos</a></li>
+                        <li><h6 class="dropdown-header">Administración.</h6></li>
+                        <li><a class="dropdown-item" href="{{route('administracion.tecnologias.usuarios.index')}}">Fondo Revolvente</a></li>
                         <li>
                           <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{{route('humanos.empleados.index')}}">Ejemplo</a></li>
+                        <li><h5 class="dropdown-header">Tecnologías de la Información.</h5></li>
+                        <li><h6 class="dropdown-header">Configuracion de usuarios.</h6></li>
+                        <li><a class="dropdown-item" href="{{route('administracion.tecnologias.usuarios.index')}}"><i class="bi bi-person-gear"></i> Usuarios</a></li>
+                        <li><a class="dropdown-item" href="{{route('administracion.tecnologias.roles.index')}}"><i class="bi bi-ui-checks"></i> Roles</a></li>
+                        <li><a class="dropdown-item" href="{{route('administracion.tecnologias.permisos.index')}}"><i class="bi bi-key"></i> Permisos</a></li>
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
                       </ul>
                     </li>
                   </ul>
