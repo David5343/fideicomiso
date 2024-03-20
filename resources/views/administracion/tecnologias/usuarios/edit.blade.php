@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('tecnologias.usuarios.index') }}" class="btn btn-primary" role="button">Lista de Usuarios</a>
+        <a href="{{ route('administracion.tecnologias.usuarios.index') }}" class="btn btn-secondary" role="button">Lista de Usuarios</a>
     </p>
     <div class="card mt-1" style="border-color:#333333">
         <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
@@ -14,7 +14,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-            <form action="{{ url('tecnologias/usuarios/' . $usuario->id) }}" method="POST">
+            <form action="{{ url('administracion/tecnologias/usuarios/' . $usuario->id) }}" method="POST">
                       @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
@@ -61,7 +61,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg"></label>
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{{ route('tecnologias.usuarios.index') }}" class="btn btn-danger" role="button">Cancelar</a>
+                        <a href="{{ route('administracion.tecnologias.usuarios.index') }}" class="btn btn-danger" role="button">Cancelar</a>
                     </div>
                 </div>
             </form>
