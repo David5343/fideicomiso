@@ -16,8 +16,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-        <livewire:tecnologias.permisos.index-permiso />
+        <livewire:administracion.tecnologias.permisos.index-permiso />
     </div>
-    <livewire:tecnologias.permisos.create-permiso />
+    <livewire:administracion.tecnologias.permisos.create-permiso />
     {{-- <livewire:humanos.areas.edit-area /> --}}
 @endsection

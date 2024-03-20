@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Tecnologias;
+namespace App\Http\Controllers\Administracion\Tecnologias;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,12 +11,12 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return view('tecnologias.permisos.index');
+        return view('administracion.tecnologias.permisos.index');
     }
     public function edit(string $id)
     {
         $row = Permission::find($id);
-        return view('tecnologias.permisos.edit', ['row' => $row]);
+        return view('administracion.tecnologias.permisos.edit', ['row' => $row]);
     }
     public function update(Request $request, string $id)
     {
@@ -28,7 +28,7 @@ class PermissionController extends Controller
         $row->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro actualizado con éxito!'); 
-        return to_route('tecnologias.permisos.index');
+        return to_route('administracion.tecnologias.permisos.index');
     }
     public function destroy(string $id)
     {
@@ -37,6 +37,6 @@ class PermissionController extends Controller
         $row->delete();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro eliminado con éxito!'); 
-        return to_route('tecnologias.permisos.index');
+        return to_route('administracion.tecnologias.permisos.index');
     }
 }

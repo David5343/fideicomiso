@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Tecnologias;
+namespace App\Http\Controllers\Administracion\Tecnologias;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,6 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return view('tecnologias.roles.index');
+        return view('administracion.tecnologias.roles.index');
     }
 }

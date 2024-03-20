@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Tecnologias\Usuarios;
+namespace App\Livewire\Administracion\Tecnologias\Usuarios;
 
 use App\Models\User;
 use Livewire\Attributes\On;
@@ -32,7 +32,7 @@ class IndexUsuarios extends Component
                         ->orderBy('created_at','desc')
                         ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.tecnologias.usuarios.index-usuarios',[
+        return view('livewire.administracion.tecnologias.usuarios.index-usuarios',[
             'count' => $count,
             'lista' => $lista,]);
     }

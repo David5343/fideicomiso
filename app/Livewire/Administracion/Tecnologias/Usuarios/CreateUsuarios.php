@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Tecnologias\Usuarios;
+namespace App\Livewire\Administracion\Tecnologias\Usuarios;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +37,6 @@ class CreateUsuarios extends Component
     }
     public function render()
     {
-        return view('livewire.tecnologias.usuarios.create-usuarios');
+        return view('livewire.administracion.tecnologias.usuarios.create-usuarios');
     }
 }

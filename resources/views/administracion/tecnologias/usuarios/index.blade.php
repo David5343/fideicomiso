@@ -16,8 +16,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-        <livewire:tecnologias.usuarios.index-usuarios />
+        <livewire:administracion.tecnologias.usuarios.index-usuarios />
     </div>
-    <livewire:tecnologias.usuarios.create-usuarios />
+    <livewire:administracion.tecnologias.usuarios.create-usuarios />
     {{-- <livewire:humanos.areas.edit-area /> --}}
 @endsection

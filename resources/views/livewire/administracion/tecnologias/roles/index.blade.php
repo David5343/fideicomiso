@@ -16,8 +16,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-        <livewire:tecnologias.roles.index-roles />
+        <livewire:administracion.tecnologias.roles.index-roles />
     </div>
-    <livewire:tecnologias.roles.create-role />
+    <livewire:administracion.tecnologias.roles.create-role />
     {{-- <livewire:humanos.areas.edit-area /> --}}
 @endsection

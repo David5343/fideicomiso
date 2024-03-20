@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Tecnologias;
+namespace App\Http\Controllers\Administracion\Tecnologias;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -14,17 +14,17 @@ class UserController extends Controller
         //$this->middleware(['role:Admin','permission:humanos.areas.index|humanos.areas.edit|humanos.areas.update|humanos.areas.destroy']);
         //$this->middleware(['role_or_permission:Admin|humanos.areas.index']);
         //$this->middleware('auth');
-        $this->middleware('can:tecnologias.usuarios.index');
+        $this->middleware('can:administracion.tecnologias.usuarios.index');
         //$this->middleware('subscribed')->except('store');
     }
     public function index()
     {
-        return view('tecnologias.usuarios.index');
+        return view('administracion.tecnologias.usuarios.index');
 
     }
     public function create()
     {
-        return view('tecnologias.usuarios.create');
+        return view('administracion.tecnologias.usuarios.create');
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $row = User::find($id);
-        return view('tecnologias.usuarios.edit',['usuario'=> $row]);
+        return view('administracion.tecnologias.usuarios.edit',['usuario'=> $row]);
     }
 
     /**
@@ -75,7 +75,7 @@ class UserController extends Controller
         $row->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro editado con éxito!');  
-        return to_route('tecnologias.usuarios.index');
+        return to_route('administracion.tecnologias.usuarios.index');
     }
 
     public function destroy(string $id)
@@ -86,6 +86,6 @@ class UserController extends Controller
         $area->save();
         session()->flash('msg_tipo','success');
         session()->flash('msg','Registro deshabilitado con éxito!');   
-        return to_route('tecnologias.usuarios.index');
+        return to_route('administracion.tecnologias.usuarios.index');
     }
 }

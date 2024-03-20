@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Tecnologias\Roles;
+namespace App\Livewire\Administracion\Tecnologias\Roles;
 
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -31,7 +31,7 @@ class IndexRoles extends Component
                         ->orderBy('name','asc')
                         ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.tecnologias.roles.index-roles',[
+        return view('livewire.administracion.tecnologias.roles.index-roles',[
             'count' => $count,
             'lista' => $lista,]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Tecnologias\Permisos;
+namespace App\Livewire\Administracion\Tecnologias\Permisos;
 
 use Livewire\Component;
 use Livewire\Attributes\Validate;
@@ -32,6 +32,6 @@ class CreatePermiso extends Component
     public function render()
     {
         $select = Role::all();
-        return view('livewire.tecnologias.permisos.create-permiso',['select'=>$select]);
+        return view('livewire.administracion.tecnologias.permisos.create-permiso',['select'=>$select]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Tecnologias\Permisos;
+namespace App\Livewire\Administracion\Tecnologias\Permisos;
 
 use App\Models\User;
 use Livewire\Attributes\On;
@@ -32,7 +32,7 @@ class IndexPermiso extends Component
                         ->orderBy('name','asc')
                         ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.tecnologias.permisos.index-permiso',[
+        return view('livewire.administracion.tecnologias.permisos.index-permiso',[
             'count' => $count,
             'lista' => $lista,]);
     }
