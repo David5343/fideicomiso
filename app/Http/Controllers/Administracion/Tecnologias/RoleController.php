@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+
+        $this->middleware('can:administracion.tecnologias.roles.index');
+
+    }
     public function index()
     {
         return view('administracion.tecnologias.roles.index');

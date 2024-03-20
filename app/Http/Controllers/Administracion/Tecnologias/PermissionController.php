@@ -9,6 +9,12 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+
+        $this->middleware('can:administracion.tecnologias.permisos.index');
+
+    }
     public function index()
     {
         return view('administracion.tecnologias.permisos.index');

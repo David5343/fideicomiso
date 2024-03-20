@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <p class="text-end">
-        <a href="{{ route('humanos.areas.index') }}" class="btn btn-secondary" role="button">Lista de Áreas</a>
+        <a href="{{ route('administracion.tecnologias.permisos.index') }}" class="btn btn-secondary" role="button">Lista de Permisos</a>
     </p>
     <div class="card mt-1" style="border-color:#333333">
         <div  class="card-header p-3 fs-5 rounded" style="background-color:#333333; color:#b09a5b">
@@ -14,7 +14,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-            <form action="{{ url('tecnologias/permisos/' . $row->id) }}" method="POST">
+            <form action="{{ url('administracion/tecnologias/permisos/' . $row->id) }}" method="POST">
                 @method('PUT')
                 @csrf
                 <div class="row mb-3">
@@ -31,7 +31,7 @@
                     <label class="col-sm-2 col-form-label col-form-label-lg"></label>
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{{ route('tecnologias.permisos.index') }}" class="btn btn-danger" role="button">Cancelar</a>
+                        <a href="{{ route('administracion.tecnologias.permisos.index') }}" class="btn btn-danger" role="button">Cancelar</a>
                     </div>
                 </div>
             </form>

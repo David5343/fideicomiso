@@ -13,7 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::get('administracion/tecnologias/usuarios/{id}',[UserController::class, 'show'])->name('administracion.tecnologias.usuarios.show');
     Route::get('administracion/tecnologias/usuarios/{id}/edit', [UserController::class,'edit'])->name('administracion.tecnologias.usuarios.edit');
     Route::put('administracion/tecnologias/usuarios/{id}', [UserController::class,'update'])->name('administracion.tecnologias.usuarios.update');
-    Route::delete('tecnologias/usuarios/{id}', [UserController::class,'destroy'])->name('administracion.tecnologias.usuarios.destroy');
+    Route::delete('administracion/tecnologias/usuarios/{id}', [UserController::class,'destroy'])->name('administracion.tecnologias.usuarios.destroy');
     //Rutas de permisos
     Route::get('administracion/tecnologias/permisos',[PermissionController::class, 'index'])->name('administracion.tecnologias.permisos.index');
     Route::get('administracion/tecnologias/permisos/create',[PermissionController::class, 'create'])->name('administracion.tecnologias.permisos.create');
