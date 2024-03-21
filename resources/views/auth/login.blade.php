@@ -64,7 +64,7 @@ height: 100%;
             <div class="d-flex justify-content-between align-items-center">
               <!-- Checkbox -->
               <div class="form-check mb-0">
-                <input id="remember"  class="form-check-input me-2" type="checkbox" name="remember" value="" {{ old('remember') ? 'checked' : '' }} />
+                <input id="remember"  class="form-check-input me-2" type="checkbox" name="remember"/>
                 <label class="form-check-label" for="form2Example3">
                   Recuerdame
                 </label>

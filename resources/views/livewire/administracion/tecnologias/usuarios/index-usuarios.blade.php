@@ -36,6 +36,11 @@
                     <td><button wire:click="$dispatch('create_token', { id: {{ $item->id }} })" class="btn btn-info btn-sm">
                         <i class="bi bi-key"></i>
                         </button>
+                        @if($item->api_token == null)
+                        Token No Generado.
+                        @else
+                        {{$item->api_token}}
+                        @endif
                     </td>
                     <td>
                         <a href="{{ url('administracion/tecnologias/usuarios/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">

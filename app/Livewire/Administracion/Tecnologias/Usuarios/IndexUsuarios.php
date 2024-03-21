@@ -3,6 +3,7 @@
 namespace App\Livewire\Administracion\Tecnologias\Usuarios;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -29,10 +30,26 @@ class IndexUsuarios extends Component
     public function crearToken($id)
     {
         $user = User::find($id);
-        //$token = $user->createToken($data->email);
-        //$response["token"] = $token->plainTextToken;
-        dump($user);
-        exit();
+        if($user->api_token == null){
+            //tokens por default no caducan
+            //Creando nuevo token
+            $token = $user->createToken($user->email);
+            $api_token= $token->plainTextToken;
+            $user->api_token = $api_token;
+            $user->modified_by = Auth::user()->email;
+            $user->save();
+
+        }else{
+            //Eliminando token existente
+            $user->tokens()->where('name', $user->email)->delete();
+            //Creando nuevo token
+            $token = $user->createToken($user->email);
+            $api_token= $token->plainTextToken;
+            $user->api_token = $api_token;
+            $user->modified_by = Auth::user()->email;
+            $user->save();
+        }
+
     }
     public function render()
     {
