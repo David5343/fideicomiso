@@ -21,6 +21,7 @@
             <th scope="col">#</th>
             <th scope="col">Usuario</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Token API</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
         </tr>
@@ -32,9 +33,11 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->name }}</td>
+                    <td><button wire:click="$dispatch('create_token', { id: {{ $item->id }} })" class="btn btn-info btn-sm">
+                        <i class="bi bi-key"></i>
+                        </button>
+                    </td>
                     <td>
-                        {{-- <button @click ="$dispatch('enviar-id',{id:{{$item->id}}}" class="btn btn-warning"data-bs-toggle="modal" data-bs-target="#editarArea">
-                            <i class="bi bi-pencil-square"></i></button> --}}
                         <a href="{{ url('administracion/tecnologias/usuarios/'.$item->id .'/edit')}}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i>
                         </a>

@@ -25,9 +25,15 @@ class IndexUsuarios extends Component
     public function updateList($user = null){
 
     }
+    #[On('create_token')]
+    public function crearToken($user = null)
+    {
+        dump($user);
+        exit();
+    }
     public function render()
     {
-        $lista =  User::where('status','=','active')
+        $lista =  User::where('status','active')
                         ->where('email','like','%'.$this->search.'%')
                         ->orderBy('created_at','desc')
                         ->paginate($this->numberRows);
