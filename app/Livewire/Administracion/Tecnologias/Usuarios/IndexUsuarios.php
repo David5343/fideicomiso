@@ -26,8 +26,11 @@ class IndexUsuarios extends Component
 
     }
     #[On('create_token')]
-    public function crearToken($user = null)
+    public function crearToken($id)
     {
+        $user = User::find($id);
+        //$token = $user->createToken($data->email);
+        //$response["token"] = $token->plainTextToken;
         dump($user);
         exit();
     }
