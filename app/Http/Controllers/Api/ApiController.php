@@ -32,7 +32,7 @@ class ApiController extends Controller
                     $response["status"] = 1;
                     //$response["token"] = $token->plainTextToken;
                     $response["msg"] = "Inicio de Session exitoso.";
-                    $response["data"] = $user;
+                    $response["user"] = $user;
                 }else{
                     $response["msg"] = "Estas Credenciales no coinciden con nuestros registros.";
                 }
