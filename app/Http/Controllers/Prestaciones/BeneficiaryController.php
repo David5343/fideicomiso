@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
 use App\Models\Prestaciones\Beneficiary;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -61,6 +63,10 @@ class BeneficiaryController extends Controller
             'curp_representante' =>['nullable','max:18','alpha_num:ascii'],
             'parentesco_representante' =>['nullable'],
         ]);
+        DB::beginTransaction();
+        
+        try{
+
         $row = Beneficiary::find($id);
         $row->start_date = $request->input('fecha_ingreso');
         $row->last_name_1 = Str::of($request->input('apaterno'))->trim();
@@ -85,8 +91,14 @@ class BeneficiaryController extends Controller
         $row->representative_relationship = Str::of($request->input('parentesco_representante'))->trim();
         $row->modified_by = Auth::user()->email;
         $row->save();
+        DB::commit();
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro actualizado con éxito!');
         return to_route('prestaciones.familiares.index');
+        }catch(Exception $e){
+            DB::rollBack();
+            session()->flash('msg_tipo', 'danger');
+            session()->flash('msg', $e->getMessage()); 
+        }
     }
 }

@@ -134,6 +134,7 @@ class CreateTitulares extends Component
             $titular->modified_by = Auth::user()->email;
             sleep(1);
             $titular->save();
+            DB::commit();
             session()->flash('msg_tipo', 'success');
             session()->flash('msg', 'Registro con No. de Expediente: '.$titular->file_number.' creado con éxito!');
             $this->js("alert('Registro con No. de Expediente:".$titular->file_number." creado con éxito!')"); 
@@ -143,7 +144,6 @@ class CreateTitulares extends Component
             session()->flash('msg_tipo', 'danger');
             session()->flash('msg', $e->getMessage()); 
         }
-        DB::commit();
     }
 
     public function render()

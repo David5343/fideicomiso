@@ -44,7 +44,7 @@
                   class="rounded-circle img-fluid" style="width: 150px;">
                   @endif
                   <h5 class="my-3"></h5>
-                  <p class="text-muted mb-1"><strong>ESTATUS</strong></p>
+                  <p class="text-muted mb-1"><strong>ESTATUS DE AFILIACION</strong></p>
                   <p class="text-muted mb-4"><strong>@if($titular->affiliate_status){{$titular->affiliate_status}}@endif</strong></p>
                   <div class="d-flex justify-content-center mb-2">
                     {{-- <button type="button" class="btn btn-primary">Follow</button>
@@ -199,6 +199,42 @@
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">@if($titular->observations){{$titular->observations}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Fecha de Baja</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($titular->inactive_date){{$titular->inactive_date}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Motivo de Baja</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($titular->inactive_motive){{$titular->inactive_motive}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Fecha de Reingreso</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($titular->reentry_date){{$titular->reentry_date}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Estatus del Registro</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($titular->status){{$titular->status}}@endif</p>
                     </div>
                   </div>
                   <hr>

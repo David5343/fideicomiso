@@ -50,43 +50,45 @@ class InsuredController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        // DB::beginTransaction();
-        // try{
-            $validated = $request->validate([
-                'subdepe_id'=> ['required'],
-                'fecha_ingreso' => ['required','max:10','date'],
-                'lugar_trabajo' => ['nullable','min:3','max:85'],
-                'motivo_alta' =>['nullable','min:3','max:120'],
-                'estatus_afiliado' => ['required'],
-                'observaciones' =>['nullable','min:5','max:180'],
-                'apaterno' => ['required', 'min:2','max:20'],
-                'amaterno' => ['required', 'min:2','max:20'],
-                'nombre' => ['required','min:2','max:30'],            
-                'fecha_nacimiento' => ['nullable','max:10','date'],
-                'lugar_nacimiento' => ['nullable','min:3','max:85'],
-                'sexo' => ['nullable'],
-                'estado_civil' => ['nullable'],
-                'rfc' => ['required ',' max:13 ',' alpha_num:ascii','unique:insureds,rfc,'.$id],
-                'curp' => ['nullable' ,' max:18 ', 'alpha_num:ascii','unique:insureds,curp,'.$id],
-                'telefono' => ['nullable','numeric','digits:10'],
-                'email' => ['nullable','email','min:5','max:50','unique:insureds,email,'. $id],
-                'estado' => ['nullable','min:5','max:85'],
-                'municipio' => ['nullable','min:3','max:85'],
-                'colonia' => ['nullable','min:5','max:50'],
-                'tipo_vialidad' => ['nullable','min:5','max:50'],
-                'calle' =>['nullable','min:5','max:50'],
-                'num_exterior' => ['nullable','max:7'],
-                'num_interior' => ['nullable','max:7'],
-                'cp' => ['nullable','numeric','digits:5'],
-                'localidad' => ['nullable','min:5','max:85'],
-                'num_cuenta' => ['nullable','digits:10','unique:insureds,account_number,'.$id],
-                'clabe' => ['nullable','digits:18','unique:insureds,clabe,'.$id],
-                'banco_id' => ['nullable'],
-                'nombre_representante' =>['nullable','max:40'],
-                'rfc_representante' =>['nullable ',' max:13 ',' alpha_num:ascii'],
-                'curp_representante' =>['nullable ',' max:18 ',' alpha_num:ascii'],
-                'parentesco_representante' =>['nullable'],
-            ]);
+        $validated = $request->validate([
+            'subdepe_id'=> ['required'],
+            'fecha_ingreso' => ['required','max:10','date'],
+            'lugar_trabajo' => ['nullable','min:3','max:85'],
+            'motivo_alta' =>['nullable','min:3','max:120'],
+            'estatus_afiliado' => ['required'],
+            'observaciones' =>['nullable','min:5','max:180'],
+            'apaterno' => ['required', 'min:2','max:20'],
+            'amaterno' => ['required', 'min:2','max:20'],
+            'nombre' => ['required','min:2','max:30'],            
+            'fecha_nacimiento' => ['nullable','max:10','date'],
+            'lugar_nacimiento' => ['nullable','min:3','max:85'],
+            'sexo' => ['nullable'],
+            'estado_civil' => ['nullable'],
+            'rfc' => ['required ',' max:13 ',' alpha_num:ascii','unique:insureds,rfc,'.$id],
+            'curp' => ['nullable' ,' max:18 ', 'alpha_num:ascii','unique:insureds,curp,'.$id],
+            'telefono' => ['nullable','numeric','digits:10'],
+            'email' => ['nullable','email','min:5','max:50','unique:insureds,email,'. $id],
+            'estado' => ['nullable','min:5','max:85'],
+            'municipio' => ['nullable','min:3','max:85'],
+            'colonia' => ['nullable','min:5','max:50'],
+            'tipo_vialidad' => ['nullable','min:5','max:50'],
+            'calle' =>['nullable','min:5','max:50'],
+            'num_exterior' => ['nullable','max:7'],
+            'num_interior' => ['nullable','max:7'],
+            'cp' => ['nullable','numeric','digits:5'],
+            'localidad' => ['nullable','min:5','max:85'],
+            'num_cuenta' => ['nullable','digits:10','unique:insureds,account_number,'.$id],
+            'clabe' => ['nullable','digits:18','unique:insureds,clabe,'.$id],
+            'banco_id' => ['nullable'],
+            'nombre_representante' =>['nullable','max:40'],
+            'rfc_representante' =>['nullable ',' max:13 ',' alpha_num:ascii'],
+            'curp_representante' =>['nullable ',' max:18 ',' alpha_num:ascii'],
+            'parentesco_representante' =>['nullable'],
+        ]);
+
+        DB::beginTransaction();
+        
+        try{
             $row = Insured::find($id);
             $row->subdependency_id = $request->input('subdepe_id');
             $row->start_date =$request->input('fecha_ingreso');
@@ -126,15 +128,16 @@ class InsuredController extends Controller
             $row->representative_relationship = Str::of($request->input('parentesco_representante'))->trim(); 
             $row->modified_by = Auth::user()->email;
             $row->save();
+            DB::commit();
             session()->flash('msg_tipo', 'success');
             session()->flash('msg', 'Registro creado con éxito!');
             return to_route('prestaciones.titulares.index'); 
-        // }catch(Exception $e){
-        //     DB::rollBack();
-        //     session()->flash('msg_tipo', 'danger');
-        //     session()->flash('msg', $e->getMessage()); 
-        // }
-        // DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+            session()->flash('msg_tipo', 'danger');
+            session()->flash('msg', $e->getMessage()); 
+        }
+        
        
     }
     public function disabled(string $id)
@@ -144,19 +147,23 @@ class InsuredController extends Controller
     }
     public function baja(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'fecha_baja' => ['required','max:10','date'],
+            'motivo_baja' => ['required'],
+
+        ]);
         DB::beginTransaction();
         try{
-            $validated = $request->validate([
-                'fecha_baja' => ['required','max:10','date'],
-                'motivo_baja' => ['required'],
-    
-            ]);
             $row = Insured::find($id);
             $row->inactive_date = $request->input('fecha_baja');
             $row->inactive_motive = $request->input('motivo_baja');
             $row->affiliate_status = "Baja";
+            $row->status = "Inactive";
             $row->modified_by = Auth::user()->email;
             $row->save();
+            
+            DB::commit();
+
             session()->flash('msg_tipo', 'success');
             session()->flash('msg', 'El Registro fue dado de baja con éxito!');
             return to_route('prestaciones.titulares.index'); 
@@ -165,7 +172,7 @@ class InsuredController extends Controller
             session()->flash('msg_tipo', 'danger');
             session()->flash('msg', $e->getMessage()); 
         }
-        DB::commit();
+        
 
     }
 }

@@ -79,9 +79,9 @@ class CreateFamily extends Component
     }
     public function guardar()
     {
-        DB::beginTransaction();
-        try
-        {
+        // DB::beginTransaction();
+        // try
+        // {
             $this->validate();
             //El trabajador solo tiene derecho a registrar una esposa, una concubina
             //una Madre y un Padre
@@ -222,17 +222,18 @@ class CreateFamily extends Component
                         //             } 
                         //         }                     
                         // }
+                        
                              break;                    
                             default:
                             break;
                 } 
+        //DB::commit();
         
-        }catch (Exception $e){
-            DB::rollBack();
-            session()->flash('msg_tipo', 'danger');
-            session()->flash('msg', $e->getMessage()); 
-        }
-        DB::commit();
+    // }catch (Exception $e){
+    //         DB::rollBack();
+    //         session()->flash('msg_tipo', 'danger');
+    //         session()->flash('msg', $e->getMessage()); 
+    //     }
 
     }
 
