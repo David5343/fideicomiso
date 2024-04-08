@@ -51,9 +51,9 @@
     </div>
     <div class="col-12">
       <div class="col-md-2">
-        <label class="form-label">Fecha de Baja de SSYPC</label>
-        <input type="date" class="form-control" id="fecha_baja_ssypc" name="fecha_baja_ssypc" required>
-        @error('fecha_baja_ssypc')<br><small style="color: red">{{ $message }}</small>
+        <label class="form-label">Fecha de Baja de Dependencia</label>
+        <input type="date" class="form-control" id="fecha_baja_dependencia" name="fecha_baja_dependencia" required>
+        @error('fecha_baja_dependencia')<br><small style="color: red">{{ $message }}</small>
         @enderror
       </div>
   </div>

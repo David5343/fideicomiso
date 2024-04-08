@@ -149,7 +149,7 @@ class InsuredController extends Controller
     {
         $validated = $request->validate([
             'fecha_baja' => ['required','max:10','date'],
-            'fecha_baja_ssypc' => ['required','max:10','date'],
+            'fecha_baja_dependencia' => ['required','max:10','date'],
             'motivo_baja' => ['required'],
 
         ]);
@@ -157,7 +157,7 @@ class InsuredController extends Controller
         try{
             $row = Insured::find($id);
             $row->inactive_date = $request->input('fecha_baja');
-            $row->inactive_date_ssypc = $request->input('fecha_baja_ssypc');
+            $row->inactive_date_dependency = $request->input('fecha_baja_dependencia');
             $row->inactive_motive = $request->input('motivo_baja');
             $row->affiliate_status = "Baja";
             $row->status = "Inactive";
