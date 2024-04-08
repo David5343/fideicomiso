@@ -30,8 +30,12 @@ class InsuredController extends Controller
         $row = Insured::find($id);
         $fecha_ingreso =Carbon::parse($row->start_date);
         $fecha_nacimiento =Carbon::parse($row->birthday);
+        $baja_depe = Carbon::parse($row->inactive_date_dependency);
+        $baja_sistema = Carbon::parse($row->inactive_date);
         $row->start_date = $fecha_ingreso->format('d-m-Y');
         $row->birthday = $fecha_nacimiento->format('d-m-Y');
+        $row->inactive_date_dependency = $baja_depe->format('d-m-Y');
+        $row->inactive_date = $baja_sistema->format('d-m-Y');
         return view('prestaciones.titulares.show',['titular' => $row]);
         
     }

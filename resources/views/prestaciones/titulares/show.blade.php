@@ -207,7 +207,7 @@
                       <p class="mb-0"><strong>Fecha de Baja (Dependencia)</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($titular->inactive_date_ssypc){{$titular->inactive_date_ssypc}}@endif</p>
+                      <p class="text-muted mb-0">@if($titular->inactive_date_dependency){{$titular->inactive_date_dependency}}@endif</p>
                     </div>
                   </div>
                   <hr>
