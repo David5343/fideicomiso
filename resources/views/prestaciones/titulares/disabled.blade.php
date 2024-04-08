@@ -43,12 +43,20 @@
         </div>
         <div class="col-12">
         <div class="col-md-2">
-          <label class="form-label">Fecha de Baja</label>
+          <label class="form-label">Fecha de Baja del Sistema</label>
           <input type="date" class="form-control" id="fecha_baja" name="fecha_baja" required>
           @error('fecha_baja')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
     </div>
+    <div class="col-12">
+      <div class="col-md-2">
+        <label class="form-label">Fecha de Baja de SSYPC</label>
+        <input type="date" class="form-control" id="fecha_baja_ssypc" name="fecha_baja_ssypc" required>
+        @error('fecha_baja_ssypc')<br><small style="color: red">{{ $message }}</small>
+        @enderror
+      </div>
+  </div>
     <div class="col-12">
         <div class="col-md-3">
           <label class="form-label">Motivo de Baja</label>

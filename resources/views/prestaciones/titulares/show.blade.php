@@ -204,7 +204,16 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0"><strong>Fecha de Baja</strong></p>
+                      <p class="mb-0"><strong>Fecha de Baja SSYPC</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($titular->inactive_date_ssypc){{$titular->inactive_date_ssypc}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Fecha de Baja de Sistema</strong></p>
                     </div>
                     <div class="col-sm-9">
                       <p class="text-muted mb-0">@if($titular->inactive_date){{$titular->inactive_date}}@endif</p>
