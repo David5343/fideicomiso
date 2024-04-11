@@ -25,10 +25,23 @@ class BeneficiaryController extends Controller
     public function show(string $id)
     {
         $row = Beneficiary::find($id);
-        $fecha_ingreso =Carbon::parse($row->start_date);
-        $fecha_nacimiento =Carbon::parse($row->birthday);
-        $row->start_date = $fecha_ingreso->format('d-m-Y');
-        $row->birthday = $fecha_nacimiento->format('d-m-Y');
+        if($row->start_date != null){
+            $fecha_ingreso =Carbon::parse($row->start_date);
+            $row->start_date = $fecha_ingreso->format('d-m-Y');
+        }
+        if($row->birthday != null){
+            $fecha_nacimiento =Carbon::parse($row->birthday);
+            $row->birthday = $fecha_nacimiento->format('d-m-Y');
+        }
+        if($row->inactive_date != null){
+            $baja_sistema = Carbon::parse($row->inactive_date);
+            $row->inactive_date = $baja_sistema->format('d-m-Y');
+        }       
+        if($row->reentry_date != null){
+            $reingreso = Carbon::parse($row->reentry_date);
+            $row->reentry_date = $reingreso->format('d-m-Y');
+        }
+
         return view('prestaciones.familiares.show',['familiar' => $row]);
         
     }
@@ -95,6 +108,39 @@ class BeneficiaryController extends Controller
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro actualizado con éxito!');
         return to_route('prestaciones.familiares.index');
+        }catch(Exception $e){
+            DB::rollBack();
+            session()->flash('msg_tipo', 'danger');
+            session()->flash('msg', $e->getMessage()); 
+        }
+    }
+    public function disabled(string $id)
+    {
+        $row = Beneficiary::find($id);
+        return view('prestaciones.familiares.disabled',['familiar'=>$row]);
+    }
+    public function baja(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'fecha_baja' => ['required','max:10','date'],
+            'motivo_baja' => ['required','max:255'],
+
+        ]);
+        DB::beginTransaction();
+        try{
+            $row = Beneficiary::find($id);
+            $row->inactive_date = $request->input('fecha_baja');
+            $row->inactive_motive = $request->input('motivo_baja');
+            $row->affiliate_status = "Baja";
+            $row->status = "Inactive";
+            $row->modified_by = Auth::user()->email;
+            $row->save();
+            
+            DB::commit();
+
+            session()->flash('msg_tipo', 'success');
+            session()->flash('msg', 'El Registro fue dado de baja con éxito!');
+            return to_route('prestaciones.familiares.index'); 
         }catch(Exception $e){
             DB::rollBack();
             session()->flash('msg_tipo', 'danger');

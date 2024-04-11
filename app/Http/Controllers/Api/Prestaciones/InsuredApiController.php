@@ -21,7 +21,8 @@ class InsuredApiController extends Controller
     public function idgenerator()
     {
         $no_expediente = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
-        return response()->json($no_expediente);
+        $response["no_expediente"] = $no_expediente;
+        return response()->json($response);
     }
 }
 

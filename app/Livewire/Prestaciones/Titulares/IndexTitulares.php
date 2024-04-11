@@ -61,8 +61,7 @@ class IndexTitulares extends Component
         $indefinidos = Insured::where('status','active')
                 ->where('sex',null)
                 ->get();
-        $lista =  Insured::where('status','active')
-                        ->latest()
+        $lista =  Insured::latest()
                         ->limit(25)
                         ->get();
         return view('livewire.prestaciones.titulares.index-titulares',[

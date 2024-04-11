@@ -159,6 +159,42 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
+                      <p class="mb-0"><strong>Fecha de Baja del Sistema</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($familiar->inactive_date){{$familiar->inactive_date}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Motivo de baja</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($familiar->inactive_motive){{$familiar->inactive_motive}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Fecha de Reingreso</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($familiar->reentry_date){{$familiar->reentry_date}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0"><strong>Estatus del Registro</strong></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">@if($familiar->status){{$familiar->status}}@endif</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
                       <p class="mb-0"><strong></strong></p>
                     </div>
                     <div class="col-sm-9">

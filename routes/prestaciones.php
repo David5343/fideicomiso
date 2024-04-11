@@ -4,6 +4,7 @@ use App\Http\Controllers\Prestaciones\BeneficiaryController;
 use App\Http\Controllers\Prestaciones\DependencyController;
 use App\Http\Controllers\Prestaciones\InsuredController;
 use App\Http\Controllers\Prestaciones\SubdependencyController;
+use App\Models\Prestaciones\Beneficiary;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -40,4 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::get('prestaciones/familiares/{id}/edit', [BeneficiaryController::class,'edit'])->name('prestaciones.familiares.edit');
     Route::put('prestaciones/familiares/{id}', [BeneficiaryController::class,'update'])->name('prestaciones.familiares.update');
     Route::delete('prestaciones/familiares/{id}', [BeneficiaryController::class,'destroy'])->name('prestaciones.familiares.destroy');
+    Route::get('prestaciones/familiares/{id}/disabled', [BeneficiaryController::class,'disabled'])->name('prestaciones.familiares.disabled');
+    Route::put('prestaciones/familiares/baja/{id}', [BeneficiaryController::class,'baja'])->name('prestaciones.familiares.baja');
 });

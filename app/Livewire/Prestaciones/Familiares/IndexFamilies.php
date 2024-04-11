@@ -61,8 +61,7 @@ class IndexFamilies extends Component
         $concubinas = Beneficiary::where('status','active')
                 ->where('relationship','Concubina')
                 ->get();
-        $lista =  Beneficiary::where('status','active')
-                        ->latest()
+        $lista =  Beneficiary::latest()
                         ->limit(25)
                         ->get();     
         return view('livewire.prestaciones.familiares.index-families',[
