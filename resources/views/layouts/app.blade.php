@@ -106,6 +106,7 @@
                         <li><h6 class="dropdown-header">Catalogos</h6></li>
                         <li><a class="dropdown-item" href="{{route('prestaciones.dependencias.index')}}">Dependencias</a></li>
                         <li><a class="dropdown-item" href="{{route('prestaciones.subdependencias.index')}}">Subdependencias</a></li>
+                        <li><a class="dropdown-item" href="{{route('prestaciones.categorias.index')}}">Categorias</a></li>
                         <li>
                           <hr class="dropdown-divider">
                           <li><h6 class="dropdown-header">Afiliados</h6></li>

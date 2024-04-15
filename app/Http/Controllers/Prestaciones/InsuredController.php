@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
+use App\Models\Prestaciones\Category;
 use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Subdependency;
 use Exception;
@@ -60,11 +61,13 @@ class InsuredController extends Controller
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
+        $select5 = Category::where('status', 'active')->get();
         $row = Insured::find($id);
         return view('prestaciones/titulares/edit', ['select1' => $select1,
                                                     'select2' => $select2,
                                                     'select3' => $select3,
                                                     'select4' => $select4,
+                                                    'select5' => $select5,
                                                     'titular' => $row]);
     }
     public function update(Request $request, string $id)
