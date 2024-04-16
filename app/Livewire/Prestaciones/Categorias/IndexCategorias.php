@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Prestaciones\Categorias;
 
-use App\Models\Prestaciones\Category;
+use App\Models\Prestaciones\Rank;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -27,7 +27,7 @@ class IndexCategorias extends Component
     }
     public function render()
     {
-        $lista =  Category::where('status','active')
+        $lista =  Rank::where('status','active')
                         ->where('name','like','%'.$this->search.'%')
                         ->orderBy('name','asc')
                         ->paginate($this->numberRows);

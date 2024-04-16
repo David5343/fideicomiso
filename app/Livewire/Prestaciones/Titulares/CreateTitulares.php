@@ -7,6 +7,7 @@ use App\Models\Humanos\County;
 use App\Models\Humanos\State;
 use App\Models\Prestaciones\Category;
 use App\Models\Prestaciones\Insured;
+use App\Models\Prestaciones\Rank;
 use App\Models\Prestaciones\Subdependency;
 use Exception;
 use Livewire\Component;
@@ -156,7 +157,7 @@ class CreateTitulares extends Component
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
-        $select5 = Category::where('status', 'active')->get();
+        $select5 = Rank::where('status', 'active')->get();
         $this->no_expediente = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
         return view('livewire.prestaciones.titulares.create-titulares',['select1' => $select1,
                                                                         'select2' => $select2,

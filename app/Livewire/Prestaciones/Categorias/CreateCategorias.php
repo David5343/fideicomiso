@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Prestaciones\Categorias;
 
-use App\Models\Prestaciones\Category;
+use App\Models\Prestaciones\Rank;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
@@ -15,7 +15,7 @@ class CreateCategorias extends Component
     public function createCategory(){
 
         $this->validate();
-        $categoria = new Category();
+        $categoria = new Rank();
         $categoria->name = $this->nombre;
         $categoria->status = 'active';
         $categoria->modified_by = Auth::user()->email;
