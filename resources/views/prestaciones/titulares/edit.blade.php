@@ -56,6 +56,17 @@
         @error('subdepe_id')<br><small style="color: red">{{ $message }}</small>
         @enderror
         </div>
+        <div class="col-md-4">
+          <label class="form-label">* Categoria</label>
+          <select  class="form-select" id="categoria_id" name="categoria_id">
+            <option selected value="@if($titular->bank != null){{$titular->bank->id}}@endif">@if($titular->bank != null){{$titular->bank->name.' (Seleccionado)'}}@endif</option>
+            @foreach($select5 as $categoria)
+            <option value="{{$categoria->id}}">{{$categoria->name}}</option>
+            @endforeach
+        </select>
+        @error('categoria_id')<br><small style="color: red">{{ $message }}</small>
+        @enderror
+        </div>
         <div class="col-md-2">
           <label class="form-label">* Fecha de Ingreso</label>
           <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" 

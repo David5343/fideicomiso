@@ -46,11 +46,11 @@
             <select wire:model="categoria_id" class="form-select" id="categoria_id" name="categoria_id" 
             value="{{old('categoria_id')}}">
               <option selected value="">Elije...</option>
-              @foreach($select5 as $sd)
-              <option value="{{$sd->id}}">{{$sd->name}}</option>
+              @foreach($select5 as $categoria)
+              <option value="{{$categoria->id}}">{{$categoria->name}}</option>
               @endforeach
           </select>
-          @error('subdepe_id')<br><small style="color: red">{{ $message }}</small>
+          @error('categoria_id')<br><small style="color: red">{{ $message }}</small>
           @enderror
           </div>
           <div class="col-md-3">

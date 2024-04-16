@@ -3,6 +3,7 @@
 namespace App\Models\Prestaciones;
 
 use App\Models\Humanos\Bank;
+use App\Models\Prestaciones\Rank;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,5 +24,9 @@ class Insured extends Model
     public function bank(): BelongsTo
     {
        return $this->belongsTo(Bank::class);
+    }
+    public function rank(): BelongsTo
+    {
+        return $this->belongsTo(Rank::class);
     }
 }

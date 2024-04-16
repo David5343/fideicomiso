@@ -22,6 +22,8 @@ class CreateTitulares extends Component
     public $no_expediente;
     #[Validate('required')]
     public $subdepe_id;
+    #[Validate('required')]
+    public $categoria_id;
     #[Validate('required|max:10|date')]
     public $fecha_ingreso;
     #[Validate('nullable|min:3|max:85')]
@@ -96,6 +98,7 @@ class CreateTitulares extends Component
             $titular = new Insured();
             $titular->file_number = Str::of($this->no_expediente)->trim();
             $titular->subdependency_id = $this->subdepe_id;
+            $titular->rank_id = $this->categoria_id;
             $titular->start_date =$this->fecha_ingreso;
             $titular->work_place = Str::of($this->lugar_trabajo)->trim();
             $titular->register_motive = Str::of($this->motivo_alta)->trim();

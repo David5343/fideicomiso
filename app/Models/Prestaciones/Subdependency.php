@@ -15,8 +15,4 @@ class Subdependency extends Model
     {
         return $this->belongsTo(Dependency::class);
     }
-    public function affiliate():HasMany
-    {
-        return $this->hasMany(Affiliate::class);
-    }
 }

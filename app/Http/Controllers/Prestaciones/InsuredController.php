@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
-use App\Models\Prestaciones\Category;
 use App\Models\Prestaciones\Insured;
+use App\Models\Prestaciones\Rank;
 use App\Models\Prestaciones\Subdependency;
 use Exception;
 use Illuminate\Http\Request;
@@ -61,7 +61,7 @@ class InsuredController extends Controller
         $select2 = State::where('status', 'active')->get();
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
-        $select5 = Category::where('status', 'active')->get();
+        $select5 = Rank::where('status', 'active')->get();
         $row = Insured::find($id);
         return view('prestaciones/titulares/edit', ['select1' => $select1,
                                                     'select2' => $select2,
@@ -74,6 +74,7 @@ class InsuredController extends Controller
     {
         $validated = $request->validate([
             'subdepe_id'=> ['required'],
+            'categoria_id'=> ['required'],
             'fecha_ingreso' => ['required','max:10','date'],
             'lugar_trabajo' => ['nullable','min:3','max:85'],
             'motivo_alta' =>['nullable','min:3','max:120'],
@@ -113,6 +114,7 @@ class InsuredController extends Controller
         try{
             $row = Insured::find($id);
             $row->subdependency_id = $request->input('subdepe_id');
+            $row->rank_id = $request->input('categoria_id');
             $row->start_date =$request->input('fecha_ingreso');
             $row->work_place = Str::of($request->input('lugar_trabajo'))->trim();  
             $row->register_motive = Str::of($request->input('motivo_alta'))->trim();
