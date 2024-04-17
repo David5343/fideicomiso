@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
+use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::put('api/prestaciones/titulares/{id}', [InsuredController::class,'update']);
     // Route::get('api/prestaciones/titulares/{id}/disabled', [InsuredController::class,'disabled']);
     // Route::put('api/prestaciones/titulares/baja/{id}', [InsuredController::class,'baja']);
+    //Rutas de subdependencias
+    Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 });
