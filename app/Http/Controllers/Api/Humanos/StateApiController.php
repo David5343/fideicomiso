@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\Prestaciones;
+namespace App\Http\Controllers\Api\Humanos;
 
 use App\Http\Controllers\Controller;
-use App\Models\Prestaciones\Subdependency;
+use App\Models\Humanos\State;
 use Illuminate\Http\Request;
 
-class SubdependencyApiController extends Controller
+class StateApiController extends Controller
 {
     public function listar()
     {
-        $query = Subdependency::where('status','active')->get();
+        $query = State::where('status','active')->get();
         //$subdepe["subdependencias"] = $query;
         return response()->json($query);
     }

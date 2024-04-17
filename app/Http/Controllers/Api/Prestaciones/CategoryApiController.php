@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\Prestaciones;
 
 use App\Http\Controllers\Controller;
-use App\Models\Prestaciones\Subdependency;
+use App\Models\Prestaciones\Rank;
 use Illuminate\Http\Request;
 
-class SubdependencyApiController extends Controller
+class CategoryApiController extends Controller
 {
     public function listar()
     {
-        $query = Subdependency::where('status','active')->get();
+        $query = Rank::where('status','active')->get();
         //$subdepe["subdependencias"] = $query;
         return response()->json($query);
     }

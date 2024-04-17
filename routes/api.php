@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\Humanos\CountyApiController;
+use App\Http\Controllers\Api\Humanos\StateApiController;
+use App\Http\Controllers\Api\Prestaciones\CategoryApiController;
 use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
 use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
 use Illuminate\Http\Request;
@@ -39,4 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::put('api/prestaciones/titulares/baja/{id}', [InsuredController::class,'baja']);
     //Rutas de subdependencias
     Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
+    //Rutas de categorias
+    Route::get('/prestaciones/categorias/listar',[CategoryApiController::class, 'listar']);
+    //Rutas de municipios
+    Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
+    //Rutas de estados
+    Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
 });

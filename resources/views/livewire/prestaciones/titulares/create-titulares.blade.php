@@ -41,7 +41,7 @@
           @error('subdepe_id')<br><small style="color: red">{{ $message }}</small>
           @enderror
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label class="form-label">* Categoria</label>
             <select wire:model="categoria_id" class="form-select" id="categoria_id" name="categoria_id" 
             value="{{old('categoria_id')}}">
