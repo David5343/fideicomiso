@@ -9,7 +9,7 @@ use Livewire\Attributes\Validate;
 
 class CreateCategorias extends Component
 {
-    #[Validate('required|unique:rank,name|min:5|max:50')]
+    #[Validate('required|unique:ranks,name|min:5|max:50')]
     public $nombre;
 
     public function createCategory(){

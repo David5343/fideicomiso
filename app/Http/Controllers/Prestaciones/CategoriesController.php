@@ -21,7 +21,7 @@ class CategoriesController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nombre' => ['required', 'max:50', 'unique:rank,name,' . $id],
+            'nombre' => ['required', 'max:50', 'unique:ranks,name,' . $id],
         ]);
         $row = Rank::find($id);
         $row->name = $request->input('nombre');
