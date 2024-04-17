@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('insureds', function (Blueprint $table) {
             $table->unsignedBigInteger('rank_id')->nullable()->after('subdependency_id');
-            $table->foreign('rank_id')->references('id')->on('rank');
+            $table->foreign('rank_id')->references('id')->on('ranks');
         });
     }
 
