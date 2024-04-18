@@ -171,7 +171,7 @@
                       <p class="mb-0"><strong>Categoria</strong></p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">@if($titular->rank->name){{$titular->rank->name}}@endif</p>
+                      <p class="text-muted mb-0">@isset($titular->rank->name){{$titular->rank->name}}@endisset</p>
                     </div>
                   </div>
                   <hr>

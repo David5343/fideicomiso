@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\Humanos\BankApiController;
 use App\Http\Controllers\Api\Humanos\CountyApiController;
 use App\Http\Controllers\Api\Humanos\StateApiController;
 use App\Http\Controllers\Api\Prestaciones\CategoryApiController;
@@ -33,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Rutas de titulares
     Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
     Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
-    // Route::get('api/prestaciones/titulares/create',[InsuredController::class, 'create']);
+     Route::get('api/prestaciones/titulares/create',[InsuredApiController::class, 'create']);
     // Route::post('api/prestaciones/titulares',[InsuredController::class, 'store']);
     // Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
     // Route::get('api/prestaciones/titulares/{id}/edit', [InsuredController::class,'edit']);
@@ -48,4 +49,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
     //Rutas de estados
     Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
+    //Rutas de bancos
+    Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
 });
