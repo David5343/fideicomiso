@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Rutas de titulares
     Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
     Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
-     Route::get('api/prestaciones/titulares/create',[InsuredApiController::class, 'create']);
+     Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
     // Route::post('api/prestaciones/titulares',[InsuredController::class, 'store']);
     // Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
     // Route::get('api/prestaciones/titulares/{id}/edit', [InsuredController::class,'edit']);

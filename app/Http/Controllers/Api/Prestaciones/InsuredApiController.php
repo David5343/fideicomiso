@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Insured;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Validator;
+
+use function Psy\debug;
 
 class InsuredApiController extends Controller
 {
@@ -26,30 +29,24 @@ class InsuredApiController extends Controller
     }
     public function store(Request $request)
     {
-        // $response =["status"=>0,
-        //             "msg"=>""];
-        // $data =json_decode($request->getContent());
-        // if(isset($data->email)){
-        //     $user = User::where('email',$data->email)->first();
-        //     if($user){
-        //         if(Hash::check($data->password,$user->password)){
-        //             $token = $user->createToken($data->email);
-        //             $response["status"] = 1;
-        //             $response["token"] = $token->plainTextToken;
-        //             $response["msg"] = "Inicio de Session exitoso.";
-        //             $response["user"] = $user;
-        //         }else{
-        //             $response["msg"] = "Estas Credenciales no coinciden con nuestros registros.";
-        //         }
-        //     }else{
-        //         $response["msg"] = "Usuario no encontrado.";
-        //     }
-            
-        // }else{
-        //     $response["msg"] = "Ingrese Parametros validos.";
-        // }
-
-        // return response()->json($response);
+        $response =["status"=>0,
+                    "validaciones"=>""];
+         $data =json_decode($request->getContent());
+         $validator = Validator::make($request->all(), [
+            'file_number' => 'required',
+            'subdependency_id' => 'required',
+            // Agrega más reglas de validación según tus necesidades
+        ]);
+    
+        if ($validator->fails()) {
+            // Aquí obtienes los mensajes de error de validación
+            $errors = $validator->errors()->all();
+    
+            // Puedes manejar los errores como desees, como por ejemplo, devolverlos como respuesta JSON
+            return response()->json(['errors' => $errors], 422);
+        }
+    
+        // Si la validación pasa, continua con el resto de tu lógica aquí
     }
 }
 
