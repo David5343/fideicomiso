@@ -30,16 +30,17 @@ class InsuredApiController extends Controller
     public function store(Request $request)
     {
         $response =["status"=>0,
-                    "validaciones"=>""];
-         $data =json_decode($request->getContent());
+                    "errors"=>"",
+                    "insured"=>""];
+        $data =json_decode($request->getContent());
          $validator = Validator::make($request->all(), [
-            'File_number' => 'required',
-            'Subdependency_id'=> ['required'],
-            'Rank_id'=> ['required'],
-            'Start_date' => ['required','max:10','date'],
-            'Work_place' => ['nullable','min:3','max:85'],
+            'File_number' => ['required','max:8','unique:insureds,file_number'],
+            'Subdependency_id'=> ['required','numeric','min:0'],
+            'Rank_id'=> ['required','numeric','min:0'],
+            'Start_date' => ['required','date','max:10'],
+            'Work_place' => ['nullable','not_in:Elije...','min:3','max:85'],
             'Register_motive' =>['nullable','min:3','max:120'],
-            'Affiliate_status' => ['required'],
+            'Affiliate_status' => ['required','not_in:Elije...'],
             'Observations' =>['nullable','min:5','max:180'],
             'Last_name_1' => ['required', 'min:2','max:20'],
             'Last_name_2' => ['required', 'min:2','max:20'],
@@ -72,15 +73,14 @@ class InsuredApiController extends Controller
         // Si la validación falla
         if ($validator->fails()) {
             // Obtener los mensajes de error en el formato deseado
-            //$errors = $validator->errors();
-            $errores = $validator->errors()->toArray();
-
+            $response['errors'] = $validator->errors()->toArray();
             // Retornar una respuesta con los errores en formato JSON
-            return response()->json(['errors' => $errores]);
+
         }    
-    
-        // // Si la validación pasa, continua con el resto de tu lógica aquí
-        // return response()->json(['Work_place' => $data->Work_place]);
+         // Si la validación pasa, continua con el resto de tu lógica aquí
+         //return response()->json(['Bank_id' => $data->Bank_id]);
+         return response()->json($response);
+
     }
 }
 
