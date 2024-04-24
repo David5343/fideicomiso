@@ -31,14 +31,15 @@ class InsuredApiController extends Controller
     {
         $response =["status"=>0,
                     "errors"=>"",
-                    "insured"=>""];
+                    "insured"=>"",
+                    "debug"=>""];
         $data =json_decode($request->getContent());
          $validator = Validator::make($request->all(), [
             'File_number' => ['required','max:8','unique:insureds,file_number'],
             'Subdependency_id'=> ['required','numeric','min:0'],
             'Rank_id'=> ['required','numeric','min:0'],
             'Start_date' => ['required','date','max:10'],
-            'Work_place' => ['nullable','not_in:Elije...','min:3','max:85'],
+            'Work_place' => ['nullable','min:3','max:85'],
             'Register_motive' =>['nullable','min:3','max:120'],
             'Affiliate_status' => ['required','not_in:Elije...'],
             'Observations' =>['nullable','min:5','max:180'],
@@ -47,7 +48,7 @@ class InsuredApiController extends Controller
             'Name' => ['required','min:2','max:30'],            
             'Birthday' => ['nullable','max:10','date'],
             'Birthplace' => ['nullable','min:3','max:85'],
-            'Sex' => ['nullable'],
+            'Sex' => ['required'],
             'Marital_status' => ['nullable'],
             'Rfc' => ['required ',' max:13 ',' alpha_num:ascii','unique:insureds,rfc'],
             'Curp' => ['nullable' ,' max:18 ', 'alpha_num:ascii','unique:insureds,curp'],
@@ -79,6 +80,7 @@ class InsuredApiController extends Controller
         }    
          // Si la validación pasa, continua con el resto de tu lógica aquí
          //return response()->json(['Bank_id' => $data->Bank_id]);
+         $response["debug"]= $data->Representative_relationship;
          return response()->json($response);
 
     }
