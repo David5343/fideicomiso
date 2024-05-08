@@ -77,8 +77,7 @@ class InsuredApiController extends Controller
         if ($validator->fails()) {
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
-            //$errores = $validator->errors()->toArray();
-            //$response['debug'] = $request->input('Start_date');
+            //$response['debug'] = $request->all();
             return response()->json($response, 200);
         }
 
@@ -129,17 +128,17 @@ class InsuredApiController extends Controller
              $titular->status = 'active';
              $titular->modified_by = Auth::user()->email;
              //sleep(1);
-             //$record = $titular->save();
-            //DB::commit();
+             $titular->save();
+            DB::commit();
             $response['status'] ="1";
-            ///$response['insured'] =$record;
+            $response['insured'] =$titular->file_number;
             return response()->json($response, 200);
          }catch(Exception $e){
              DB::rollBack();
              $response['debug'] =$e->getMessage(); 
              
          }         
-         //return response()->json($response);
+
     }
 }
 
