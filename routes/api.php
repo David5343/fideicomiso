@@ -30,25 +30,25 @@ Route::get('/users', [ApiController::class,'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     
-    Route::get('/users', [ApiController::class,'index']);
-    //Rutas de titulares
-    Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
-    Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
-     Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
-    // Route::post('api/prestaciones/titulares',[InsuredController::class, 'store']);
-    // Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
-    // Route::get('api/prestaciones/titulares/{id}/edit', [InsuredController::class,'edit']);
-    // Route::put('api/prestaciones/titulares/{id}', [InsuredController::class,'update']);
-    // Route::get('api/prestaciones/titulares/{id}/disabled', [InsuredController::class,'disabled']);
-    // Route::put('api/prestaciones/titulares/baja/{id}', [InsuredController::class,'baja']);
-    //Rutas de subdependencias
-    Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
-    //Rutas de categorias
-    Route::get('/prestaciones/categorias/listar',[CategoryApiController::class, 'listar']);
-    //Rutas de municipios
-    Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
-    //Rutas de estados
-    Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
-    //Rutas de bancos
-    Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
+Route::get('/users', [ApiController::class,'index']);
+//Rutas de titulares
+Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
+Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
+Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
+Route::post('/prestaciones/titulares/busqueda',[InsuredApiController::class, 'busqueda']);
+// Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
+// Route::get('api/prestaciones/titulares/{id}/edit', [InsuredController::class,'edit']);
+// Route::put('api/prestaciones/titulares/{id}', [InsuredController::class,'update']);
+// Route::get('api/prestaciones/titulares/{id}/disabled', [InsuredController::class,'disabled']);
+// Route::put('api/prestaciones/titulares/baja/{id}', [InsuredController::class,'baja']);
+//Rutas de subdependencias
+Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
+//Rutas de categorias
+Route::get('/prestaciones/categorias/listar',[CategoryApiController::class, 'listar']);
+//Rutas de municipios
+Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
+//Rutas de estados
+Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
+//Rutas de bancos
+Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
 });

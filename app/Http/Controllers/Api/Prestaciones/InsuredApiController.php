@@ -22,7 +22,49 @@ class InsuredApiController extends Controller
                                 ->get();
         return response()->json($titulares);
     }
+    public function busqueda(Request $request)
+    {
+        $data = $request->json()->all();
+        $parametro = $data['parametro'];
+        $busqueda = $data['search'];
+        $row = null;
+        if($parametro != null && $busqueda != null){
+            switch ($parametro) {
+                case 'Elije...':
+                    return response()->json($row);
+                    break;
+                    case 'RFC':
+                        $fila = Insured::where('rfc',$busqueda)->first();
+                        if($fila != null){
+                            return response()->json([$fila]);
+                        }else{
+                            return response()->json($row);
+                        }
+                        break;
+                        case 'No. de Expediente':
+                            $fila = Insured::where('file_number',$busqueda)->first();
+                            if($fila != null){
+                                return response()->json([$fila]);
+                            }else{
+                                return response()->json($row);
+                            }
+                            break;
+                            case 'CURP':
+                                $fila = Insured::where('curp',$busqueda)->first();
+                                if($fila != null){
+                                    return response()->json([$fila]);
+                                }else{
+                                    return response()->json($row);
+                                }
+                                break;                 
+                default:
+                    # code...
+                    break;
+            }
 
+        }
+        return response()->json($row);
+    }
     public function idgenerator()
     {
         $no_expediente = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
