@@ -27,43 +27,51 @@ class InsuredApiController extends Controller
         $data = $request->json()->all();
         $parametro = $data['parametro'];
         $busqueda = $data['search'];
-        $row = null;
-        if($parametro != null && $busqueda != null){
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['errors'] =[];
+        $response['insured'] =[];
+        $response['debug'] ="0";
+
             switch ($parametro) {
-                case 'Elije...':
-                    return response()->json($row);
-                    break;
                     case 'RFC':
                         $fila = Insured::where('rfc',$busqueda)->first();
                         if($fila != null){
-                            return response()->json([$fila]);
-                        }else{
-                            return response()->json($row);
-                        }
+                            $response['insured'] = [$fila];
+                            $response['status'] ="success";
+                            $codigo = 200;
+                        } else{
+                            //$codigo = 404;
+                            $codigo = 200;
+                        }                       
                         break;
                         case 'No. de Expediente':
                             $fila = Insured::where('file_number',$busqueda)->first();
                             if($fila != null){
-                                return response()->json([$fila]);
-                            }else{
-                                return response()->json($row);
-                            }
-                            break;
-                            case 'CURP':
-                                $fila = Insured::where('curp',$busqueda)->first();
-                                if($fila != null){
-                                    return response()->json([$fila]);
-                                }else{
-                                    return response()->json($row);
-                                }
+                                $response['insured'] = [$fila];
+                                $response['status'] ="success";
+                                $codigo = 200;
+                            } else{
+                                //$codigo = 404;
+                                $codigo = 200;
+                            } 
+                        break;
+                        case 'CURP':
+                            $fila = Insured::where('curp',$busqueda)->first();
+                            if($fila != null){
+                                $response['insured'] = [$fila];
+                                $response['status'] ="success";
+                                $codigo = 200;
+                            } else{
+                                //$codigo = 404;
+                                $codigo = 200;
+                            }  
                                 break;                 
-                default:
+                        default:
                     # code...
                     break;
             }
-
-        }
-        return response()->json($row);
+            return response()->json($response,status:$codigo);
     }
     public function idgenerator()
     {
