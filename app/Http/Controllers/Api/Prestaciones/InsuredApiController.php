@@ -22,6 +22,7 @@ class InsuredApiController extends Controller
                                 ->get();
         return response()->json($titulares);
     }
+
     public function busqueda(Request $request)
     {
         $data = $request->json()->all();
@@ -72,6 +73,27 @@ class InsuredApiController extends Controller
                     break;
             }
             return response()->json($response,status:$codigo);
+    }
+    public function buscarPorId(Request $request)
+    {
+        $data = $request->json()->all();
+        $id = $data['id'];
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['errors'] =[];
+        $response['insured'] =[];
+        $response['debug'] ="0";
+
+        $fila = Insured::find($id);
+        if($fila != null){
+            $response['insured'] = $fila;
+            $response['status'] ="success";
+            $codigo = 200;
+        } else{
+            //$codigo = 404;
+            $codigo = 200;
+        } 
+        return response()->json($response,status:$codigo);
     }
     public function idgenerator()
     {

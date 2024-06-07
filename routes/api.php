@@ -36,6 +36,7 @@ Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
 Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
 Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
 Route::post('/prestaciones/titulares/busqueda',[InsuredApiController::class, 'busqueda']);
+Route::post('/prestaciones/titulares/buscarporid',[InsuredApiController::class, 'buscarporid']);
 // Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
 // Route::get('api/prestaciones/titulares/{id}/edit', [InsuredController::class,'edit']);
 // Route::put('api/prestaciones/titulares/{id}', [InsuredController::class,'update']);
