@@ -143,6 +143,7 @@
             <th scope="col">#</th>
             <th scope="col">No de Expediente</th>
             <th scope="col">Nombre</th>
+            <th scope="col">CURP</th>
             <th scope="col">Editar</th>
             <th scope="col">Ficha Técnica</th>
             <th scope="col">Estatus</th>
@@ -156,6 +157,7 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->file_number }}</td>
                     <td>{{ $item->last_name_1.' '.$item->last_name_2.' '.$item->name }}</td>
+                    <td>{{ $item->curp }}</td>
                     <td>
                         <a href="{{ url('prestaciones/familiares/'.$item->id .'/edit')}}" class="btn btn-secondary btn-sm">
                             <i class="bi bi-pencil-square"></i>
