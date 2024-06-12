@@ -38,7 +38,7 @@ class CreateFamily extends Component
     public $sexo="";
     #[Validate('nullable | max:13| alpha_num:ascii')] 
     public $rfc="";
-    #[Validate('required|max:18|alpha_num:ascii|unique:beneficiaries,curp')]
+    #[Validate('nullable|max:18|alpha_num:ascii|unique:beneficiaries,curp')]
     public $curp="";
     #[Validate('required')] 
     public $persona_discapacitada="";
