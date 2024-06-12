@@ -82,11 +82,25 @@ class InsuredApiController extends Controller
         $response['status'] ="fail";
         $response['errors'] =[];
         $response['insured'] =[];
+        $response['beneficiaries']=[];
         $response['debug'] ="0";
 
         $fila = Insured::find($id);
         if($fila != null){
+            if($fila->subdependency_id !=0){
+
+                $fila->subdependency_name = $fila->subdependency->name;
+            }
+            if($fila->rank_id !=null){
+
+                $fila->rank_name = $fila->rank->name;
+            }
+            if($fila->bank_id !=null){
+
+                $fila->bank_name = $fila->bank->name;
+            }
             $response['insured'] = $fila;
+            $response['beneficiaries'] = $fila->beneficiaries;
             $response['status'] ="success";
             $codigo = 200;
         } else{
