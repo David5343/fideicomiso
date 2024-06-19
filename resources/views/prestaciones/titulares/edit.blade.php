@@ -59,7 +59,7 @@
         <div class="col-md-4">
           <label class="form-label">* Categoria</label>
           <select  class="form-select" id="categoria_id" name="categoria_id">
-            <option selected value="@if($titular->bank != null){{$titular->bank->id}}@endif">@if($titular->bank != null){{$titular->bank->name.' (Seleccionado)'}}@endif</option>
+            <option selected value="@if($titular->rank != null){{$titular->rank->id}}@endif">@if($titular->rank != null){{$titular->rank->name.' (Seleccionado)'}}@endif</option>
             @foreach($select5 as $categoria)
             <option value="{{$categoria->id}}">{{$categoria->name}}</option>
             @endforeach

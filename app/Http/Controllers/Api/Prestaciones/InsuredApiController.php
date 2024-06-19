@@ -100,6 +100,12 @@ class InsuredApiController extends Controller
                 $fila->bank_name = $fila->bank->name;
             }
             $response['insured'] = $fila;
+            // foreach($fila->beneficiaries as $item)
+            // {
+            //     if($item->bank_id !=null){
+
+            //     }
+            // }
             $response['beneficiaries'] = $fila->beneficiaries;
             $response['status'] ="success";
             $codigo = 200;
