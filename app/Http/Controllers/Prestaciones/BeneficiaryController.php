@@ -59,7 +59,7 @@ class BeneficiaryController extends Controller
             'fecha_ingreso' => ['required','date'],
             'apaterno' => ['required','max:20'],
             'amaterno' => ['required', 'max:20'],
-            'nombre' => ['required','max:20'], 
+            'nombre' => ['required','max:30'], 
             'fecha_nacimiento' => ['required','date'],
             'sexo' => ['required'],
             'rfc' => ['nullable','max:13','alpha_num:ascii','unique:beneficiaries,rfc,'. $id],
