@@ -114,8 +114,8 @@ class InsuredApiController extends Controller
     }
     public function idgenerator()
     {
-        $no_expediente = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
-        $response["no_expediente"] = $no_expediente;
+        $no_afiliacion = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
+        $response["no_afiliacion"] = $no_afiliacion;
         return response()->json($response);
     }
     public function store(Request $request)
