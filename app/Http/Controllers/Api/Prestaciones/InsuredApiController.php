@@ -16,7 +16,8 @@ class InsuredApiController extends Controller
 {
     public function index()
     {   
-        $titulares = Insured::where('status','active')
+        $titulares = Insured::with('rank')
+                                ->with('subdependency')
                                 ->latest()
                                 ->limit(25)
                                 ->get();

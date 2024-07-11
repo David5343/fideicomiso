@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Insured extends Model
 {
     use HasFactory;
+    protected $table = 'insureds';
 
     public function beneficiaries():HasMany
     {
@@ -27,6 +28,6 @@ class Insured extends Model
     }
     public function rank(): BelongsTo
     {
-        return $this->belongsTo(Rank::class);
+        return $this->belongsTo(Rank::class,'rank_id');
     }
 }
