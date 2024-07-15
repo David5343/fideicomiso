@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Insured;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -126,7 +128,9 @@ class InsuredApiController extends Controller
         $response['insured'] ="0";
         $response['debug'] ="0";
          $rules =[
-            'File_number' => 'required|max:8|unique:insureds,file_number',
+            //'File_number' => 'required|max:8|unique:insureds,file_number',
+            'File_number' => ['required',Rule::unique('insureds')->where(fn (Builder $query) => $query->where('status','active')),],
+            //'File_number' => 'required|max:8',
             'Subdependency_id'=> 'required|numeric|min:1',
             'Rank_id'=> 'required|numeric|min:0',
             'Start_date' => 'required|date|max:10',
@@ -141,8 +145,10 @@ class InsuredApiController extends Controller
             'Birthplace' => 'nullable|min:3|max:85',
             'Sex' => 'required',
             'Marital_status' => 'nullable',
-            'Rfc' => 'required|max:13|alpha_num:ascii|unique:insureds,rfc',
-            'Curp' => 'nullable| max:18 |alpha_num:ascii|unique:insureds,curp',
+            //'Rfc' => 'required|max:13|alpha_num:ascii|unique:insureds,rfc',
+            'Rfc' => 'required|max:13|alpha_num:ascii',
+            //'Curp' => 'nullable| max:18 |alpha_num:ascii|unique:insureds,curp',
+            'Curp' => 'nullable| max:18 |alpha_num:ascii',
             'Phone' => 'nullable|numeric|digits:10',
             'Email' => 'nullable|email|min:5|max:50|unique:insureds,email',
             'State' => 'nullable|min:5|max:85',
