@@ -32,16 +32,16 @@ Route::middleware('auth:sanctum')->group(function () {
     
 Route::get('/users', [ApiController::class,'index']);
 //Rutas de titulares
-Route::get('/prestaciones/titulares', [InsuredApiController::class,'index']);
+// Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
+// Route::post('/prestaciones/titulares/busqueda',[InsuredApiController::class, 'busqueda']);
+Route::get('/prestaciones/titulares',[InsuredApiController::class, 'index']);
+//Route::get('/prestaciones/titulares/create',[InsuredApiController::class, 'create']);
+Route::post('/prestaciones/titulares',[InsuredApiController::class, 'store']);
+Route::get('/prestaciones/titulares/{id}',[InsuredApiController::class,'show']);
+//Route::get('/prestaciones/titulares/{id}/edit', [InsuredApiController::class,'edit']);
+Route::put('/prestaciones/titulares/{id}', [InsuredApiController::class,'update']);
+Route::delete('/prestaciones/titulares/{id}', [InsuredApiController::class,'destroy']);
 Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
-Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
-Route::post('/prestaciones/titulares/busqueda',[InsuredApiController::class, 'busqueda']);
-Route::post('/prestaciones/titulares/buscarporid',[InsuredApiController::class, 'buscarporid']);
-// Route::get('api/prestaciones/titulares/{id}',[InsuredController::class, 'show']);
-// Route::get('api/prestaciones/titulares/{id}/edit', [InsuredController::class,'edit']);
-// Route::put('api/prestaciones/titulares/{id}', [InsuredController::class,'update']);
-// Route::get('api/prestaciones/titulares/{id}/disabled', [InsuredController::class,'disabled']);
-// Route::put('api/prestaciones/titulares/baja/{id}', [InsuredController::class,'baja']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias

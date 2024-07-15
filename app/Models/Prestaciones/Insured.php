@@ -28,6 +28,6 @@ class Insured extends Model
     }
     public function rank(): BelongsTo
     {
-        return $this->belongsTo(Rank::class,'rank_id');
+        return $this->belongsTo(Rank::class);
     }
 }

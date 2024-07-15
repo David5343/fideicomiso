@@ -15,4 +15,8 @@ class Subdependency extends Model
     {
         return $this->belongsTo(Dependency::class);
     }
+    public function insured():HasMany
+    {
+        return $this->hasMany(Insured::class,'subdependency_id');
+    }
 }

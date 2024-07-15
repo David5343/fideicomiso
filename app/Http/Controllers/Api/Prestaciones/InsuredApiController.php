@@ -77,43 +77,26 @@ class InsuredApiController extends Controller
             }
             return response()->json($response,status:$codigo);
     }
-    public function buscarPorId(Request $request)
+    public function show($id)
     {
-        $data = $request->json()->all();
-        $id = $data['id'];
-        $codigo = 0;
-        $response['status'] ="fail";
-        $response['errors'] =[];
-        $response['insured'] =[];
-        $response['debug'] ="0";
-
-        $fila = Insured::find($id);
-        if(empty($fila)){
-            if(!empty($fila->subdependency_id)){
-                $fila->subdependency_name = $fila->subdependency->name;
-            }
-            if(empty($fila->rank_id)){
-                $fila->rank_name ="NO DISPONIBLE";
-                
-            }else{
-                $fila->rank_name = $fila->rank->name;
-            }
-            if($fila->bank_id !=null){
-
-                $fila->bank_name = $fila->bank->name;
-            }
-            if($fila->beneficiaries !=null)
-            {
-                $fila->fam = $fila->beneficiaries;
-            }
-            $response['insured'] = $fila;          
-            $response['status'] ="success";
-            $codigo = 200;
-        } else{
-            //$codigo = 404;
-            $codigo = 200;
-        } 
-        return response()->json($response,status:$codigo);
+        //$data = $request->json()->all();
+        //$id = $data['id'];
+        // $codigo = 0;
+        // $response['status'] ="fail";
+        // $response['errors'] =[];
+        // $response['insured'] =[];
+        // $response['debug'] ="0";
+        // $fila = Insured::find($id);
+        // $response['insured'] = $fila;          
+        // $response['status'] ="success";
+        // $codigo = 200;
+        // return response()->json($response,status:$codigo);
+        $titular = Insured::find($id);
+        if ($titular) {
+            return response()->json($titular, 200);
+        } else {
+            return response()->json(['message' => 'Registro no encontrado'], 404);
+        }
     }
     public function idgenerator()
     {
