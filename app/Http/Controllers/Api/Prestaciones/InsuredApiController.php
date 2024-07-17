@@ -77,25 +77,36 @@ class InsuredApiController extends Controller
             }
             return response()->json($response,status:$codigo);
     }
-    public function show($id)
+    public function show($dato)
     {
-        //$data = $request->json()->all();
-        //$id = $data['id'];
-        // $codigo = 0;
-        // $response['status'] ="fail";
-        // $response['errors'] =[];
-        // $response['insured'] =[];
-        // $response['debug'] ="0";
-        // $fila = Insured::find($id);
-        // $response['insured'] = $fila;          
-        // $response['status'] ="success";
-        // $codigo = 200;
-        // return response()->json($response,status:$codigo);
-        $titular = Insured::find($id);
-        if ($titular) {
-            return response()->json($titular, 200);
+
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] =[];
+        $response['insured'] =[];
+        $response['beneficiary'] =[];
+        $response['debug'] ="0";
+        $titular = Insured::where('status','active')
+                            ->where('id',$dato)
+                            ->orwhere('file_number',$dato)
+                            ->orwhere('last_name_1',$dato)
+                            ->orwhere('last_name_2',$dato)
+                            ->orwhere('name',$dato)
+                            ->orwhere('rfc',$dato)
+                            ->orwhere('curp',$dato)
+                            ->get();
+        if ($titular->isEmpty()) {
+            $response['message'] = "Registro no encontrado";      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
         } else {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
+            $response['status'] ="success";
+            $response['message'] = [];
+            $response['insured'] =$titular;
+            $response['beneficiary'] =[]; 
+            $response['debug'] ="0";        
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
         }
     }
     public function idgenerator()
