@@ -25,75 +25,26 @@ class InsuredApiController extends Controller
                                 ->get();
         return response()->json($titulares);
     }
-
-    public function busqueda(Request $request)
-    {
-        $data = $request->json()->all();
-        $parametro = $data['parametro'];
-        $busqueda = $data['search'];
-        $codigo = 0;
-        $response['status'] ="fail";
-        $response['errors'] =[];
-        $response['insured'] =[];
-        $response['debug'] ="0";
-
-            switch ($parametro) {
-                    case 'RFC':
-                        $fila = Insured::where('rfc',$busqueda)->first();
-                        if($fila != null){
-                            $response['insured'] = [$fila];
-                            $response['status'] ="success";
-                            $codigo = 200;
-                        } else{
-                            //$codigo = 404;
-                            $codigo = 200;
-                        }                       
-                        break;
-                        case 'No. de Expediente':
-                            $fila = Insured::where('file_number',$busqueda)->first();
-                            if($fila != null){
-                                $response['insured'] = [$fila];
-                                $response['status'] ="success";
-                                $codigo = 200;
-                            } else{
-                                //$codigo = 404;
-                                $codigo = 200;
-                            } 
-                        break;
-                        case 'CURP':
-                            $fila = Insured::where('curp',$busqueda)->first();
-                            if($fila != null){
-                                $response['insured'] = [$fila];
-                                $response['status'] ="success";
-                                $codigo = 200;
-                            } else{
-                                //$codigo = 404;
-                                $codigo = 200;
-                            }  
-                                break;                 
-                        default:
-                    # code...
-                    break;
-            }
-            return response()->json($response,status:$codigo);
-    }
     public function show($dato)
     {
 
         $codigo = 0;
         $response['status'] ="fail";
-        $response['message'] =[];
-        $response['insured'] =[];
-        $response['beneficiary'] =[];
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
         $response['debug'] ="0";
         $titular = Insured::where('status','active')
-                            ->where('id',$dato)
-                            ->orwhere('file_number',$dato)
-                            ->orwhere('last_name_1',$dato)
-                            ->orwhere('last_name_2',$dato)
-                            ->orwhere('name',$dato)
+                            ->where('file_number',$dato)
+                            ->orwhere('id',$dato)
                             ->orwhere('rfc',$dato)
                             ->orwhere('curp',$dato)
+                            ->orwhere('name','like','%'.$dato.'%')
+                            ->orwhere('last_name_1','like','%'.$dato.'%')
+                            ->orwhere('last_name_2','like','%'.$dato.'%')
+                            ->with('subdependency')
+                            ->with('rank')
                             ->get();
         if ($titular->isEmpty()) {
             $response['message'] = "Registro no encontrado";      
@@ -101,10 +52,7 @@ class InsuredApiController extends Controller
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
-            $response['message'] = [];
-            $response['insured'] =$titular;
-            $response['beneficiary'] =[]; 
-            $response['debug'] ="0";        
+            $response['insured'] =$titular;        
             $codigo = 200;
             return response()->json($response,status:$codigo);
         }
