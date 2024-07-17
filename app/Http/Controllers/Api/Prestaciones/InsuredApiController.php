@@ -54,7 +54,7 @@ class InsuredApiController extends Controller
             $response['status'] ="success";
             $response['insured'] =$titular;        
             $codigo = 200;
-            return response()->json($response,status:$codigo);
+            return response()->json($response,status:$codigo);     
         }
     }
     public function idgenerator()
