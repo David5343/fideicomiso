@@ -45,6 +45,7 @@ class InsuredApiController extends Controller
                             ->orwhere('last_name_2','like','%'.$dato.'%')
                             ->with('subdependency')
                             ->with('rank')
+                            ->with('beneficiaries')
                             ->get();
         if ($titular->isEmpty()) {
             $response['message'] = "Registro no encontrado";      
