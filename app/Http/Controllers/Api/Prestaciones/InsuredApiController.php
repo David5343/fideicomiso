@@ -13,6 +13,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Constraint\Count;
 
 class InsuredApiController extends Controller
 {
@@ -25,7 +26,7 @@ class InsuredApiController extends Controller
                                 ->get();
         return response()->json($titulares);
     }
-    public function show($dato)
+    public function show($id)
     {
 
         $codigo = 0;
@@ -34,26 +35,29 @@ class InsuredApiController extends Controller
         $response['errors'] ="";
         $response['insured'] ="";
         $response['beneficiary'] ="";
+        $response['history'] ="";
         $response['debug'] ="0";
-        $titular = Insured::where('status','active')
-                            ->where('file_number',$dato)
-                            ->orwhere('id',$dato)
-                            ->orwhere('rfc',$dato)
-                            ->orwhere('curp',$dato)
-                            ->orwhere('name','like','%'.$dato.'%')
-                            ->orwhere('last_name_1','like','%'.$dato.'%')
-                            ->orwhere('last_name_2','like','%'.$dato.'%')
+        $titular = Insured::where('id',$id)
                             ->with('subdependency')
                             ->with('rank')
+                            ->with('bank')
                             ->with('beneficiaries')
-                            ->get();
-        if ($titular->isEmpty()) {
+                            ->first();
+        if ($titular == null) {
             $response['message'] = "Registro no encontrado";      
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
+            $history = Insured::where('file_number',$titular->file_number)
+            ->where('affiliate_status','Baja')
+            ->with('subdependency')
+            ->with('rank')
+            ->with('bank')
+            ->with('beneficiaries')
+            ->get();
             $response['status'] ="success";
-            $response['insured'] =$titular;        
+            $response['insured'] =$titular;  
+            $response['history'] =$history;      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
         }
@@ -178,6 +182,40 @@ class InsuredApiController extends Controller
              
          }         
 
+    }
+    public function busqueda(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="0";
+        $titular = Insured::where('status','active')
+                            ->where('file_number',$dato)
+                            ->orwhere('id',$dato)
+                            ->orwhere('rfc',$dato)
+                            ->orwhere('curp',$dato)
+                            ->orwhere('name','like','%'.$dato.'%')
+                            ->orwhere('last_name_1','like','%'.$dato.'%')
+                            ->orwhere('last_name_2','like','%'.$dato.'%')
+                            ->with('subdependency')
+                            ->with('rank')
+                            ->with('bank')
+                            ->with('beneficiaries')
+                            ->get();
+        if ($titular->isEmpty()) {
+            $response['message'] = "Registro no encontrado";      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $response['status'] ="success";
+            $response['insured'] =$titular;        
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
     }
 }
 

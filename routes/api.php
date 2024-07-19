@@ -42,6 +42,7 @@ Route::get('/prestaciones/titulares/{id}',[InsuredApiController::class,'show']);
 Route::put('/prestaciones/titulares/{id}', [InsuredApiController::class,'update']);
 Route::delete('/prestaciones/titulares/{id}', [InsuredApiController::class,'destroy']);
 Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
+Route::get('/prestaciones/titulares/busqueda/{dato}',[InsuredApiController::class, 'busqueda']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
