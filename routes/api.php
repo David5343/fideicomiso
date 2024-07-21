@@ -32,17 +32,14 @@ Route::middleware('auth:sanctum')->group(function () {
     
 Route::get('/users', [ApiController::class,'index']);
 //Rutas de titulares
-// Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
-// Route::post('/prestaciones/titulares/busqueda',[InsuredApiController::class, 'busqueda']);
-Route::get('/prestaciones/titulares',[InsuredApiController::class, 'index']);
-//Route::get('/prestaciones/titulares/create',[InsuredApiController::class, 'create']);
-Route::post('/prestaciones/titulares',[InsuredApiController::class, 'store']);
-Route::get('/prestaciones/titulares/{id}',[InsuredApiController::class,'show']);
-//Route::get('/prestaciones/titulares/{id}/edit', [InsuredApiController::class,'edit']);
-Route::put('/prestaciones/titulares/{id}', [InsuredApiController::class,'update']);
-Route::delete('/prestaciones/titulares/{id}', [InsuredApiController::class,'destroy']);
 Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
+Route::get('/prestaciones/titulares',[InsuredApiController::class, 'index']);
+Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
+Route::get('/prestaciones/titulares/{id}',[InsuredApiController::class,'show']);
+//Route::put('/prestaciones/titulares/{id}', [InsuredApiController::class,'update']);
+//Route::delete('/prestaciones/titulares/{id}', [InsuredApiController::class,'destroy']);
 Route::get('/prestaciones/titulares/busqueda/{dato}',[InsuredApiController::class, 'busqueda']);
+Route::get('/prestaciones/titulares/editar/{dato}',[InsuredApiController::class, 'editar']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias

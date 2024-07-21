@@ -56,7 +56,7 @@ class InsuredApiController extends Controller
             ->with('beneficiaries')
             ->get();
             $response['status'] ="success";
-            $response['insured'] =$titular;  
+            $response['insured'] =[$titular];  
             $response['history'] =$history;      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
@@ -76,8 +76,11 @@ class InsuredApiController extends Controller
         $response['debug'] ="0";
          $rules =[
             //'File_number' => 'required|max:8|unique:insureds,file_number',
-            'File_number' => ['required',Rule::unique('insureds')->where(fn (Builder $query) => $query->where('status','active')),],
-            //'File_number' => 'required|max:8',
+            //'File_number' => ['required',Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo'))],
+            'File_number' => [
+                'required','max:8',
+                Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
+            ],
             'Subdependency_id'=> 'required|numeric|min:1',
             'Rank_id'=> 'required|numeric|min:0',
             'Start_date' => 'required|date|max:10',
@@ -93,9 +96,14 @@ class InsuredApiController extends Controller
             'Sex' => 'required',
             'Marital_status' => 'nullable',
             //'Rfc' => 'required|max:13|alpha_num:ascii|unique:insureds,rfc',
-            'Rfc' => 'required|max:13|alpha_num:ascii',
+            //'Rfc' => 'required|max:13|alpha_num:ascii',
+            'Rfc' =>[
+                'required','alpha_num:ascii',
+                Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
+            ],
             //'Curp' => 'nullable| max:18 |alpha_num:ascii|unique:insureds,curp',
-            'Curp' => 'nullable| max:18 |alpha_num:ascii',
+            'Curp' => ['nullable| max:18 |min:18|alpha_num:ascii',
+            Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo'))],
             'Phone' => 'nullable|numeric|digits:10',
             'Email' => 'nullable|email|min:5|max:50|unique:insureds,email',
             'State' => 'nullable|min:5|max:85',
@@ -115,6 +123,23 @@ class InsuredApiController extends Controller
             'Representative_curp' =>'nullable | max:18|alpha_num:ascii',
             'Representative_relationship' =>'nullable',
         ];
+        // $messages = [
+        //     'File_number.required' => 'El número de expediente es obligatorio.',
+        //     'File_number.max' => 'El número de expediente no debe exceder los 8 caracteres.',
+        //     'File_number.unique' => 'El número de expediente ya está registrado para un afiliado activo.',
+        //     'Subdependency_id.required' => 'La subdependencia es obligatoria.',
+        //     'Subdependency_id.numeric' => 'La subdependencia debe ser un número.',
+        //     'Subdependency_id.min' => 'La subdependencia debe ser al menos 1.',
+        //     // Añade aquí el resto de tus mensajes personalizados...
+        //     'Rfc.required' => 'El RFC es obligatorio.',
+        //     'Rfc.alpha_num' => 'El RFC debe ser alfanumérico.',
+        //     'Rfc.unique' => 'El RFC ya está registrado para un afiliado activo.',
+        //     'Curp.alpha_num' => 'La CURP debe ser alfanumérica.',
+        //     'Curp.unique' => 'La CURP ya está registrada para un afiliado activo.',
+        //     'Email.email' => 'El correo electrónico debe ser una dirección válida.',
+        //     'Email.unique' => 'El correo electrónico ya está registrado.',
+        //     // etc...
+        // ];
         $validator = Validator::make($request->all(),$rules);
         // Comprobar si la validación falla
         if ($validator->fails()) {
@@ -193,9 +218,8 @@ class InsuredApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $titular = Insured::where('status','active')
-                            ->where('file_number',$dato)
-                            ->orwhere('id',$dato)
+        $titular = Insured::where('id',$dato)
+                            ->orwhere('file_number',$dato)
                             ->orwhere('rfc',$dato)
                             ->orwhere('curp',$dato)
                             ->orwhere('name','like','%'.$dato.'%')
@@ -207,12 +231,42 @@ class InsuredApiController extends Controller
                             ->with('beneficiaries')
                             ->get();
         if ($titular->isEmpty()) {
-            $response['message'] = "Registro no encontrado";      
+            $response['message'] = "Registro no encontrado";    
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
             $response['insured'] =$titular;        
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
+    }
+    public function editar(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="0";
+        $titular = Insured::where('affiliate_status','Activo')
+                            ->where('file_number',$dato)
+                            ->orwhere('rfc',$dato)
+                            ->orwhere('curp',$dato)
+                            ->with('subdependency')
+                            ->with('rank')
+                            ->with('bank')
+                            ->with('beneficiaries')
+                            ->first();
+        if ($titular == null) {
+            $response['message'] = "Registro no encontrado";    
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $response['status'] ="success";
+            $response['insured'] =[$titular];      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
         }
