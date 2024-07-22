@@ -251,7 +251,7 @@ class InsuredApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $titular = Insured::where('affiliate_status','Activo')
+        $titular = Insured::where('status','active')
                             ->where('file_number',$dato)
                             ->orwhere('rfc',$dato)
                             ->orwhere('curp',$dato)

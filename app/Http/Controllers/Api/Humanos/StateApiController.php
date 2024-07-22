@@ -11,7 +11,8 @@ class StateApiController extends Controller
     public function listar()
     {
         $query = State::where('status','active')->get();
-        //$response["subdependencias"] = $query;
+        //$response["estados"] = $query;
         return response()->json($query);
+        //return response()->json($response);
     }
 }
