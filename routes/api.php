@@ -36,10 +36,10 @@ Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, '
 Route::get('/prestaciones/titulares',[InsuredApiController::class, 'index']);
 Route::post('/prestaciones/titulares/guardar',[InsuredApiController::class, 'store']);
 Route::get('/prestaciones/titulares/{id}',[InsuredApiController::class,'show']);
-//Route::put('/prestaciones/titulares/{id}', [InsuredApiController::class,'update']);
 //Route::delete('/prestaciones/titulares/{id}', [InsuredApiController::class,'destroy']);
 Route::get('/prestaciones/titulares/busqueda/{dato}',[InsuredApiController::class, 'busqueda']);
 Route::get('/prestaciones/titulares/editar/{dato}',[InsuredApiController::class, 'editar']);
+Route::post('/prestaciones/titulares/update', [InsuredApiController::class,'update']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
