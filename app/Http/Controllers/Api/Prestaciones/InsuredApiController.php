@@ -241,7 +241,7 @@ class InsuredApiController extends Controller
             return response()->json($response,status:$codigo);     
         }
     }
-    public function editar(Request $request)
+    public function porfolio(Request $request)
     {
         $dato = $request->dato;
         $codigo = 0;
@@ -253,8 +253,62 @@ class InsuredApiController extends Controller
         $response['debug'] ="0";
         $titular = Insured::where('status','active')
                             ->where('file_number',$dato)
-                            ->orwhere('rfc',$dato)
-                            ->orwhere('curp',$dato)
+                            ->with('subdependency')
+                            ->with('rank')
+                            ->with('bank')
+                            ->with('beneficiaries')
+                            ->first();
+        if ($titular == null) {
+            $response['message'] = "Registro no encontrado";    
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $response['status'] ="success";
+            $response['insured'] =[$titular];      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
+    }
+    public function porrfc(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="0";
+        $titular = Insured::where('status','active')
+                            ->where('rfc',$dato)
+                            ->with('subdependency')
+                            ->with('rank')
+                            ->with('bank')
+                            ->with('beneficiaries')
+                            ->first();
+        if ($titular == null) {
+            $response['message'] = "Registro no encontrado";    
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $response['status'] ="success";
+            $response['insured'] =[$titular];      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
+    }
+    public function porcurp(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="0";
+        $titular = Insured::where('status','active')
+                            ->where('curp',$dato)
                             ->with('subdependency')
                             ->with('rank')
                             ->with('bank')
