@@ -325,12 +325,20 @@ class InsuredApiController extends Controller
             return response()->json($response,status:$codigo);     
         }
     }
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $response['status'] ="0";
-        $response['errors'] ="0";
-        $response['insured'] ="0";
-        $response['debug'] ="0";
+        $todo = $request->all();
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['history'] ="";
+        $response['debug'] ="";
+        //$response['debug'] =$request->input('File_number');
+        //$codigo = 200;
+        //return response()->json($response,status:$codigo); 
          $rules =[
             'Subdependency_id'=> 'required|numeric|min:1',
             'Rank_id'=> 'required|numeric|min:0',
@@ -389,17 +397,18 @@ class InsuredApiController extends Controller
         if ($validator->fails()) {
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
-            //$response['debug'] = $request->all();
-            return response()->json($response, 200);
+            //$response['debug'] = [$request->all()];
+            $codigo = 200;
+            return response()->json($response,status:$codigo); 
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
          DB::beginTransaction();
          try
          {
-            $id = $request->id;
+            //$id = $request->input('Id');
             $titular = Insured::find($id);
-             $titular->subdependency_id = $request->input('Subdependency_id');
+             //$titular->subdependency_id = $request->input('Subdependency_id');
              $titular->rank_id = $request->input('Rank_id');
              $titular->start_date =$request->input('Start_date');
              $titular->work_place = Str::of($request->input('Work_place'))->trim();
@@ -439,9 +448,10 @@ class InsuredApiController extends Controller
              $titular->modified_by = Auth::user()->email;
              $titular->save();
             DB::commit();
-            $response['status'] ="1";
-            $response['insured'] =$titular->file_number;
-            return response()->json($response, 200);
+            $response['status'] ="success";
+            $response['message'] =$titular->file_number;
+            $codigo = 200;
+            return response()->json($response,status:$codigo); 
          }catch(Exception $e){
              DB::rollBack();
              $response['debug'] =$e->getMessage(); 
