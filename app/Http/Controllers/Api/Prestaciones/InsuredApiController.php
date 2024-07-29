@@ -77,6 +77,7 @@ class InsuredApiController extends Controller
          $rules =[
             //'File_number' => 'required|max:8|unique:insureds,file_number',
             //'File_number' => ['required',Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo'))],
+            //Valida si ya hay un registro en la tabla insureds con el mismo numero de afiliacion con un estatus de activo
             'File_number' => [
                 'required','max:8',
                 Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
@@ -445,6 +446,77 @@ class InsuredApiController extends Controller
              $titular->representative_rfc = Str::of($request->input('Representative_rfc'))->trim();
              $titular->representative_curp = Str::of($request->input('Representative_curp'))->trim();
              $titular->representative_relationship = Str::of($request->input('Representative_relationship'))->trim();
+             $titular->modified_by = Auth::user()->email;
+             $titular->save();
+            DB::commit();
+            $response['status'] ="success";
+            $response['message'] =$titular->file_number;
+            $codigo = 200;
+            return response()->json($response,status:$codigo); 
+         }catch(Exception $e){
+             DB::rollBack();
+             $response['debug'] =$e->getMessage(); 
+             
+         }          
+    }
+    public function baja(Request $request,$id)
+    {
+        $todo = $request->all();
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['history'] ="";
+        $response['debug'] ="";
+        //$response['debug'] =$request->input('File_number');
+        //$codigo = 200;
+        //return response()->json($response,status:$codigo); 
+         $rules =[
+
+            'File_number' => 'required','max:8',         
+            'Inactive_date' => 'required|max:10|date',
+            'Inactive_date_dependency' => 'required|max:10|date',         
+            'Inactive_motive' => 'required',
+        ];
+        // $messages = [
+        //     'File_number.required' => 'El número de expediente es obligatorio.',
+        //     'File_number.max' => 'El número de expediente no debe exceder los 8 caracteres.',
+        //     'File_number.unique' => 'El número de expediente ya está registrado para un afiliado activo.',
+        //     'Subdependency_id.required' => 'La subdependencia es obligatoria.',
+        //     'Subdependency_id.numeric' => 'La subdependencia debe ser un número.',
+        //     'Subdependency_id.min' => 'La subdependencia debe ser al menos 1.',
+        //     // Añade aquí el resto de tus mensajes personalizados...
+        //     'Rfc.required' => 'El RFC es obligatorio.',
+        //     'Rfc.alpha_num' => 'El RFC debe ser alfanumérico.',
+        //     'Rfc.unique' => 'El RFC ya está registrado para un afiliado activo.',
+        //     'Curp.alpha_num' => 'La CURP debe ser alfanumérica.',
+        //     'Curp.unique' => 'La CURP ya está registrada para un afiliado activo.',
+        //     'Email.email' => 'El correo electrónico debe ser una dirección válida.',
+        //     'Email.unique' => 'El correo electrónico ya está registrado.',
+        //     // etc...
+        // ];
+        $validator = Validator::make($request->all(),$rules);
+        // Comprobar si la validación falla
+        if ($validator->fails()) {
+            // Retornar errores de validación
+            $response['errors'] = $validator->errors()->toArray();
+            //$response['debug'] = [$request->all()];
+            $codigo = 200;
+            return response()->json($response,status:$codigo); 
+        }
+
+        // Si la validación pasa, continua con el resto de tu lógica aquí
+         DB::beginTransaction();
+         try
+         {
+            //$id = $request->input('Id');
+            $titular = Insured::find($id);
+             $titular->inactive_date =$request->input('Inactive_date');
+             $titular->inactive_date_dependency = Str::of($request->input('Inactive_date_dependency'))->trim();
+             $titular->inactive_motive = Str::of($request->input('Inactive_motive'))->trim();
+             $titular->affiliate_status = "Baja";
              $titular->modified_by = Auth::user()->email;
              $titular->save();
             DB::commit();
