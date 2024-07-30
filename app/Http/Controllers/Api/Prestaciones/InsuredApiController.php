@@ -476,8 +476,8 @@ class InsuredApiController extends Controller
          $rules =[
 
             'File_number' => 'required','max:8',         
-            'Inactive_date' => 'required|max:10|date',
-            'Inactive_date_dependency' => 'required|max:10|date',         
+            'Inactive_date' => 'required|date',
+            'Inactive_date_dependency' => 'required|date',         
             'Inactive_motive' => 'required',
         ];
         // $messages = [
@@ -514,9 +514,10 @@ class InsuredApiController extends Controller
             //$id = $request->input('Id');
             $titular = Insured::find($id);
              $titular->inactive_date =$request->input('Inactive_date');
-             $titular->inactive_date_dependency = Str::of($request->input('Inactive_date_dependency'))->trim();
+             $titular->inactive_date_dependency = $request->input('Inactive_date_dependency');
              $titular->inactive_motive = Str::of($request->input('Inactive_motive'))->trim();
              $titular->affiliate_status = "Baja";
+             $titular->status = "inactive";
              $titular->modified_by = Auth::user()->email;
              $titular->save();
             DB::commit();
