@@ -43,6 +43,7 @@ Route::get('/prestaciones/titulares/porrfc/{dato}',[InsuredApiController::class,
 Route::get('/prestaciones/titulares/porcurp/{dato}',[InsuredApiController::class, 'porcurp']);
 Route::put('/prestaciones/titulares/update/{id}', [InsuredApiController::class,'update']);
 Route::put('/prestaciones/titulares/baja/{id}', [InsuredApiController::class,'baja']);
+Route::put('/prestaciones/titulares/guardarfoto/{id}', [InsuredApiController::class,'guardarfoto']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
