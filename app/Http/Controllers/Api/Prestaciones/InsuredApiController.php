@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Constraint\Count;
+use App\Models\Prestaciones\Beneficiary;
 
 class InsuredApiController extends Controller
 {
@@ -520,9 +521,24 @@ class InsuredApiController extends Controller
              $titular->status = "inactive";
              $titular->modified_by = Auth::user()->email;
              $titular->save();
+            // Actualizar todos los beneficiarios y verificar el número de registros afectados
+            $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                'inactive_date' => $request->input('Inactive_date'),
+                'inactive_motive' => Str::of($request->input('Inactive_motive'))->trim(),
+                'affiliate_status' => "Baja",
+                'status' => "Inactive",
+                'modified_by' => Auth::user()->email,
+            ]);
+    // Verificar si no se encontraron registros de beneficiarios
+    if ($affectedRows === 0) {
+        // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
+        $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
+    } else {
+        $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
+    }             
             DB::commit();
             $response['status'] ="success";
-            $response['message'] =$titular->file_number;
+            $response['message'] = $msg;
             $codigo = 200;
             return response()->json($response,status:$codigo); 
          }catch(Exception $e){
