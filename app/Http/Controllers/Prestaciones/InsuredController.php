@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
+use App\Models\Prestaciones\Beneficiary;
 use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Rank;
 use App\Models\Prestaciones\Subdependency;
@@ -187,12 +188,27 @@ class InsuredController extends Controller
             $row->status = "Inactive";
             $row->modified_by = Auth::user()->email;
             $row->save();
-            
-            DB::commit();
+    // Actualizar todos los beneficiarios y verificar el número de registros afectados
+    $affectedRows = Beneficiary::where('insured_id', $row->id)->update([
+        'inactive_date' => $request->input('fecha_baja'),
+        'inactive_motive' => $request->input('motivo_baja'),
+        'affiliate_status' => "Baja",
+        'status' => "Inactive",
+        'modified_by' => Auth::user()->email,
+    ]);
 
-            session()->flash('msg_tipo', 'success');
-            session()->flash('msg', 'El Registro fue dado de baja con éxito!');
-            return to_route('prestaciones.titulares.index'); 
+    // Verificar si no se encontraron registros de beneficiarios
+    if ($affectedRows === 0) {
+        // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
+        session()->flash('msg_tipo', 'warning');
+        session()->flash('msg', 'El registro fue dado de baja con éxito, pero no se encontraron familiares para actualizar.');
+    } else {
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', '¡El registro y sus familiares fueron dados de baja con éxito!');
+    }
+
+    DB::commit();
+    return redirect()->route('prestaciones.titulares.index');
         }catch(Exception $e){
             DB::rollBack();
             session()->flash('msg_tipo', 'danger');
