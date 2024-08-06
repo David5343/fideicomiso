@@ -582,5 +582,56 @@ class InsuredApiController extends Controller
              
          }          
     }
+    public function guardarfirma(Request $request,$id)
+    {
+        $todo = $request->all();
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['history'] ="";
+        $response['debug'] ="";
+         $rules =[
+
+            'File_number' => 'required','max:8',
+            'Signature' => 'required'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        // Comprobar si la validación falla
+        if ($validator->fails()) {
+            // Retornar errores de validación
+            $response['errors'] = $validator->errors()->toArray();
+            //$response['debug'] = [$request->all()];
+            $codigo = 200;
+            return response()->json($response,status:$codigo); 
+        }
+
+        // Si la validación pasa, continua con el resto de tu lógica aquí
+         DB::beginTransaction();
+         try
+         {
+            $titular = Insured::find($id);
+            if($titular == null){
+                $response['message'] ="Registro no encontrado";
+                $codigo = 200;
+                return response()->json($response,status:$codigo); 
+            }else{
+                $titular->signature =Str::of($request->input('Signature'))->trim();
+                $titular->modified_by = Auth::user()->email;
+                $titular->save();
+                DB::commit();
+                $response['status'] ="success";
+                $response['message'] =$titular->file_number;
+                $codigo = 200;
+                return response()->json($response,status:$codigo); 
+        }
+         }catch(Exception $e){
+             DB::rollBack();
+             $response['debug'] =$e->getMessage(); 
+             
+         }          
+    }
 }
 
