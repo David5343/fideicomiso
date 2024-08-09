@@ -124,7 +124,7 @@ class CreateFamily extends Component
                 $familiar->representative_curp = $this->curp_representante;
                 $familiar->representative_relationship = $this->parentesco_representante;
                 $familiar->insured_id = $this->hidden_id;
-                $familiar->affiliate_status = 'active'; 
+                $familiar->affiliate_status = 'Activo'; 
                 $familiar->status = 'active';
                 $familiar->modified_by = Auth::user()->email;
                 switch ($this->parentesco) {
