@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Humanos\StateApiController;
 use App\Http\Controllers\Api\Prestaciones\CategoryApiController;
 use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
 use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
+use App\Http\Controllers\Api\Prestaciones\BeneficiaryApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,10 @@ Route::put('/prestaciones/titulares/update/{id}', [InsuredApiController::class,'
 Route::put('/prestaciones/titulares/baja/{id}', [InsuredApiController::class,'baja']);
 Route::put('/prestaciones/titulares/guardarfoto/{id}', [InsuredApiController::class,'guardarfoto']);
 Route::put('/prestaciones/titulares/guardarfirma/{id}', [InsuredApiController::class,'guardarfirma']);
+//Rutas de familiares
+Route::get('/prestaciones/familiares/idgenerator',[BeneficiaryApiController::class, 'idgenerator']);
+Route::get('/prestaciones/familiares',[BeneficiaryApiController::class, 'index']);
+Route::post('/prestaciones/familiares/guardar',[BeneficiaryApiController::class, 'store']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
