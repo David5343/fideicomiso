@@ -50,6 +50,7 @@ Route::put('/prestaciones/titulares/guardarfirma/{id}', [InsuredApiController::c
 Route::get('/prestaciones/familiares/idgenerator',[BeneficiaryApiController::class, 'idgenerator']);
 Route::get('/prestaciones/familiares',[BeneficiaryApiController::class, 'index']);
 Route::post('/prestaciones/familiares/guardar',[BeneficiaryApiController::class, 'store']);
+Route::get('/prestaciones/familiares/busqueda/{dato}',[BeneficiaryApiController::class, 'busqueda']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias

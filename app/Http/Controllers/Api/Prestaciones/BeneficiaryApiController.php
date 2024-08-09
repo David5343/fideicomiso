@@ -28,4 +28,36 @@ class BeneficiaryApiController extends Controller
     {
 
     }
+    public function busqueda(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="0";
+        $familiar = Beneficiary::where('id',$dato)
+                            ->orwhere('file_number',$dato)
+                            ->orwhere('rfc',$dato)
+                            ->orwhere('curp',$dato)
+                            ->orwhere('name','like','%'.$dato.'%')
+                            ->orwhere('last_name_1','like','%'.$dato.'%')
+                            ->orwhere('last_name_2','like','%'.$dato.'%')
+                            ->with('rank')
+                            ->with('bank')
+                            ->with('insureds')
+                            ->get();
+        if ($familiar->isEmpty()) {
+            $response['message'] = "Registro no encontrado";    
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $response['status'] ="success";
+            $response['beneficiary'] =$familiar;        
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
+    }
 }
