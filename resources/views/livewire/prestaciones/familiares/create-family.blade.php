@@ -77,14 +77,14 @@
   @error('fecha_ingreso')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
-<div class="col-md-2">
+<div class="col-md-4">
   <label  class="form-label">* Apellido Paterno (Primer Apellido)</label>
   <input wire:model="apaterno" type="text" class="form-control" id="apaterno" name="apaterno"
   maxlength="20" value="{{old('apaterno')}}">
   @error('apaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>
-<div class="col-2">
+<div class="col-4">
   <label  class="form-label">* Apellido Materno (Segundo Apellido)</label>
   <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno"
   maxlength="20" value="{{old('amaterno')}}">
