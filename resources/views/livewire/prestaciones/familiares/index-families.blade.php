@@ -173,7 +173,7 @@
                         @case("Preafiliado")
                         <i class="bi bi-stoplights-fill btn btn-warning btn-sm"></i>
                             @break                     
-                        @case("active")
+                        @case("Activo")
                         <i class="bi bi-stoplights-fill btn btn-success btn-sm"></i>
                             @break               
                         @default
