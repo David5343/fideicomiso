@@ -24,6 +24,37 @@ class BeneficiaryApiController extends Controller
                                 ->get();
         return response()->json($familiares);
     }
+    public function show($id)
+    {
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['history'] ="";
+        $response['debug'] ="0";
+        $familiar = Beneficiary::where('id',$id)
+                            ->with('bank')
+                            ->with('insured')
+                            ->first();
+        if ($familiar == null) {
+            $response['message'] = "Registro no encontrado";      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $history = Beneficiary::where('file_number',$familiar->file_number)
+            ->where('affiliate_status','Baja')
+            ->with('bank')
+            ->with('insured')
+            ->get();
+            $response['status'] ="success";
+            $response['insured'] =[$familiar];  
+            $response['history'] =$history;      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
+    }
     public function store(Request $request)
     {
 
