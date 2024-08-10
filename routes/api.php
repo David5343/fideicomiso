@@ -51,6 +51,9 @@ Route::get('/prestaciones/familiares/idgenerator',[BeneficiaryApiController::cla
 Route::get('/prestaciones/familiares',[BeneficiaryApiController::class, 'index']);
 Route::post('/prestaciones/familiares/guardar',[BeneficiaryApiController::class, 'store']);
 Route::get('/prestaciones/familiares/busqueda/{dato}',[BeneficiaryApiController::class, 'busqueda']);
+Route::get('/prestaciones/familiares/porfolio/{dato}',[BeneficiaryApiController::class, 'porfolio']);
+Route::get('/prestaciones/familiares/porrfc/{dato}',[BeneficiaryApiController::class, 'porrfc']);
+Route::get('/prestaciones/familiares/porcurp/{dato}',[BeneficiaryApiController::class, 'porcurp']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
