@@ -45,9 +45,8 @@ class BeneficiaryApiController extends Controller
                             ->orwhere('name','like','%'.$dato.'%')
                             ->orwhere('last_name_1','like','%'.$dato.'%')
                             ->orwhere('last_name_2','like','%'.$dato.'%')
-                            ->with('rank')
                             ->with('bank')
-                            ->with('insureds')
+                            ->with('insured')
                             ->get();
         if ($familiar->isEmpty()) {
             $response['message'] = "Registro no encontrado";    
