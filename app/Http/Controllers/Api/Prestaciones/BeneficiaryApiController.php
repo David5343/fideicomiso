@@ -116,4 +116,30 @@ class BeneficiaryApiController extends Controller
             return response()->json($response,status:$codigo);     
         }
     }
+    public function porrfc(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="0";
+        $familiar = Beneficiary::where('status','active')
+                            ->where('rfc',$dato)
+                            ->with('bank')
+                            ->with('insured')
+                            ->first();
+        if ($familiar == null) {
+            $response['message'] = "Registro no encontrado";    
+            $codigo = 200;
+            return response()->json($response,status:$codigo);
+        } else {
+            $response['status'] ="success";
+            $response['beneficiary'] =$familiar;      
+            $codigo = 200;
+            return response()->json($response,status:$codigo);     
+        }
+    }
 }
