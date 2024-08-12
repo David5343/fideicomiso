@@ -82,7 +82,7 @@ class InsuredController extends Controller
             'estatus_afiliado' => ['required'],
             'observaciones' =>['nullable','min:5','max:180'],
             'apaterno' => ['required', 'min:2','max:20'],
-            'amaterno' => ['required', 'min:2','max:20'],
+            'amaterno' => ['nullable', 'min:2','max:20'],
             'nombre' => ['required','min:2','max:30'],            
             'fecha_nacimiento' => ['nullable','max:10','date'],
             'lugar_nacimiento' => ['nullable','min:3','max:85'],

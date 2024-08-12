@@ -39,7 +39,7 @@ class CreateTitulares extends Component
     public $apaterno;
     #[Validate('required|min:2|max:20')]
     public $amaterno;
-    #[Validate('required|min:2|max:30')]
+    #[Validate('nullable|min:2|max:30')]
     public $nombre;         
     #[Validate('nullable|max:10|date')]
     public $fecha_nacimiento;

@@ -111,7 +111,7 @@
             @enderror
           </div>
           <div class="col-3">
-            <label  class="form-label">* Apellido Materno (Segundo Apellido)</label>
+            <label  class="form-label">Apellido Materno (Segundo Apellido)</label>
             <input wire:model="amaterno" type="text" class="form-control" id="amaterno" name="amaterno" 
             minlength="2" maxlength="20" value="{{old('amaterno')}}">
             @error('amaterno')<br><small style="color: red">{{ $message }}</small>
