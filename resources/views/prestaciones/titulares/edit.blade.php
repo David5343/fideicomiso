@@ -123,7 +123,7 @@
         <div class="col-3">
           <label  class="form-label">Apellido Materno</label>
           <input type="text" class="form-control" id="amaterno" name="amaterno" minlength="2" maxlength="20"
-           value="{{@if($titular->last_name_2){$titular->last_name_2}@endif}}" >
+           value="@if($titular->last_name_2){{$titular->last_name_2}}@endif" >
           @error('amaterno')<br><small style="color: red">{{ $message }}</small>
           @enderror
         </div>
