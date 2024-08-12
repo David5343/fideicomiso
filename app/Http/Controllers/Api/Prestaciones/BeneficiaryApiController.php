@@ -49,7 +49,7 @@ class BeneficiaryApiController extends Controller
             ->with('insured')
             ->get();
             $response['status'] ="success";
-            $response['insured'] =[$familiar];  
+            $response['beneficiary'] =[$familiar];  
             $response['history'] =$history;      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
