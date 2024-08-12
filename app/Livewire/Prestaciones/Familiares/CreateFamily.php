@@ -28,7 +28,7 @@ class CreateFamily extends Component
     public $fecha_ingreso="";
     #[Validate('required | max:20')]  
     public $apaterno="";
-    #[Validate('required | max:20')] 
+    #[Validate('nullable | max:20')] 
     public $amaterno="";
     #[Validate('required | max:30')] 
     public $nombre="";

@@ -43,9 +43,9 @@
   @enderror
 </div>
 <div class="col-2">
-  <label  class="form-label">* Apellido Materno</label>
+  <label  class="form-label">Apellido Materno</label>
   <input type="text" class="form-control" id="amaterno" name="amaterno" maxlength="20"
-   value="{{$familiar->last_name_2}}" required>
+   value="{{@if($familiar->last_name_2){$familiar->last_name_2}@endif}}" required>
   @error('amaterno')<br><small style="color: red">{{ $message }}</small>
   @enderror
 </div>

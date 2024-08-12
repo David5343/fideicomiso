@@ -58,7 +58,7 @@ class BeneficiaryController extends Controller
             'expediente_hidden'=> ['required'],
             'fecha_ingreso' => ['required','date'],
             'apaterno' => ['required','max:20'],
-            'amaterno' => ['required', 'max:20'],
+            'amaterno' => ['nullable', 'max:20'],
             'nombre' => ['required','max:30'], 
             'fecha_nacimiento' => ['required','date'],
             'sexo' => ['required'],
