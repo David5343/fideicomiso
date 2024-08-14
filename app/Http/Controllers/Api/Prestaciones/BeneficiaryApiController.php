@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Prestaciones;
 
 use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Beneficiary;
+use App\Models\Prestaciones\Subdependency;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -38,6 +39,7 @@ class BeneficiaryApiController extends Controller
                             ->with('bank')
                             ->with('insured')
                             ->first();
+        $familiar->insured->subdependency = Subdependency::where('id',$familiar->insured->subdependency_id)->first();
         if ($familiar == null) {
             $response['message'] = "Registro no encontrado";      
             $codigo = 200;
