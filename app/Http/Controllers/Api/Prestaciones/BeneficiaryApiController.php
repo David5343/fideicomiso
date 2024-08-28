@@ -8,6 +8,12 @@ use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Subdependency;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Validator;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BeneficiaryApiController extends Controller
 {
@@ -116,7 +122,7 @@ class BeneficiaryApiController extends Controller
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
-            $response['beneficiary'] =$familiar;      
+            $response['beneficiary'] =[$familiar];      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
         }
@@ -172,5 +178,56 @@ class BeneficiaryApiController extends Controller
             $codigo = 200;
             return response()->json($response,status:$codigo);     
         }
+    }
+    public function guardarfoto(Request $request,$id)
+    {
+        $todo = $request->all();
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['message'] ="";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['beneficiary'] ="";
+        $response['history'] ="";
+        $response['debug'] ="";
+         $rules =[
+
+            'File_number' => 'required','max:8',
+            'Photo' => 'required'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        // Comprobar si la validación falla
+        if ($validator->fails()) {
+            // Retornar errores de validación
+            $response['errors'] = $validator->errors()->toArray();
+            //$response['debug'] = [$request->all()];
+            $codigo = 200;
+            return response()->json($response,status:$codigo); 
+        }
+
+        // Si la validación pasa, continua con el resto de tu lógica aquí
+         DB::beginTransaction();
+         try
+         {
+            $familiar = Beneficiary::find($id);
+            if($familiar == null){
+                $response['message'] ="Registro no encontrado";
+                $codigo = 200;
+                return response()->json($response,status:$codigo); 
+            }else{
+                $familiar->photo =Str::of($request->input('Photo'))->trim();
+                $familiar->modified_by = Auth::user()->email;
+                $familiar->save();
+                DB::commit();
+                $response['status'] ="success";
+                $response['message'] =$familiar->file_number;
+                $codigo = 200;
+                return response()->json($response,status:$codigo); 
+        }
+         }catch(Exception $e){
+             DB::rollBack();
+             $response['debug'] =$e->getMessage(); 
+             
+         }          
     }
 }
