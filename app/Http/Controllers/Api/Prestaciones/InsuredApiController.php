@@ -481,23 +481,6 @@ class InsuredApiController extends Controller
             'Inactive_date_dependency' => 'required|date',         
             'Inactive_motive' => 'required',
         ];
-        // $messages = [
-        //     'File_number.required' => 'El número de expediente es obligatorio.',
-        //     'File_number.max' => 'El número de expediente no debe exceder los 8 caracteres.',
-        //     'File_number.unique' => 'El número de expediente ya está registrado para un afiliado activo.',
-        //     'Subdependency_id.required' => 'La subdependencia es obligatoria.',
-        //     'Subdependency_id.numeric' => 'La subdependencia debe ser un número.',
-        //     'Subdependency_id.min' => 'La subdependencia debe ser al menos 1.',
-        //     // Añade aquí el resto de tus mensajes personalizados...
-        //     'Rfc.required' => 'El RFC es obligatorio.',
-        //     'Rfc.alpha_num' => 'El RFC debe ser alfanumérico.',
-        //     'Rfc.unique' => 'El RFC ya está registrado para un afiliado activo.',
-        //     'Curp.alpha_num' => 'La CURP debe ser alfanumérica.',
-        //     'Curp.unique' => 'La CURP ya está registrada para un afiliado activo.',
-        //     'Email.email' => 'El correo electrónico debe ser una dirección válida.',
-        //     'Email.unique' => 'El correo electrónico ya está registrado.',
-        //     // etc...
-        // ];
         $validator = Validator::make($request->all(),$rules);
         // Comprobar si la validación falla
         if ($validator->fails()) {
@@ -512,7 +495,9 @@ class InsuredApiController extends Controller
          DB::beginTransaction();
          try
          {
-            //$id = $request->input('Id');
+            //tratabar en las condiciones para cada baja
+            //
+            //
             $titular = Insured::find($id);
              $titular->inactive_date =$request->input('Inactive_date');
              $titular->inactive_date_dependency = $request->input('Inactive_date_dependency');
