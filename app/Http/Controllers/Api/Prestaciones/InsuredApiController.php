@@ -495,9 +495,28 @@ class InsuredApiController extends Controller
          DB::beginTransaction();
          try
          {
+            $motivo_baja =Str::of($request->input('Inactive_motive'))->trim();
             //tratabar en las condiciones para cada baja
             //
-            //
+            switch ($motivo_baja) {
+                case 'Acta Administrativa':
+                    $data = ['name' => 'John Doe', 'email' => 'john@example.com'];
+                    return response()->json($data, 200);
+    
+                case 'Defunsión':
+                    $data = ['product' => 'Laptop', 'price' => 1000];
+                    return response()->json($data, 200);
+    
+                case 'Pensión':
+                    $data = ['order_id' => 12345, 'status' => 'shipped'];
+                    return response()->json($data, 200);
+                    
+                case 'Renuncia':
+                        $data = ['order_id' => 12345, 'status' => 'shipped'];
+                        return response()->json($data, 200);
+                default:
+                    return response()->json(['error' => 'Invalid type'], 400);
+            }
             $titular = Insured::find($id);
              $titular->inactive_date =$request->input('Inactive_date');
              $titular->inactive_date_dependency = $request->input('Inactive_date_dependency');
