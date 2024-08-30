@@ -495,51 +495,111 @@ class InsuredApiController extends Controller
          DB::beginTransaction();
          try
          {
+            $fecha_baja = $request->input('Inactive_date');
+            $baja_dependencia  = $request->input('Inactive_date_dependency');
             $motivo_baja =Str::of($request->input('Inactive_motive'))->trim();
-            //tratabar en las condiciones para cada baja
-            //
+            $titular = Insured::find($id);            
+            $msg = "";
             switch ($motivo_baja) {
                 case 'Acta Administrativa':
-                    $data = ['name' => 'John Doe', 'email' => 'john@example.com'];
-                    return response()->json($data, 200);
-    
+                    //dando de baja a titular  
+                    $titular->inactive_date =$fecha_baja;
+                    $titular->inactive_date_dependency = $baja_dependencia;
+                    $titular->inactive_motive = $motivo_baja;
+                    $titular->affiliate_status = "Baja";
+                    $titular->status = "inactive";
+                    $titular->modified_by = Auth::user()->email;
+                    $titular->save();
+                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
+                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                    'inactive_date' => $fecha_baja,
+                    'inactive_motive' => $motivo_baja+" del Titular",
+                    'affiliate_status' => "Baja",
+                    'status' => "inactive",
+                    'modified_by' => Auth::user()->email,
+                ]);
+                 // Verificar si no se encontraron registros de beneficiarios
+                  if ($affectedRows === 0) {
+                 // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
+                 $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
+                 } else {
+                 $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
+                 }    
                 case 'Defunsión':
-                    $data = ['product' => 'Laptop', 'price' => 1000];
-                    return response()->json($data, 200);
-    
+                    $titular->inactive_date =$fecha_baja;
+                    $titular->inactive_date_dependency = $baja_dependencia;
+                    $titular->inactive_motive = $motivo_baja;
+                    $titular->affiliate_status = "Baja";
+                    $titular->status = "inactive";
+                    $titular->modified_by = Auth::user()->email;
+                    $titular->save(); 
+                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
+                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                       'inactive_date' => $fecha_baja,
+                       'inactive_motive' => $motivo_baja+" del Titular",
+                       'affiliate_status' => "Baja por Aplicar",
+                    //'status' => "inactive",
+                       'modified_by' => Auth::user()->email,
+                   ]);
+                    // Verificar si no se encontraron registros de beneficiarios
+                     if ($affectedRows === 0) {
+                    // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
+                    $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
+                    } else {
+                    $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
+                    } 
+
                 case 'Pensión':
-                    $data = ['order_id' => 12345, 'status' => 'shipped'];
-                    return response()->json($data, 200);
+                    $titular->inactive_date =$fecha_baja;
+                    $titular->inactive_date_dependency = $baja_dependencia;
+                    $titular->inactive_motive = $motivo_baja;
+                    $titular->affiliate_status = "Baja por Aplicar";
+                    //$titular->status = "inactive";
+                    $titular->modified_by = Auth::user()->email;
+                    $titular->save(); 
+                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
+                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                       'inactive_date' => $fecha_baja,
+                       'inactive_motive' => $motivo_baja+" del Titular",
+                       'affiliate_status' => "Baja por Aplicar",
+                       //'status' => "inactive",
+                       'modified_by' => Auth::user()->email,
+                   ]);
+                    // Verificar si no se encontraron registros de beneficiarios
+                     if ($affectedRows === 0) {
+                    // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
+                    $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
+                    } else {
+                    $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
+                    }
                     
                 case 'Renuncia':
-                        $data = ['order_id' => 12345, 'status' => 'shipped'];
-                        return response()->json($data, 200);
-                default:
-                    return response()->json(['error' => 'Invalid type'], 400);
-            }
-            $titular = Insured::find($id);
-             $titular->inactive_date =$request->input('Inactive_date');
-             $titular->inactive_date_dependency = $request->input('Inactive_date_dependency');
-             $titular->inactive_motive = Str::of($request->input('Inactive_motive'))->trim();
-             $titular->affiliate_status = "Baja";
-             $titular->status = "inactive";
-             $titular->modified_by = Auth::user()->email;
-             $titular->save();
-            // Actualizar todos los beneficiarios y verificar el número de registros afectados
-            $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
-                'inactive_date' => $request->input('Inactive_date'),
-                'inactive_motive' => Str::of($request->input('Inactive_motive'))->trim(),
-                'affiliate_status' => "Baja",
-                'status' => "Inactive",
-                'modified_by' => Auth::user()->email,
-            ]);
-    // Verificar si no se encontraron registros de beneficiarios
-    if ($affectedRows === 0) {
-        // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
-        $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
-    } else {
-        $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-    }             
+
+                    $titular->inactive_date =$fecha_baja;
+                    $titular->inactive_date_dependency = $baja_dependencia;
+                    $titular->inactive_motive = $motivo_baja;
+                    $titular->affiliate_status = "Baja por Aplicar";
+                    //$titular->status = "inactive";
+                    $titular->modified_by = Auth::user()->email;
+                    $titular->save(); 
+                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
+                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                       'inactive_date' => $fecha_baja,
+                       'inactive_motive' => $motivo_baja+" del Titular",
+                       'affiliate_status' => "Baja por Aplicar",
+                       //'status' => "inactive",
+                       'modified_by' => Auth::user()->email,
+                   ]);
+                    // Verificar si no se encontraron registros de beneficiarios
+                     if ($affectedRows === 0) {
+                    // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
+                    $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
+                    } else {
+                    $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
+                    }
+                // default:
+                //     return response()->json(['error' => 'Invalid type'], 400);
+            }            
             DB::commit();
             $response['status'] ="success";
             $response['message'] = $msg;
