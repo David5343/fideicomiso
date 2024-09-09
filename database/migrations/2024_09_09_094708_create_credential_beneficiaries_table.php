@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('credential_insureds', function (Blueprint $table) {
+        Schema::create('credential_beneficiaries', function (Blueprint $table) {
             $table->id();
             $table->dateTime('issued_at', precision: 0);
             $table->dateTime('expires_at', precision: 0);
-            $table->unsignedBigInteger('insured_id')->nullable();
-            $table->foreign('insured_id')->references('id')->on('insureds');
+            $table->unsignedBigInteger('beneficiary_id')->nullable();
+            $table->foreign('beneficiary_id')->references('id')->on('insureds');
             $table->string('credential_status',255)->nullable();
             $table->enum('status', ['active', 'inactive','deleted']);
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('credential_insureds');
+        Schema::dropIfExists('credential_beneficiaries');
     }
 };
