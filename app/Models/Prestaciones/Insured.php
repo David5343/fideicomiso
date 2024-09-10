@@ -30,4 +30,8 @@ class Insured extends Model
     {
         return $this->belongsTo(Rank::class);
     }
+    public function credencialInsured():HasMany
+    {
+        return $this->hasMany(CredentialInsured::class);
+    }
 }
