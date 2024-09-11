@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Prestaciones\CategoryApiController;
 use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
 use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
 use App\Http\Controllers\Api\Prestaciones\BeneficiaryApiController;
+use App\Http\Controllers\Api\Prestaciones\CredentialInsuredApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,4 +67,5 @@ Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
 Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
 //Rutas de bancos
 Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
+Route::post('/prestaciones/credencialtitular/guardar',[CredentialInsuredApiController::class, 'store']);
 });
