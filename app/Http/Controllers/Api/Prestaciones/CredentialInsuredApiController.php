@@ -45,7 +45,7 @@ class CredentialInsuredApiController extends Controller
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
-            $history = CredentialInsured::where('file_number',$credencial->file_number)
+            $history = CredentialInsured::where('insured_id',$credencial->insured_id)
             ->where('credential_status','VENCIDA')
             // ->with('subdependency')
             // ->with('rank')
@@ -53,7 +53,7 @@ class CredentialInsuredApiController extends Controller
             // ->with('beneficiaries')
             ->get();
             $response['status'] ="success";
-            $response['credential'] =[$credencial];  
+            $response['credential'] =$credencial;  
             $response['history'] =$history;      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
