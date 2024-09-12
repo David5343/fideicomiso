@@ -68,4 +68,5 @@ Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
 //Rutas de bancos
 Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
 Route::post('/prestaciones/credencialtitular/guardar',[CredentialInsuredApiController::class, 'store']);
+Route::get('/prestaciones/credencialtitular/{id}',[CredentialInsuredApiController::class,'show']);
 });

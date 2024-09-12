@@ -32,27 +32,28 @@ class CredentialInsuredApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['history'] ="";
+        $response['credential'] ="0";
         $response['debug'] ="0";
-        $titular = CredentialInsured::where('id',$id)
+        $credencial = CredentialInsured::where('id',$id)
                             ->with('insured')
                             // ->with('rank')
                             // ->with('bank')
                             // ->with('beneficiaries')
                             ->first();
-        if ($titular == null) {
+        if ($credencial == null) {
             $response['message'] = "Registro no encontrado";      
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
-            $history = CredentialInsured::where('file_number',$titular->file_number)
-            ->where('affiliate_status','Baja')
+            $history = CredentialInsured::where('file_number',$credencial->file_number)
+            ->where('credential_status','VENCIDA')
             // ->with('subdependency')
             // ->with('rank')
             // ->with('bank')
             // ->with('beneficiaries')
             ->get();
             $response['status'] ="success";
-            $response['insured'] =[$titular];  
+            $response['credential'] =[$credencial];  
             $response['history'] =$history;      
             $codigo = 200;
             return response()->json($response,status:$codigo);     
@@ -66,15 +67,15 @@ class CredentialInsuredApiController extends Controller
         $response['debug'] ="0";
 
         $rules=[
-            'insured_id'=> 'required|numeric',
-            'expires_at'=> 'required|date_format:Y-m-d H:i:s'
+            'Insured_id'=> 'required|numeric',
+            'Expires_at'=> 'required|date_format:Y-m-d H:i:s'
         ];
         $validator = Validator::make($request->all(),$rules);
         // Comprobar si la validación falla
         if ($validator->fails()) {
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
-            //$response['debug'] = $request->all();
+            $response['debug'] = $request->all();
             return response()->json($response, 200);
         }
         DB::beginTransaction();
@@ -83,8 +84,8 @@ class CredentialInsuredApiController extends Controller
             $fechaActual = now()->toDateTimeString();
            $credencialTitular = new CredentialInsured();
            $credencialTitular->issued_at = $fechaActual;
-           $credencialTitular->expires_at = $request->input('Fecha_vencimiento');
-           $credencialTitular->insured_id = $request->input('Id');
+           $credencialTitular->expires_at = $request->input('Expires_at');
+           $credencialTitular->insured_id = $request->input('Insured_id');
            $credencialTitular->expiration_types ="PERSONALIZADO";
            $credencialTitular->credential_status ="VIGENTE";
            $credencialTitular->status = 'active';
@@ -92,7 +93,7 @@ class CredentialInsuredApiController extends Controller
             $credencialTitular->save();
            DB::commit();
            $response['status'] ="1";
-           $response['insured'] =$credencialTitular->id;
+           $response['credential'] =$credencialTitular->id;
            return response()->json($response, 200);
         }catch(Exception $e){
             DB::rollBack();
