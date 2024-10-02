@@ -35,8 +35,8 @@ class CredentialInsuredApiController extends Controller
         $response['credential'] ="0";
         $response['debug'] ="0";
         $credencial = CredentialInsured::where('id',$id)
-                            ->with('insured')
-                            // ->with('rank')
+                            ->with('insured.subdependency')
+                            //->with('subdependency')
                             // ->with('bank')
                             // ->with('beneficiaries')
                             ->first();
