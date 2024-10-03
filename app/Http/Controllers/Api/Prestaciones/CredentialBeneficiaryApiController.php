@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Exception;
 
-class CredentialBeneficiaryController extends Controller
+class CredentialBeneficiaryApiController extends Controller
 {
     public function index()
     {   
@@ -34,7 +34,7 @@ class CredentialBeneficiaryController extends Controller
         $response['credential'] ="0";
         $response['debug'] ="0";
         $credencial = CredentialBeneficiary::where('id',$id)
-                            ->with('beneficiary.insured')
+                            ->with('beneficiary.insured.subdependency')
                             ->first();
         if ($credencial == null) {
             $response['message'] = "Registro no encontrado";      
@@ -63,7 +63,7 @@ class CredentialBeneficiaryController extends Controller
         $response['debug'] ="0";
 
         $rules=[
-            'Insured_id'=> 'required|numeric',
+            'Beneficiary_id'=> 'required|numeric',
             'Expires_at'=> 'required|date_format:Y-m-d H:i:s'
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -81,7 +81,7 @@ class CredentialBeneficiaryController extends Controller
            $credencialFamiliar = new CredentialBeneficiary();
            $credencialFamiliar->issued_at = $fechaActual;
            $credencialFamiliar->expires_at = $request->input('Expires_at');
-           $credencialFamiliar->insured_id = $request->input('Insured_id');
+           $credencialFamiliar->beneficiary_id = $request->input('Beneficiary_id');
            $credencialFamiliar->expiration_types ="PERSONALIZADO";
            $credencialFamiliar->credential_status ="VIGENTE";
            $credencialFamiliar->status = 'active';
