@@ -91,7 +91,7 @@ class InsuredApiController extends Controller
             'Affiliate_status' => 'required|not_in:Elije...',
             'Observations' =>'nullable|min:5|max:180',
             'Last_name_1' => 'required|min:2|max:20',
-            'Last_name_2' => 'required|min:2|max:20',
+            'Last_name_2' => 'nullable|min:2|max:20',
             'Name' => 'required|min:2|max:30',            
             'Birthday' => 'nullable|max:10|date',
             'Birthplace' => 'nullable|min:3|max:85',
@@ -148,7 +148,7 @@ class InsuredApiController extends Controller
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
             //$response['debug'] = $request->all();
-            return response()->json($response, 200);
+            return response()->json([$response], 200);
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -202,7 +202,7 @@ class InsuredApiController extends Controller
             DB::commit();
             $response['status'] ="1";
             $response['insured'] =$titular->file_number;
-            return response()->json($response, 200);
+            return response()->json([$response], 200);
          }catch(Exception $e){
              DB::rollBack();
              $response['debug'] =$e->getMessage(); 
