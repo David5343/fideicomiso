@@ -19,7 +19,7 @@ use App\Models\Prestaciones\Beneficiary;
 class InsuredApiController extends Controller
 {
     public function index()
-    {   
+    {
         $titulares = Insured::with('rank')
                                 ->with('subdependency')
                                 ->latest()
@@ -45,7 +45,7 @@ class InsuredApiController extends Controller
                             ->with('beneficiaries')
                             ->first();
         if ($titular == null) {
-            $response['message'] = "Registro no encontrado";      
+            $response['message'] = "Registro no encontrado";
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
@@ -57,10 +57,10 @@ class InsuredApiController extends Controller
             ->with('beneficiaries')
             ->get();
             $response['status'] ="success";
-            $response['insured'] =[$titular];  
-            $response['history'] =$history;      
+            $response['insured'] =[$titular];
+            $response['history'] =$history;
             $codigo = 200;
-            return response()->json($response,status:$codigo);     
+            return response()->json($response,status:$codigo);
         }
     }
     public function idgenerator()
@@ -71,10 +71,10 @@ class InsuredApiController extends Controller
     }
     public function store(Request $request)
     {
-        $response['status'] ="0";
-        $response['errors'] ="0";
-        $response['insured'] ="0";
-        $response['debug'] ="0";
+        $response['status'] ="fail";
+        $response['errors'] ="";
+        $response['insured'] ="";
+        $response['debug'] ="";
          $rules =[
             //'File_number' => 'required|max:8|unique:insureds,file_number',
             //'File_number' => ['required',Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo'))],
@@ -92,7 +92,7 @@ class InsuredApiController extends Controller
             'Observations' =>'nullable|min:5|max:180',
             'Last_name_1' => 'required|min:2|max:20',
             'Last_name_2' => 'nullable|min:2|max:20',
-            'Name' => 'required|min:2|max:30',            
+            'Name' => 'required|min:2|max:30',
             'Birthday' => 'nullable|max:10|date',
             'Birthplace' => 'nullable|min:3|max:85',
             'Sex' => 'required',
@@ -104,8 +104,9 @@ class InsuredApiController extends Controller
                 Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
             ],
             //'Curp' => 'nullable| max:18 |alpha_num:ascii|unique:insureds,curp',
-            'Curp' => ['nullable| max:18 |min:18|alpha_num:ascii',
-            Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo'))],
+            // 'Curp' => ['nullable| max:18 |min:18|alpha_num:ascii',
+            // Rule::unique('insureds')->where(fn (Builder $query) => $query->where('affiliate_status','Activo'))],
+            'Curp'=> 'nullable | string | min:18 | max: 18',
             'Phone' => 'nullable|numeric|digits:10',
             'Email' => 'nullable|email|min:5|max:50|unique:insureds,email',
             'State' => 'nullable|min:5|max:85',
@@ -147,8 +148,9 @@ class InsuredApiController extends Controller
         if ($validator->fails()) {
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
+            //$response['errors'] = $validator->errors();
             //$response['debug'] = $request->all();
-            return response()->json([$response], 200);
+            return response()->json($response, 200);
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -200,14 +202,14 @@ class InsuredApiController extends Controller
              //sleep(1);
              $titular->save();
             DB::commit();
-            $response['status'] ="1";
+            $response['status'] ="success";
             $response['insured'] =$titular->file_number;
-            return response()->json([$response], 200);
+            return response()->json($response, 200);
          }catch(Exception $e){
              DB::rollBack();
-             $response['debug'] =$e->getMessage(); 
-             
-         }         
+             $response['debug'] =$e->getMessage();
+
+         }
 
     }
     public function busqueda(Request $request)
@@ -233,14 +235,14 @@ class InsuredApiController extends Controller
                             ->with('beneficiaries')
                             ->get();
         if ($titular->isEmpty()) {
-            $response['message'] = "Registro no encontrado";    
+            $response['message'] = "Registro no encontrado";
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
-            $response['insured'] =$titular;        
+            $response['insured'] =$titular;
             $codigo = 200;
-            return response()->json($response,status:$codigo);     
+            return response()->json($response,status:$codigo);
         }
     }
     public function porfolio(Request $request)
@@ -261,14 +263,14 @@ class InsuredApiController extends Controller
                             ->with('beneficiaries')
                             ->first();
         if ($titular == null) {
-            $response['message'] = "Registro no encontrado";    
+            $response['message'] = "Registro no encontrado";
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
-            $response['insured'] =[$titular];      
+            $response['insured'] =[$titular];
             $codigo = 200;
-            return response()->json($response,status:$codigo);     
+            return response()->json($response,status:$codigo);
         }
     }
     public function porrfc(Request $request)
@@ -289,14 +291,14 @@ class InsuredApiController extends Controller
                             ->with('beneficiaries')
                             ->first();
         if ($titular == null) {
-            $response['message'] = "Registro no encontrado";    
+            $response['message'] = "Registro no encontrado";
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
-            $response['insured'] =[$titular];      
+            $response['insured'] =[$titular];
             $codigo = 200;
-            return response()->json($response,status:$codigo);     
+            return response()->json($response,status:$codigo);
         }
     }
     public function porcurp(Request $request)
@@ -317,14 +319,14 @@ class InsuredApiController extends Controller
                             ->with('beneficiaries')
                             ->first();
         if ($titular == null) {
-            $response['message'] = "Registro no encontrado";    
+            $response['message'] = "Registro no encontrado";
             $codigo = 200;
             return response()->json($response,status:$codigo);
         } else {
             $response['status'] ="success";
-            $response['insured'] =[$titular];      
+            $response['insured'] =[$titular];
             $codigo = 200;
-            return response()->json($response,status:$codigo);     
+            return response()->json($response,status:$codigo);
         }
     }
     public function update(Request $request,$id)
@@ -332,15 +334,12 @@ class InsuredApiController extends Controller
         $todo = $request->all();
         $codigo = 0;
         $response['status'] ="fail";
-        $response['message'] ="";
         $response['errors'] ="";
         $response['insured'] ="";
-        $response['beneficiary'] ="";
-        $response['history'] ="";
         $response['debug'] ="";
         //$response['debug'] =$request->input('File_number');
         //$codigo = 200;
-        //return response()->json($response,status:$codigo); 
+        //return response()->json($response,status:$codigo);
          $rules =[
             'Subdependency_id'=> 'required|numeric|min:1',
             'Rank_id'=> 'required|numeric|min:0',
@@ -350,14 +349,14 @@ class InsuredApiController extends Controller
             'Affiliate_status' => 'required|not_in:Elije...',
             'Observations' =>'nullable|min:5|max:180',
             'Last_name_1' => 'required|min:2|max:20',
-            'Last_name_2' => 'required|min:2|max:20',
-            'Name' => 'required|min:2|max:30',            
+            'Last_name_2' => 'nullable|min:2|max:20',
+            'Name' => 'required|min:2|max:30',
             'Birthday' => 'nullable|max:10|date',
             'Birthplace' => 'nullable|min:3|max:85',
             'Sex' => 'required',
             'Marital_status' => 'nullable',
             'Rfc' => 'required|max:13|alpha_num:ascii',
-            'Curp' => 'nullable| max:18 |alpha_num:ascii',
+            'Curp'=> 'nullable | string | min:18 | max: 18',
             'Phone' => 'nullable|numeric|digits:10',
             'Email' => 'nullable|email|min:5|max:50|unique:insureds,email',
             'State' => 'nullable|min:5|max:85',
@@ -401,7 +400,7 @@ class InsuredApiController extends Controller
             $response['errors'] = $validator->errors()->toArray();
             //$response['debug'] = [$request->all()];
             $codigo = 200;
-            return response()->json($response,status:$codigo); 
+            return response()->json($response,status:$codigo);
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -453,12 +452,12 @@ class InsuredApiController extends Controller
             $response['status'] ="success";
             $response['message'] =$titular->file_number;
             $codigo = 200;
-            return response()->json($response,status:$codigo); 
+            return response()->json($response,status:$codigo);
          }catch(Exception $e){
              DB::rollBack();
-             $response['debug'] =$e->getMessage(); 
-             
-         }          
+             $response['debug'] =$e->getMessage();
+
+         }
     }
     public function baja(Request $request,$id)
     {
@@ -473,12 +472,12 @@ class InsuredApiController extends Controller
         $response['debug'] ="";
         //$response['debug'] =$request->input('File_number');
         //$codigo = 200;
-        //return response()->json($response,status:$codigo); 
+        //return response()->json($response,status:$codigo);
          $rules =[
 
-            'File_number' => 'required','max:8',         
+            'File_number' => 'required','max:8',
             'Inactive_date' => 'required|date',
-            'Inactive_date_dependency' => 'required|date',         
+            'Inactive_date_dependency' => 'required|date',
             'Inactive_motive' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -488,7 +487,7 @@ class InsuredApiController extends Controller
             $response['errors'] = $validator->errors()->toArray();
             //$response['debug'] = [$request->all()];
             $codigo = 200;
-            return response()->json($response,status:$codigo); 
+            return response()->json($response,status:$codigo);
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -498,11 +497,11 @@ class InsuredApiController extends Controller
             $fecha_baja = $request->input('Inactive_date');
             $baja_dependencia  = $request->input('Inactive_date_dependency');
             $motivo_baja =Str::of($request->input('Inactive_motive'))->trim();
-            $titular = Insured::find($id);            
+            $titular = Insured::find($id);
             $msg = "";
             switch ($motivo_baja) {
                 case 'Acta Administrativa':
-                    //dando de baja a titular  
+                    //dando de baja a titular
                     $titular->inactive_date =$fecha_baja;
                     $titular->inactive_date_dependency = $baja_dependencia;
                     $titular->inactive_motive = $motivo_baja;
@@ -524,7 +523,7 @@ class InsuredApiController extends Controller
                  $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
                  } else {
                  $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-                 }    
+                 }
                 case 'Defunsión':
                     $titular->inactive_date =$fecha_baja;
                     $titular->inactive_date_dependency = $baja_dependencia;
@@ -532,7 +531,7 @@ class InsuredApiController extends Controller
                     $titular->affiliate_status = "Baja";
                     $titular->status = "inactive";
                     $titular->modified_by = Auth::user()->email;
-                    $titular->save(); 
+                    $titular->save();
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                        'inactive_date' => $fecha_baja,
@@ -547,7 +546,7 @@ class InsuredApiController extends Controller
                     $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
                     } else {
                     $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-                    } 
+                    }
 
                 case 'Pensión':
                     $titular->inactive_date =$fecha_baja;
@@ -556,7 +555,7 @@ class InsuredApiController extends Controller
                     $titular->affiliate_status = "Baja por Aplicar";
                     //$titular->status = "inactive";
                     $titular->modified_by = Auth::user()->email;
-                    $titular->save(); 
+                    $titular->save();
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                        'inactive_date' => $fecha_baja,
@@ -572,7 +571,7 @@ class InsuredApiController extends Controller
                     } else {
                     $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
                     }
-                    
+
                 case 'Renuncia':
 
                     $titular->inactive_date =$fecha_baja;
@@ -581,7 +580,7 @@ class InsuredApiController extends Controller
                     $titular->affiliate_status = "Baja por Aplicar";
                     //$titular->status = "inactive";
                     $titular->modified_by = Auth::user()->email;
-                    $titular->save(); 
+                    $titular->save();
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                        'inactive_date' => $fecha_baja,
@@ -599,17 +598,17 @@ class InsuredApiController extends Controller
                     }
                 // default:
                 //     return response()->json(['error' => 'Invalid type'], 400);
-            }            
+            }
             DB::commit();
             $response['status'] ="success";
             $response['message'] = $msg;
             $codigo = 200;
-            return response()->json($response,status:$codigo); 
+            return response()->json($response,status:$codigo);
          }catch(Exception $e){
              DB::rollBack();
-             $response['debug'] =$e->getMessage(); 
-             
-         }          
+             $response['debug'] =$e->getMessage();
+
+         }
     }
     public function guardarfoto(Request $request,$id)
     {
@@ -634,7 +633,7 @@ class InsuredApiController extends Controller
             $response['errors'] = $validator->errors()->toArray();
             //$response['debug'] = [$request->all()];
             $codigo = 200;
-            return response()->json($response,status:$codigo); 
+            return response()->json($response,status:$codigo);
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -645,7 +644,7 @@ class InsuredApiController extends Controller
             if($titular == null){
                 $response['message'] ="Registro no encontrado";
                 $codigo = 200;
-                return response()->json($response,status:$codigo); 
+                return response()->json($response,status:$codigo);
             }else{
                 $titular->photo =Str::of($request->input('Photo'))->trim();
                 $titular->modified_by = Auth::user()->email;
@@ -654,13 +653,13 @@ class InsuredApiController extends Controller
                 $response['status'] ="success";
                 $response['message'] =$titular->file_number;
                 $codigo = 200;
-                return response()->json($response,status:$codigo); 
+                return response()->json($response,status:$codigo);
         }
          }catch(Exception $e){
              DB::rollBack();
-             $response['debug'] =$e->getMessage(); 
-             
-         }          
+             $response['debug'] =$e->getMessage();
+
+         }
     }
     public function guardarfirma(Request $request,$id)
     {
@@ -685,7 +684,7 @@ class InsuredApiController extends Controller
             $response['errors'] = $validator->errors()->toArray();
             //$response['debug'] = [$request->all()];
             $codigo = 200;
-            return response()->json($response,status:$codigo); 
+            return response()->json($response,status:$codigo);
         }
 
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -696,7 +695,7 @@ class InsuredApiController extends Controller
             if($titular == null){
                 $response['message'] ="Registro no encontrado";
                 $codigo = 200;
-                return response()->json($response,status:$codigo); 
+                return response()->json($response,status:$codigo);
             }else{
                 $titular->signature =Str::of($request->input('Signature'))->trim();
                 $titular->modified_by = Auth::user()->email;
@@ -705,13 +704,13 @@ class InsuredApiController extends Controller
                 $response['status'] ="success";
                 $response['message'] =$titular->file_number;
                 $codigo = 200;
-                return response()->json($response,status:$codigo); 
+                return response()->json($response,status:$codigo);
         }
          }catch(Exception $e){
              DB::rollBack();
-             $response['debug'] =$e->getMessage(); 
-             
-         }          
+             $response['debug'] =$e->getMessage();
+
+         }
     }
 }
 
