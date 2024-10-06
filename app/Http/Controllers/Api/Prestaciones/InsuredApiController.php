@@ -470,9 +470,9 @@ class InsuredApiController extends Controller
         $response['beneficiary'] ="";
         $response['history'] ="";
         $response['debug'] ="";
-        //$response['debug'] =$request->input('File_number');
-        //$codigo = 200;
-        //return response()->json($response,status:$codigo);
+        // $response['debug'] =$request->all();
+        // $codigo = 200;
+        // return response()->json($response,status:$codigo);
          $rules =[
 
             'File_number' => 'required','max:8',
@@ -512,7 +512,7 @@ class InsuredApiController extends Controller
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                     'inactive_date' => $fecha_baja,
-                    'inactive_motive' => $motivo_baja+" del Titular",
+                    'inactive_motive' => $motivo_baja." del Titular",
                     'affiliate_status' => "Baja",
                     'status' => "inactive",
                     'modified_by' => Auth::user()->email,
@@ -535,7 +535,7 @@ class InsuredApiController extends Controller
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                        'inactive_date' => $fecha_baja,
-                       'inactive_motive' => $motivo_baja+" del Titular",
+                       'inactive_motive' => $motivo_baja." del Titular",
                        'affiliate_status' => "Baja por Aplicar",
                     //'status' => "inactive",
                        'modified_by' => Auth::user()->email,
@@ -559,7 +559,7 @@ class InsuredApiController extends Controller
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                        'inactive_date' => $fecha_baja,
-                       'inactive_motive' => $motivo_baja+" del Titular",
+                       'inactive_motive' => $motivo_baja." del Titular",
                        'affiliate_status' => "Baja por Aplicar",
                        //'status' => "inactive",
                        'modified_by' => Auth::user()->email,
@@ -584,7 +584,7 @@ class InsuredApiController extends Controller
                    // Actualizar todos los beneficiarios y verificar el número de registros afectados
                    $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                        'inactive_date' => $fecha_baja,
-                       'inactive_motive' => $motivo_baja+" del Titular",
+                       'inactive_motive' => $motivo_baja." del Titular",
                        'affiliate_status' => "Baja por Aplicar",
                        //'status' => "inactive",
                        'modified_by' => Auth::user()->email,
