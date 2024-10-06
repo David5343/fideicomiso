@@ -459,156 +459,112 @@ class InsuredApiController extends Controller
 
          }
     }
-    public function baja(Request $request,$id)
+    public function baja(Request $request, $id)
     {
         $todo = $request->all();
         $codigo = 0;
-        $response['status'] ="fail";
-        $response['message'] ="";
-        $response['errors'] ="";
-        $response['insured'] ="";
-        $response['beneficiary'] ="";
-        $response['history'] ="";
-        $response['debug'] ="";
-        // $response['debug'] =$request->all();
-        // $codigo = 200;
-        // return response()->json($response,status:$codigo);
-         $rules =[
+        $response['status'] = "fail";
+        $response['message'] = "";
+        $response['errors'] = "";
+        $response['insured'] = "";
+        $response['beneficiary'] = "";
+        $response['history'] = "";
+        $response['debug'] = "";
 
-            'File_number' => 'required','max:8',
+        $rules = [
+            'File_number' => 'required|max:8',
             'Inactive_date' => 'required|date',
             'Inactive_date_dependency' => 'required|date',
             'Inactive_motive' => 'required',
         ];
-        $validator = Validator::make($request->all(),$rules);
-        // Comprobar si la validación falla
+
+        $validator = Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
-            // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
-            //$response['debug'] = [$request->all()];
             $codigo = 200;
-            return response()->json($response,status:$codigo);
+            return response()->json($response, status: $codigo);
         }
 
-        // Si la validación pasa, continua con el resto de tu lógica aquí
-         DB::beginTransaction();
-         try
-         {
+        DB::beginTransaction();
+        try {
             $fecha_baja = $request->input('Inactive_date');
-            $baja_dependencia  = $request->input('Inactive_date_dependency');
-            $motivo_baja =Str::of($request->input('Inactive_motive'))->trim();
+            $baja_dependencia = $request->input('Inactive_date_dependency');
+            $motivo_baja = Str::of($request->input('Inactive_motive'))->trim();
             $titular = Insured::find($id);
             $msg = "";
-            switch ($motivo_baja) {
-                case 'Acta Administrativa':
-                    //dando de baja a titular
-                    $titular->inactive_date =$fecha_baja;
-                    $titular->inactive_date_dependency = $baja_dependencia;
-                    $titular->inactive_motive = $motivo_baja;
-                    $titular->affiliate_status = "Baja";
-                    $titular->status = "inactive";
-                    $titular->modified_by = Auth::user()->email;
-                    $titular->save();
-                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
-                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+
+            if ($motivo_baja == 'Acta Administrativa') {
+                $titular->inactive_date = $fecha_baja;
+                $titular->inactive_date_dependency = $baja_dependencia;
+                $titular->inactive_motive = $motivo_baja;
+                $titular->affiliate_status = "Baja";
+                $titular->status = "inactive";
+                $titular->modified_by = Auth::user()->email;
+                $titular->save();
+
+                $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
                     'inactive_date' => $fecha_baja,
-                    'inactive_motive' => $motivo_baja." del Titular",
+                    'inactive_motive' => $motivo_baja . " del Titular",
                     'affiliate_status' => "Baja",
                     'status' => "inactive",
                     'modified_by' => Auth::user()->email,
                 ]);
-                 // Verificar si no se encontraron registros de beneficiarios
-                  if ($affectedRows === 0) {
-                 // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
-                 $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
-                 } else {
-                 $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-                 }
-                case 'Defunsión':
-                    $titular->inactive_date =$fecha_baja;
-                    $titular->inactive_date_dependency = $baja_dependencia;
-                    $titular->inactive_motive = $motivo_baja;
-                    $titular->affiliate_status = "Baja";
-                    $titular->status = "inactive";
-                    $titular->modified_by = Auth::user()->email;
-                    $titular->save();
-                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
-                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
-                       'inactive_date' => $fecha_baja,
-                       'inactive_motive' => $motivo_baja." del Titular",
-                       'affiliate_status' => "Baja por Aplicar",
-                    //'status' => "inactive",
-                       'modified_by' => Auth::user()->email,
-                   ]);
-                    // Verificar si no se encontraron registros de beneficiarios
-                     if ($affectedRows === 0) {
-                    // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
-                    $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
-                    } else {
-                    $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-                    }
 
-                case 'Pensión':
-                    $titular->inactive_date =$fecha_baja;
-                    $titular->inactive_date_dependency = $baja_dependencia;
-                    $titular->inactive_motive = $motivo_baja;
-                    $titular->affiliate_status = "Baja por Aplicar";
-                    //$titular->status = "inactive";
-                    $titular->modified_by = Auth::user()->email;
-                    $titular->save();
-                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
-                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
-                       'inactive_date' => $fecha_baja,
-                       'inactive_motive' => $motivo_baja." del Titular",
-                       'affiliate_status' => "Baja por Aplicar",
-                       //'status' => "inactive",
-                       'modified_by' => Auth::user()->email,
-                   ]);
-                    // Verificar si no se encontraron registros de beneficiarios
-                     if ($affectedRows === 0) {
-                    // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
-                    $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
-                    } else {
-                    $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-                    }
-
-                case 'Renuncia':
-
-                    $titular->inactive_date =$fecha_baja;
-                    $titular->inactive_date_dependency = $baja_dependencia;
-                    $titular->inactive_motive = $motivo_baja;
-                    $titular->affiliate_status = "Baja por Aplicar";
-                    //$titular->status = "inactive";
-                    $titular->modified_by = Auth::user()->email;
-                    $titular->save();
-                   // Actualizar todos los beneficiarios y verificar el número de registros afectados
-                   $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
-                       'inactive_date' => $fecha_baja,
-                       'inactive_motive' => $motivo_baja." del Titular",
-                       'affiliate_status' => "Baja por Aplicar",
-                       //'status' => "inactive",
-                       'modified_by' => Auth::user()->email,
-                   ]);
-                    // Verificar si no se encontraron registros de beneficiarios
-                     if ($affectedRows === 0) {
-                    // Aquí puedes manejar el caso de que no se encontraran beneficiarios si es necesario
-                    $msg = 'El registro'.$titular->file_number.' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.';
-                    } else {
-                    $msg ='El registro'.$titular->file_number.' y sus familiares fueron dados de baja con éxito!';
-                    }
-                // default:
-                //     return response()->json(['error' => 'Invalid type'], 400);
+                $msg = ($affectedRows === 0) ?
+                    'El registro ' . $titular->file_number . ' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.' :
+                    'El registro ' . $titular->file_number . ' y sus familiares fueron dados de baja con éxito!';
             }
+            else if ($motivo_baja == 'Defunsión') {
+                $titular->inactive_date = $fecha_baja;
+                $titular->inactive_date_dependency = $baja_dependencia;
+                $titular->inactive_motive = $motivo_baja;
+                $titular->affiliate_status = "Baja";
+                $titular->status = "inactive";
+                $titular->modified_by = Auth::user()->email;
+                $titular->save();
+
+                $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                    'inactive_date' => $fecha_baja,
+                    'inactive_motive' => $motivo_baja . " del Titular",
+                    'affiliate_status' => "Baja por Aplicar",
+                    'modified_by' => Auth::user()->email,
+                ]);
+
+                $msg = ($affectedRows === 0) ?
+                    'El registro ' . $titular->file_number . ' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.' :
+                    'El registro ' . $titular->file_number . ' y sus familiares fueron dados de baja con éxito!';
+            }
+            else if ($motivo_baja == 'Pensión' || $motivo_baja == 'Renuncia') {
+                $titular->inactive_date = $fecha_baja;
+                $titular->inactive_date_dependency = $baja_dependencia;
+                $titular->inactive_motive = $motivo_baja;
+                $titular->affiliate_status = "Baja por Aplicar";
+                $titular->modified_by = Auth::user()->email;
+                $titular->save();
+
+                $affectedRows = Beneficiary::where('insured_id', $titular->id)->update([
+                    'inactive_date' => $fecha_baja,
+                    'inactive_motive' => $motivo_baja . " del Titular",
+                    'affiliate_status' => "Baja por Aplicar",
+                    'modified_by' => Auth::user()->email,
+                ]);
+
+                $msg = ($affectedRows === 0) ?
+                    'El registro ' . $titular->file_number . ' fue dado de baja con éxito, pero no se encontraron familiares para actualizar.' :
+                    'El registro ' . $titular->file_number . ' y sus familiares fueron dados de baja con éxito!';
+            }
+
             DB::commit();
-            $response['status'] ="success";
+            $response['status'] = "success";
             $response['message'] = $msg;
             $codigo = 200;
-            return response()->json($response,status:$codigo);
-         }catch(Exception $e){
-             DB::rollBack();
-             $response['debug'] =$e->getMessage();
-
-         }
+            return response()->json($response, status: $codigo);
+        } catch (Exception $e) {
+            DB::rollBack();
+            $response['debug'] = $e->getMessage();
+            return response()->json($response, status: 500);
+        }
     }
     public function guardarfoto(Request $request,$id)
     {
