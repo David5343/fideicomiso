@@ -400,4 +400,88 @@ class BeneficiaryApiController extends Controller
             return response()->json($response, status: 500);
         }
     }
+    public function update(Request $request,$id)
+    {
+        $todo = $request->all();
+        $codigo = 0;
+        $response['status'] ="fail";
+        $response['errors'] ="";
+        $response['beneficiary'] ="";
+        $response['debug'] ="";
+         $rules =[
+            //Valida si ya hay un registro en la tabla beneficiaries con el mismo numero de afiliacion con un estatus de activo
+            // 'File_number' => [
+            //     'Insured_id' =>'required',
+            //     'required','max:8',
+            //     Rule::unique('beneficiaries')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
+            // ],
+            'Start_date' => 'required|date|max:10',
+            'Last_name_1' => 'required|min:2|max:20',
+            'Last_name_2' => 'nullable|min:2|max:20',
+            'Name' => 'required|min:2|max:30',
+            'Birthday' => 'nullable|max:10|date',
+            'Sex' => 'required',
+            'Rfc' => 'nullable|string|min:13|max:13',
+            'Curp'=> 'nullable|string|min:18|max: 18',
+            'Disabled_person'=>'nullable |string',
+            'Relationship' =>'nullable|string',
+            'Address'=>'nullable|string|max:200',
+            'Observations' =>'nullable|min:5|max:180',
+            'Account_number' => 'nullable|digits:10|unique:insureds,account_number',
+            'Clabe' => 'nullable','digits:18','unique:insureds,clabe',
+            'Bank_id' => 'nullable',
+            'Representative_name' =>'nullable|max:40',
+            'Representative_rfc' =>'nullable | max:13|alpha_num:ascii',
+            'Representative_curp' =>'nullable | max:18|alpha_num:ascii',
+            'Representative_relationship' =>'nullable',
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        // Comprobar si la validación falla
+        if ($validator->fails()) {
+            // Retornar errores de validación
+            $response['errors'] = $validator->errors()->toArray();
+            //$response['errors'] = $validator->errors();
+            //$response['debug'] = $request->all();
+            return response()->json($response, 200);
+        }
+        // Si la validación pasa, continua con el resto de tu lógica aquí
+        DB::beginTransaction();
+        try
+        {
+
+           $familiar = Beneficiary::find($id);
+        //    $familiar->file_number = Str::of($request->input('File_number'))->trim();
+        //    $familiar->insured_id = $request->input('Insured_id');
+            $familiar->start_date =$request->input('Start_date');
+            $familiar->last_name_1 = Str::of($request->input('Last_name_1'))->trim();
+            $familiar->last_name_2 = Str::of($request->input('Last_name_2'))->trim();
+            $familiar->name = Str::of($request->input('Name'))->trim();
+            $familiar->birthday = $request->input('Birthday');
+            $familiar->sex = $request->input('Sex');
+            $rfc = Str::of($request->input('Rfc'))->trim();
+            $familiar->rfc = Str::upper($rfc);
+            $curp = Str::of($request->input('Curp'))->trim();
+            $familiar->curp = Str::upper($curp);
+            $familiar->disabled_person = Str::of($request->input('Disabled_person'))->trim();
+            $familiar->relationship = Str::of($request->input('Relationship'))->trim();
+            $familiar->address = Str::of($request->input('Address'))->trim();
+            $familiar->observations = Str::of($request->input('Observations'))->trim();
+            $familiar->clabe = Str::of($request->input('Clabe'))->trim();
+            $familiar->bank_id = $request->input('Bank_id');
+            $familiar->representative_name = Str::of($request->input('Representative_name'))->trim();
+            $familiar->representative_rfc = Str::of($request->input('Representative_rfc'))->trim();
+            $familiar->representative_curp = Str::of($request->input('Representative_curp'))->trim();
+            $familiar->representative_relationship = Str::of($request->input('Representative_relationship'))->trim();
+            $familiar->modified_by = Auth::user()->email;
+            $familiar->save();
+           DB::commit();
+           $response['status'] ="success";
+           $response['beneficiary'] =$familiar->file_number;
+           return response()->json($response, 200);
+        }catch(Exception $e){
+            DB::rollBack();
+            $response['debug'] =$e->getMessage();
+
+        }
+    }
 }

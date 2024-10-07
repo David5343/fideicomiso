@@ -59,6 +59,7 @@ Route::get('/prestaciones/familiares/porrfc/{dato}',[BeneficiaryApiController::c
 Route::get('/prestaciones/familiares/porcurp/{dato}',[BeneficiaryApiController::class, 'porcurp']);
 Route::put('/prestaciones/familiares/guardarfoto/{id}', [BeneficiaryApiController::class,'guardarfoto']);
 Route::put('/prestaciones/familiares/baja/{id}', [BeneficiaryApiController::class,'baja']);
+Route::put('/prestaciones/familiares/update/{id}', [BeneficiaryApiController::class,'update']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
