@@ -32,7 +32,7 @@ Route::post('/login',[ApiController::class,'login']);
 Route::get('/users', [ApiController::class,'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+
 Route::get('/users', [ApiController::class,'index']);
 //Rutas de titulares
 Route::get('/prestaciones/titulares/idgenerator',[InsuredApiController::class, 'idgenerator']);
@@ -58,6 +58,7 @@ Route::get('/prestaciones/familiares/porfolio/{dato}',[BeneficiaryApiController:
 Route::get('/prestaciones/familiares/porrfc/{dato}',[BeneficiaryApiController::class, 'porrfc']);
 Route::get('/prestaciones/familiares/porcurp/{dato}',[BeneficiaryApiController::class, 'porcurp']);
 Route::put('/prestaciones/familiares/guardarfoto/{id}', [BeneficiaryApiController::class,'guardarfoto']);
+Route::put('/prestaciones/familiares/baja/{id}', [BeneficiaryApiController::class,'baja']);
 //Rutas de subdependencias
 Route::get('/prestaciones/subdependencias/listar',[SubdependencyApiController::class, 'listar']);
 //Rutas de categorias
