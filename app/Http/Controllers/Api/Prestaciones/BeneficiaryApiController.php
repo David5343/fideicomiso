@@ -415,11 +415,11 @@ class BeneficiaryApiController extends Controller
             //     'required','max:8',
             //     Rule::unique('beneficiaries')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
             // ],
-            'Start_date' => 'required|date|max:10',
+            'Start_date' => 'required|date|date_format:Y-m-d',
             'Last_name_1' => 'required|min:2|max:20',
             'Last_name_2' => 'nullable|min:2|max:20',
             'Name' => 'required|min:2|max:30',
-            'Birthday' => 'nullable|max:10|date',
+            'Birthday' => 'nullable|date|date_format:Y-m-d',
             'Sex' => 'required',
             'Rfc' => 'nullable|string|min:13|max:13',
             'Curp'=> 'nullable|string|min:18|max: 18',
@@ -440,8 +440,6 @@ class BeneficiaryApiController extends Controller
         if ($validator->fails()) {
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
-            //$response['errors'] = $validator->errors();
-            //$response['debug'] = $request->all();
             return response()->json($response, 200);
         }
         // Si la validación pasa, continua con el resto de tu lógica aquí
@@ -450,9 +448,7 @@ class BeneficiaryApiController extends Controller
         {
 
            $familiar = Beneficiary::find($id);
-        //    $familiar->file_number = Str::of($request->input('File_number'))->trim();
-        //    $familiar->insured_id = $request->input('Insured_id');
-            $familiar->start_date =$request->input('Start_date');
+            $familiar->start_date = $request->input('Start_date');
             $familiar->last_name_1 = Str::of($request->input('Last_name_1'))->trim();
             $familiar->last_name_2 = Str::of($request->input('Last_name_2'))->trim();
             $familiar->name = Str::of($request->input('Name'))->trim();
