@@ -70,6 +70,7 @@ Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
 Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
 //Rutas de bancos
 Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
+Route::get('/prestaciones/credencialtitular',[CredentialInsuredApiController::class, 'index']);
 Route::post('/prestaciones/credencialtitular/guardar',[CredentialInsuredApiController::class, 'store']);
 Route::get('/prestaciones/credencialtitular/{id}',[CredentialInsuredApiController::class,'show']);
 Route::post('/prestaciones/credencialfamiliar/guardar',[CredentialBeneficiaryApiController::class, 'store']);
