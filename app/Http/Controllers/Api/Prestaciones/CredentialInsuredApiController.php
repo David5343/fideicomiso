@@ -15,7 +15,7 @@ class CredentialInsuredApiController extends Controller
 {
     public function index()
     {   
-        $titulares = CredentialInsured::with('insured')
+        $titulares = CredentialInsured::with('insured.subdependency')
                                 //->with('subdependency')
                                 ->latest()
                                 ->limit(25)
