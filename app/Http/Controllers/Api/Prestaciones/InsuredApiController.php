@@ -255,7 +255,7 @@ class InsuredApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $titular = Insured::where('status','active')
+        $titular = Insured::where('affiliate_status','Activo')
                             ->where('file_number',$dato)
                             ->with('subdependency')
                             ->with('rank')
@@ -283,7 +283,7 @@ class InsuredApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $titular = Insured::where('status','active')
+        $titular = Insured::where('affiliate_status','Activo')
                             ->where('rfc',$dato)
                             ->with('subdependency')
                             ->with('rank')
@@ -311,7 +311,7 @@ class InsuredApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $titular = Insured::where('status','active')
+        $titular = Insured::where('affiliate_status','Activo')
                             ->where('curp',$dato)
                             ->with('subdependency')
                             ->with('rank')
@@ -499,7 +499,7 @@ class InsuredApiController extends Controller
                 $titular->inactive_date_dependency = $baja_dependencia;
                 $titular->inactive_motive = $motivo_baja;
                 $titular->affiliate_status = "Baja";
-                $titular->status = "inactive";
+               // $titular->status = "inactive";
                 $titular->modified_by = Auth::user()->email;
                 $titular->save();
 
@@ -507,7 +507,7 @@ class InsuredApiController extends Controller
                     'inactive_date' => $fecha_baja,
                     'inactive_motive' => $motivo_baja . " del Titular",
                     'affiliate_status' => "Baja",
-                    'status' => "inactive",
+                    //'status' => "inactive",
                     'modified_by' => Auth::user()->email,
                 ]);
 
@@ -520,7 +520,7 @@ class InsuredApiController extends Controller
                 $titular->inactive_date_dependency = $baja_dependencia;
                 $titular->inactive_motive = $motivo_baja;
                 $titular->affiliate_status = "Baja";
-                $titular->status = "inactive";
+                //$titular->status = "inactive";
                 $titular->modified_by = Auth::user()->email;
                 $titular->save();
 
