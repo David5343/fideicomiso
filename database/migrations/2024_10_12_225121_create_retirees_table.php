@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->string('insured_type',255)->nullable();
             $table->unsignedBigInteger('pension_type')->nullable();
-            $table->foreign('pension_type_id')->references('id')->on('pension_type');
+            $table->foreign('pension_type')->references('id')->on('pension_type');
             $table->unsignedBigInteger('insured_id')->nullable();
             $table->foreign('insured_id')->references('id')->on('insureds');
             $table->unsignedBigInteger('beneficiary_id')->nullable();
