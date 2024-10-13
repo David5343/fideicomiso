@@ -76,10 +76,10 @@ class BeneficiaryApiController extends Controller
          $rules =[
             //Valida si ya hay un registro en la tabla beneficiaries con el mismo numero de afiliacion con un estatus de activo
             'File_number' => [
-                'Insured_id' =>'required',
                 'required','max:8',
                 Rule::unique('beneficiaries')->where(fn (Builder $query) => $query->where('affiliate_status','Activo')),
             ],
+            'Insured_id' =>'required',
             'Start_date' => 'required|date|max:10',
             'Last_name_1' => 'required|min:2|max:20',
             'Last_name_2' => 'nullable|min:2|max:20',
@@ -192,7 +192,7 @@ class BeneficiaryApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $familiar = Beneficiary::where('status','active')
+        $familiar = Beneficiary::where('affiliate_status','Activo')
                             ->where('file_number',$dato)
                             ->with('bank')
                             ->with('insured')
@@ -218,7 +218,7 @@ class BeneficiaryApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $familiar = Beneficiary::where('status','active')
+        $familiar = Beneficiary::where('affiliate_status','Activo')
                             ->where('rfc',$dato)
                             ->with('bank')
                             ->with('insured')
@@ -244,7 +244,7 @@ class BeneficiaryApiController extends Controller
         $response['insured'] ="";
         $response['beneficiary'] ="";
         $response['debug'] ="0";
-        $familiar = Beneficiary::where('status','active')
+        $familiar = Beneficiary::where('affiliate_status','Activo')
                             ->where('curp',$dato)
                             ->with('bank')
                             ->with('insured')
@@ -348,7 +348,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = "Baja";
-                $familiar->status = "inactive";
+                //$familiar->status = "inactive";
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro ' . $familiar->file_number . ' fue dado de baja con éxito.';
@@ -357,7 +357,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = "Baja por Aplicar";
-                $familiar->status = "inactive";
+                //$familiar->status = "inactive";
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro ' . $familiar->file_number . ' fue dado de baja con éxito.';
@@ -374,7 +374,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = "Baja";
-                $familiar->status = "inactive";
+                //$familiar->status = "inactive";
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro ' . $familiar->file_number . ' fue dado de baja con éxito.';
@@ -383,7 +383,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = "Baja";
-                $familiar->status = "inactive";
+                //$familiar->status = "inactive";
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro ' . $familiar->file_number . ' fue dado de baja con éxito.';
