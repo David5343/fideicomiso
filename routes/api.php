@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
 use App\Http\Controllers\Api\Prestaciones\BeneficiaryApiController;
 use App\Http\Controllers\Api\Prestaciones\CredentialBeneficiaryApiController;
 use App\Http\Controllers\Api\Prestaciones\CredentialInsuredApiController;
+use App\Http\Controllers\Api\Prestaciones\RetireeApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -70,9 +71,13 @@ Route::get('/humanos/municipios/listar',[CountyApiController::class, 'listar']);
 Route::get('/humanos/estados/listar',[StateApiController::class, 'listar']);
 //Rutas de bancos
 Route::get('/humanos/bancos/listar',[BankApiController::class, 'listar']);
+//Credencial Titulares
 Route::get('/prestaciones/credencialtitular',[CredentialInsuredApiController::class, 'index']);
 Route::post('/prestaciones/credencialtitular/guardar',[CredentialInsuredApiController::class, 'store']);
 Route::get('/prestaciones/credencialtitular/{id}',[CredentialInsuredApiController::class,'show']);
+//Credencial Familiares
 Route::post('/prestaciones/credencialfamiliar/guardar',[CredentialBeneficiaryApiController::class, 'store']);
 Route::get('/prestaciones/credencialfamiliar/{id}',[CredentialBeneficiaryApiController::class,'show']);
+//Pensionados
+Route::get('/prestaciones/pensionados/busqueda/{dato}',[RetireeApiController::class, 'busqueda']);
 });
