@@ -76,6 +76,7 @@ Route::get('/prestaciones/credencialtitular',[CredentialInsuredApiController::cl
 Route::post('/prestaciones/credencialtitular/guardar',[CredentialInsuredApiController::class, 'store']);
 Route::get('/prestaciones/credencialtitular/{id}',[CredentialInsuredApiController::class,'show']);
 //Credencial Familiares
+Route::get('/prestaciones/credencialfamiliar',[CredentialBeneficiaryApiController::class, 'index']);
 Route::post('/prestaciones/credencialfamiliar/guardar',[CredentialBeneficiaryApiController::class, 'store']);
 Route::get('/prestaciones/credencialfamiliar/{id}',[CredentialBeneficiaryApiController::class,'show']);
 //Pensionados
