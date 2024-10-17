@@ -15,12 +15,12 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('birth_certificate',255)->nullable();
-            $table->string('curp',255)->nullable();
+            $table->string('birth_certificate', 255)->nullable();
+            $table->string('curp', 255)->nullable();
             $table->unsignedBigInteger('family_id')->nullable()->unique();
             $table->foreign('family_id')->references('id')->on('employee_families');
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -10,30 +10,39 @@ use Livewire\WithPagination;
 class IndexDependencias extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
-    public $search='';
+    public $search = '';
+
     public $numberRows = 5;
 
-    public function updatingSearch(){
+    public function updatingSearch()
+    {
         $this->resetPage();
     }
-    public function updatingnumberRows(){
+
+    public function updatingnumberRows()
+    {
         $this->resetPage();
     }
+
     #[On('create_dependencia')]
-    public function updateList($dependencia = null){
+    public function updateList($dependencia = null)
+    {
 
     }
+
     public function render()
     {
-        $lista =  Dependency::where('status','=','active')
-                        ->where('name','like','%'.$this->search.'%')
-                        ->orderBy('name','asc')
-                        ->paginate($this->numberRows);
+        $lista = Dependency::where('status', '=', 'active')
+            ->where('name', 'like', '%'.$this->search.'%')
+            ->orderBy('name', 'asc')
+            ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.prestaciones.dependencias.index-dependencias',[
+
+        return view('livewire.prestaciones.dependencias.index-dependencias', [
             'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista, ]);
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Dependency extends Model
 {
     use HasFactory;
+
     protected $table = 'dependencies';
 
     public function subdependency(): HasMany

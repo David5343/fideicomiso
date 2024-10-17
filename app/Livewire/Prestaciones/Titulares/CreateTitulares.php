@@ -5,102 +5,134 @@ namespace App\Livewire\Prestaciones\Titulares;
 use App\Models\Humanos\Bank;
 use App\Models\Humanos\County;
 use App\Models\Humanos\State;
-use App\Models\Prestaciones\Category;
 use App\Models\Prestaciones\Insured;
 use App\Models\Prestaciones\Rank;
 use App\Models\Prestaciones\Subdependency;
 use Exception;
-use Livewire\Component;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class CreateTitulares extends Component
 {
-    #[Validate('required|max:8|unique:insureds,file_number')] 
+    #[Validate('required|max:8|unique:insureds,file_number')]
     public $no_expediente;
+
     #[Validate('required')]
     public $subdepe_id;
+
     #[Validate('required')]
     public $categoria_id;
+
     #[Validate('required|max:10|date')]
     public $fecha_ingreso;
+
     #[Validate('nullable|min:3|max:85')]
     public $lugar_trabajo;
+
     #[Validate('nullable|min:3|max:120')]
     public $motivo_alta;
+
     #[Validate('required')]
     public $estatus_afiliado;
+
     #[Validate('nullable|min:5|max:180')]
     public $observaciones;
+
     #[Validate('required|min:2|max:20')]
     public $apaterno;
+
     #[Validate('required|min:2|max:20')]
     public $amaterno;
+
     #[Validate('nullable|min:2|max:30')]
-    public $nombre;         
+    public $nombre;
+
     #[Validate('nullable|max:10|date')]
     public $fecha_nacimiento;
+
     #[Validate('nullable | min:3| max:85')]
     public $lugar_nacimiento;
+
     #[Validate('required')]
     public $sexo;
+
     #[Validate('nullable')]
     public $estado_civil;
+
     #[Validate('required|max:13|alpha_num:ascii|unique:insureds,rfc')]
     public $rfc;
+
     #[Validate('nullable|max:18|alpha_num:ascii|unique:insureds,curp')]
     public $curp;
+
     #[Validate('nullable|numeric|digits:10')]
     public $telefono;
+
     #[Validate('nullable|email|min:5|max:50|unique:insureds,email')]
     public $email;
+
     #[Validate('nullable|min:5|max:85')]
     public $estado;
+
     #[Validate('nullable|min:3|max:85')]
     public $municipio;
+
     #[Validate('nullable|min:5|max:50')]
     public $colonia;
+
     #[Validate('nullable|min:5|max:50')]
     public $tipo_vialidad;
+
     #[Validate('nullable|min:5|max:50')]
     public $calle;
+
     #[Validate('nullable|max:7')]
     public $num_exterior;
+
     #[Validate('nullable|max:7')]
     public $num_interior;
+
     #[Validate('nullable|numeric|digits:5')]
     public $cp;
+
     #[Validate('nullable|min:5|max:85')]
     public $localidad;
+
     #[Validate('nullable|digits:10')]
     public $num_cuenta;
+
     #[Validate('nullable|digits:18')]
     public $clabe;
+
     #[Validate('nullable')]
     public $banco_id;
+
     #[Validate('nullable| max:40')]
     public $nombre_representante;
+
     #[Validate('nullable|max:13|alpha_num:ascii')]
     public $rfc_representante;
+
     #[Validate('nullable| max:18|alpha_num:ascii')]
     public $curp_representante;
+
     #[Validate('nullable')]
     public $parentesco_representante;
 
     public function guardar()
     {
         DB::beginTransaction();
-        try
-        {
+        try {
             $this->validate();
             $titular = new Insured();
             $titular->file_number = Str::of($this->no_expediente)->trim();
             $titular->subdependency_id = $this->subdepe_id;
             $titular->rank_id = $this->categoria_id;
-            $titular->start_date =$this->fecha_ingreso;
+            $titular->start_date = $this->fecha_ingreso;
             $titular->work_place = Str::of($this->lugar_trabajo)->trim();
             $titular->register_motive = Str::of($this->motivo_alta)->trim();
             $titular->affiliate_status = $this->estatus_afiliado;
@@ -142,12 +174,12 @@ class CreateTitulares extends Component
             DB::commit();
             session()->flash('msg_tipo', 'success');
             session()->flash('msg', 'Registro con No. de Expediente: '.$titular->file_number.' creado con éxito!');
-            $this->js("alert('Registro con No. de Expediente:".$titular->file_number." creado con éxito!')"); 
+            $this->js("alert('Registro con No. de Expediente:".$titular->file_number." creado con éxito!')");
             //return to_route('prestaciones.titulares.create');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
             session()->flash('msg_tipo', 'danger');
-            session()->flash('msg', $e->getMessage()); 
+            session()->flash('msg', $e->getMessage());
         }
     }
 
@@ -158,12 +190,13 @@ class CreateTitulares extends Component
         $select3 = County::where('status', 'active')->get();
         $select4 = Bank::where('status', 'active')->get();
         $select5 = Rank::where('status', 'active')->get();
-        $this->no_expediente = IdGenerator::generate(['table' => 'insureds','field' => 'file_number', 'length' => 8, 'prefix' =>'T']);
-        return view('livewire.prestaciones.titulares.create-titulares',['select1' => $select1,
-                                                                        'select2' => $select2,
-                                                                        'select3' => $select3,
-                                                                        'select4' => $select4,
-                                                                        'select5' => $select5,
-                                                                        'no_expediente' =>$this->no_expediente]);
+        $this->no_expediente = IdGenerator::generate(['table' => 'insureds', 'field' => 'file_number', 'length' => 8, 'prefix' => 'T']);
+
+        return view('livewire.prestaciones.titulares.create-titulares', ['select1' => $select1,
+            'select2' => $select2,
+            'select3' => $select3,
+            'select4' => $select4,
+            'select5' => $select5,
+            'no_expediente' => $this->no_expediente]);
     }
 }

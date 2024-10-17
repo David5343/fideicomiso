@@ -5,17 +5,19 @@ namespace App\Livewire\Prestaciones\Subdependencias;
 use App\Models\Prestaciones\Dependency;
 use App\Models\Prestaciones\Subdependency;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Livewire\Attributes\Rule;
+use Livewire\Component;
 
 class CreateSubdependencias extends Component
 {
     #[Rule('required|unique:subdependencies,name|min:5|max:50')]
     public $nombre;
+
     #[Rule('required')]
     public $dependencia_id;
 
-    public function createSubdependency(){
+    public function createSubdependency()
+    {
 
         $this->validate();
         $sd = new Subdependency();
@@ -24,19 +26,23 @@ class CreateSubdependencias extends Component
         $sd->status = 'active';
         $sd->modified_by = Auth::user()->email;
         $sd->save();
-        session()->flash('msg_tipo','success');
-        session()->flash('msg','Registro creado con éxito!'); 
-        $this->dispatch('create_subdependencia',$sd);
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'Registro creado con éxito!');
+        $this->dispatch('create_subdependencia', $sd);
     }
-    public function cerrarModal(){
 
-        $this->reset(['nombre','dependencia_id']);
+    public function cerrarModal()
+    {
+
+        $this->reset(['nombre', 'dependencia_id']);
         $this->resetValidation();
 
     }
+
     public function render()
     {
-        $select = Dependency::where('status','active')->get();
-        return view('livewire.prestaciones.subdependencias.create-subdependencias',['select'=>$select]);
+        $select = Dependency::where('status', 'active')->get();
+
+        return view('livewire.prestaciones.subdependencias.create-subdependencias', ['select' => $select]);
     }
 }

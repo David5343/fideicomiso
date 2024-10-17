@@ -15,8 +15,9 @@ class Beneficiary extends Model
     {
         return $this->belongsTo(Insured::class);
     }
+
     public function bank(): BelongsTo
     {
-       return $this->belongsTo(Bank::class);
+        return $this->belongsTo(Bank::class);
     }
 }

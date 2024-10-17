@@ -10,29 +10,38 @@ use Spatie\Permission\Models\Role;
 class IndexRoles extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
-    public $search='';
+    public $search = '';
+
     public $numberRows = 5;
 
-    public function updatingSearch(){
+    public function updatingSearch()
+    {
         $this->resetPage();
     }
-    public function updatingnumberRows(){
+
+    public function updatingnumberRows()
+    {
         $this->resetPage();
     }
+
     #[On('create_role')]
-    public function updateList($role = null){
+    public function updateList($role = null)
+    {
 
     }
+
     public function render()
     {
-        $lista =  Role::where('name','like','%'.$this->search.'%')
-                        ->orderBy('name','asc')
-                        ->paginate($this->numberRows);
+        $lista = Role::where('name', 'like', '%'.$this->search.'%')
+            ->orderBy('name', 'asc')
+            ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.administracion.tecnologias.roles.index-roles',[
+
+        return view('livewire.administracion.tecnologias.roles.index-roles', [
             'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista, ]);
     }
 }

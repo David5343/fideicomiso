@@ -13,17 +13,24 @@ class SliderController extends Controller
         //$this->middleware('can:humanos.areas.index');
         //$this->middleware('subscribed')->except('store');
     }
-    public function index(){
+
+    public function index()
+    {
         $lista = Slider::all();
-        return view('humanos.slider.index',['lista'=>$lista]);
+
+        return view('humanos.slider.index', ['lista' => $lista]);
     }
-    public function create(){
+
+    public function create()
+    {
 
         return view('humanos.slider.create');
     }
+
     public function edit(string $id)
     {
         $row = Slider::find($id);
+
         return view('humanos.slider.edit', ['slider' => $row]);
     }
 }

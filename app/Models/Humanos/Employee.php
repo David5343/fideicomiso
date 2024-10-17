@@ -16,21 +16,25 @@ class Employee extends Model
 
     public function area(): BelongsTo
     {
-       return $this->belongsTo(Area::class);
+        return $this->belongsTo(Area::class);
     }
+
     public function place(): BelongsTo
     {
-       return $this->belongsTo(Place::class);
+        return $this->belongsTo(Place::class);
     }
+
     public function bank(): BelongsTo
     {
-       return $this->belongsTo(Bank::class);
+        return $this->belongsTo(Bank::class);
     }
+
     public function user(): BelongsTo
     {
-       return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
-    public function families():HasMany
+
+    public function families(): HasMany
     {
         return $this->hasMany(EmployeeFamily::class);
     }

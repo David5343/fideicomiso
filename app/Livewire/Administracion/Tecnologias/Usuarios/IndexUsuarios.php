@@ -11,55 +11,65 @@ use Livewire\WithPagination;
 class IndexUsuarios extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
-    public $search='';
+    public $search = '';
+
     public $numberRows = 5;
 
-    public function updatingSearch(){
+    public function updatingSearch()
+    {
         $this->resetPage();
     }
-    public function updatingnumberRows(){
+
+    public function updatingnumberRows()
+    {
         $this->resetPage();
     }
+
     #[On('create_user')]
-    public function updateList($user = null){
+    public function updateList($user = null)
+    {
 
     }
+
     #[On('create_token')]
     public function crearToken($id)
     {
         $user = User::find($id);
-        if($user->api_token == null){
+        if ($user->api_token == null) {
             //tokens por default no caducan
             //Creando nuevo token
             $token = $user->createToken($user->email);
-            $api_token= $token->plainTextToken;
+            $api_token = $token->plainTextToken;
             $user->api_token = $api_token;
             $user->modified_by = Auth::user()->email;
             $user->save();
 
-        }else{
+        } else {
             //Eliminando token existente
             $user->tokens()->where('name', $user->email)->delete();
             //Creando nuevo token
             $token = $user->createToken($user->email);
-            $api_token= $token->plainTextToken;
+            $api_token = $token->plainTextToken;
             $user->api_token = $api_token;
             $user->modified_by = Auth::user()->email;
             $user->save();
         }
 
     }
+
     public function render()
     {
-        $lista =  User::where('status','active')
-                        ->where('email','like','%'.$this->search.'%')
-                        ->orderBy('created_at','desc')
-                        ->paginate($this->numberRows);
+        $lista = User::where('status', 'active')
+            ->where('email', 'like', '%'.$this->search.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.administracion.tecnologias.usuarios.index-usuarios',[
+
+        return view('livewire.administracion.tecnologias.usuarios.index-usuarios', [
             'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista, ]);
     }
 }

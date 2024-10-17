@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('attendance_tracking', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_num',255)->nullable();
+            $table->string('employee_num', 255)->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->date('date')->nullable();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

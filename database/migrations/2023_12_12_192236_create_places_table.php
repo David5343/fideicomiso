@@ -15,12 +15,12 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('place_number',255)->unique();
-            $table->string('job_position',255);
+            $table->string('place_number', 255)->unique();
+            $table->string('job_position', 255);
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

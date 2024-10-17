@@ -10,8 +10,8 @@ class Rank extends Model
 {
     use HasFactory;
 
-    public function insured():HasMany
+    public function insured(): HasMany
     {
-        return $this->hasMany(Insured::class,'rank_id');
+        return $this->hasMany(Insured::class, 'rank_id');
     }
 }

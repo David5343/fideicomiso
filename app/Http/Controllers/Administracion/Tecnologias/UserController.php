@@ -17,11 +17,13 @@ class UserController extends Controller
         $this->middleware('can:administracion.tecnologias.usuarios.index');
         //$this->middleware('subscribed')->except('store');
     }
+
     public function index()
     {
         return view('administracion.tecnologias.usuarios.index');
 
     }
+
     public function create()
     {
         return view('administracion.tecnologias.usuarios.create');
@@ -42,8 +44,9 @@ class UserController extends Controller
         $user->status = 'active';
         $user->modified_by = Auth::user()->email;
         $user->save();
-        session()->flash('msg_tipo','success');
-        session()->flash('msg','Registro creado con éxito!');  
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'Registro creado con éxito!');
+
         return to_route('tecnologias.usuarios.index');
     }
 
@@ -55,7 +58,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $row = User::find($id);
-        return view('administracion.tecnologias.usuarios.edit',['usuario'=> $row]);
+
+        return view('administracion.tecnologias.usuarios.edit', ['usuario' => $row]);
     }
 
     /**
@@ -65,7 +69,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
-            'email' => ['required','max:50','unique:users,email,'.$id],
+            'email' => ['required', 'max:50', 'unique:users,email,'.$id],
             'password' => ['required', 'string', 'min:8'],
         ]);
         $row = User::find($id);
@@ -73,8 +77,9 @@ class UserController extends Controller
         $row->password = $request->input('password');
         $row->modified_by = Auth::user()->email;
         $row->save();
-        session()->flash('msg_tipo','success');
-        session()->flash('msg','Registro editado con éxito!');  
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'Registro editado con éxito!');
+
         return to_route('administracion.tecnologias.usuarios.index');
     }
 
@@ -84,8 +89,9 @@ class UserController extends Controller
         $area->status = 'inactive';
         $area->modified_by = Auth::user()->email;
         $area->save();
-        session()->flash('msg_tipo','success');
-        session()->flash('msg','Registro deshabilitado con éxito!');   
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'Registro deshabilitado con éxito!');
+
         return to_route('administracion.tecnologias.usuarios.index');
     }
 }

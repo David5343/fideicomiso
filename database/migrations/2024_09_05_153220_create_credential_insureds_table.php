@@ -17,10 +17,10 @@ return new class extends Migration
             $table->dateTime('expires_at', precision: 0);
             $table->unsignedBigInteger('insured_id')->nullable();
             $table->foreign('insured_id')->references('id')->on('insureds');
-            $table->string('expiration_types',255)->nullable();
-            $table->string('credential_status',255)->nullable();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->string('expiration_types', 255)->nullable();
+            $table->string('credential_status', 255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('medical_disability', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class RetireeApiController extends Controller
         $response['beneficiary'] = '';
         $response['debug'] = '0';
         $titular = Insured::where('affiliate_status', 'Baja')
-            ->where('inactive_motive','Pensión')
+            ->where('inactive_motive', 'Pensión')
             ->where('id', $dato)
             ->orwhere('file_number', $dato)
             ->orwhere('rfc', $dato)
@@ -29,17 +29,23 @@ class RetireeApiController extends Controller
             ->orwhere('last_name_1', 'like', '%'.$dato.'%')
             ->orwhere('last_name_2', 'like', '%'.$dato.'%')
             ->get();
-        if ($titular->isEmpty()) {
-            $familiar = Beneficiary::where('affiliate_status', 'Baja')
-                ->where('inactive_motive','Pensión')
-                ->where('id', $dato)
-                ->orwhere('file_number', $dato)
-                ->orwhere('rfc', $dato)
-                ->orwhere('curp', $dato)
-                ->orwhere('name', 'like', '%'.$dato.'%')
-                ->orwhere('last_name_1', 'like', '%'.$dato.'%')
-                ->orwhere('last_name_2', 'like', '%'.$dato.'%')
-                ->get();
+        $familiar = Beneficiary::where('affiliate_status', 'Baja')
+            ->where('inactive_motive', 'Pensión')
+            ->where('id', $dato)
+            ->orwhere('file_number', $dato)
+            ->orwhere('rfc', $dato)
+            ->orwhere('curp', $dato)
+            ->orwhere('name', 'like', '%'.$dato.'%')
+            ->orwhere('last_name_1', 'like', '%'.$dato.'%')
+            ->orwhere('last_name_2', 'like', '%'.$dato.'%')
+            ->get();
+        if ($titular->count() > 0) {
+            $response['status'] = 'success';
+            $response['insured'] = $titular;
+            $codigo = 200;
+
+            return response()->json($response, status: $codigo);
+        } elseif ($familiar->count() > 0) {
             $response['status'] = 'success';
             $response['beneficiary'] = $familiar;
             $codigo = 200;
@@ -47,8 +53,8 @@ class RetireeApiController extends Controller
             return response()->json($response, status: $codigo);
         } else {
 
-            $response['status'] = 'success';
-            $response['insured'] = $titular;
+            $response['status'] = 'fail';
+            $response['message'] = 'Registro no encontrado';
             $codigo = 200;
 
             return response()->json($response, status: $codigo);

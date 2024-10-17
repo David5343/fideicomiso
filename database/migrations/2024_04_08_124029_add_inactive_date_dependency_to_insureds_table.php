@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('insureds', function (Blueprint $table) {
-            $table->renameColumn('inactive_date_ssypc','inactive_date_dependency');
+            $table->renameColumn('inactive_date_ssypc', 'inactive_date_dependency');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('insureds', function (Blueprint $table) {
-            $table->renameColumn('inactive_date_dependency','inactive_date_ssypc');
+            $table->renameColumn('inactive_date_dependency', 'inactive_date_ssypc');
         });
     }
 };

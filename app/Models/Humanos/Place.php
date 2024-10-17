@@ -13,9 +13,10 @@ class Place extends Model
 
     public function category(): BelongsTo
     {
-       return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
-    public function employee():HasMany
+
+    public function employee(): HasMany
     {
         return $this->hasMany(Employee::class);
     }

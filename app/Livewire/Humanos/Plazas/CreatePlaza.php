@@ -5,24 +5,27 @@ namespace App\Livewire\Humanos\Plazas;
 use App\Models\Humanos\Category;
 use App\Models\Humanos\Place;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Livewire\Attributes\Rule;
+use Livewire\Component;
 
 class CreatePlaza extends Component
 {
     #[Rule('required|min:4|max:4|unique:places,place_number')]
     public $num_plaza;
+
     #[Rule('required|max:40')]
     public $puesto;
+
     #[Rule('required')]
     public $categoria_id;
 
-    public function createPlace(){
+    public function createPlace()
+    {
         $this->validate();
-        $categoria = Category::find($this->categoria_id);  
+        $categoria = Category::find($this->categoria_id);
         $autorizadas = $categoria->authorized_places;
         $ocupadas = $categoria->covered_places;
-        if($ocupadas < $autorizadas){
+        if ($ocupadas < $autorizadas) {
             //Creando la plaza
             $plaza = new Place();
             $plaza->place_number = $this->num_plaza;
@@ -35,22 +38,26 @@ class CreatePlaza extends Component
             $categoria->increment('covered_places');
             $categoria->modified_by = Auth::user()->email;
             $categoria->save();
-            session()->flash('msg_tipo','success');
-            session()->flash('msg','Registro creado con éxito!');  
-            $this->reset(['num_plaza','puesto','categoria_id']);
-            $this->dispatch('create_plaza',$plaza);
-        }else{
-            session()->flash('msg_tipo','danger'); 
-            session()->flash('msg','Supero el numero de plazas autorizadas para la categoria: '.$categoria->name);
+            session()->flash('msg_tipo', 'success');
+            session()->flash('msg', 'Registro creado con éxito!');
+            $this->reset(['num_plaza', 'puesto', 'categoria_id']);
+            $this->dispatch('create_plaza', $plaza);
+        } else {
+            session()->flash('msg_tipo', 'danger');
+            session()->flash('msg', 'Supero el numero de plazas autorizadas para la categoria: '.$categoria->name);
         }
     }
-    public function cerrarModal(){
-        $this->reset(['num_plaza','puesto','categoria_id']);
+
+    public function cerrarModal()
+    {
+        $this->reset(['num_plaza', 'puesto', 'categoria_id']);
         $this->resetValidation();
     }
+
     public function render()
     {
-        $select = Category::where('status','active')->get();
-        return view('livewire.humanos.plazas.create-plaza',['select'=>$select]);
+        $select = Category::where('status', 'active')->get();
+
+        return view('livewire.humanos.plazas.create-plaza', ['select' => $select]);
     }
 }

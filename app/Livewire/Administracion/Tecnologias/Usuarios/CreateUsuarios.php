@@ -4,15 +4,17 @@ namespace App\Livewire\Administracion\Tecnologias\Usuarios;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Livewire\Attributes\Rule;
+use Livewire\Component;
 
 class CreateUsuarios extends Component
 {
     #[Rule('required', 'string', 'max:255')]
     public $nombre;
+
     #[Rule('required', 'string', 'email', 'max:255', 'unique:users')]
     public $email;
+
     #[Rule('required', 'string', 'min:8')]
     public $password;
 
@@ -26,15 +28,17 @@ class CreateUsuarios extends Component
         $usuario->status = 'active';
         $usuario->modified_by = Auth::user()->email;
         $usuario->save();
-        session()->flash('msg_tipo','success');
-        session()->flash('msg','Registro creado con éxito!'); 
-        $this->dispatch('create_user',$usuario);
+        session()->flash('msg_tipo', 'success');
+        session()->flash('msg', 'Registro creado con éxito!');
+        $this->dispatch('create_user', $usuario);
     }
+
     public function cerrarModal()
     {
-        $this->reset(['nombre','email','password']);
+        $this->reset(['nombre', 'email', 'password']);
         $this->resetValidation();
     }
+
     public function render()
     {
         return view('livewire.administracion.tecnologias.usuarios.create-usuarios');

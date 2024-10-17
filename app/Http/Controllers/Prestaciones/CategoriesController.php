@@ -13,15 +13,18 @@ class CategoriesController extends Controller
     {
         return view('prestaciones.categorias.index');
     }
+
     public function edit(string $id)
     {
         $row = Rank::find($id);
+
         return view('prestaciones.categorias.edit', ['categoria' => $row]);
     }
+
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nombre' => ['required', 'max:50', 'unique:ranks,name,' . $id],
+            'nombre' => ['required', 'max:50', 'unique:ranks,name,'.$id],
         ]);
         $row = Rank::find($id);
         $row->name = $request->input('nombre');
@@ -29,8 +32,10 @@ class CategoriesController extends Controller
         $row->save();
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro actualizado con éxito!');
+
         return to_route('prestaciones.categorias.index');
     }
+
     public function destroy(string $id)
     {
         $row = Rank::find($id);
@@ -39,6 +44,7 @@ class CategoriesController extends Controller
         $row->save();
         session()->flash('msg_tipo', 'success');
         session()->flash('msg', 'Registro deshabilitado con éxito!');
+
         return to_route('prestaciones.categorias.index');
     }
 }

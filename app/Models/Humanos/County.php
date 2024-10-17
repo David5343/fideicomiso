@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class County extends Model
 {
     use HasFactory;
-    public function state():BelongsTo
+
+    public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);
     }

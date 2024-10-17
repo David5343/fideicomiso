@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('insureds', function (Blueprint $table) {
-            $table->string('file_number',255)->unique()->change();
+            $table->string('file_number', 255)->unique()->change();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('insureds', function (Blueprint $table) {
-            $table->string('file_number',255)->nullable()->change();
+            $table->string('file_number', 255)->nullable()->change();
         });
     }
 };

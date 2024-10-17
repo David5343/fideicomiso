@@ -10,13 +10,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Subdependency extends Model
 {
     use HasFactory;
+
     protected $table = 'subdependencies';
-    public function dependency():BelongsTo
+
+    public function dependency(): BelongsTo
     {
         return $this->belongsTo(Dependency::class);
     }
-    public function insured():HasMany
+
+    public function insured(): HasMany
     {
-        return $this->hasMany(Insured::class,'subdependency_id');
+        return $this->hasMany(Insured::class, 'subdependency_id');
     }
 }

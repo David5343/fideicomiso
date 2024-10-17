@@ -15,20 +15,24 @@ class StateController extends Controller
         $this->middleware('can:humanos.estados.index');
         //$this->middleware('subscribed')->except('store');
     }
+
     public function index()
     {
         return view('humanos.estados.index');
     }
+
     public function edit(string $id)
     {
         $row = State::find($id);
+
         return view('humanos/estados/edit', ['estado' => $row]);
     }
+
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'clave' => ['required','min:3','max:5','unique:states,key,'.$id],
-            'nombre' => ['required','min:2','max:40'],
+            'clave' => ['required', 'min:3', 'max:5', 'unique:states,key,'.$id],
+            'nombre' => ['required', 'min:2', 'max:40'],
 
         ]);
         $row = State::find($id);
@@ -37,8 +41,10 @@ class StateController extends Controller
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('status', 'Registro actualizado con éxito!');
+
         return to_route('humanos.estados.index');
     }
+
     public function destroy(string $id)
     {
         $row = State::find($id);
@@ -46,6 +52,7 @@ class StateController extends Controller
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('status', 'Registro deshabilitado con éxito!');
+
         return to_route('humanos.estados.index');
     }
 }

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('navbars', function (Blueprint $table) {
             $table->id();
-            $table->string('text',255)->nullable();
-            $table->string('size',255)->nullable();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->string('text', 255)->nullable();
+            $table->string('size', 255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

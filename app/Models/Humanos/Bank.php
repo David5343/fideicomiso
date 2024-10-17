@@ -12,15 +12,17 @@ class Bank extends Model
 {
     use HasFactory;
 
-    public function employee():HasMany
+    public function employee(): HasMany
     {
         return $this->hasMany(Employee::class);
     }
-    public function insured():HasMany
+
+    public function insured(): HasMany
     {
         return $this->hasMany(Insured::class);
     }
-    public function beneficiary():HasMany
+
+    public function beneficiary(): HasMany
     {
         return $this->hasMany(Beneficiary::class);
     }

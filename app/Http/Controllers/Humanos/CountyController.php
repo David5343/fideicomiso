@@ -16,20 +16,24 @@ class CountyController extends Controller
         $this->middleware('can:humanos.municipios.index');
         //$this->middleware('subscribed')->except('store');
     }
+
     public function index()
     {
         return view('humanos.municipios.index');
     }
+
     public function edit(string $id)
     {
         $row = County::find($id);
-        $select = State::where('status','active')->get();
-        return view('humanos/municipios/edit', ['municipio' => $row,'select'=>$select]);
+        $select = State::where('status', 'active')->get();
+
+        return view('humanos/municipios/edit', ['municipio' => $row, 'select' => $select]);
     }
+
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nombre' => ['required','min:3','max:50','unique:counties,name,'.$id],
+            'nombre' => ['required', 'min:3', 'max:50', 'unique:counties,name,'.$id],
             'estado_id' => ['required'],
 
         ]);
@@ -39,8 +43,10 @@ class CountyController extends Controller
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('status', 'Registro actualizado con éxito!');
+
         return to_route('humanos.municipios.index');
     }
+
     public function destroy(string $id)
     {
         $row = County::find($id);
@@ -48,6 +54,7 @@ class CountyController extends Controller
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('status', 'Registro deshabilitado con éxito!');
+
         return to_route('humanos.municipios.index');
     }
 }

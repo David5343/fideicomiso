@@ -10,30 +10,39 @@ use Livewire\WithPagination;
 class IndexCategorias extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
-    public $search='';
+    public $search = '';
+
     public $numberRows = 5;
 
-    public function updatingSearch(){
+    public function updatingSearch()
+    {
         $this->resetPage();
     }
-    public function updatingnumberRows(){
+
+    public function updatingnumberRows()
+    {
         $this->resetPage();
     }
+
     #[On('create_categoria')]
-    public function updateList($categoria = null){
+    public function updateList($categoria = null)
+    {
 
     }
+
     public function render()
     {
-        $lista =  Rank::where('status','active')
-                        ->where('name','like','%'.$this->search.'%')
-                        ->orderBy('name','asc')
-                        ->paginate($this->numberRows);
+        $lista = Rank::where('status', 'active')
+            ->where('name', 'like', '%'.$this->search.'%')
+            ->orderBy('name', 'asc')
+            ->paginate($this->numberRows);
         $count = $lista->count();
-        return view('livewire.prestaciones.categorias.index-categorias',[
+
+        return view('livewire.prestaciones.categorias.index-categorias', [
             'count' => $count,
-            'lista' => $lista,]);
+            'lista' => $lista, ]);
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vacation', function (Blueprint $table) {
             $table->id();
-            $table->string('folio',255)->nullable();
+            $table->string('folio', 255)->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->date('request_date')->nullable();
@@ -21,10 +21,10 @@ return new class extends Migration
             $table->date('end_vacation')->nullable();
             $table->unsignedTinyInteger('first_period')->nullable();
             $table->unsignedTinyInteger('second_period')->nullable();
-            $table->string('note',255)->nullable();
+            $table->string('note', 255)->nullable();
             $table->unsignedTinyInteger('vacation_bag')->nullable();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

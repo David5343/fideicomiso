@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255)->unique();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->string('name', 255)->unique();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

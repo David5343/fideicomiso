@@ -14,17 +14,20 @@ class SubdependencyController extends Controller
     {
         return view('prestaciones.subdependencias.index');
     }
+
     public function edit(string $id)
     {
         $row = Subdependency::find($id);
-        $select = Dependency::where('status','active')->get();
-        return view('prestaciones/subdependencias/edit', ['subdependencia' => $row,'select'=>$select]);
+        $select = Dependency::where('status', 'active')->get();
+
+        return view('prestaciones/subdependencias/edit', ['subdependencia' => $row, 'select' => $select]);
     }
+
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nombre' => ['required', 'max:60', 'unique:subdependencies,name,' . $id],
-            'dependencia_id' =>['required']
+            'nombre' => ['required', 'max:60', 'unique:subdependencies,name,'.$id],
+            'dependencia_id' => ['required'],
         ]);
         $row = Subdependency::find($id);
         $row->name = $request->input('nombre');
@@ -32,6 +35,7 @@ class SubdependencyController extends Controller
         $row->modified_by = Auth::user()->email;
         $row->save();
         session()->flash('status', 'Registro actualizado con éxito!');
+
         return to_route('prestaciones.subdependencias.index');
     }
 }

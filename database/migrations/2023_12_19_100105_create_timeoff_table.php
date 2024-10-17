@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('timeoff', function (Blueprint $table) {
             $table->id();
-            $table->string('folio',255)->nullable();
+            $table->string('folio', 255)->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->unsignedTinyInteger('required_time');
             $table->date('required_date')->nullable();
-            $table->string('segment_day',255)->nullable();
-            $table->string('reason',255)->nullable();
-            $table->string('other',255)->nullable();
+            $table->string('segment_day', 255)->nullable();
+            $table->string('reason', 255)->nullable();
+            $table->string('other', 255)->nullable();
             $table->unsignedTinyInteger('monthly_bag')->nullable();
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

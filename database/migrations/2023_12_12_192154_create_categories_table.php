@@ -15,7 +15,7 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('name',255)->unique();
+            $table->string('name', 255)->unique();
             $table->decimal('salary', $precision = 10, $scale = 2);
             $table->decimal('compensation', $precision = 10, $scale = 2);
             $table->decimal('complementary', $precision = 10, $scale = 2);
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->decimal('net_salary', $precision = 10, $scale = 2);
             $table->unsignedTinyInteger('authorized_places');
             $table->unsignedTinyInteger('covered_places');
-            $table->enum('status', ['active', 'inactive','deleted']);
-            $table->string('modified_by',255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }

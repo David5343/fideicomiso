@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('insureds', function (Blueprint $table) {
-            $table->string('inactive_date_ssypc',255)->nullable()->after('inactive_date');
+            $table->string('inactive_date_ssypc', 255)->nullable()->after('inactive_date');
         });
     }
 
