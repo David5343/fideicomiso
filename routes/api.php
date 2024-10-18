@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Prestaciones\CategoryApiController;
 use App\Http\Controllers\Api\Prestaciones\CredentialBeneficiaryApiController;
 use App\Http\Controllers\Api\Prestaciones\CredentialInsuredApiController;
 use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
+use App\Http\Controllers\Api\Prestaciones\PensionTypeController;
 use App\Http\Controllers\Api\Prestaciones\RetireeApiController;
 use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
 use Illuminate\Http\Request;
@@ -82,5 +83,5 @@ Route::middleware('auth:sanctum')->group(function () {
     //Pensionados
     Route::get('/prestaciones/pensionados/busqueda/{dato}', [RetireeApiController::class, 'busqueda']);
     //Tipos de Pensionados
-    Route::get('/prestaciones/pensionados/busqueda/{dato}', [RetireeApiController::class, 'busqueda']);
+    Route::get('/prestaciones/tipopensiones', [PensionTypeController::class, 'index']);
 });
