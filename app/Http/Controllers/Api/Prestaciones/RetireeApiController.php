@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Beneficiary;
 use App\Models\Prestaciones\Insured;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RetireeApiController extends Controller
 {
@@ -63,11 +66,44 @@ class RetireeApiController extends Controller
 
     public function store(Request $request)
     {
-        $titular = new Insured();
-        $familiar = new Beneficiary();
-        if ($request->input('Insured_type') == 'Titular') {
+        $response['status'] = '0';
+        $response['errors'] = '0';
+        $response['insured'] = '0';
+        $response['debug'] = '0';
+        $rules = [
+            'pension_type' => 'required | numeric',
+            // 'Beneficiary_id' => 'required|numeric',
+            // 'Expires_at' => 'required|date_format:Y-m-d H:i:s',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        // Comprobar si la validación falla
+        if ($validator->fails()) {
+            // Retornar errores de validación
+            $response['errors'] = $validator->errors()->toArray();
+            $response['debug'] = $request->all();
 
-        } elseif ($request->input('Insured_type') == 'Familiar') {
+            return response()->json($response, 200);
+        }
+        DB::beginTransaction();
+        try {
+            //$fechaActual = now()->toDateTimeString();
+            //$pension = Retiree
+            $credencialFamiliar->issued_at = $fechaActual;
+            $credencialFamiliar->expires_at = $request->input('Expires_at');
+            $credencialFamiliar->beneficiary_id = $request->input('Beneficiary_id');
+            $credencialFamiliar->expiration_types = 'PERSONALIZADO';
+            $credencialFamiliar->credential_status = 'VIGENTE';
+            $credencialFamiliar->status = 'active';
+            $credencialFamiliar->modified_by = Auth::user()->email;
+            $credencialFamiliar->save();
+            DB::commit();
+            $response['status'] = '1';
+            $response['credential'] = $credencialFamiliar->id;
+
+            return response()->json($response, 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+            $response['debug'] = $e->getMessage();
 
         }
     }
