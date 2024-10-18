@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Api\Prestaciones;
 use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Beneficiary;
 use App\Models\Prestaciones\Insured;
+use App\Models\Prestaciones\Retiree;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class RetireeApiController extends Controller
 {
@@ -68,37 +71,39 @@ class RetireeApiController extends Controller
     {
         $response['status'] = '0';
         $response['errors'] = '0';
-        $response['insured'] = '0';
+        $response['retiree'] = '0';
         $response['debug'] = '0';
         $rules = [
-            'pension_type' => 'required | numeric',
-            // 'Beneficiary_id' => 'required|numeric',
-            // 'Expires_at' => 'required|date_format:Y-m-d H:i:s',
+            'Pension_type' => 'required | numeric',
+            'Start_date' => 'required|date_format:Y-m-d',
         ];
         $validator = Validator::make($request->all(), $rules);
         // Comprobar si la validación falla
         if ($validator->fails()) {
             // Retornar errores de validación
             $response['errors'] = $validator->errors()->toArray();
-            $response['debug'] = $request->all();
+            $response['debug'] = $request->input('Start_date');
 
             return response()->json($response, 200);
         }
         DB::beginTransaction();
         try {
             //$fechaActual = now()->toDateTimeString();
-            //$pension = Retiree
-            $credencialFamiliar->issued_at = $fechaActual;
-            $credencialFamiliar->expires_at = $request->input('Expires_at');
-            $credencialFamiliar->beneficiary_id = $request->input('Beneficiary_id');
-            $credencialFamiliar->expiration_types = 'PERSONALIZADO';
-            $credencialFamiliar->credential_status = 'VIGENTE';
-            $credencialFamiliar->status = 'active';
-            $credencialFamiliar->modified_by = Auth::user()->email;
-            $credencialFamiliar->save();
+            $pension = new Retiree();
+            $no_afiliacion = IdGenerator::generate(['table' => 'retirees', 'field' => 'file_number', 'length' => 8, 'prefix' => 'P']);
+            $pension->file_number = $no_afiliacion;
+            $pension->start_date = $request->input('Start_date');
+            $pension->insured_type = $request->input('Insured_type');
+            $pension->pension_type = $request->input('Pension_type');
+            $pension->insured_id = $request->input('Insured_id');
+            $pension->beneficiary_id = $request->input('Beneficiary_id');
+            $pension->pension_status = 'ACTIVO';
+            $pension->status = 'active';
+            $pension->modified_by = Auth::user()->email;
+            $pension->save();
             DB::commit();
             $response['status'] = '1';
-            $response['credential'] = $credencialFamiliar->id;
+            $response['retiree'] = $pension->id;
 
             return response()->json($response, 200);
         } catch (Exception $e) {
