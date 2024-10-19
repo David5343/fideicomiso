@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('file_number', 255)->nullable();
             $table->date('start_date')->nullable();
             $table->string('insured_type', 255)->nullable();
-            $table->unsignedBigInteger('pension_type')->nullable();
-            $table->foreign('pension_type')->references('id')->on('pension_types');
+            $table->string('pension_status', 255)->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted']);
+            $table->string('modified_by', 255)->nullable();
+            $table->unsignedBigInteger('pension_id')->nullable();
+            $table->foreign('pension_id')->references('id')->on('pension_types');
             $table->unsignedBigInteger('insured_id')->nullable();
             $table->foreign('insured_id')->references('id')->on('insureds');
             $table->unsignedBigInteger('beneficiary_id')->nullable();
             $table->foreign('beneficiary_id')->references('id')->on('beneficiaries');
-            $table->string('pension_status', 255)->nullable();
-            $table->enum('status', ['active', 'inactive', 'deleted']);
-            $table->string('modified_by', 255)->nullable();
             $table->timestamps();
         });
     }
