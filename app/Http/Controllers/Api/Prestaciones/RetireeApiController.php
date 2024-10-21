@@ -19,7 +19,14 @@ class RetireeApiController extends Controller
 {
     public function index()
     {
+        $pensionados = Retiree::with('pension_type')
+        ->with('insured')
+        ->with('beneficiary')
+        ->latest()
+        ->limit(25)
+        ->get();
 
+    return response()->json($pensionados);
     }
     public function busqueda(Request $request)
     {
@@ -81,7 +88,7 @@ class RetireeApiController extends Controller
         $response['debug'] = '';
 
         $rules = [
-            'Pension_id' => 'required | numeric',
+            'Pension_type' => 'required | numeric',
             'Start_date' => 'required|date_format:Y-m-d',
         ];
         $validator = Validator::make($request->all(), $rules);
