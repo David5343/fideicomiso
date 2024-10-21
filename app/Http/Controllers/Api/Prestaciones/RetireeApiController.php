@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Validator;
 
 class RetireeApiController extends Controller
 {
+    public function index()
+    {
+
+    }
     public function busqueda(Request $request)
     {
         $dato = $request->dato;
@@ -97,7 +101,7 @@ class RetireeApiController extends Controller
             $pension->file_number = $no_afiliacion;
             $pension->start_date = $request->input('Start_date');
             $pension->insured_type = $request->input('Insured_type');
-            $pension->pension_id = $request->input('Pension_id');
+            $pension->pension_type = $request->input('Pension_type');
             if($request->input('Insured_id') == 0){
                 $pension->insured_id = null;
             }else{

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('pension_status', 255)->nullable();
             $table->enum('status', ['active', 'inactive', 'deleted']);
             $table->string('modified_by', 255)->nullable();
-            $table->unsignedBigInteger('pension_id')->nullable();
-            $table->foreign('pension_id')->references('id')->on('pension_types');
+            $table->unsignedBigInteger('pension_type')->nullable();
+            $table->foreign('pension_type')->references('id')->on('pension_types');
             $table->unsignedBigInteger('insured_id')->nullable();
             $table->foreign('insured_id')->references('id')->on('insureds');
             $table->unsignedBigInteger('beneficiary_id')->nullable();
