@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Prestaciones\PensionType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PensionTypeSeeder extends Seeder
