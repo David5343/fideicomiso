@@ -14,11 +14,13 @@ class Retiree extends Model
     {
         return $this->belongsTo(Insured::class);
     }
+
     public function beneficiary(): BelongsTo
     {
         return $this->belongsTo(Beneficiary::class);
     }
-    public function pension_type(): BelongsTo
+
+    public function pensionType(): BelongsTo
     {
         return $this->belongsTo(PensionType::class);
     }
