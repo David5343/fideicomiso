@@ -13,21 +13,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-
-
 class RetireeApiController extends Controller
 {
     public function index()
     {
-        $pensionados = Retiree::with('pension_type')
-        ->with('insured')
-        ->with('beneficiary')
-        ->latest()
-        ->limit(25)
-        ->get();
+        $pensionados = Retiree::where('pension_status', 'ACTIVO')
+            ->with('pensionType')
+            ->with('insured')
+            ->with('beneficiary')
+            ->latest()
+            ->limit(25)
+            ->get();
 
-    return response()->json($pensionados);
+        return response()->json($pensionados);
     }
+
     public function busqueda(Request $request)
     {
         $dato = $request->dato;
@@ -88,7 +88,7 @@ class RetireeApiController extends Controller
         $response['debug'] = '';
 
         $rules = [
-            'Pension_type' => 'required | numeric',
+            'Pension_type_id' => 'required | numeric',
             'Start_date' => 'required|date_format:Y-m-d',
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -100,7 +100,7 @@ class RetireeApiController extends Controller
 
             return response()->json($response, 200);
         }
-         DB::beginTransaction();
+        DB::beginTransaction();
         try {
 
             $pension = new Retiree();
@@ -108,18 +108,14 @@ class RetireeApiController extends Controller
             $pension->file_number = $no_afiliacion;
             $pension->start_date = $request->input('Start_date');
             $pension->insured_type = $request->input('Insured_type');
-            $pension->pension_type = $request->input('Pension_type');
-            if($request->input('Insured_id') == 0){
-                $pension->insured_id = null;
-            }else{
-                $pension->insured_id =$request->input('Insured_id');
-            }
-            if($request->input('Beneficiary_id') == 0){
-                $pension->beneficiary_id  = null;
-            }else{
+            $pension->pension_type_id = $request->input('Pension_type_id');
+            if ($request->input('Insured_type') == 'Titular') {
+                $pension->insured_id = $request->input('Insured_id');
+                $pension->beneficiary_id = null;
+            } else {
                 $pension->beneficiary_id = $request->input('Beneficiary_id');
+                $pension->insured_id = null;
             }
-
             $pension->pension_status = 'ACTIVO';
             $pension->status = 'active';
             $pension->modified_by = Auth::user()->email;
@@ -132,6 +128,7 @@ class RetireeApiController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             $response['debug'] = $e->getMessage();
+
             return response()->json($response, 200);
         }
     }
