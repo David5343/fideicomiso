@@ -86,5 +86,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prestaciones/pensionados', [RetireeApiController::class, 'index']);
     Route::post('/prestaciones/pensionados/guardar', [RetireeApiController::class, 'store']);
     Route::get('/prestaciones/pensionados/busqueda/{dato}', [RetireeApiController::class, 'busqueda']);
+    Route::get('/prestaciones/pensionados/search/{dato}', [RetireeApiController::class, 'search']);
 
 });
