@@ -132,4 +132,72 @@ class RetireeApiController extends Controller
             return response()->json($response, 200);
         }
     }
+
+    public function search(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] = 'fail';
+        $response['message'] = '';
+        $response['errors'] = '';
+        $response['insured'] = '';
+        $response['beneficiary'] = '';
+        $response['retiree'] = '';
+        $response['debug'] = '0';
+
+        $retiree = Retiree::where('pension_status', 'ACTIVO')
+        ->with(['pensionType', 'insured', 'beneficiary'])
+        ->where('file_number', $dato)
+        //->where('number_noi',$dato)
+        ->orWhereHas('insured', function ($query) use ($dato) {
+            $query->where('file_number', $dato);
+        })
+        ->orWhereHas('insured', function ($query) use ($dato) {
+            $query->where('rfc', $dato);
+        })
+        ->orWhereHas('insured', function ($query) use ($dato) {
+            $query->where('curp', $dato);
+        })
+        ->orWhereHas('insured', function ($query) use ($dato) {
+            $query->where('name', 'like', '%'.$dato.'%');
+        })
+        ->orWhereHas('insured', function ($query) use ($dato) {
+            $query->where('last_name_1', 'like', '%'.$dato.'%');
+        })
+        ->orWhereHas('insured', function ($query) use ($dato) {
+            $query->where('last_name_2', 'like', '%'.$dato.'%');
+        })
+        ->orWhereHas('beneficiary', function ($query) use ($dato) {
+            $query->where('file_number', $dato);
+        })
+        ->orWhereHas('beneficiary', function ($query) use ($dato) {
+            $query->where('rfc', $dato);
+        })
+        ->orWhereHas('beneficiary', function ($query) use ($dato) {
+            $query->where('curp', $dato);
+        })
+        ->orWhereHas('beneficiary', function ($query) use ($dato) {
+            $query->where('name', 'like', '%'.$dato.'%');
+        })
+        ->orWhereHas('beneficiary', function ($query) use ($dato) {
+            $query->where('last_name_1', 'like', '%'.$dato.'%');
+        })
+        ->orWhereHas('beneficiary', function ($query) use ($dato) {
+            $query->where('last_name_2', 'like', '%'.$dato.'%');
+        })
+        ->get();
+
+        if ($retiree->count() > 0) {
+            $response['status'] = 'success';
+            $response['retiree'] = $retiree;
+
+            return response()->json($response, 200);
+        }else
+        {
+            $response['message'] = 'Registro no encontrado';
+            return response()->json($response, 200);
+        }
+
+        
+    }
 }
