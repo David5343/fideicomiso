@@ -107,7 +107,7 @@ class RetireeApiController extends Controller
             $pension = new Retiree();
             $no_afiliacion = IdGenerator::generate(['table' => 'retirees', 'field' => 'file_number', 'length' => 8, 'prefix' => 'P']);
             $pension->file_number = $no_afiliacion;
-            $pension->start_noi_number = $request->input('Noi_number');
+            $pension->noi_number = $request->input('Noi_number');
             $pension->start_date = $request->input('Start_date');
             $pension->insured_type = $request->input('Insured_type');
             $pension->pension_type_id = $request->input('Pension_type_id');
