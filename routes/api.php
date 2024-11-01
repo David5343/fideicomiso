@@ -90,4 +90,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prestaciones/pensionados/search/{dato}', [RetireeApiController::class, 'search']);
     //Credencial Pensionados
     Route::get('/prestaciones/credencialpensionados', [CredentialRetireeController::class, 'index']); 
+    Route::post('/prestaciones/credencialpensionados/guardar', [CredentialRetireeController::class, 'store']);
 });
