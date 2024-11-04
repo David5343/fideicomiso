@@ -39,24 +39,28 @@ class RetireeApiController extends Controller
         $response['beneficiary'] = '';
         $response['debug'] = '0';
         $titular = Insured::where('affiliate_status', 'Baja')
-            ->where('inactive_motive', 'Pensión')
-            ->where('id', $dato)
-            ->orwhere('file_number', $dato)
-            ->orwhere('rfc', $dato)
-            ->orwhere('curp', $dato)
-            ->orwhere('name', 'like', '%'.$dato.'%')
-            ->orwhere('last_name_1', 'like', '%'.$dato.'%')
-            ->orwhere('last_name_2', 'like', '%'.$dato.'%')
-            ->get();
+        ->where('inactive_motive', 'Pensión')
+        ->where(function ($query) use ($dato) {
+            $query->where('id', $dato)
+                  ->orWhere('file_number', $dato)
+                  ->orWhere('rfc', $dato)
+                  ->orWhere('curp', $dato)
+                  ->orWhere('name', 'like', '%'.$dato.'%')
+                  ->orWhere('last_name_1', 'like', '%'.$dato.'%')
+                  ->orWhere('last_name_2', 'like', '%'.$dato.'%');
+        })
+        ->get();
         $familiar = Beneficiary::where('affiliate_status', 'Baja')
-            ->where('inactive_motive', 'Pensión')
-            ->where('id', $dato)
-            ->orwhere('file_number', $dato)
-            ->orwhere('rfc', $dato)
-            ->orwhere('curp', $dato)
-            ->orwhere('name', 'like', '%'.$dato.'%')
-            ->orwhere('last_name_1', 'like', '%'.$dato.'%')
-            ->orwhere('last_name_2', 'like', '%'.$dato.'%')
+            //->where('inactive_motive', 'Pensión del Titular')
+            ->where(function($query) use ($dato){
+                $query->where('id', $dato)
+                ->orwhere('file_number', $dato)
+                ->orwhere('rfc', $dato)
+                ->orwhere('curp', $dato)
+                ->orwhere('name', 'like', '%'.$dato.'%')
+                ->orwhere('last_name_1', 'like', '%'.$dato.'%')
+                ->orwhere('last_name_2', 'like', '%'.$dato.'%');
+            })
             ->get();
         if ($titular->count() > 0) {
             $response['status'] = 'success';
