@@ -35,11 +35,8 @@ class CredentialRetireeApiController extends Controller
         $response['credential'] = '0';
         $response['debug'] = '0';
         $credencial = CredentialRetiree::where('id', $id)
-            ->with('retiree.insured')
+            ->with('retiree.insured.subdependency')
             ->with('retiree.beneficiary')
-                            //->with('subdependency')
-                            // ->with('bank')
-                            // ->with('beneficiaries')
             ->first();
         if ($credencial == null) {
             $response['message'] = 'Registro no encontrado';
@@ -47,7 +44,7 @@ class CredentialRetireeApiController extends Controller
 
             return response()->json($response, status: $codigo);
         } else {
-            $history = CredentialRetiree::where('insured_id', $credencial->retiree_id)
+            $history = CredentialRetiree::where('retiree_id', $credencial->retiree_id)
                 ->where('credential_status', 'VENCIDA')
                 ->get();
             $response['status'] = 'success';
@@ -67,7 +64,6 @@ class CredentialRetireeApiController extends Controller
 
         $rules = [
             'Retiree_id' => 'required | numeric',
-            'Insured_id' => 'required|numeric',
             'Expires_at' => 'required|date_format:Y-m-d H:i:s',
         ];
         $validator = Validator::make($request->all(), $rules);
