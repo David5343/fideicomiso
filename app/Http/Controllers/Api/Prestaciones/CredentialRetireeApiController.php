@@ -15,6 +15,8 @@ class CredentialRetireeApiController extends Controller
     public function index()
     {
         $pensionados = CredentialRetiree::with('retiree')
+        ->with('retiree.insured.subdependency')
+        ->with('retiree.beneficiary.insured.subdependency')
             ->latest()
             ->limit(25)
             ->get();
@@ -101,6 +103,75 @@ class CredentialRetireeApiController extends Controller
             DB::rollBack();
             $response['debug'] = $e->getMessage();
 
+        }
+    }
+    public function search(Request $request)
+    {
+        $dato = $request->dato;
+        $codigo = 0;
+        $response['status'] = 'fail';
+        $response['message'] = '';
+        $response['errors'] = '';
+        $response['insured'] = '';
+        $response['beneficiary'] = '';
+        $response['retiree'] = '';
+        $response['debug'] = '0';
+
+        $credencial = CredentialRetiree::where('credential_status', 'ACTIVO')
+            ->with(['retiree.insured', 'retiree.beneficiary'])
+            ->orWhereHas('retiree', function ($query) use ($dato) {
+                $query->where('file_number', $dato);
+            })
+            ->orWhereHas('retiree', function ($query) use ($dato) {
+                $query->where('noi_number', $dato);
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('file_number', $dato);
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('rfc', $dato);
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('curp', $dato);
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('name', 'like', '%'.$dato.'%');
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('last_name_1', 'like', '%'.$dato.'%');
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('last_name_2', 'like', '%'.$dato.'%');
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('file_number', $dato);
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('rfc', $dato);
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('curp', $dato);
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('name', 'like', '%'.$dato.'%');
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('last_name_1', 'like', '%'.$dato.'%');
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('last_name_2', 'like', '%'.$dato.'%');
+            })
+            ->get();
+
+        if ($credencial->count() > 0) {
+            $response['status'] = 'success';
+            $response['retiree'] = $credencial;
+
+            return response()->json($response, 200);
+        } else {
+            $response['message'] = 'Registro no encontrado';
+
+            return response()->json($response, 200);
         }
     }
 }
