@@ -83,6 +83,15 @@ class CredentialInsuredApiController extends Controller
 
             return response()->json($response, 200);
         }
+    // Verificar si ya existe un registro "VIGENTE" para el retiree_id dado
+    $existeVigente = CredentialInsured::where('insured_id', $request->input('Insured_id'))
+                                      ->where('credential_status', 'VIGENTE')
+                                      ->exists();
+
+    if ($existeVigente) {
+        $response['errors'] = ['Insured_id' => 'Ya existe una credencial vigente para este jubilado.'];
+        return response()->json($response, 200);
+    }
         DB::beginTransaction();
         try {
             $fechaActual = now()->toDateTimeString();
