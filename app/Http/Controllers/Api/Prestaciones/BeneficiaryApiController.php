@@ -351,7 +351,7 @@ class BeneficiaryApiController extends Controller
             'File_number' => 'required|max:8',
             'Inactive_date' => 'required|date',
             'Inactive_motive' => 'required',
-            'Reference' => 'nullable|max:250'
+            'Inactive_reference' => 'nullable|max:250'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -374,7 +374,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = 'Baja';
-                $familiar->reference = Str::of($request->input('Reference'))->trim();
+                $familiar->inactive_reference = Str::of($request->input('Inactive_reference'))->trim();
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro '.$familiar->file_number.' fue dado de baja con éxito.';
@@ -382,7 +382,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = 'Baja por Aplicar';
-                $familiar->reference = Str::of($request->input('Reference'))->trim();
+                $familiar->inactive_reference = Str::of($request->input('Inactive_reference'))->trim();
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro '.$familiar->file_number.' fue dado de baja con éxito.';
@@ -390,7 +390,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = 'Baja por Aplicar';
-                $familiar->reference = Str::of($request->input('Reference'))->trim();
+                $familiar->inactive_reference = Str::of($request->input('Inactive_reference'))->trim();
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro '.$familiar->file_number.' fue dado de baja con éxito.';
@@ -398,7 +398,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = 'Baja';
-                $familiar->reference = Str::of($request->input('Reference'))->trim();
+                $familiar->inactive_reference = Str::of($request->input('Inactive_reference'))->trim();
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro '.$familiar->file_number.' fue dado de baja con éxito.';
@@ -406,7 +406,7 @@ class BeneficiaryApiController extends Controller
                 $familiar->inactive_date = $fecha_baja;
                 $familiar->inactive_motive = $motivo_baja;
                 $familiar->affiliate_status = 'Baja';
-                $familiar->reference = Str::of($request->input('Reference'))->trim();
+                $familiar->inactive_reference = Str::of($request->input('Inactive_reference'))->trim();
                 $familiar->modified_by = Auth::user()->email;
                 $familiar->save();
                 $msg = 'El registro '.$familiar->file_number.' fue dado de baja con éxito.';
