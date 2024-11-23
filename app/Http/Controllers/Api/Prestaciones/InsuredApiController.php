@@ -95,7 +95,7 @@ class InsuredApiController extends Controller
             'Work_place' => 'nullable|min:3|max:85',
             'Register_motive' => 'nullable|min:3|max:120',
             'Affiliate_status' => 'required|not_in:Elije...',
-            'Observations' => 'nullable|min:5|max:180',
+            'Observations' => 'nullable|min:5|max:250',
             'Last_name_1' => 'required|min:2|max:20',
             'Last_name_2' => 'nullable|min:2|max:20',
             'Name' => 'required|min:2|max:30',
