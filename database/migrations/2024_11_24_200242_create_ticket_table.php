@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('requester', 255)->nullable();
             $table->dateTime('ticket_date', precision: 0);
             $table->string('procedure_type', 255)->nullable();
+            $table->string('insured_type', 255)->nullable();
             $table->unsignedBigInteger('insured_id')->nullable();
             $table->foreign('insured_id')->references('id')->on('insureds');
             $table->unsignedBigInteger('beneficiary_id')->nullable();
