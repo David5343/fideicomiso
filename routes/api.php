@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Prestaciones\InsuredApiController;
 use App\Http\Controllers\Api\Prestaciones\PensionTypeController;
 use App\Http\Controllers\Api\Prestaciones\RetireeApiController;
 use App\Http\Controllers\Api\Prestaciones\SubdependencyApiController;
+use App\Http\Controllers\Api\Prestaciones\TicketApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -93,4 +94,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/prestaciones/credencialpensionados/guardar', [CredentialRetireeApiController::class, 'store']);
     Route::get('/prestaciones/credencialpensionados/{id}', [CredentialRetireeApiController::class, 'show']);
     Route::get('/prestaciones/credencialpensionados/search/{dato}', [CredentialRetireeApiController::class, 'search']);
+    //Turnos
+    Route::get('/prestaciones/turnos/busqueda/{dato}', [TicketApiController::class, 'busqueda']);
+
 });
