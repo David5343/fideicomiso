@@ -95,6 +95,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prestaciones/credencialpensionados/{id}', [CredentialRetireeApiController::class, 'show']);
     Route::get('/prestaciones/credencialpensionados/search/{dato}', [CredentialRetireeApiController::class, 'search']);
     //Turnos
+    Route::get('/prestaciones/turnos', [TicketApiController::class, 'index']);
+    Route::post('/prestaciones/turnos/guardar', [TicketApiController::class, 'store']);
     Route::get('/prestaciones/turnos/busqueda/{dato}', [TicketApiController::class, 'busqueda']);
-
 });
