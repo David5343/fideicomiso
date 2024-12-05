@@ -79,15 +79,16 @@ class CredentialBeneficiaryApiController extends Controller
 
             return response()->json($response, 200);
         }
-    // Verificar si ya existe un registro "VIGENTE" para el retiree_id dado
-    $existeVigente = CredentialBeneficiary::where('beneficiary_id', $request->input('Beneficiary_id'))
-                                      ->where('credential_status', 'VIGENTE')
-                                      ->exists();
+        // Verificar si ya existe un registro "VIGENTE" para el retiree_id dado
+        $existeVigente = CredentialBeneficiary::where('beneficiary_id', $request->input('Beneficiary_id'))
+            ->where('credential_status', 'VIGENTE')
+            ->exists();
 
-    if ($existeVigente) {
-        $response['errors'] = ['Beneficiary_id' => 'Ya existe una credencial vigente para este Familiar.'];
-        return response()->json($response, 200);
-    }
+        if ($existeVigente) {
+            $response['errors'] = ['Beneficiary_id' => 'Ya existe una credencial vigente para este Familiar.'];
+
+            return response()->json($response, 200);
+        }
         DB::beginTransaction();
         try {
             $fechaActual = now()->toDateTimeString();

@@ -15,14 +15,15 @@ class CredentialRetireeApiController extends Controller
     public function index()
     {
         $pensionados = CredentialRetiree::with('retiree')
-        ->with('retiree.insured.subdependency')
-        ->with('retiree.beneficiary.insured.subdependency')
+            ->with('retiree.insured.subdependency')
+            ->with('retiree.beneficiary.insured.subdependency')
             ->latest()
             ->limit(25)
             ->get();
 
         return response()->json($pensionados);
     }
+
     public function show($id)
     {
 
@@ -57,6 +58,7 @@ class CredentialRetireeApiController extends Controller
             return response()->json($response, status: $codigo);
         }
     }
+
     public function store(Request $request)
     {
         $response['status'] = 'fail';
@@ -77,15 +79,16 @@ class CredentialRetireeApiController extends Controller
 
             return response()->json($response, 200);
         }
-    // Verificar si ya existe un registro "VIGENTE" para el retiree_id dado
-    $existeVigente = CredentialRetiree::where('retiree_id', $request->input('Retiree_id'))
-                                      ->where('credential_status', 'VIGENTE')
-                                      ->exists();
+        // Verificar si ya existe un registro "VIGENTE" para el retiree_id dado
+        $existeVigente = CredentialRetiree::where('retiree_id', $request->input('Retiree_id'))
+            ->where('credential_status', 'VIGENTE')
+            ->exists();
 
-    if ($existeVigente) {
-        $response['errors'] = ['Retiree_id' => 'Ya existe una credencial vigente para este jubilado.'];
-        return response()->json($response, 200);
-    }
+        if ($existeVigente) {
+            $response['errors'] = ['Retiree_id' => 'Ya existe una credencial vigente para este jubilado.'];
+
+            return response()->json($response, 200);
+        }
         DB::beginTransaction();
         try {
             $fechaActual = now()->toDateTimeString();
@@ -93,10 +96,9 @@ class CredentialRetireeApiController extends Controller
             $credencialRetire->issued_at = $fechaActual;
             $credencialRetire->expires_at = $request->input('Expires_at');
             $credencialRetire->retiree_id = $request->input('Retiree_id');
-            if($request->input('Insured_type' == "Titular")){
+            if ($request->input('Insured_type' == 'Titular')) {
                 $credencialRetire->expiration_types = 'PERMANENTE';
-            }else
-            {
+            } else {
                 $credencialRetire->expiration_types = 'PERSONALIZADO';
             }
             $credencialRetire->credential_status = 'VIGENTE';
@@ -114,6 +116,7 @@ class CredentialRetireeApiController extends Controller
 
         }
     }
+
     public function search(Request $request)
     {
         $dato = $request->dato;

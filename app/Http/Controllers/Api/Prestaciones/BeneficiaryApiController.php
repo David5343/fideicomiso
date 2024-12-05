@@ -351,7 +351,7 @@ class BeneficiaryApiController extends Controller
             'File_number' => 'required|max:8',
             'Inactive_date' => 'required|date',
             'Inactive_motive' => 'required',
-            'Inactive_reference' => 'nullable|max:250'
+            'Inactive_reference' => 'nullable|max:250',
         ];
 
         $validator = Validator::make($request->all(), $rules);
