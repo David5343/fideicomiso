@@ -14,10 +14,12 @@ class Ticket extends Model
     {
         return $this->belongsTo(Insured::class);
     }
+
     public function beneficiary(): BelongsTo
     {
         return $this->belongsTo(Beneficiary::class);
     }
+
     public function retiree(): BelongsTo
     {
         return $this->belongsTo(Retiree::class);
