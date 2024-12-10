@@ -44,8 +44,8 @@ class TicketApiController extends Controller
     public function busqueda(Request $request)
     {
         $dato = $request->dato;
-        $response['Status'] = "fail";
-        $response['Message'] = "No hay Datos que mostrar.";
+        $response['Status'] = 'fail';
+        $response['Message'] = 'No hay Datos que mostrar.';
         $response['Errors'] = null;
         $response['Ticket'] = null;
         $response['Tickets'] = [];
@@ -91,27 +91,27 @@ class TicketApiController extends Controller
             })
             ->first();
         if ($titular != null) {
-            $response['Status'] = "success";
+            $response['Status'] = 'success';
             $response['Insured'] = $titular;
             $codigo = 200;
 
             return response()->json($response, status: $codigo);
         } elseif ($familiar != null) {
-            $response['Status'] = "success";
+            $response['Status'] = 'success';
             $response['Beneficiary'] = $familiar;
             $codigo = 200;
 
             return response()->json($response, status: $codigo);
         } elseif ($retiree != null) {
-            $response['Status'] = "success";
+            $response['Status'] = 'success';
             $response['Retiree'] = $retiree;
             $codigo = 200;
 
             return response()->json($response, status: $codigo);
         } else {
 
-            $response['Status'] = "success";
-            $response['Message'] = "Registro no encontrado.";
+            $response['Status'] = 'success';
+            $response['Message'] = 'Registro no encontrado.';
             $codigo = 200;
 
             return response()->json($response, status: $codigo);
@@ -120,8 +120,8 @@ class TicketApiController extends Controller
 
     public function store(Request $request)
     {
-        $response['Status'] = "fail";
-        $response['Message'] = "No hay Datos que mostrar.";
+        $response['Status'] = 'fail';
+        $response['Message'] = 'No hay Datos que mostrar.';
         $response['Errors'] = null;
         $response['Ticket'] = null;
         $response['Tickets'] = [];
@@ -141,7 +141,7 @@ class TicketApiController extends Controller
         // Comprobar si la validación falla
         if ($validator->fails()) {
             // Retornar errores de validación
-            $response['Message'] = "Se encontraron los siguientes errores:";
+            $response['Message'] = 'Se encontraron los siguientes errores:';
             $response['Errors'] = [$validator->errors()->toArray()];
             // $response['Debug'] = $request->all();
 
@@ -149,32 +149,32 @@ class TicketApiController extends Controller
         }
         DB::beginTransaction();
         try {
-                $fechaActual = now()->toDateTimeString();
-                $turno = new Ticket();
-                $turno->ticket_number = $request->input('Ticket_number');
-                $turno->requester = $request->input('Requester');
-                $turno->ticket_date = $fechaActual;
-                $turno->procedure_type = $request->input('Procedure_type');
-                $turno->requester_movil = $request->input('Requester_movil');
-                $turno->insured_type = $request->input('Insured_type');
-                if ($request->input('Insured_id') != null) {
-                    $turno->insured_id = $request->input('Insured_id');
-                }
-                if ($request->input('Beneficiary_id') != null) {
-                    $turno->beneficiary_id = $request->input('Beneficiary_id');
-                }
-                if ($request->input('Retiree_id') != null) {
-                    $turno->retiree_id = $request->input('Retiree_id');
-                }
-                $turno->ticket_status = 'EN PROCESO';
-                $turno->status = 'active';
-                $turno->modified_by = Auth::user()->email;
-                $turno->save();
-                DB::commit();
-                $response['Status'] = "success";
-                $response['Message'] = "El Turno ".$turno->ticket_number." fue creado correctamente";
+            $fechaActual = now()->toDateTimeString();
+            $turno = new Ticket();
+            $turno->ticket_number = $request->input('Ticket_number');
+            $turno->requester = $request->input('Requester');
+            $turno->ticket_date = $fechaActual;
+            $turno->procedure_type = $request->input('Procedure_type');
+            $turno->requester_movil = $request->input('Requester_movil');
+            $turno->insured_type = $request->input('Insured_type');
+            if ($request->input('Insured_id') != null) {
+                $turno->insured_id = $request->input('Insured_id');
+            }
+            if ($request->input('Beneficiary_id') != null) {
+                $turno->beneficiary_id = $request->input('Beneficiary_id');
+            }
+            if ($request->input('Retiree_id') != null) {
+                $turno->retiree_id = $request->input('Retiree_id');
+            }
+            $turno->ticket_status = 'EN PROCESO';
+            $turno->status = 'active';
+            $turno->modified_by = Auth::user()->email;
+            $turno->save();
+            DB::commit();
+            $response['Status'] = 'success';
+            $response['Message'] = 'El Turno '.$turno->ticket_number.' fue creado correctamente';
 
-                return response()->json($response, 200);
+            return response()->json($response, 200);
 
         } catch (Exception $e) {
             DB::rollBack();
