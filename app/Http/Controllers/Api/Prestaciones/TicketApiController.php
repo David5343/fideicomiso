@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class TicketApiController extends Controller
 {
@@ -29,7 +30,7 @@ class TicketApiController extends Controller
         $response['Debug'] = null;
 
         $turnos = Ticket::with(['insured', 'beneficiary', 'retiree', 'retiree.insured', 'retiree.beneficiary'])
-            ->whereDate('created_at', Carbon::today())
+            ->whereDate('Ticket_date', Carbon::today())
             ->latest()
             ->get();
         if (! $turnos->isEmpty()) {
@@ -130,8 +131,18 @@ class TicketApiController extends Controller
         $response['Retiree'] = null;
         $response['Debug'] = null;
 
+
         $rules = [
-            'Ticket_number' => 'required | string | max:3 | min:1|unique:tickets,ticket_number',
+            'Ticket_number' => [
+                'required',
+                'string',
+                'max:3',
+                'min:1',
+                Rule::unique('tickets')->where(function ($query) use ($request) {
+                    $fechaActual = now()->toDateString();
+                    return $query->where('ticket_date', $fechaActual);
+                }),
+            ],
             'Requester' => 'required | max:70 | min:4',
             'Procedure_type' => 'required',
             'Requester_movil' => 'required | max:14',
@@ -141,7 +152,7 @@ class TicketApiController extends Controller
         // Comprobar si la validación falla
         if ($validator->fails()) {
             // Retornar errores de validación
-            $response['Message'] = 'Se encontraron los siguientes errores:';
+            $response['Message'] = "Se encontraron los siguientes errores:";
             $response['Errors'] = [$validator->errors()->toArray()];
             // $response['Debug'] = $request->all();
 
@@ -149,7 +160,7 @@ class TicketApiController extends Controller
         }
         DB::beginTransaction();
         try {
-            $fechaActual = now()->toDateTimeString();
+            $fechaActual = now()->toDateString();
             $turno = new Ticket();
             $turno->ticket_number = $request->input('Ticket_number');
             $turno->requester = $request->input('Requester');
@@ -171,8 +182,8 @@ class TicketApiController extends Controller
             $turno->modified_by = Auth::user()->email;
             $turno->save();
             DB::commit();
-            $response['Status'] = 'success';
-            $response['Message'] = 'El Turno '.$turno->ticket_number.' fue creado correctamente';
+            $response['Status'] = "success";
+            $response['Message'] = "El Turno ".$turno->ticket_number." fue creado correctamente";
 
             return response()->json($response, 200);
 
