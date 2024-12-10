@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('ticket_number', 255)->nullable();
             $table->string('requester', 255)->nullable();
-            $table->dateTime('ticket_date', precision: 0);
+            $table->date('ticket_date',255);
             $table->string('procedure_type', 255)->nullable();
             $table->string('requester_movil', 255)->nullable();
             $table->string('insured_type', 255)->nullable();
