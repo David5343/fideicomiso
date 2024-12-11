@@ -98,4 +98,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/prestaciones/turnos', [TicketApiController::class, 'index']);
     Route::post('/prestaciones/turnos/guardar', [TicketApiController::class, 'store']);
     Route::get('/prestaciones/turnos/busqueda/{dato}', [TicketApiController::class, 'busqueda']);
+    Route::put('/prestaciones/turnos/update/{id}', [TicketApiController::class, 'update']);
 });
