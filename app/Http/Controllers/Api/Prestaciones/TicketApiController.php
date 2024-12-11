@@ -119,6 +119,33 @@ class TicketApiController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $response['Status'] = 'fail';
+        $response['Message'] = 'No hay Datos que mostrar.';
+        $response['Errors'] = null;
+        $response['Ticket'] = null;
+        $response['Tickets'] = [];
+        $response['Insured'] = null;
+        $response['Beneficiary'] = null;
+        $response['Retiree'] = null;
+        $response['Debug'] = null;
+
+        $turno = Ticket::with(['insured', 'beneficiary', 'retiree', 'retiree.insured', 'retiree.beneficiary'])
+            ->find($id);
+        if ($turno != null) {
+            $response['Status'] = 'success';
+            $response['Message'] = 'Se encontró el siguiente registro:';
+            $response['Ticket'] = $turno;
+
+            return response()->json($response, 200);
+        } else {
+            $response['Status'] = 'fail';
+
+            return response()->json($response, 200);
+        }
+    }
+
     public function store(Request $request)
     {
         $response['Status'] = 'fail';
@@ -131,15 +158,15 @@ class TicketApiController extends Controller
         $response['Retiree'] = null;
         $response['Debug'] = null;
 
-
         $rules = [
             'Ticket_number' => [
                 'required',
                 'string',
                 'max:3',
                 'min:1',
-                Rule::unique('tickets')->where(function ($query) use ($request) {
+                Rule::unique('tickets')->where(function ($query) {
                     $fechaActual = now()->toDateString();
+
                     return $query->where('ticket_date', $fechaActual);
                 }),
             ],
@@ -152,7 +179,7 @@ class TicketApiController extends Controller
         // Comprobar si la validación falla
         if ($validator->fails()) {
             // Retornar errores de validación
-            $response['Message'] = "Se encontraron los siguientes errores:";
+            $response['Message'] = 'Se encontraron los siguientes errores:';
             $response['Errors'] = [$validator->errors()->toArray()];
             // $response['Debug'] = $request->all();
 
@@ -182,8 +209,8 @@ class TicketApiController extends Controller
             $turno->modified_by = Auth::user()->email;
             $turno->save();
             DB::commit();
-            $response['Status'] = "success";
-            $response['Message'] = "El Turno ".$turno->ticket_number." fue creado correctamente";
+            $response['Status'] = 'success';
+            $response['Message'] = 'El Turno '.$turno->ticket_number.' fue creado correctamente';
 
             return response()->json($response, 200);
 
@@ -193,10 +220,11 @@ class TicketApiController extends Controller
 
         }
     }
+
     public function update(Request $request)
     {
-        $response['Status'] = "fail";
-        $response['Message'] = "No hay Datos que mostrar.";
+        $response['Status'] = 'fail';
+        $response['Message'] = 'No hay Datos que mostrar.';
         $response['Errors'] = null;
         $response['Ticket'] = null;
         $response['Tickets'] = [];
@@ -207,19 +235,19 @@ class TicketApiController extends Controller
 
         $id = $request->input('Id');
         $turno = Ticket::find($id);
-        if($turno->ticket_status == "FINALIZADO")
-        {
-            $response['Status'] = "fail";
-            $response['Message'] = "Este turno ya fue finalizado con anterioridad.";
+        if ($turno->ticket_status == 'FINALIZADO') {
+            $response['Status'] = 'fail';
+            $response['Message'] = 'Este turno ya fue finalizado con anterioridad.';
+
             return response()->json($response, 200);
-        }
-        else{
-            $turno->ticket_status = "FINALIZADO";
+        } else {
+            $turno->ticket_status = 'FINALIZADO';
             $turno->save();
-            $response['Status'] = "success";
-            $response['Message'] = "El turno fue finalizado con éxito.";
+            $response['Status'] = 'success';
+            $response['Message'] = 'El turno fue finalizado con éxito.';
+
             return response()->json($response, 200);
         }
-        
+
     }
 }
