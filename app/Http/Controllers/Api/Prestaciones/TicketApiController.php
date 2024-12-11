@@ -193,4 +193,33 @@ class TicketApiController extends Controller
 
         }
     }
+    public function update(Request $request)
+    {
+        $response['Status'] = "fail";
+        $response['Message'] = "No hay Datos que mostrar.";
+        $response['Errors'] = null;
+        $response['Ticket'] = null;
+        $response['Tickets'] = [];
+        $response['Insured'] = null;
+        $response['Beneficiary'] = null;
+        $response['Retiree'] = null;
+        $response['Debug'] = null;
+
+        $id = $request->input('Id');
+        $turno = Ticket::find($id);
+        if($turno->ticket_status == "FINALIZADO")
+        {
+            $response['Status'] = "fail";
+            $response['Message'] = "Este turno ya fue finalizado con anterioridad.";
+            return response()->json($response, 200);
+        }
+        else{
+            $turno->ticket_status = "FINALIZADO";
+            $turno->save();
+            $response['Status'] = "success";
+            $response['Message'] = "El turno fue finalizado con éxito.";
+            return response()->json($response, 200);
+        }
+        
+    }
 }
