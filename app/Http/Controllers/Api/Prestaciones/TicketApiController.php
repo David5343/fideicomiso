@@ -131,7 +131,7 @@ class TicketApiController extends Controller
         $response['Retiree'] = null;
         $response['Debug'] = null;
 
-        $turno = Ticket::with(['insured', 'beneficiary', 'retiree', 'retiree.insured', 'retiree.beneficiary'])
+        $turno = Ticket::with(['insured.subdependency', 'beneficiary.insured.subdependency', 'retiree', 'retiree.insured', 'retiree.beneficiary'])
             ->find($id);
         if ($turno != null) {
             $response['Status'] = 'success';
@@ -141,7 +141,7 @@ class TicketApiController extends Controller
             return response()->json($response, 200);
         } else {
             $response['Status'] = 'fail';
-
+            $response['Message'] = 'La Solicitud no es de tipo :Reposición';
             return response()->json($response, 200);
         }
     }
