@@ -142,6 +142,7 @@ class TicketApiController extends Controller
         } else {
             $response['Status'] = 'fail';
             $response['Message'] = 'La Solicitud no es de tipo :Reposición';
+
             return response()->json($response, 200);
         }
     }
@@ -242,9 +243,43 @@ class TicketApiController extends Controller
             return response()->json($response, 200);
         } else {
             $turno->ticket_status = 'FINALIZADO';
+            $turno->status = 'active';
+            $turno->modified_by = Auth::user()->email;
             $turno->save();
             $response['Status'] = 'success';
             $response['Message'] = 'El turno fue finalizado con éxito.';
+
+            return response()->json($response, 200);
+        }
+
+    }
+
+    public function cancel(Request $request)
+    {
+        $response['Status'] = 'fail';
+        $response['Message'] = 'No hay Datos que mostrar.';
+        $response['Errors'] = null;
+        $response['Ticket'] = null;
+        $response['Tickets'] = [];
+        $response['Insured'] = null;
+        $response['Beneficiary'] = null;
+        $response['Retiree'] = null;
+        $response['Debug'] = null;
+
+        $id = $request->input('Id');
+        $turno = Ticket::find($id);
+        if ($turno->ticket_status == 'CANCELADO') {
+            $response['Status'] = 'fail';
+            $response['Message'] = 'Este turno ya fue Cancelado con anterioridad.';
+
+            return response()->json($response, 200);
+        } else {
+            $turno->ticket_status = 'CANCELADO';
+            $turno->status = 'active';
+            $turno->modified_by = Auth::user()->email;
+            $turno->save();
+            $response['Status'] = 'success';
+            $response['Message'] = 'El turno fue Cancelado con éxito.';
 
             return response()->json($response, 200);
         }
