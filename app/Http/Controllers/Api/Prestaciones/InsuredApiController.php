@@ -30,15 +30,12 @@ class InsuredApiController extends Controller
 
     public function show($id)
     {
-
-        $codigo = 0;
-        $response['status'] = 'fail';
-        $response['message'] = '';
-        $response['errors'] = '';
-        $response['insured'] = '';
-        $response['beneficiary'] = '';
-        $response['history'] = '';
-        $response['debug'] = '0';
+        $response['Status'] = 'fail';
+        $response['Message'] = null;
+        $response['Errors'] = null;
+        $response['Insured'] = null;
+        $response['History'] = null;
+        $response['Debug'] = null;
         $titular = Insured::where('id', $id)
             ->with('subdependency')
             ->with('rank')
@@ -47,9 +44,8 @@ class InsuredApiController extends Controller
             ->first();
         if ($titular == null) {
             $response['message'] = 'Registro no encontrado';
-            $codigo = 200;
 
-            return response()->json($response, status: $codigo);
+            return response()->json($response, 200);
         } else {
             $history = Insured::where('file_number', $titular->file_number)
                 ->where('affiliate_status', 'Baja')
@@ -58,12 +54,13 @@ class InsuredApiController extends Controller
                 ->with('bank')
                 ->with('beneficiaries')
                 ->get();
-            $response['status'] = 'success';
-            $response['insured'] = [$titular];
-            $response['history'] = $history;
-            $codigo = 200;
+            $response['Status'] = 'success';
+            $response['Insured'] = $titular;
+            if ($history != null) {
+                $response['History'] = $history;
+            }
 
-            return response()->json($response, status: $codigo);
+            return response()->json($response, 200);
         }
     }
 
