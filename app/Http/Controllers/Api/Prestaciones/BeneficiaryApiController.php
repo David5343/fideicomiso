@@ -39,38 +39,31 @@ class BeneficiaryApiController extends Controller
 
     public function show($id)
     {
-        $codigo = 0;
-        $response['status'] = 'fail';
-        $response['message'] = '';
-        $response['errors'] = '';
-        $response['insured'] = '';
-        $response['beneficiary'] = '';
-        $response['history'] = '';
-        $response['debug'] = '0';
+        $response['Status'] = 'fail';
+        $response['Message'] = null;
+        $response['Errors'] = null;
+        $response['Beneficiary'] = null;
+        $response['History'] = null;
+        $response['Debug'] = null;
         $familiar = Beneficiary::where('id', $id)
-            ->with('bank')
-            ->with('insured')
+            ->with('insured.subdependency')
             ->first();
-        //datos de dependencia del titular que esta en el with de arriba->with('insured')
-        $familiar->insured->subdependency = Subdependency::where('id', $familiar->insured->subdependency_id)->first();
-        $familiar->secondary_insured = Insured::where('id', $familiar->secondary_insured_id)->first();
         if ($familiar == null) {
             $response['message'] = 'Registro no encontrado';
-            $codigo = 200;
 
-            return response()->json($response, status: $codigo);
+            return response()->json($response, 200);
         } else {
             $history = Beneficiary::where('file_number', $familiar->file_number)
                 ->where('affiliate_status', 'Baja')
-                ->with('bank')
-                ->with('insured')
+                ->with('insured.subdependency')
                 ->get();
-            $response['status'] = 'success';
-            $response['beneficiary'] = [$familiar];
-            $response['history'] = $history;
-            $codigo = 200;
+            $response['Status'] = 'success';
+            $response['Beneficiary'] = $familiar;
+            if ($history != null) {
+                $response['History'] = $history;
+            }
 
-            return response()->json($response, status: $codigo);
+            return response()->json($response, 200);
         }
     }
 
