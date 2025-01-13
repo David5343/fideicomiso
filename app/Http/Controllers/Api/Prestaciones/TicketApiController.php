@@ -54,69 +54,82 @@ class TicketApiController extends Controller
         $response['Beneficiary'] = null;
         $response['Retiree'] = null;
         $response['Debug'] = null;
-        $titular = Insured::where('affiliate_status', 'Activo')
-            ->where(function ($query) use ($dato) {
-                $query->where('file_number', $dato)
-                    ->orWhere('rfc', $dato)
-                    ->orWhere('curp', $dato);
-            })
-            ->first();
-        $familiar = Beneficiary::where('affiliate_status', 'Activo')
-            ->where(function ($query) use ($dato) {
-                $query->where('file_number', $dato)
-                    ->orwhere('rfc', $dato)
-                    ->orwhere('curp', $dato);
-            })
-            ->first();
-        $retiree = Retiree::where('pension_status', 'ACTIVO')
-            ->with(['pensionType', 'insured', 'beneficiary'])
-            ->where('file_number', $dato)
-            ->orwhere('noi_number', $dato)
-            ->orWhereHas('insured', function ($query) use ($dato) {
-                $query->where('file_number', $dato);
-            })
-            ->orWhereHas('insured', function ($query) use ($dato) {
-                $query->where('rfc', $dato);
-            })
-            ->orWhereHas('insured', function ($query) use ($dato) {
-                $query->where('curp', $dato);
-            })
-            ->orWhereHas('beneficiary', function ($query) use ($dato) {
-                $query->where('file_number', $dato);
-            })
-            ->orWhereHas('beneficiary', function ($query) use ($dato) {
-                $query->where('rfc', $dato);
-            })
-            ->orWhereHas('beneficiary', function ($query) use ($dato) {
-                $query->where('curp', $dato);
-            })
-            ->first();
-        if ($titular != null) {
-            $response['Status'] = 'success';
-            $response['Insured'] = $titular;
-            $codigo = 200;
 
-            return response()->json($response, status: $codigo);
-        } elseif ($familiar != null) {
-            $response['Status'] = 'success';
-            $response['Beneficiary'] = $familiar;
-            $codigo = 200;
+        $turnos = Ticket::whereHas('insured',function($query) use ($dato){
+            $query->where('file_number',$dato);
+        })->get();
+        // if($turnos != null)
+        // { 
+            $response['Tickets'] = $turnos;
+            $response['Debug'] = $dato;
+            return response()->json($response, status: 200);
+        // }else{
+        //     return response()->json($response, status: 200);
+        // }
 
-            return response()->json($response, status: $codigo);
-        } elseif ($retiree != null) {
-            $response['Status'] = 'success';
-            $response['Retiree'] = $retiree;
-            $codigo = 200;
+        // $titular = Insured::where('affiliate_status', 'Activo')
+        //     ->where(function ($query) use ($dato) {
+        //         $query->where('file_number', $dato)
+        //             ->orWhere('rfc', $dato)
+        //             ->orWhere('curp', $dato);
+        //     })
+        //     ->first();
+        // $familiar = Beneficiary::where('affiliate_status', 'Activo')
+        //     ->where(function ($query) use ($dato) {
+        //         $query->where('file_number', $dato)
+        //             ->orwhere('rfc', $dato)
+        //             ->orwhere('curp', $dato);
+        //     })
+        //     ->first();
+        // $retiree = Retiree::where('pension_status', 'ACTIVO')
+        //     ->with(['pensionType', 'insured', 'beneficiary'])
+        //     ->where('file_number', $dato)
+        //     ->orwhere('noi_number', $dato)
+        //     ->orWhereHas('insured', function ($query) use ($dato) {
+        //         $query->where('file_number', $dato);
+        //     })
+        //     ->orWhereHas('insured', function ($query) use ($dato) {
+        //         $query->where('rfc', $dato);
+        //     })
+        //     ->orWhereHas('insured', function ($query) use ($dato) {
+        //         $query->where('curp', $dato);
+        //     })
+        //     ->orWhereHas('beneficiary', function ($query) use ($dato) {
+        //         $query->where('file_number', $dato);
+        //     })
+        //     ->orWhereHas('beneficiary', function ($query) use ($dato) {
+        //         $query->where('rfc', $dato);
+        //     })
+        //     ->orWhereHas('beneficiary', function ($query) use ($dato) {
+        //         $query->where('curp', $dato);
+        //     })
+        //     ->first();
+        // if ($titular != null) {
+        //     $response['Status'] = 'success';
+        //     $response['Insured'] = $titular;
+        //     $codigo = 200;
 
-            return response()->json($response, status: $codigo);
-        } else {
+        //     return response()->json($response, status: $codigo);
+        // } elseif ($familiar != null) {
+        //     $response['Status'] = 'success';
+        //     $response['Beneficiary'] = $familiar;
+        //     $codigo = 200;
 
-            $response['Status'] = 'success';
-            $response['Message'] = 'Registro no encontrado.';
-            $codigo = 200;
+        //     return response()->json($response, status: $codigo);
+        // } elseif ($retiree != null) {
+        //     $response['Status'] = 'success';
+        //     $response['Retiree'] = $retiree;
+        //     $codigo = 200;
 
-            return response()->json($response, status: $codigo);
-        }
+        //     return response()->json($response, status: $codigo);
+        // } else {
+
+        //     $response['Status'] = 'success';
+        //     $response['Message'] = 'Registro no encontrado.';
+        //     $codigo = 200;
+
+        //     return response()->json($response, status: $codigo);
+        // }
     }
 
     public function show($id)
