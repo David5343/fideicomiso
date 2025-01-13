@@ -12,7 +12,7 @@ class Ticket extends Model
 
     public function insured(): BelongsTo
     {
-        return $this->belongsTo(Insured::class);
+        return $this->belongsTo(Insured::class,'insured_id');
     }
 
     public function beneficiary(): BelongsTo
