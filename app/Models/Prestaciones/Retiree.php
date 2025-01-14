@@ -24,4 +24,9 @@ class Retiree extends Model
     {
         return $this->belongsTo(PensionType::class);
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
