@@ -38,4 +38,9 @@ class Insured extends Model
     {
         return $this->hasMany(CredentialInsured::class);
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
