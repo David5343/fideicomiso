@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Prestaciones;
 use App\Http\Controllers\Controller;
 use App\Models\Prestaciones\Beneficiary;
 use App\Models\Prestaciones\Insured;
-use App\Models\Prestaciones\Subdependency;
 use Exception;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Query\Builder;
