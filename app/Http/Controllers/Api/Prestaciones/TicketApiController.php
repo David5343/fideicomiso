@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Api\Prestaciones;
 
 use App\Http\Controllers\Controller;
-use App\Models\Prestaciones\Beneficiary;
-use App\Models\Prestaciones\Insured;
-use App\Models\Prestaciones\Retiree;
 use App\Models\Prestaciones\Ticket;
 use Carbon\Carbon;
 use Exception;
@@ -55,81 +52,55 @@ class TicketApiController extends Controller
         $response['Retiree'] = null;
         $response['Debug'] = null;
 
-        $turnos = Ticket::whereHas('insured',function($query) use ($dato){
-            $query->where('file_number',$dato);
-        })->get();
-        // if($turnos != null)
-        // { 
-            $response['Tickets'] = $turnos;
-            $response['Debug'] = $dato;
-            return response()->json($response, status: 200);
-        // }else{
-        //     return response()->json($response, status: 200);
-        // }
+        $turnos_insured = Ticket::with('insured')
+            ->whereHas('insured', function ($query) use ($dato) {
+                $query->where('file_number', $dato)
+                    ->orWhere('rfc', $dato)
+                    ->orWhere('curp', $dato)
+                    ->orWhere('name', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
+            })->get();
+        $turnos_beneficiary = Ticket::with('beneficiary')
+            ->whereHas('beneficiary', function ($query) use ($dato) {
+                $query->where('file_number', $dato)
+                    ->orWhere('rfc', $dato)
+                    ->orWhere('curp', $dato)
+                    ->orWhere('name', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
+            })->get();
+        $turnos_retiree = Ticket::with(['retiree.insured', 'retiree.beneficiary'])
+            ->whereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('file_number', $dato)
+                    ->orWhere('rfc', $dato)
+                    ->orWhere('curp', $dato)
+                    ->orWhere('name', 'LIKE', "%{$dato}%");
+            })
+            ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
+                $query->where('file_number', $dato)
+                    ->orWhere('rfc', $dato)
+                    ->orWhere('curp', $dato)
+                    ->orWhere('name', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
+            })
+            ->get();
+        if ($turnos_insured != null) {
+            $response['Status'] = 'success';
+            $response['Message'] = 'Se encontraron los siguientes Datos.';
+            $response['Tickets'] = $turnos_insured;
+        } elseif ($turnos_beneficiary != null) {
+            $response['Status'] = 'success';
+            $response['Message'] = 'Se encontraron los siguientes Datos.';
+            $response['Tickets'] = $turnos_beneficiary;
+        } elseif ($turnos_retiree != null) {
+            $response['Status'] = 'success';
+            $response['Message'] = 'Se encontraron los siguientes Datos.';
+            $response['Tickets'] = $turnos_retiree;
+        }
 
-        // $titular = Insured::where('affiliate_status', 'Activo')
-        //     ->where(function ($query) use ($dato) {
-        //         $query->where('file_number', $dato)
-        //             ->orWhere('rfc', $dato)
-        //             ->orWhere('curp', $dato);
-        //     })
-        //     ->first();
-        // $familiar = Beneficiary::where('affiliate_status', 'Activo')
-        //     ->where(function ($query) use ($dato) {
-        //         $query->where('file_number', $dato)
-        //             ->orwhere('rfc', $dato)
-        //             ->orwhere('curp', $dato);
-        //     })
-        //     ->first();
-        // $retiree = Retiree::where('pension_status', 'ACTIVO')
-        //     ->with(['pensionType', 'insured', 'beneficiary'])
-        //     ->where('file_number', $dato)
-        //     ->orwhere('noi_number', $dato)
-        //     ->orWhereHas('insured', function ($query) use ($dato) {
-        //         $query->where('file_number', $dato);
-        //     })
-        //     ->orWhereHas('insured', function ($query) use ($dato) {
-        //         $query->where('rfc', $dato);
-        //     })
-        //     ->orWhereHas('insured', function ($query) use ($dato) {
-        //         $query->where('curp', $dato);
-        //     })
-        //     ->orWhereHas('beneficiary', function ($query) use ($dato) {
-        //         $query->where('file_number', $dato);
-        //     })
-        //     ->orWhereHas('beneficiary', function ($query) use ($dato) {
-        //         $query->where('rfc', $dato);
-        //     })
-        //     ->orWhereHas('beneficiary', function ($query) use ($dato) {
-        //         $query->where('curp', $dato);
-        //     })
-        //     ->first();
-        // if ($titular != null) {
-        //     $response['Status'] = 'success';
-        //     $response['Insured'] = $titular;
-        //     $codigo = 200;
-
-        //     return response()->json($response, status: $codigo);
-        // } elseif ($familiar != null) {
-        //     $response['Status'] = 'success';
-        //     $response['Beneficiary'] = $familiar;
-        //     $codigo = 200;
-
-        //     return response()->json($response, status: $codigo);
-        // } elseif ($retiree != null) {
-        //     $response['Status'] = 'success';
-        //     $response['Retiree'] = $retiree;
-        //     $codigo = 200;
-
-        //     return response()->json($response, status: $codigo);
-        // } else {
-
-        //     $response['Status'] = 'success';
-        //     $response['Message'] = 'Registro no encontrado.';
-        //     $codigo = 200;
-
-        //     return response()->json($response, status: $codigo);
-        // }
+        return response()->json($response, 200);
     }
 
     public function show($id)
