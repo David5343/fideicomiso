@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api\Prestaciones;
 
 use App\Http\Controllers\Controller;
+use App\Models\Prestaciones\Beneficiary;
+use App\Models\Prestaciones\Insured;
+use App\Models\Prestaciones\Retiree;
 use App\Models\Prestaciones\Ticket;
 use Carbon\Carbon;
 use Exception;
