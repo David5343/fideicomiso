@@ -43,4 +43,9 @@ class Insured extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function retiree(): HasMany
+    {
+        return $this->hasMany(Retiree::class);
+    }
 }
