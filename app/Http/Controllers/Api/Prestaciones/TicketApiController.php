@@ -44,7 +44,7 @@ class TicketApiController extends Controller
 
     public function busqueda(Request $request)
     {
-        $dato = $request->dato;
+        $dato = trim($request->dato);
         $response['Status'] = 'fail';
         $response['Message'] = 'No hay Datos que mostrar.';
         $response['Errors'] = null;
@@ -73,36 +73,41 @@ class TicketApiController extends Controller
                     ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
                     ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
             })->get();
-        $turnos_retiree = Ticket::with(['retiree.insured', 'retiree.beneficiary'])
-            ->whereHas('retiree.insured', function ($query) use ($dato) {
+            $turnos_retiree = Ticket::with('retiree.insured')
+            ->WhereHas('retiree', function ($query) use ($dato) {
                 $query->where('file_number', $dato)
-                    ->orWhere('rfc', $dato)
-                    ->orWhere('curp', $dato)
-                    ->orWhere('name', 'LIKE', "%{$dato}%");
+                ->orwhere('noi_number', $dato);
+            })
+            ->orWhereHas('retiree.insured', function ($query) use ($dato) {
+                $query->where('file_number', $dato)
+                ->orWhere('rfc', $dato)
+                ->orWhere('curp', $dato)
+                ->orWhere('name', 'LIKE', "%{$dato}%")
+                ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
             })
             ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
                 $query->where('file_number', $dato)
-                    ->orWhere('rfc', $dato)
-                    ->orWhere('curp', $dato)
-                    ->orWhere('name', 'LIKE', "%{$dato}%")
-                    ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
-                    ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
-            })
-            ->get();
-        if ($turnos_insured != null) {
+                ->orWhere('rfc', $dato)
+                ->orWhere('curp', $dato)
+                ->orWhere('name', 'LIKE', "%{$dato}%")
+                ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
+            })->get();
+        if ($turnos_insured->isNotEmpty()) {
             $response['Status'] = 'success';
             $response['Message'] = 'Se encontraron los siguientes Datos.';
             $response['Tickets'] = $turnos_insured;
-        } elseif ($turnos_beneficiary != null) {
+        } elseif ($turnos_beneficiary->isNotEmpty()) {
             $response['Status'] = 'success';
             $response['Message'] = 'Se encontraron los siguientes Datos.';
             $response['Tickets'] = $turnos_beneficiary;
-        } elseif ($turnos_retiree != null) {
+        }
+        elseif ($turnos_retiree->isNotEmpty()) {
             $response['Status'] = 'success';
             $response['Message'] = 'Se encontraron los siguientes Datos.';
             $response['Tickets'] = $turnos_retiree;
         }
-
         return response()->json($response, 200);
     }
 
@@ -272,6 +277,7 @@ class TicketApiController extends Controller
         }
 
     }
+
     public function search(Request $request)
     {
         $dato = $request->dato;
@@ -325,6 +331,7 @@ class TicketApiController extends Controller
             $response['Status'] = 'success';
             $response['Insured'] = $titular;
             $codigo = 200;
+
             return response()->json($response, status: $codigo);
         } elseif ($familiar != null) {
             $response['Status'] = 'success';
@@ -336,11 +343,12 @@ class TicketApiController extends Controller
             $response['Status'] = 'success';
             $response['Retiree'] = $retiree;
             $codigo = 200;
+
             return response()->json($response, status: $codigo);
         } else {
-            $response['Status'] = 'success';
             $response['Message'] = 'Registro no encontrado.';
             $codigo = 200;
+
             return response()->json($response, status: $codigo);
         }
     }
