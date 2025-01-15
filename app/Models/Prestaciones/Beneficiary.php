@@ -20,4 +20,9 @@ class Beneficiary extends Model
     {
         return $this->belongsTo(Bank::class);
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
