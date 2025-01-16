@@ -73,26 +73,26 @@ class TicketApiController extends Controller
                     ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
                     ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
             })->get();
-            $turnos_retiree = Ticket::with('retiree.insured')
+        $turnos_retiree = Ticket::with('retiree.insured')
             ->WhereHas('retiree', function ($query) use ($dato) {
                 $query->where('file_number', $dato)
-                ->orwhere('noi_number', $dato);
+                    ->orwhere('noi_number', $dato);
             })
             ->orWhereHas('retiree.insured', function ($query) use ($dato) {
                 $query->where('file_number', $dato)
-                ->orWhere('rfc', $dato)
-                ->orWhere('curp', $dato)
-                ->orWhere('name', 'LIKE', "%{$dato}%")
-                ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
-                ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
+                    ->orWhere('rfc', $dato)
+                    ->orWhere('curp', $dato)
+                    ->orWhere('name', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
             })
             ->orWhereHas('retiree.beneficiary', function ($query) use ($dato) {
                 $query->where('file_number', $dato)
-                ->orWhere('rfc', $dato)
-                ->orWhere('curp', $dato)
-                ->orWhere('name', 'LIKE', "%{$dato}%")
-                ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
-                ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
+                    ->orWhere('rfc', $dato)
+                    ->orWhere('curp', $dato)
+                    ->orWhere('name', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_1', 'LIKE', "%{$dato}%")
+                    ->orWhere('last_name_2', 'LIKE', "%{$dato}%");
             })->get();
         if ($turnos_insured->isNotEmpty()) {
             $response['Status'] = 'success';
@@ -102,12 +102,12 @@ class TicketApiController extends Controller
             $response['Status'] = 'success';
             $response['Message'] = 'Se encontraron los siguientes Datos.';
             $response['Tickets'] = $turnos_beneficiary;
-        }
-        elseif ($turnos_retiree->isNotEmpty()) {
+        } elseif ($turnos_retiree->isNotEmpty()) {
             $response['Status'] = 'success';
             $response['Message'] = 'Se encontraron los siguientes Datos.';
             $response['Tickets'] = $turnos_retiree;
         }
+
         return response()->json($response, 200);
     }
 
@@ -351,5 +351,38 @@ class TicketApiController extends Controller
 
             return response()->json($response, status: $codigo);
         }
+    }
+
+    public function searchByDate(Request $request)
+    {
+        $response['Status'] = 'fail';
+        $response['Message'] = 'No hay Datos que mostrar.';
+        $response['Errors'] = null;
+        $response['Ticket'] = null;
+        $response['Tickets'] = [];
+        $response['Insured'] = null;
+        $response['Beneficiary'] = null;
+        $response['Retiree'] = null;
+        $response['Debug'] = null;
+
+        $fecha1 = $request->query('fecha1');
+        $fecha2 = $request->query('fecha2');
+
+        if (! $fecha1 || ! $fecha2) {
+            $response['Message'] = 'Faltan Parámetros';
+
+            return response()->json($response, 400);
+        }
+
+        $turnos = Ticket::with(['insured', 'beneficiary', 'retiree', 'retiree.insured', 'retiree.beneficiary'])
+            ->whereBetween('ticket_date', [$fecha1, $fecha2])
+            ->get();
+        if ($turnos->isNotEmpty()) {
+            $response['Status'] = 'success';
+            $response['Message'] = 'Datos encontrados';
+            $response['Tickets'] = $turnos;
+        }
+        $response['Debug'] = $fecha1;
+        return response()->json($response);
     }
 }
